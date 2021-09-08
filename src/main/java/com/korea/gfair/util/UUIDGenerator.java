@@ -148,13 +148,15 @@ public class UUIDGenerator {
     /***************************************************************
      * Unique Keys Generation Using Message Digest and Type 4 UUID
      ***************************************************************/
-    public static String generateUniqueKeysWithUUIDAndMessageDigest() 
+    public static String generateUniqueKeysWithUUIDAndMessageDigest(String memberpw) 
     		throws NoSuchAlgorithmException, UnsupportedEncodingException {
     	log.debug("generateUniqueKeysWithUUIDAndMessageDigest() invoked.");
     	
+    	String str =memberpw;
         MessageDigest salt = MessageDigest.getInstance("SHA-256");
         
-        salt.update(UUID.randomUUID().toString().getBytes("UTF-8"));
+        salt.update(str.getBytes("UTF-8"));
+//        salt.update(UUID.randomUUID().toString().getBytes("UTF-8"));
         
         String digest = bytesToHex(salt.digest());
         
