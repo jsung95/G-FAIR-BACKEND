@@ -41,6 +41,30 @@ public class ApiCaptchaNkeyResult {
 //        
         return responseBody;
     }//
+    
+    public static String getResult(String key, String value, String jinsung) {
+
+        String code = "1"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
+        //ApiUrl에 키값과 코드값 쿼리스트링으로 저장. 
+        String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
+
+        //요청헤더 
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-Naver-Client-Id", ApiCaptchaNkey.CLIENT_ID);
+        requestHeaders.put("X-Naver-Client-Secret", ApiCaptchaNkey.CLIENT_SECRET);
+        
+        //응답 문서 저장. 
+        String responseBody = ApiCaptchaNkeyResult.get(apiURL, requestHeaders);
+
+        log.info(responseBody);
+        Gson gson = new Gson();
+        Captcha cap = gson.<Captcha>fromJson(responseBody, Captcha.class);
+        
+        String result = cap.getResult();
+        
+        //return responseBody;
+        return result;
+    }//
 
     private static String get(String apiUrl, Map<String, String> requestHeaders){
         
