@@ -282,7 +282,23 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		
+		<!-- org.imgscalr -->
+      
+	   <dependency>
+         <groupId>org.imgscalr</groupId>
+         <artifactId>imgscalr-lib</artifactId>
+         <version>4.2</version>
+	   </dependency>
 
+      
+      <!-- thumbnailator -->
+      <dependency>
+         <groupId>net.coobird</groupId>
+         <artifactId>thumbnailator</artifactId>
+         <version>0.4.8</version>
+      </dependency>
 		<!-- ==================Oracle============================= -->
 		
 		  <!-- ojdbc8-production -->
