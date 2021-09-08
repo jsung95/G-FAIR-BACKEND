@@ -6,6 +6,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.korea.gfair.mapper.UploadFileMapper">
+	<!-- 나현아 Mapper -->
     <insert id="insert" >
         <selectKey keyProperty="fid" order="BEFORE" resultType="int">
             
@@ -88,4 +89,54 @@
                 bno = #{bno}
         ]]>
     </select>
+	
+
+	<!-- 이진성 Mapper -->
+	<insert id="insertFile">
+		<![CDATA[
+			INSERT INTO tbl_uploadfile(fid, frename, fpath, forname)
+			VALUES("ADMIN"."ISEQ$$_103229".nextval, #{frename}, #{fpath}, #{forname})
+		]]>
+	</insert>
+	
+	<update id="updateFileId">
+		<![CDATA[
+			UPDATE tbl_board 
+			SET fid = "ADMIN"."ISEQ$$_103229".currval
+			WHERE bno = #{bno}
+		]]>
+	</update>
+	
+	
+	<select id="selectFileById" resultType="com.korea.gfair.domain.AttachFileVO">
+		<![CDATA[
+			SELECT *
+			FROM tbl_uploadfile
+			WHERE fid = #{fid}
+		]]>
+	</select>
+	
+	<update id="updateFile">
+		<![CDATA[
+			UPDATE tbl_uploadfile
+			SET frename = #{frename}, fpath = #{fpath}, forname = #{forname}
+			WHERE fid = #{fid}
+		]]>
+	</update>
+	
+	<update id="updateExistFileFromBoard">
+		<![CDATA[
+			UPDATE tbl_board
+			SET fid = null
+			WHERE bno = #{bno}
+		]]>
+	</update>
+	
+	<delete id="deleteExistFile">
+		<![CDATA[
+			DELETE FROM tbl_uploadfile
+			WHERE fid = #{fid}
+		]]>
+	</delete>
+	
 </mapper>
