@@ -1,5 +1,7 @@
 package com.korea.gfair.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -13,14 +15,20 @@ public class BoardDTO {
 	private String title;
 	private String content;
 	private String memberid;
-	private String bname;
+	
+	private Date insert_ts;
+	private Date update_ts;
 	
 	private Integer readcnt;
+	
+	private String bname;
+	
 	private Integer fid;
 	
 	private String notice_tf;
 	private String public_tf;
 	private String reply_tf;
+
 	
 	
 }//end class

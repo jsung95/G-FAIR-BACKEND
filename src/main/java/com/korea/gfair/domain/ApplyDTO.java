@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ApplyDTO {
+	
 	private Integer applyno;
 	private Long cbno;
 	private Integer fid;
