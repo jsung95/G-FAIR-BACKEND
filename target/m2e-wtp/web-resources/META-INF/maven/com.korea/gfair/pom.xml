@@ -38,6 +38,40 @@
 
 
 	<dependencies>
+	
+	
+	
+	
+		<!-- =============== 새로 추가한 디펜던시 =============== -->
+		
+		<!-- ==== 사업자번호 REST API ==== -->
+	    <!-- httpclient -->
+	    <dependency>
+	      <groupId>org.apache.httpcomponents</groupId>
+	      <artifactId>httpclient</artifactId>
+	      <version>4.5.13</version>
+	    </dependency>
+	
+		<!-- =============== mail =============== -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+		
+		<!-- spring-context-support -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>5.3.9</version>
+		</dependency>	
+		<!-- =============== 새로 추가한 디펜던시 =============== -->
+		
+		
+		
+		
+		
+	
 
 		<!-- ===============Logging =================-->
 		<!-- log4j -->

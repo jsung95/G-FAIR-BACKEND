@@ -16,6 +16,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/resources/**/" location="/resources/**/" />
 	<resources mapping="/resources/captcha/**" location="/resources/captcha/**" />
+	
+	<resources mapping="/img/*" location="/img/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -39,9 +41,76 @@
 		<beans:property name="preserveFilename" value="true"/>
 
 	</beans:bean>	
+	
+	<!-- 이메일 인증 이진성 -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+			<beans:property name="host" value="smtp.gmail.com" />
+			<beans:property name="port" value="587" />
+			<beans:property name="username" value="myemail@gmail.com" />
+			<beans:property name="password" value="passwd" />
+			<beans:property name="defaultEncoding" value="utf-8" />
+			<beans:property name="javaMailProperties">
+				<beans:props>
+					<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+					<beans:prop key="mail.smtp.auth">true</beans:prop>
+					<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+					<beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
+					<beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
+					<beans:prop key="mail.debug">true</beans:prop>
+				</beans:props>
+			</beans:property>
+	</beans:bean>
+
 
 	<context:component-scan base-package="com.korea.gfair.controller" />
+	<context:component-scan base-package="com.korea.gfair.service" />
+	<context:component-scan base-package="com.korea.gfair.interceptor" />	
 	
+	
+	
+	<view-controller 
+		path="/main" 
+		view-name="/main/main" 
+		status-code="200" />
+		
+	<interceptors>
+		<interceptor>
+			<mapping path="/login/loginPost" />
+			
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/member/find_id_c_result" />
+			
+			<beans:ref bean="findInfoInterceptor" />
+		</interceptor>		
+		
+		<interceptor>
+		
+			<mapping path="/notice/answer"/>
+			<mapping path="/notice/modify"/>
+			<mapping path="/notice/register"/>
+			
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/main"/>
+			
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		
+		
+		<interceptor>
+			<mapping path="/member/join_c"/>
+			
+			<beans:ref bean="registerInterceptor"/>
+		</interceptor>
+		
+
+		
+	</interceptors>
 	
 	
 </beans:beans>
