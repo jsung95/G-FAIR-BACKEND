@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.pageDTO;
-import com.korea.gfair.service.BoardService;
+import com.korea.gfair.service.NewsBoardService;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,26 +26,44 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller  
 @RequestMapping("/news/") /* **/ 
-public class newsBoardController {
+public class NewsBoardController {
 	
 	@Autowired
-	private BoardService service;
+	private NewsBoardService service;
 
-	@GetMapping("list")
-	public void list(Model model) {
-		log.debug("list(Model model) invoked");
+//	@GetMapping("list")
+//	public void list(Model model) {
+//		log.debug("list(Model model) invoked");
+//	
+//		List<BoardVO> board = this.service.getList();
+//		
+//		Objects.requireNonNull(board); 
+//		
+//		board.forEach(log::info);
+//		
+//		
+//		model.addAttribute("list",board);
+//		
+//	}// end list
 	
-		List<BoardVO> board = this.service.getList();
+	@GetMapping("modify")
+	public void modifyui(
+			@ModelAttribute("cri") Criteria cri,  
+			@RequestParam("bno") Integer bno ,
+			Model model) { 
+		log.debug("getui invoked");
 		
-		Objects.requireNonNull(board); 
-		
-		board.forEach(log::info);
-		
-		model.addAttribute("list",board);
-		
-	}// end list
+		BoardVO board = this.service.select(bno);
 	
-	@GetMapping({"get","modify"})
+		
+		assert board != null;
+		
+		log.info("board");
+		
+		model.addAttribute("board",board);
+	}
+	
+	@GetMapping("get")
 	public void getui(
 			@ModelAttribute("cri") Criteria cri,  
 			@RequestParam("bno") Integer bno ,
@@ -53,7 +71,7 @@ public class newsBoardController {
 		log.debug("getui invoked");
 		
 		BoardVO board = this.service.select(bno);
-		
+		this.service.hit(bno);
 		assert board != null;
 		
 		log.info("board");
@@ -79,8 +97,7 @@ public class newsBoardController {
 		rttrs.addAttribute("amount",cri.getAmount());
 		rttrs.addAttribute("pagesPerPage",cri.getPagesPerPage());
 		
-		return "redirect:/news/list";
-		
+		return "redirect:/news/list";		
 	}
 	
 	@GetMapping("register")  // 등록화면 >> 페이지정보를 남겨야함
@@ -89,7 +106,6 @@ public class newsBoardController {
 		
 		log.debug("register () invoked");		
 	}
-	
 	
 	@PostMapping("register")
 						//dto로 변경하기 
@@ -126,15 +142,14 @@ public class newsBoardController {
 		rttrs.addAttribute("pagesPerPage",cri.getPagesPerPage());
 		
 		return "redirect:/news/listPerPage";
-		
 	}
 	
 	//list를 criteria로 받아서 페이징 처리하는 매핑 
 	@GetMapping("listPerPage")
 	public String listPerPage(
 					@ModelAttribute("cri") Criteria cri, Model model ){
-		 
-		List<BoardVO> boards = this.service.getList();
+		 log.info("****************************"+cri);
+		List<BoardVO> boards = this.service.getList(cri);
 		
 		Objects.requireNonNull(boards);
 		boards.forEach(log::info);
@@ -143,9 +158,7 @@ public class newsBoardController {
 		model.addAttribute("list", boards); 
 		model.addAttribute("pageMaker", pageDTO); 
 		
-		
 		return "news/list"; 
-		
 		
 	}//end listPerPage 
 	
