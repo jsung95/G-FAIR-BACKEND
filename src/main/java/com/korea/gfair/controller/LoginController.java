@@ -15,6 +15,7 @@ import com.korea.gfair.domain.LoginDTO;
 import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.interceptor.LoginInterceptor;
 import com.korea.gfair.service.MemberService;
+import com.korea.gfair.util.UUIDGenerator;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,8 +42,8 @@ public class LoginController {
 	public void loginPost(LoginDTO dto, Model model) throws Exception{
 		log.debug("loginPost(dto) invoked");
 		
-		dto.setMemberpw(this.service.digest(dto.getMemberpw()));
-		log.info("##DIGEST ==> " + this.service.digest(dto.getMemberpw()));
+		dto.setMemberpw(UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(dto.getMemberpw()));
+		log.info("##DIGEST ==> " + UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(dto.getMemberpw()));
 		
 		Objects.requireNonNull(this.service);
 		// 1. 전송파라미터에 해당되는 사용자가 있는지 확인 
