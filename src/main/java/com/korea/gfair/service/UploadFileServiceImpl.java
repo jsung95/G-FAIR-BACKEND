@@ -2,8 +2,10 @@ package com.korea.gfair.service;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -12,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -24,7 +28,10 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.korea.gfair.domain.AttachFileDTO;
+import com.korea.gfair.domain.AttachFileVO;
+import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardSearchFileVO;
+import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.UploadFileDTO;
 import com.korea.gfair.domain.UploadFileVO;
 import com.korea.gfair.mapper.UploadFileMapper;
@@ -567,4 +574,193 @@ public class UploadFileServiceImpl implements UploadFileService {
 		
 		return this.dao.selectFile(dto);
 	}//getFile
+	
+	
+	//=============================================================//
+	//================이진성=============//
+	//================이진성=============//
+	//================이진성=============//
+	//================이진성=============//
+	//FILE 처리 
+	@Override
+	public void uploadFile(AttachFileDTO dto) {
+		this.fileMapper.insertFile(dto);
+		
+	}
+
+	@Override
+	public void addFileId(BoardDTO dto) {
+		this.fileMapper.updateFileId(dto);
+		
+	}
+
+	@Override
+	public AttachFileVO getFileById(BoardDTO dto) {
+		
+		AttachFileVO file = this.fileMapper.selectFileById(dto);
+		
+		return file;
+	}
+
+	@Override
+	public AttachFileVO getFileById(Integer fid) {
+		AttachFileVO file = this.fileMapper.selectFileById(fid);
+		return file;
+	}//overLOADING
+
+	@Override
+	public void updateFile(AttachFileDTO dto) {
+		this.fileMapper.updateFile(dto);
+		
+	}
+
+	@Override
+	public void removeExistFileFromBoard(BoardDTO dto) {
+		this.fileMapper.updateExistFileFromBoard(dto);
+		this.fileMapper.deleteExistFile(dto);
+		
+	}
+
+	
+	
+	
+	
+	@Override
+	public void load_img(BoardDTO dto, AttachFileVO file, HttpServletResponse response) {
+
+		String path = file.getFpath();
+		String fileReName = file.getFrename();
+		
+		File img = new File(path + fileReName);
+		
+		
+		try {
+			
+			FileInputStream fis = new FileInputStream(img);
+			OutputStream out = response.getOutputStream();
+			
+			
+			byte[] buffer = new byte[1024];
+			
+			try(out; fis;) {
+				
+				int data;
+				while ( (data = fis.read(buffer)) != -1) {
+					out.write(buffer, 0, data);
+				}//while
+				
+			}//try-with-resource
+			
+		} catch (Exception e) {
+			
+		}//try-catch
+		
+	}
+
+	@Override
+	public void uploadFileByModify(BoardDTO dto, MultipartFile file) {
+		AttachFileDTO attachDTO = new AttachFileDTO();
+		
+		
+		String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		
+		if(file.getSize() > 0) {
+			try {
+				
+				String uuidFile = UUID.randomUUID().toString();
+				
+				byte[] fileData = file.getBytes();
+				FileOutputStream fos = new FileOutputStream(uploadDir + uuidFile);
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				
+				try(fos; bos;) {
+					attachDTO.setFpath(uploadDir);
+					attachDTO.setForname(file.getOriginalFilename());
+					attachDTO.setFrename(uuidFile);
+					
+					bos.write(fileData);
+					if(dto.getFid() != null) { //만약 기존 게시글의 파일이있는데 첨부파일 변경을 할때,
+						attachDTO.setFid(dto.getFid()); //파일DTO의 FID값을 기존 게시글의 FID값으로 대치하고
+						updateFile(attachDTO); //기존 파일테이블의 기존FID의 파일정보를 새로 첨부한 파일로 업데이트   
+					} else { //만약 기존 게시글의 첨부된 파일이 없었는데 파일 첨부를 한다면,
+						uploadFile(attachDTO); //새로운 파일테이블의 파일 업로드 
+						addFileId(dto); //새로 작성한 게시글의 fid정보 업데이트
+					}
+
+				}//try-with-resources
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}//try-catch
+		}//if
+
+		
+	}
+
+	@Override
+	public void uploadFileByWrite(BoardDTO dto, MultipartFile file) {
+		AttachFileDTO attachDTO = new AttachFileDTO();
+		
+		
+		String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		if(file.getSize() > 0) {
+			try {
+				
+				String uuidFile = UUID.randomUUID().toString();
+				
+				byte[] fileData = file.getBytes();
+				FileOutputStream fos = new FileOutputStream(uploadDir + uuidFile);
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				
+				try(fos; bos;) {
+					attachDTO.setFpath(uploadDir);
+					attachDTO.setForname(file.getOriginalFilename());
+					attachDTO.setFrename(uuidFile);
+					
+					bos.write(fileData);
+					
+					uploadFile(attachDTO);
+					addFileId(dto);
+				}//try-with-resources
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}//try-catch
+		}//if
+		
+	}
+
+	@Override
+	public void uploadFileByRegister(MemberDTO dto, MultipartFile file) {
+		AttachFileDTO attachDTO = new AttachFileDTO();
+		
+		
+		String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		
+		if(file.getSize() > 0) {
+			try {
+				
+				String uuidFile = UUID.randomUUID().toString();
+				
+				byte[] fileData = file.getBytes();
+				FileOutputStream fos = new FileOutputStream(uploadDir + uuidFile);
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				
+				try(fos; bos;) {
+					attachDTO.setFpath(uploadDir);
+					attachDTO.setForname(file.getOriginalFilename());
+					attachDTO.setFrename(uuidFile);
+					
+					bos.write(fileData);
+					
+					uploadFile(attachDTO);
+				}//try-with-resources
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}//try-catch
+		}//if
+		
+	}
+	//================================================================//
 }//end class

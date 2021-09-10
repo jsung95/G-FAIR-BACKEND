@@ -3,12 +3,17 @@ package com.korea.gfair.service;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.korea.gfair.domain.AttachFileDTO;
+import com.korea.gfair.domain.AttachFileVO;
+import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardSearchFileVO;
+import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.UploadFileDTO;
 import com.korea.gfair.domain.UploadFileVO;
 
@@ -41,4 +46,24 @@ public interface UploadFileService {
 //	--------------------------다은---------------------------------------------------
 	public abstract int uploadFile(MultipartFile file) throws Exception;
 	public abstract UploadFileVO getFile(UploadFileDTO dto) throws Exception;
+	
+	
+	//--------------------이진성-----------------------------//
+	//FILE 처리 
+	public abstract void uploadFile(AttachFileDTO dto);
+	public abstract void addFileId(BoardDTO dto);
+	public abstract AttachFileVO getFileById(BoardDTO dto);
+	public abstract AttachFileVO getFileById(Integer fid);
+	
+	public abstract void updateFile(AttachFileDTO dto);
+	
+	public abstract void removeExistFileFromBoard(BoardDTO dto);
+	
+	public abstract void load_img(BoardDTO dto, AttachFileVO file, HttpServletResponse response);
+	public abstract void uploadFileByModify(BoardDTO dto, MultipartFile file);
+	public abstract void uploadFileByWrite(BoardDTO dto, MultipartFile file);
+	
+	
+	public abstract void uploadFileByRegister(MemberDTO dto, MultipartFile file);
+	
 }//end interface
