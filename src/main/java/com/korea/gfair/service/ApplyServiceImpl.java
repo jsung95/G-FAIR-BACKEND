@@ -1,0 +1,77 @@
+package com.korea.gfair.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.korea.gfair.domain.ApplyDTO;
+import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.domain.BoothVO;
+import com.korea.gfair.domain.ExhibitionVO;
+import com.korea.gfair.domain.MemberDTO;
+import com.korea.gfair.domain.MemberVO;
+import com.korea.gfair.domain.PaymentVO;
+import com.korea.gfair.persistence.ApplyDAO;
+
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@NoArgsConstructor
+@Log4j2
+
+@Service
+public class ApplyServiceImpl implements ApplyService {
+
+	@Autowired
+	ApplyDAO dao;
+	
+	@Override
+	public MemberVO getMemberInfo(MemberDTO dto) throws Exception {
+		log.debug("getMemberInfo({}) invoked.", dto);
+		return this.dao.selectMemberInfo(dto);
+	}//getMemberInfo
+
+	@Override
+	public List<BoothVO> getBoothList() throws Exception {
+		log.debug("getBoothList() invoked.");
+		
+		return this.dao.selectBooth();
+	}//getBoothList
+
+	@Override
+	public boolean applyExhibition(ApplyDTO dto) throws Exception {
+		log.debug("applyExhibition({}) invoked.", dto);
+		
+		return this.dao.insert(dto);
+	}//applyExhibition
+
+	@Override
+	public boolean boothIsSelected(ApplyDTO dto) throws Exception {
+		log.debug("boothIsSelected({}) invoked.", dto);
+		
+		return this.dao.updateBooth(dto);
+	}//boothIsSelected
+
+	@Override
+	public List<ApplyVO> getApplyInfo(MemberDTO dto) throws Exception {
+		log.debug("getApplyInfo({}) invoked.", dto);
+		
+		return this.dao.selectApplyInfo(dto);
+	}//getApplyInfo
+
+	@Override
+	public List<ExhibitionVO> getExhibitionInfo() throws Exception {
+		log.debug("getExhibitionInfo() invoked.");
+		
+		return this.dao.selectExhibition();
+	}//getExhibitionInfo
+
+	@Override
+	public PaymentVO getPaymentInfo(Integer applyno) throws Exception {
+		log.debug("getPaymentInfo({}) invoked.", applyno);
+		
+		return this.dao.selectPaymentInfo(applyno);
+	}//getExhibitionInfo
+
+}//end class

@@ -20,7 +20,7 @@ import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.domain.ReplyVO;
 import com.korea.gfair.domain.UploadFileDTO;
 import com.korea.gfair.domain.UploadFileVO;
-import com.korea.gfair.service.BoardService;
+import com.korea.gfair.service.QuestionBoardService;
 import com.korea.gfair.service.ReplyService;
 import com.korea.gfair.service.UploadFileService;
 
@@ -36,7 +36,7 @@ import lombok.extern.log4j.Log4j2;
 public class QuestionBoardController {
 
 	@Setter(onMethod_ = @Autowired)
-	BoardService service;
+	QuestionBoardService service;
 	
 	@Setter(onMethod_ = @Autowired)
 	ReplyService replyService;

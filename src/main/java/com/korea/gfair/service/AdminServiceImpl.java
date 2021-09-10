@@ -1,0 +1,61 @@
+package com.korea.gfair.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.persistence.AdminDAO;
+
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@NoArgsConstructor
+@Log4j2
+
+@Service
+public class AdminServiceImpl implements AdminService {
+
+	@Autowired
+	AdminDAO dao;
+	
+	@Override
+	public List<ApplyVO> getApplyInformation() throws Exception {
+		log.debug("getApplyInformation() invoked.");
+		
+		return this.dao.selectApply();
+	}//getApplyInformation
+
+	@Override
+	public boolean modifyApplyStatus(List<Integer> applynoList) throws Exception {
+		log.debug("getApplyInformation() invoked.");
+		
+		return this.dao.updateApplyAgreeStatus(applynoList);
+	}//modifyApplyStatus
+
+	@Override
+	public boolean registerPaymentInfo(List<Integer> applynoList) throws Exception {
+		log.debug("getApplyInformation() invoked.");
+		
+		return this.dao.insertPayment(applynoList);
+	}//registerPaymentInfo
+
+	@Override
+	public boolean modifyApplyPno(List<Integer> applynoList) throws Exception {
+		log.debug("modifyApplyPno() invoked.");
+		
+		return this.dao.updateApplyPno(applynoList);
+	}//registerPaymentInfo
+
+	@Override
+	public boolean modifyPaymentStatusAndApplyPaymentTF(List<Integer> applynoList) throws Exception {
+		log.debug("modifyPaymentStatusAndApplyPaymentTF({}) invoked.",applynoList);
+		
+		boolean isPaymentStatus = this.dao.updatePaymentStatus(applynoList);
+		boolean isPaymentTF		= this.dao.updateApplyPaymentTF(applynoList);
+		
+		return isPaymentStatus && isPaymentTF;
+	}//modifyPaymentStatusAndApplyPaymentTF
+
+}//end class
