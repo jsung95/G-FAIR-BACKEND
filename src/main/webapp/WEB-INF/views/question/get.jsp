@@ -50,6 +50,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
 
+        <!-- Summer note -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+        
+
         <script>
             $(function () {
             	
@@ -72,9 +78,11 @@
                     location.href="/question/retrieve?bno=${__LIST__.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}"
                 })//onclick ret
 
-       
+                $('#summernote').summernote();
             }); //.jq
         </script>
+
+        
     </head>
     <body>
         <div id="wrapper">
@@ -112,11 +120,11 @@
                                         <td>내용</td>
                                         <td colspan='2'>${__LIST__.content}</td>
                                     </tr>
-
+                                 
                                     <c:if test="${__FILE__.fid>0}">
                                         <tr>
                                             <td>첨부파일</td>
-                                            <td colspan='2'><img src="${__FILE__.fpath}${__FILE__.frename}" alt="" width="600" height="400" ></td>
+                                            <td colspan='2'><img src="/resources/img/${__FILE__.fpath}${__FILE__.frename}" alt="" width="600" height="400" ></td>
                                         </tr>
                                     </c:if>
                                     

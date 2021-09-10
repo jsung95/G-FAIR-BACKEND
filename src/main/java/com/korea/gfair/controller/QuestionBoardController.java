@@ -124,15 +124,18 @@ public class QuestionBoardController {
 	
 	@PostMapping("register")
 	public String register(
-			@ModelAttribute("cri") Criteria cri,BoardDTO dto,MultipartFile file, RedirectAttributes rttrs) throws Exception {
+			@ModelAttribute("cri") Criteria cri,BoardDTO dto,MultipartFile file, RedirectAttributes rttrs, String editordata) throws Exception {
 		log.debug("register({}, {}) invoked.", dto, rttrs);
+		log.debug("file : {}", file);
+		log.debug("editordata : {} ",editordata);
 		
-		if(file.getSize()>0) {
+		if(file.getSize() > 0) {
 			int fid=this.fileService.uploadFile(file);
 			dto.setFid(fid);
 		}//if
 		
-		
+//		
+		dto.setContent(editordata);
 		boolean result=this.service.register(dto);
 		
 		if(result) {

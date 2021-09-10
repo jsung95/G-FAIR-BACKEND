@@ -16,7 +16,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
 
-
+        <!-- Summer note -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+        
         <script>
             $(function () {
                console.log("jq started..."); 
@@ -26,8 +30,21 @@
                 
                });//onclick list
 
+               $('#summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+                });//summer note
             });//jq
         </script>
+   
+   
     </head>
     <body>
         <div id="wrapper">
@@ -48,11 +65,13 @@
                                 <td><input type="text" name="memberid" id="memberid" size="20" placeholder="작성자"></td>
                             </tr>
                             
-                            <tr>
+                            <!-- <tr>
                                 <td><label for="content">내용</label></td>
                                 <td><textarea name="content" id="content" cols="48" rows="10" placeholder="내용을 입력하세요"></textarea></td>
+                            </tr> -->
+                            <tr>
+                                <td colspan="2"><textarea id="summernote" name="editordata" ></textarea></td>
                             </tr>
-        
                             <tr>
                                 <td colspan="2"><input type="file" name="file"></td>
                             </tr>
