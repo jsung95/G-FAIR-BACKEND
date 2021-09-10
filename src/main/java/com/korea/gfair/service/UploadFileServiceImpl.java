@@ -49,9 +49,9 @@ public class UploadFileServiceImpl implements UploadFileService {
 		
 		UploadFileVO vo = new UploadFileVO
 						(null,
-						dto.getUuid(),
-						dto.getUploadpath(),
-						dto.getFilename());
+						dto.getFrename(),
+						dto.getFpath(),
+						dto.getForname());
 		
 		Objects.nonNull(fileMapper);
 		this.fileMapper.insert(vo);//selectKey로 property를 이용해서 vo객체에 fid값을 넣어준다.
@@ -89,7 +89,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 		//파일 정보를 저장할 dto 생성
 		AttachFileDTO dto = new AttachFileDTO();
 		//---업로드경로 저장 2021/08/18
-		dto.setUploadpath("/"+getFolder());
+		dto.setFpath("/"+getFolder());
 		
 		//업로드할 파일이름의 풀네임을 얻어냄-->jsp관계.JPG 아래랑 같은데?,...
 		String uploadFileFullName = uploadFile.getOriginalFilename();
@@ -100,12 +100,12 @@ public class UploadFileServiceImpl implements UploadFileService {
 		log.info("only file Name 2. : "+uploadFileName);
 		
 		//---뽑아낸 파일명을 dto객체에 저장-->jsp관계.JPG
-		dto.setFilename(uploadFileName);
+		dto.setForname(uploadFileName);
 //=============================================================		
 //			파일명 중복방지를 위해 uuid 생성
 		UUID uuid = UUID.randomUUID();
 		//---생성한 uuid를 dto객체에 저장
-		dto.setUuid(uuid.toString());
+		dto.setFrename(uuid.toString());
 //			dto.setUuid(str);
 		
 		//uuid+업로드한 파일명으로 교체
@@ -128,7 +128,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 	public void fileModify(Integer fid, AttachFileDTO dto) throws Exception {
 		log.debug("fileDelete(dto) invoked");
 		
-		UploadFileVO vo = new UploadFileVO(fid, dto.getUuid(), dto.getUploadpath(), dto.getFilename());
+		UploadFileVO vo = new UploadFileVO(fid, dto.getFrename(), dto.getFpath(), dto.getForname());
 		
 		this.fileMapper.modify(vo);
 	}//fileModify
@@ -162,7 +162,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 		//파일 정보를 저장할 dto 생성
 		AttachFileDTO dto = new AttachFileDTO();
 		//---업로드경로 저장 2021/08/18
-		dto.setUploadpath("/"+getFolder());
+		dto.setFpath("/"+getFolder());
 		
 		//업로드할 파일이름의 풀네임을 얻어냄-->jsp관계.JPG 아래랑 같은데?,...
 		String uploadFileFullName = uploadFile.getOriginalFilename();
@@ -173,12 +173,12 @@ public class UploadFileServiceImpl implements UploadFileService {
 		log.info("only file Name 2. : "+uploadFileName);
 		
 		//---뽑아낸 파일명을 dto객체에 저장-->jsp관계.JPG
-		dto.setFilename(uploadFileName);
+		dto.setForname(uploadFileName);
 //=============================================================		
 //			파일명 중복방지를 위해 uuid 생성
 		UUID uuid = UUID.randomUUID();
 		//---생성한 uuid를 dto객체에 저장
-		dto.setUuid(uuid.toString());
+		dto.setFrename(uuid.toString());
 //			dto.setUuid(str);
 		
 		//uuid+업로드한 파일명으로 교체
@@ -196,9 +196,9 @@ public class UploadFileServiceImpl implements UploadFileService {
 		
 		UploadFileVO vo = new UploadFileVO(
 				fid, 
-				dto.getUuid(),
-				dto.getUploadpath(),
-				dto.getFilename());
+				dto.getFrename(),
+				dto.getFpath(),
+				dto.getForname());
 		
 		this.fileMapper.modify(vo);
 	}//fileModify
@@ -317,7 +317,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 			//파일 정보를 저장할 dto 생성
 			AttachFileDTO dto = new AttachFileDTO();
 			//---업로드경로 저장 2021/08/18
-			dto.setUploadpath("/"+getFolder());
+			dto.setFpath("/"+getFolder());
 			
 			//업로드할 파일이름의 풀네임을 얻어냄-->jsp관계.JPG 아래랑 같은데?,...
 			String uploadFileFullName = multipartFile.getOriginalFilename();
@@ -328,12 +328,12 @@ public class UploadFileServiceImpl implements UploadFileService {
 			log.info("only file Name 2. : "+uploadFileName);
 			
 			//---뽑아낸 파일명을 dto객체에 저장-->jsp관계.JPG
-			dto.setFilename(uploadFileName);
+			dto.setForname(uploadFileName);
 	//=============================================================		
 //			파일명 중복방지를 위해 uuid 생성
 			UUID uuid = UUID.randomUUID();
 			//---생성한 uuid를 dto객체에 저장
-			dto.setUuid(uuid.toString());
+			dto.setFrename(uuid.toString());
 //			dto.setUuid(str);
 			
 			
@@ -349,7 +349,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 			
 			if(checkImageType(saveFile)) {//생성할 파일이 이미지라면
 				//이미지파일일때 dto객체에 결과값 저장
-				dto.setFiletype(true);
+//				dto.setFiletype(true);
 				
 				//s_로 구분된 파일명으로 지정하고 그걸로 파일 출력스트림을 만든다.
 				FileOutputStream thumbnail = 
