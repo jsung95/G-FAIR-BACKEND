@@ -22,5 +22,8 @@ public interface ExhibitionService{
 	
 	public abstract Integer getTotalCount(Criteria cri) throws Exception;
 
-
+	//--------------------- danny --------------------//
+	public abstract ExhibitionVO get(Integer exno);
+	
+	public abstract List<ExhibitionVO> getList();
 }//end interface

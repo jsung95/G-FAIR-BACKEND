@@ -3,9 +3,11 @@ package com.korea.gfair.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.myapp.mapper.ExhibitionMapper;
 
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.ExhibitionDTO;
@@ -110,5 +112,26 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 		return this.exhibitionDAO.totalCount(cri);
 	}//getTotalCount
 
+	//--------------------- danny --------------------//
+	@Setter(onMethod_= {@Autowired})
+	private ExhibitionMapper mapper;
 
+	@Override
+	public ExhibitionVO get(Integer exno) {
+		log.debug("get(exno) invoked.");
+		log.info("\t+ exno: " + exno);
+		
+		Objects.requireNonNull(this.mapper);
+
+		return this.mapper.get(exno);
+	}
+
+	@Override
+	public List<ExhibitionVO> getList() {
+		log.debug("getList() invoked.");
+		
+		Objects.requireNonNull(this.mapper);
+		
+		return this.mapper.getList();
+	}//get()
 }//end class
