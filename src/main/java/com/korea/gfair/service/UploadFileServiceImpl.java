@@ -3,6 +3,7 @@ package com.korea.gfair.service;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -24,10 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.korea.gfair.domain.AttachFileDTO;
 import com.korea.gfair.domain.BoardSearchFileVO;
+import com.korea.gfair.domain.UploadFileDTO;
 import com.korea.gfair.domain.UploadFileVO;
 import com.korea.gfair.mapper.UploadFileMapper;
+import com.korea.gfair.persistence.UploadFileDAO;
+import com.korea.gfair.util.UUIDGenerator;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
 
@@ -37,6 +42,8 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j2
 public class UploadFileServiceImpl implements UploadFileService {
 
+	@Setter(onMethod_ = @Autowired)
+	private UploadFileDAO dao;
 	
 	@Autowired private UploadFileMapper fileMapper;
 	
@@ -464,5 +471,100 @@ public class UploadFileServiceImpl implements UploadFileService {
 	}//getBoardFile
 
 
+	//=============================다은=============================
 	
+	@Override
+	public int uploadFile(MultipartFile file) throws Exception {
+		
+		log.debug("=====================================================");
+		log.debug("uploadFile({})");
+		log.debug("=====================================================");
+
+		//----------------------------------------------
+		//1.사용자가 첨부한 file을 저장할 fileDTO 객체 생성.
+		//----------------------------------------------
+		
+		UploadFileDTO dto = new UploadFileDTO();
+		
+		//----------------------------------------------
+		//2.UUID 생성
+		//----------------------------------------------
+		UUID uuid = UUIDGenerator.generateType1UUID();
+		
+		//----------------------------------------------
+		//2-1. file 이름 변경
+		//----------------------------------------------
+		
+		String frename =uuid+file.getOriginalFilename();
+		
+		//----------------------------------------------
+		//3.file 저장경로 생성 
+		//----------------------------------------------
+//		LocalDate todaysDate = LocalDate.now(); // 현재 날짜 얻기. 
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        String todaysDate =sdf.format(date);
+        String filePath = todaysDate+"/";   //날짜별로 저장할 폴더 경로
+        String fullPath="C:/OPT/eclipse/workspace/JEE/gfair2/src/main/webapp/resources/img/"+filePath; 
+       
+        File dir = new File(fullPath); //fullPath로 파일 객체 생성
+
+        if(!dir.isDirectory()){    //만약 경로에 지정된 폴더가 없으면
+        	dir.mkdirs();          //폴더 새로 만들기 
+        	log.debug("*****************mkdirs invoked.");
+        }//if
+		
+        log.info("\t+ fullPath :{}", fullPath);
+        //----------------------------------------------
+		//4. file 저장. 
+        //----------------------------------------------
+			
+		log.info("\t+ contentType: "+ file.getContentType());
+		log.info("\t+ filename: "+ file.getOriginalFilename());
+		log.info("\t+ filesize: "+ file.getSize());
+		log.info("======================================");
+		
+	
+		try {
+			
+			byte[] fileData = file.getBytes();		//바가지
+														//생성자의 매개변수로 반드시 출력할 파일 경로를 지정해줘야한다. 
+			FileOutputStream fos = new FileOutputStream(fullPath + frename);
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			
+			try(fos; bos;){
+				
+				//바가지 통째로 출력 버퍼로 쓰겠다. 모든 파일의 데이터가 바가지 안에 들어있기 때문. 
+				bos.write(fileData);
+				
+				bos.flush();
+			
+			}//try-with-resources 
+	
+		}catch(IOException e) {
+			e.printStackTrace();
+		}//try-catch
+		
+		//----------------------------------------------
+		//5. DTO 객체에 file name저장
+		//----------------------------------------------
+		
+		dto.setForname(file.getOriginalFilename());
+		dto.setFpath(filePath);
+		dto.setFrename(frename);
+		
+		int fid =this.dao.insertFile(dto);
+		
+		log.info("*****fid :{} ******", fid);
+		
+		return fid;
+	}//uploadFile
+
+	@Override
+	public UploadFileVO getFile(UploadFileDTO dto) throws Exception {
+		log.debug("getFile({}) invoked.", dto);
+		
+		
+		return this.dao.selectFile(dto);
+	}//getFile
 }//end class

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.korea.gfair.domain.AttachFileDTO;
 import com.korea.gfair.domain.BoardSearchFileVO;
+import com.korea.gfair.domain.UploadFileDTO;
 import com.korea.gfair.domain.UploadFileVO;
 
 
@@ -36,4 +37,8 @@ public interface UploadFileService {
 	public ResponseEntity<Resource> downloadFile(String fileName) throws Exception;//브라우저에서 다운로드 처리
 	public ResponseEntity<String> delete(String fileName, String type) throws Exception;//썸네일 x눌렀을때
 
+	
+//	--------------------------다은---------------------------------------------------
+	public abstract int uploadFile(MultipartFile file) throws Exception;
+	public abstract UploadFileVO getFile(UploadFileDTO dto) throws Exception;
 }//end interface
