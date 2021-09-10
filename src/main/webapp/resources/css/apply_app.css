@@ -1,0 +1,57 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+    font-family: "Noto Sans KR Light";
+    
+}
+
+#content{
+    width: 1200px;
+    height: 1600px;
+
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    
+}
+#user_info{
+    width: 1100px;
+    height: 1400px;
+}
+#user_agree{
+    width: 1100px;
+    height: 150px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+button{
+    cursor: pointer;
+    border: solid 1px #005bbb;
+    background-color: #005bbb;
+    color: white;
+
+    width: 100px;
+    height: 44px;
+    margin-bottom: 1px;
+}
+
+input{
+    
+    width: 30px;
+    height: 20px;
+
+    display: inline-block;
+
+    border: none;
+    border-bottom: 1px solid grey;
+
+    align-self: stretch;
+}
+
+form{
+    display: flex;
+    justify-content: space-around;
+}
