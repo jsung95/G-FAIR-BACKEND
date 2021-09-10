@@ -2,8 +2,8 @@ package com.korea.gfair.mapper;
 
 import java.util.List;
 
-import org.zerock.myapp.domain.BoardVO;
-import org.zerock.myapp.domain.Criteria;
+import com.korea.gfair.domain.BoardVO;
+import com.korea.gfair.domain.Criteria;
 
 public interface FreeBoardMapper {
 	

@@ -3,9 +3,10 @@ package com.korea.gfair.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.EventDTO;
-import org.zerock.myapp.domain.EventVO;
+
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.EventDTO;
+import com.korea.gfair.domain.EventVO;
 
 public interface EventBoardMapper {
 	

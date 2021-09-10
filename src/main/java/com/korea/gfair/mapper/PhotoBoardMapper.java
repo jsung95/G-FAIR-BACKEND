@@ -3,10 +3,11 @@ package com.korea.gfair.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.PhotoDTO;
-import org.zerock.myapp.domain.PhotoVO;
 import org.zerock.myapp.domain.PhotoVO2;
+
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.PhotoDTO;
+import com.korea.gfair.domain.PhotoVO;
 
 public interface PhotoBoardMapper {
 

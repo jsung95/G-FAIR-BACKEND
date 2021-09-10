@@ -3,9 +3,10 @@ package com.korea.gfair.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.ReplyDTO;
-import org.zerock.myapp.domain.ReplyVO;
+
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.ReplyDTO;
+import com.korea.gfair.domain.ReplyVO;
 
 public interface ReplyMapper {
 	public abstract int insert(ReplyDTO dto);
