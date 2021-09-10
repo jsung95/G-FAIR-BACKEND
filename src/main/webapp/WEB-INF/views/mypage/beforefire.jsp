@@ -12,48 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title></title>
 
-        <style>
-                *{
-                margin: 0 auto;
-                padding: 0;
-                font-family: "Noto Sans KR Light";
-                
-            }
-
-            #content{
-                width: 1200px;
-                height: 600px;
-
-                justify-content: space-around;
-                display: flex;
-                flex-direction: column;
-                
-            }
-
-            #con1{
-                height: 250px;
-            }
-
-            #con2{
-                height: 150px;
-            }
-            button{
-                cursor: pointer;
-                border: solid 1px #005bbb;
-                background-color: #005bbb;
-                color: white;
-
-                width: 498px;
-                height: 44px;
-                margin-bottom: 1px;
-            }
-
-            #cancelBtn{
-                background-color: #7397bd;
-                border: solid 1px #7397bd;
-            }
-
-        </style>
+        <link rel="stylesheet" href="/resources/css/mypage_beforefire.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>

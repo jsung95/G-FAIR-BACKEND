@@ -10,86 +10,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>전시회 참가신청</title>
-        <style>
-            *{
-                margin: 0 auto;
-                padding: 0;
-                font-family: "Noto Sans KR Light";
-                
-            }
-
-            #content{
-                width: 1200px;
-                height: 1600px;
-
-                justify-content: space-around;
-                display: flex;
-                flex-direction: column;
-                
-            }
-            #user_info{
-                width: 1100px;
-                height: 1400px;
-            }
-            #user_agree{
-                width: 1100px;
-                height: 150px;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-            }
-
-            button{
-                cursor: pointer;
-                border: solid 1px #005bbb;
-                background-color: #005bbb;
-                color: white;
-
-                width: 100px;
-                height: 44px;
-                margin-bottom: 1px;
-            }
-
-            input{
-                
-                width: 30px;
-                height: 20px;
-
-                display: inline-block;
-
-                border: none;
-                border-bottom: 1px solid grey;
-
-                align-self: stretch;
-            }
-
-            form{
-                display: flex;
-                justify-content: space-around;
-            }
-        </style>
-
+      
+        <link rel="stylesheet" href="/resources/css/apply_app.css">
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
 
-        <script>
-            $(function () {
-                console.debug('jq started..');
-
-                $('#agreeBtn').on('click',function () {
-                    console.debug('agreeBtn on click event triggered..');
-
-                    if(document.querySelector('#agree').checked){
-                        let form = $('form');
-                        form.submit();
-                    }else{
-                        alert('약관에 동의를 해야지만 신청서 작성이 가능합니다. ');
-                    }//if-else
-
-                });//on click
-            });//.jq
-        </script>
+        <script src="/resources/js/apply_app.js"></script>
 
     </head>
     <body>

@@ -11,82 +11,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>내가 쓴 댓글 관리</title>
-
-        <style>
-             *{
-                margin: 0 auto;
-                padding: 0;
-                font-family: "Noto Sans KR Light";
-                
-            }
-
-            button{
-                cursor: pointer;
-                border: solid 1px #005bbb;
-                background-color: #005bbb;
-                color: white;
-
-                width: 100px;
-                height: 44px;
-                margin-bottom: 1px;
-            }
-
-            input{
-                
-                width: 30px;
-                height: 20px;
-
-                margin-bottom: 4px;
-                margin-top: 7px;
-
-                display: inline-block;
-
-                border: none;
-                border-bottom: 1px solid grey;
-
-                align-self: stretch;
-            }
-
-            #content{
-                width: 1200px;
-                height: 800px;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-            }
-
-            #con_reply{
-                height: 500px;
-               
-            }
-
-            #form_header{
-                height: 100px;
-            }
-
-            #pagination{
-                height: 70px;
-            }
-
-            #pagination ul li{
-                display: inline-block;
-            }
-
-            table{
-                width: 1000px;
-                border: 1px solid #005bbb;
-                border-collapse: collapse;
-            }
-            
-            tbody{
-                text-align: center;
-            }
-
-            #recontent{
-                width: 250px;
-            }
-        </style>
+		
+		<link rel="stylesheet" href="/resources/css/mypage_replymanage.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
@@ -121,31 +47,11 @@
 
                 }); //onclick for Prev, Next button
 
-                $('#searchBtn').on('click',function () {
-                    console.log('searchBtn on click triggered');
-
-                    let searchForm = $('#replyForm');
-                    
-                    searchForm.attr('action', '/mypage/replymanage');
-                    searchForm.attr('method', 'GET');
-
-                    searchForm.submit();
-                });//sarch on click
-
-                $('#bname').on('change',function () {
-                    console.debug('bname on change event triggered');
-                    
-                    // alert(this.value);
-
-                    let searchForm = $('#replyForm');
-                    
-                    searchForm.attr('action', '/mypage/replymanage');
-                    searchForm.attr('method', 'GET');
-                    
-                    searchForm.submit();
-                }); //on change
+            
             });//.jq
         </script>
+
+        <script src="/resources/js/mypage_replymanage.js"></script>
     </head>
     <body>
 

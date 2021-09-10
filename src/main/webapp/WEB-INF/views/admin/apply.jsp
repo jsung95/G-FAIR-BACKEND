@@ -15,34 +15,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
 
-        <script>
-            $(function () {
-                
-                $('#agreeUpdateBtn').on('click', function () {
-                    console.debug('agreeUpdateBtn click event triggered.. ');
+        <script src="/resources/js/admin_apply.js"></script>
 
-                    var applyForm = $('#apply');
-                    
-                    applyForm.attr('action', '/admin/applyUpdateAgree');
-                    applyForm.attr('method', 'POST');
-
-                    applyForm.submit();
-
-                });// on click event
-
-                $('#paymentUpadateBtn').on('click', function () {
-                    console.debug('paymentUpadateBtn click event triggered...');
-
-                    var applyForm = $('#apply');
-                    
-                    applyForm.attr('action', '/admin/applyUpdatePayment');
-                    applyForm.attr('method', 'POST');
-
-                    applyForm.submit();
-
-                });// on click event
-            });//.jq
-        </script>
     </head>
     <body>
         <div id="content">

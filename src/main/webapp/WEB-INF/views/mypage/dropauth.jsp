@@ -11,68 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>회원탈퇴</title>
 
-        <style>
-            *{
-                margin: 0 auto;
-                padding: 0;
-                font-family: "Noto Sans KR Light";
-                
-            }
-
-            #content{
-                width: 1200px;
-            }
-
-            #inner_con{
-                height: 500px;
-                justify-content: space-around;
-                display: flex;
-                flex-direction: column;
-
-                
-            }
-
-            input{
-                display: block;
-                width: 498px;
-                height: 30px;
-
-                margin-bottom: 15px;
-                margin-top: 15px;
-
-                border: none;
-                border-bottom: 1px solid grey;
-
-                align-self: stretch;
-  
-            }
-
-            button{
-                cursor: pointer;
-                border: solid 1px #005bbb;
-                background-color: #005bbb;
-                color: white;
-
-                width: 100px;
-                height: 44px;
-                margin-bottom: 1px;
-            }
-
-            h4{
-                color: #005bbb;
-                margin: 0;
-            }
-
-            form{
-                height: 400px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                flex-basis: auto;
-                
-            }
-     
-        </style>
+		<link rel="stylesheet" href="/resources/css/mypage_dropauth.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
