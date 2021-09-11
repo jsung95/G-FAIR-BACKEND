@@ -2,8 +2,8 @@ package com.korea.gfair.service;
 
 import java.util.List;
 
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.ReplyPageDTO;
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.ReplyPageDTO;
 
 import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.domain.ReplyVO;

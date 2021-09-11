@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.PhotoDTO;
-import org.zerock.myapp.domain.PhotoVO;
-import org.zerock.myapp.domain.PhotoVO2;
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.PhotoDTO;
+import com.korea.gfair.domain.PhotoVO;
+import com.korea.gfair.domain.PhotoVO2;
 
 public interface PhotoBoardService {
 	

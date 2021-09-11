@@ -17,11 +17,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.PhotoDTO;
-import org.zerock.myapp.domain.PhotoVO;
-import org.zerock.myapp.domain.PhotoVO2;
-import org.zerock.myapp.mapper.PhotoBoardMapper;
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.PhotoDTO;
+import com.korea.gfair.domain.PhotoVO;
+import com.korea.gfair.domain.PhotoVO2;
+import com.korea.gfair.mapper.PhotoBoardMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.zerock.myapp.domain.BoardVO;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.PageDTO;
-import org.zerock.myapp.service.FreeBoardService;
+import com.korea.gfair.domain.BoardVO;
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.PageDTO;
+import com.korea.gfair.service.FreeBoardService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;

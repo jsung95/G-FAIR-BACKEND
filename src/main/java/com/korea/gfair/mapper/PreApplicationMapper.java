@@ -1,7 +1,7 @@
 package com.korea.gfair.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import org.zerock.myapp.domain.PreApplicationDTO;
+import com.korea.gfair.domain.PreApplicationDTO;
 
 public interface PreApplicationMapper {
 	

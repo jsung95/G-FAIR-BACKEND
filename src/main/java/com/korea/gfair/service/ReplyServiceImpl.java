@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.ReplyPageDTO;
-import org.zerock.myapp.mapper.ReplyMapper;
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.ReplyPageDTO;
+import com.korea.gfair.mapper.ReplyMapper;
 
 import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.domain.ReplyVO;

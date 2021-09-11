@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
-import com.korea.gfair.domain.pageDTO;
+import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.service.NewsBoardService;
 
 import lombok.NoArgsConstructor;
@@ -154,7 +154,7 @@ public class NewsBoardController {
 		Objects.requireNonNull(boards);
 		boards.forEach(log::info);
 		
-		pageDTO pageDTO = new  pageDTO(cri, this.service.getTotal(cri));
+		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal(cri));
 		model.addAttribute("list", boards); 
 		model.addAttribute("pageMaker", pageDTO); 
 		

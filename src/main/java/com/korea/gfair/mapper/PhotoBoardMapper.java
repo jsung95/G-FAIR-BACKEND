@@ -3,7 +3,7 @@ package com.korea.gfair.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.zerock.myapp.domain.PhotoVO2;
+import com.korea.gfair.domain.PhotoVO2;
 
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.PhotoDTO;

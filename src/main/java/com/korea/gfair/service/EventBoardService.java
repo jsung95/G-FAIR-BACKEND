@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
-import org.zerock.myapp.domain.Criteria;
-import org.zerock.myapp.domain.EventDTO;
-import org.zerock.myapp.domain.EventVO;
+import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.EventDTO;
+import com.korea.gfair.domain.EventVO;
 
 public interface EventBoardService {
 	

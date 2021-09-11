@@ -1,6 +1,6 @@
 package com.korea.gfair.service;
 
-import org.zerock.myapp.domain.PreApplicationDTO;
+import com.korea.gfair.domain.PreApplicationDTO;
 
 public interface PreApplicationService {
 	public abstract boolean register(PreApplicationDTO dto);

@@ -4,8 +4,8 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zerock.myapp.domain.PreApplicationDTO;
-import org.zerock.myapp.mapper.PreApplicationMapper;
+import com.korea.gfair.domain.PreApplicationDTO;
+import com.korea.gfair.mapper.PreApplicationMapper;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
