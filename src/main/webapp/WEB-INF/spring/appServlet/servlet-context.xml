@@ -66,7 +66,7 @@
 	<context:component-scan base-package="com.korea.gfair.controller" />
 	<context:component-scan base-package="com.korea.gfair.service" />
 	<context:component-scan base-package="com.korea.gfair.interceptor" />	
-	
+	<context:component-scan base-package="com.korea.gfair.persistence" />		
 	
 	
 	<view-controller 
