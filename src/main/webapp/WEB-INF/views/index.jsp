@@ -105,13 +105,11 @@
         <div id="notice_Wrap">
             <div id="notice_Board">
                 <h2><a href="#">공지사항</a></h2>
+                <c:forEach items="${list}" var="board" begin="0" end="4">
                 <ul>
-                    <li><a href="#">G-FAIR KOREA 2021 참가기업 모집 안내</a></li>
-                    <li><a href="#">GFK-KOTRA : 대중 수출 온라인 컨설팅 사업 (모집~7.30.(금))</a></li>
-                    <li><a href="#">GFK-KOTRA : 중국 알리바바그룹 B2B 플랫폼 1688.com 입점지원 (모집~7.31.(토))</a></li>
-                    <li><a href="#">G-FAIR KOREA 온라인 화상상담회 개최 (7.26.(월) ~ 27.(화))</a></li>
-                    <li><a href="#">포천시 단체관 참가 기업 모집 공고 (부스비 지원) (~07/23)</a></li>
+                    <li><a href="/notice/get?bno=${board.bno}">${board.title}</a></li>
                 </ul>
+                </c:forEach>
             </div>
         </div>
 
