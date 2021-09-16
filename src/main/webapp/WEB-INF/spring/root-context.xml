@@ -40,7 +40,7 @@
 
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
 		<property name="jdbcUrl"
-		value="jdbc:log4jdbc:oracle:thin:@db202106301639_high?TNS_ADMIN=C:/OPT/OracleCloudWallet/ATP/" />
+		value="jdbc:log4jdbc:oracle:thin:@db202106301639_high?TNS_ADMIN=C:/opt/OracleCloudWallet/ATP/" />
 		<!-- value="jdbc:log4jdbc:oracle:thin:@db202106301639_high?TNS_ADMIN=/Users/jinsung/Desktop/opt/OracleCloudWallet/PROJECT/PROJECT/" /> -->
 		<!-- value="jdbc:log4jdbc:oracle:thin:@db202106301639_high?TNS_ADMIN=/Users/jinsung/Desktop/opt/OracleCloudWallet/ATP"/> -->
 		
