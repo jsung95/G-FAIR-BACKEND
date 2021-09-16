@@ -105,7 +105,7 @@ public class NoticeBoardController {
 	}
 	
 	@PostMapping("modify")
-	public String modify(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs, @RequestParam("file") MultipartFile file, @RequestParam(value="delete_file", defaultValue = "F") String delete_file) {
+	public String modify(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs, @RequestParam("file") MultipartFile file, @RequestParam(value="delete_file", defaultValue = "F") String delete_file) throws Exception {
 		
 		if(delete_file.equals("T")) { //수정창에서 기존파일삭제 체크박스 유무에따라
 			//기존 게시판 테이블 파일을 null로 업데이트
@@ -144,7 +144,7 @@ public class NoticeBoardController {
 	}
 	
 	@PostMapping("register")
-	public String register(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs, @RequestParam("file") MultipartFile file) {
+	public String register(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs, @RequestParam("file") MultipartFile file) throws Exception {
 		log.debug("register_controller invoked.");
 		
 		this.board_service.register(dto);

@@ -30,17 +30,17 @@ public class FreeBoardController {
 	@Setter(onMethod_=@Autowired)
 	public FreeBoardService service;
 	
-	@GetMapping("list")
-	public void list(Model model) {
-		
-		List<BoardVO> list = service.list();
-		
-		model.addAttribute("__LIST__",list);
-		
-	}//list
+//	@GetMapping("list")
+//	public void list(Model model) {
+//		
+//		List<BoardVO> list = service.list();
+//		
+//		model.addAttribute("__LIST__",list);
+//		
+//	}//list
 	
 	
-	@GetMapping("listPerPage")
+	@GetMapping("board")
 	public String listPerPage(@ModelAttribute("cri") Criteria cri, Model model) {
 		
 		List<BoardVO> boards = service.getListPerPage(cri);
@@ -55,7 +55,7 @@ public class FreeBoardController {
 		model.addAttribute("pageMaker",pageDTO);
 		
 		
-		return "free/list";
+		return "free/board";
 		
 	}//listPerPage
 	
@@ -75,7 +75,7 @@ public class FreeBoardController {
 		
 		service.modify(vo);
 		
-		return "redirect:/free/listPerPage";
+		return "redirect:/free/board";
 	}//modify
 	
 	
@@ -91,7 +91,7 @@ public class FreeBoardController {
 		
 		Objects.requireNonNull(write);
 		
-		return "redirect:/free/listPerPage";
+		return "redirect:/free/board";
 		
 	}//write
 	
@@ -100,11 +100,8 @@ public class FreeBoardController {
 		
 		service.remove(bno);
 		
-		return "redirect:/free/listPerPage";
+		return "redirect:/free/board";
 	}//remove
-	
-	
-	
 	
 
 }//end class

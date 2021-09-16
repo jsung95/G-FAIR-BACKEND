@@ -23,34 +23,35 @@
             $('#listBtn').click(function() {
                 console.log('onclick for #listBtn clicked...');
 
-                location.href = '/board/list';
+                location.href = '/free/board';
             });//onclick for #listBtn
             
             
 
         });//jq
         
-
-        
+	
         
     </script>
     
 </head>
 <body>
-    <h1>write</h1>
+    <h1>글쓰기</h1>
 
     <div id="wrapper">
-	    <form action="/board/write" method="post">
+	    <form action="/free/write" method="post">
 	    	
 	        <table>
 	            <tr>
 	                <td><label for="TITLE">제목</label></td>
 	                <td><input type="text" name="title" id="TITLE" size="50" placeholder="제목을 입력하세요"></td>
 	            </tr>
+	            
 	            <tr>
 	                <td><label for="CONTENT">내용</label></td>
 	                <td><textarea name="content" id="CONTENT" cols="52" rows="10" placeholder="내용을 입력하세요"></textarea></td>
 	            </tr>
+	            
 	            <tr>
 	                <td><label for="MEMBERID">작성자</label></td>
 	                <td><input type="text" name="memberId" id="MEMBERID" size="20" placeholder="작성자를 입력하세요"></td>

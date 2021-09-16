@@ -4,16 +4,17 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class ReplyPageDTO {
 
-	
-	private List<ReplyVO> list;
 	private int replyCnt;
+	private List<ReplyVO> list;
+	
 	
 }//end class

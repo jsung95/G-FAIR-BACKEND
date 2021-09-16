@@ -35,7 +35,7 @@ public class BoardReplyServiceImpl implements BoardReplyService {
 		Objects.nonNull(replyMapper);
 		
 		ReplyPageDTO replyPageDTO = 
-				new ReplyPageDTO(this.replyMapper.replyList(cri,bno), this.replyMapper.totalCount(bno));
+				new ReplyPageDTO(this.replyMapper.totalCount(bno), this.replyMapper.replyList(cri,bno));
 		
 		return replyPageDTO;
 	}//getReplyList

@@ -94,6 +94,8 @@
 				tbl_member
 			WHERE
 				email = #{email}
+			AND
+				membertype = '기업'
 		]]>
 	</select>
 	
@@ -106,6 +108,8 @@
 				tbl_member
 			WHERE
 				email = #{email}
+			AND
+				membertype = '기업'
 		]]>
 	</select>
 	
@@ -142,68 +146,87 @@
 	<!--==================== 김희용 ====================-->
 	<!--==================== 김희용 ====================-->
 	<!--==================== 김희용 ====================-->
-   <select id="selectMemberId" resultType="int">
-      SELECT count(*)
-      FROM tbl_member
-      WHERE memberId = #{memberId}
-   </select>
-   
-   <select id="selectPhone" resultType="int">
-      SELECT count(*)
-      FROM tbl_member
-      WHERE phone = #{phone}
-   </select>
-   
-   
-   <select id="selectEmail" resultType="int">
-      SELECT count(*)
-      FROM tbl_member
-      WHERE email = #{email}
-   </select>
-   
-   <insert id="insertMember">
-   
-	   <selectKey keyProperty="mno" order="BEFORE" resultType="int">
-	      select mno_seq.nextVal FROM dual
-	   </selectKey>
-	   insert into tbl_member
-	   (
-	       mno,
-	       memberid,
-	       memberpw,
-	       membername,
-	       memberaddress,
-	       phone,
-	       email,
-	       cbno,
-	       fid,
-	       membertype
-	    )
-	   values(
-	      #{mno},
-	      #{memberId},
-	      #{memberPw},
-	      #{memberName},
-	      #{memberAddress},
-	      #{phone},
-	      #{email},
-	      1,
-	      1,
-	      '개인')
-   </insert>
-   
+	<select id="selectMemberId" resultType="int">
+		SELECT count(*)
+		FROM tbl_member
+		WHERE memberid = #{memberid}
+	</select>
+	
+	<select id="selectPhone" resultType="int">
+		SELECT count(*)
+		FROM tbl_member
+		WHERE phone = #{phone}
+	</select>
+	
+	
+	<select id="selectEmail" resultType="int">
+		SELECT count(*)
+		FROM tbl_member
+		WHERE email = #{email}
+	</select>
+	
+	<select id="selectFindId" resultType="String">
+		SELECT memberid
+		FROM tbl_member
+		WHERE email = #{email}
+		AND membertype = '개인'
+		
+	</select>
+	
+	<select id="selectFindPw" resultType="int">
+		SELECT count(*) 
+		FROM tbl_member
+		WHERE memberid = #{memberid}
+		AND email = #{email}
+		AND membertype = '개인'
+	</select>
+	
+	<update id="updatePw">
+        UPDATE tbl_member 
+        SET memberpw = #{pw}
+		WHERE memberid = #{memberid}
+		AND email = #{email}
+		AND membertype = '개인'
+	</update>
+	
+	<insert id="insertMember">
+	
+<!-- 	<selectKey keyProperty="mno" order="BEFORE" resultType="int">
+      select mno_seq.nextVal FROM dual
+    </selectKey> -->
+	insert into tbl_member
+	(
+	    mno,
+	    memberid,
+	    memberpw,
+	    membername,
+	    memberaddress,
+	    phone,
+	    email,
+	    membertype
+    )
+	values(
+		"ADMIN"."ISEQ$$_103232".nextval,
+		#{memberid},
+		#{memberpw},
+		#{membername},
+		#{memberaddress},
+		#{phone},
+		#{email},
+		'개인')
+	</insert>
    
    <!--==================== 원승대 ====================-->
    <!--==================== 원승대 ====================-->
    <!--==================== 원승대 ====================-->
-	<select id="get" resultType="org.zerock.myapp.domain.MemberVO">
+	<select id="get" resultType="com.korea.gfair.domain.MemberVO">
         <![CDATA[ 
             SELECT
                 *
             FROM
                 tbl_member
             WHERE
-                mno = #{mno}
+                memberid = #{memberid}
         ]]>
     </select>
        

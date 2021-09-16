@@ -628,7 +628,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 	@Override
 	public void load_img(BoardDTO dto, AttachFileVO file, HttpServletResponse response) {
 
-		String path = file.getFpath();
+		String path = "/Users/jinsung/Desktop/opt/eclipse/workspace/PROJECT/G-Fair-BackEnd/src/main/webapp/resources/img" + file.getFpath() + "/";
 		String fileReName = file.getFrename();
 		
 		File img = new File(path + fileReName);
@@ -657,12 +657,20 @@ public class UploadFileServiceImpl implements UploadFileService {
 		
 	}
 
+	//글수
 	@Override
-	public void uploadFileByModify(BoardDTO dto, MultipartFile file) {
+	public void uploadFileByModify(BoardDTO dto, MultipartFile file) throws Exception {
 		AttachFileDTO attachDTO = new AttachFileDTO();
 		
 		
-		String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		//String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		String uploadBaseDir = imgFileName;
+		File uploadPath = new File(uploadBaseDir, getFolder());
+		
+		if(!uploadPath.exists()) {
+			uploadPath.mkdirs();
+		}
+		
 		
 		if(file.getSize() > 0) {
 			try {
@@ -670,13 +678,13 @@ public class UploadFileServiceImpl implements UploadFileService {
 				String uuidFile = UUID.randomUUID().toString();
 				
 				byte[] fileData = file.getBytes();
-				FileOutputStream fos = new FileOutputStream(uploadDir + uuidFile);
+				FileOutputStream fos = new FileOutputStream(uploadPath + "/" + uuidFile + "_" + file.getOriginalFilename());
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				
 				try(fos; bos;) {
-					attachDTO.setFpath(uploadDir);
+					attachDTO.setFpath("/"+getFolder());
 					attachDTO.setForname(file.getOriginalFilename());
-					attachDTO.setFrename(uuidFile);
+					attachDTO.setFrename(uuidFile + "_" + file.getOriginalFilename());
 					
 					bos.write(fileData);
 					if(dto.getFid() != null) { //만약 기존 게시글의 파일이있는데 첨부파일 변경을 할때,
@@ -697,25 +705,35 @@ public class UploadFileServiceImpl implements UploadFileService {
 		
 	}
 
+	
+	//글쓸때
 	@Override
-	public void uploadFileByWrite(BoardDTO dto, MultipartFile file) {
+	public void uploadFileByWrite(BoardDTO dto, MultipartFile file) throws Exception {
 		AttachFileDTO attachDTO = new AttachFileDTO();
 		
 		
-		String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		//String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		String uploadBaseDir = imgFileName;
+		File uploadPath = new File(uploadBaseDir, getFolder());
+		
+		if(!uploadPath.exists()) {
+			uploadPath.mkdirs();
+		}
+		
+		
 		if(file.getSize() > 0) {
 			try {
 				
 				String uuidFile = UUID.randomUUID().toString();
-				
+				 
 				byte[] fileData = file.getBytes();
-				FileOutputStream fos = new FileOutputStream(uploadDir + uuidFile);
+				FileOutputStream fos = new FileOutputStream(uploadPath + "/" + uuidFile + "_" + file.getOriginalFilename());
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				
 				try(fos; bos;) {
-					attachDTO.setFpath(uploadDir);
+					attachDTO.setFpath("/"+getFolder());
 					attachDTO.setForname(file.getOriginalFilename());
-					attachDTO.setFrename(uuidFile);
+					attachDTO.setFrename(uuidFile + "_" + file.getOriginalFilename());
 					
 					bos.write(fileData);
 					
@@ -730,12 +748,20 @@ public class UploadFileServiceImpl implements UploadFileService {
 		
 	}
 
+	//회원가입할때
 	@Override
-	public void uploadFileByRegister(MemberDTO dto, MultipartFile file) {
+	public void uploadFileByRegister(MemberDTO dto, MultipartFile file) throws Exception {
 		AttachFileDTO attachDTO = new AttachFileDTO();
 		
 		
-		String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		//String uploadDir = "/Users/jinsung/Desktop/temp/upload/";
+		String uploadBaseDir = imgFileName;
+		File uploadPath = new File(uploadBaseDir, getFolder());
+		
+		if(!uploadPath.exists()) {
+			uploadPath.mkdirs();
+		}
+		
 		
 		if(file.getSize() > 0) {
 			try {
@@ -743,13 +769,13 @@ public class UploadFileServiceImpl implements UploadFileService {
 				String uuidFile = UUID.randomUUID().toString();
 				
 				byte[] fileData = file.getBytes();
-				FileOutputStream fos = new FileOutputStream(uploadDir + uuidFile);
+				FileOutputStream fos = new FileOutputStream(uploadPath + "/" + uuidFile + "_" + file.getOriginalFilename());
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				
 				try(fos; bos;) {
-					attachDTO.setFpath(uploadDir);
+					attachDTO.setFpath("/"+getFolder());
 					attachDTO.setForname(file.getOriginalFilename());
-					attachDTO.setFrename(uuidFile);
+					attachDTO.setFrename(uuidFile + "_" + file.getOriginalFilename());
 					
 					bos.write(fileData);
 					
@@ -762,5 +788,6 @@ public class UploadFileServiceImpl implements UploadFileService {
 		}//if
 		
 	}
+
 	//================================================================//
 }//end class

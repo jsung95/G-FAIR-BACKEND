@@ -49,8 +49,8 @@ public class PreviewApplicationController {
 		log.debug("sample(rttrs, req) invoked.");
 		
 		MemberDTO dto = new MemberDTO();
-		dto.setMemberID("dannywon91");
-		dto.setMemberPW("dnsjtmdeo1234");
+		dto.setMemberid("dannywon91");
+		dto.setMemberpw("dnsjtmdeo1234");
 		
 		HttpSession session = req.getSession();
 		session.setAttribute("__LOGIN__", dto);
@@ -65,11 +65,11 @@ public class PreviewApplicationController {
 		log.info("\t+ memberVO: {}",  memberVO);
 		
 		List<ExhibitionVO> lists = this.exhibitionService.getList();
-		memberVO = this.memberService.get(1);
+		//memberVO = this.memberService.get(1);
 		
 		
 		model.addAttribute("__EXHI__", lists);
-		model.addAttribute("member", memberVO);
+		//model.addAttribute("member", memberVO);
 	}//registerui()
 	
 	

@@ -22,14 +22,14 @@
             $('#listBtn').on('click', function(){
                 console.log('listBtn button clicked...');
 
-                location.href="/board/list";
+                location.href="/free/board";
                 
             });//onclick
             
             $('#modifyBtn').on('click', function(){
                 console.log('listBtn button clicked...');
             
-            	location.href="/board/modify?bno=${__READ__.bno}";
+            	location.href="modify?bno=${__READ__.bno}";
             });//onclick
             
 

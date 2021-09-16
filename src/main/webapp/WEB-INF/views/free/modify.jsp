@@ -22,7 +22,7 @@
             $('#listBtn').on('click', function(){
                 console.log('listBtn button clicked...');
 
-                location.href="/board/list";
+                location.href="/free/board";
                 
             });//onclick
             
@@ -30,7 +30,7 @@
                 console.log('removeBtn button clicked...');
 				var obj = $('form')
                 
-				obj.attr('action','/board/remove');
+				obj.attr('action','/free/remove');
 				obj.attr('methood','POST');
 				obj.submit();
             });//onclick
@@ -47,7 +47,7 @@
 <body>
 	<div id="wrap">
         <h1>modify</h1>
-        <form action="/board/modify" method="post">
+        <form action="/free/modify" method="post">
 	        <p><label for="BNO">Bno</label></p>
 	        <p><input type="text" name="bno" id="BNO" value="${__READ__.bno}" readonly></p>
 	

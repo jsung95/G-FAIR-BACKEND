@@ -60,10 +60,10 @@ public interface UploadFileService {
 	public abstract void removeExistFileFromBoard(BoardDTO dto);
 	
 	public abstract void load_img(BoardDTO dto, AttachFileVO file, HttpServletResponse response);
-	public abstract void uploadFileByModify(BoardDTO dto, MultipartFile file);
-	public abstract void uploadFileByWrite(BoardDTO dto, MultipartFile file);
+	public abstract void uploadFileByModify(BoardDTO dto, MultipartFile file) throws Exception;
+	public abstract void uploadFileByWrite(BoardDTO dto, MultipartFile file) throws Exception;
 	
 	
-	public abstract void uploadFileByRegister(MemberDTO dto, MultipartFile file);
+	public abstract void uploadFileByRegister(MemberDTO dto, MultipartFile file) throws Exception;
 	
 }//end interface
