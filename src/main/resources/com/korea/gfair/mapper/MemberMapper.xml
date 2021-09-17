@@ -206,7 +206,7 @@
 	    membertype
     )
 	values(
-		"ADMIN"."ISEQ$$_103232".nextval,
+		"ADMIN"."ISEQ$$_103239".nextval,
 		#{memberid},
 		#{memberpw},
 		#{membername},

@@ -46,7 +46,7 @@
     <p>글번호: ${__READ__.bno}</p>
     <p>제 목:${__READ__.title}</p>
     <p>내 용:${__READ__.content}</p>
-    <p>작성자:${__READ__.memberId}</p>
+    <p>작성자:${__READ__.memberid}</p>
     <p>등록일:${__READ__.insert_ts}</p>
     <p>조회수${__READ__.readcnt}</p>
     

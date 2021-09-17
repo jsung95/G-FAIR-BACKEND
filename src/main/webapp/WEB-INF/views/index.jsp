@@ -105,7 +105,7 @@
 
         <div id="notice_Wrap">
             <div id="notice_Board">
-                <h2><a href="#">공지사항</a></h2>
+                <h2><a href="/notice/list">공지사항</a></h2>
                 <c:forEach items="${list}" var="board" begin="0" end="4">
                 <ul>
                     <li><a href="/notice/get?bno=${board.bno}">${board.title}</a></li>

@@ -30,15 +30,6 @@ public class FreeBoardController {
 	@Setter(onMethod_=@Autowired)
 	public FreeBoardService service;
 	
-//	@GetMapping("list")
-//	public void list(Model model) {
-//		
-//		List<BoardVO> list = service.list();
-//		
-//		model.addAttribute("__LIST__",list);
-//		
-//	}//list
-	
 	
 	@GetMapping("board")
 	public String listPerPage(@ModelAttribute("cri") Criteria cri, Model model) {

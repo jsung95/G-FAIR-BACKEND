@@ -54,7 +54,7 @@
 	            
 	            <tr>
 	                <td><label for="MEMBERID">작성자</label></td>
-	                <td><input type="text" name="memberId" id="MEMBERID" size="20" placeholder="작성자를 입력하세요"></td>
+	                <td><input type="text" name="memberid" id="MEMBERID" size="20" placeholder="작성자를 입력하세요"></td>
 	            </tr>
 	            
 	            <tr>

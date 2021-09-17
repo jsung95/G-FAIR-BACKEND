@@ -203,9 +203,9 @@
 		                <tbody>
 		                    <tr>
 		                        <td>${list.bno}</td>
-		                        <td>${list.repRoot}</td>
+		                        <td>${list.reproot}</td>
 		                        <td><a href="read?bno=${list.bno}">${list.title}</a></td>
-		                        <td>${list.memberId}</td>
+		                        <td>${list.memberid}</td>
 		                        <td class="insertDate"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${list.insert_ts}" /></td>
 			                    <td class="updateDate"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${list.update_ts}" /></td>
 		                        <td>${list.readcnt}</td>

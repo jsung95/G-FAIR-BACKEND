@@ -55,13 +55,13 @@
                             </li>
                             <li class="menu"><h3><a href="#">고객 센터</a></h3>
                                 <ul>
-                                    <li><a href="#">공지사항</a></li>
-                                    <li><a href="#">보도자료</a></li>
-                                    <li><a href="#">질문게시판</a></li>
-                                    <li><a href="#">자주묻는질문</a></li>
-                                    <li><a href="#">고객의소리</a></li>
-                                    <li><a href="#">자유게시판</a></li>
-                                    <li><a href="#">이벤트</a></li>
+                                    <li><a href="/notice/list">공지사항</a></li>
+                                    <li><a href="/news/listPerPage">보도자료</a></li>
+                                    <li><a href="/question/list">질문게시판</a></li>
+                                    <li><a href="/often/question">자주묻는질문</a></li>
+                                    <li><a href="/anony/list">고객의소리</a></li>
+                                    <li><a href="/free/board">자유게시판</a></li>
+                                    <li><a href="/event/listPerPage">이벤트</a></li>
                                 </ul>       
                             </li>
                         </ul>

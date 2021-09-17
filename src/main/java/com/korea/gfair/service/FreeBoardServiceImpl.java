@@ -19,9 +19,6 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 public class FreeBoardServiceImpl implements FreeBoardService {
-	
-
-
 
 	@Setter(onMethod_= @Autowired)
 	private FreeBoardMapper mapper;
@@ -60,7 +57,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		log.debug("read() invoked.");
 		
 		readcnt(bno);
-		BoardVO read = mapper.read(bno);
+		BoardVO read = mapper.select(bno);
 		
 		return read;
 
@@ -71,8 +68,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 
 		log.debug("write() invoked.");
 		
-		boolean write = mapper.write(vo);
+		boolean write = mapper.insert(vo);
 		
+		log.info("write=@@@"+write);
 		if(write) {
 			return true;
 		}else {
@@ -86,7 +84,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		
 		log.debug("modify() invoked.");
 		
-		boolean modify = mapper.modify(vo);
+		boolean modify = mapper.update(vo);
 		
 		return modify;
 		

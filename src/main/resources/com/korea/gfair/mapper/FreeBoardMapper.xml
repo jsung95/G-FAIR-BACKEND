@@ -6,64 +6,65 @@
 <mapper namespace="com.korea.gfair.mapper.FreeBoardMapper">
 
   <select id="selectList" resultType="com.korea.gfair.domain.BoardVO">
-    	SELECT /*+ index_desc(free_board) */ *
-    	 FROM free_board WHERE bno > 0
+    	SELECT /*+ index_desc(tbl_board) */ *
+    	 FROM tbl_board WHERE bno > 0
   </select>
 
   <select id="getListWithPaging" resultType="com.korea.gfair.domain.BoardVO">
-    SELECT /*+ index_desc(free_board) */ *
-    FROM free_board
-    <where>
+    SELECT /*+ index_desc(tbl_board) */ *
+    FROM tbl_board
+  	where bname = '자유게시판'
+
         <choose>
             <when test="type == 'T'.toString()">
-                title LIKE '%'||#{keyword}||'%'
+                and title LIKE '%'||#{keyword}||'%'
             </when>
 
             <when test="type == 'C'.toString()">
-                content LIKE '%'||#{keyword}||'%'
+                and content LIKE '%'||#{keyword}||'%'
             </when>
 
             <when test="type == 'W'.toString()">
-                memberId LIKE '%'||#{keyword}||'%'
+                and memberid LIKE '%'||#{keyword}||'%'
             </when>
         </choose>
-    </where>
+
     
     OFFSET ( #{currPage} - 1) * #{amount} ROWS
     FETCH NEXT #{amount} ROWS ONLY
 
   </select>
 
-  <select id="read" resultType="com.korea.gfair.domain.BoardVO">
+  <select id="select" resultType="com.korea.gfair.domain.BoardVO">
     SELECT *
-    FROM free_board
+    FROM tbl_board
     WHERE bno = #{bno}
   </select>
 
   
 
   <update id="readcnt">
-    update free_board
+    update tbl_board
     set readcnt= readcnt+1
     where bno = #{bno}
   </update>
   
   
-  <insert id="write">
+  <insert id="insert">
     <selectKey keyProperty="bno" order="BEFORE" resultType="int">
-      select bno_seq.nextVal FROM dual
+      select "ADMIN"."ISEQ$$_103239".nextval FROM dual
     </selectKey>
 
-    INSERT INTO free_board(
-      bno,repRoot,title,content,memberId,bname
+    INSERT INTO tbl_board(
+      bno,repRoot,title,content,memberid,bname
     )
-    values(#{bno},#{bno},#{title},#{content},#{memberId},#{bname}
+    values(#{bno},#{bno},#{title},#{content},#{memberid},#{bname}
 
     )
   </insert>
 
-  <update id="modify">
-    update free_board set 
+  <update id="update">
+    update tbl_board set 
     title = #{title},
     content = #{content},
     
@@ -74,14 +75,14 @@
   </update>
 
   <delete id="delete">
-    delete from free_board
+    delete from tbl_board
     where bno = #{bno}
 
   </delete>
 
   <select id="getTotalCount" resultType="int">
     SELECT count(bno)
-    FROM free_board
+    FROM tbl_board
     WHERE bno > 0
 
   </select>
