@@ -32,7 +32,7 @@
             paginationForm.find('input[name=amount]').val('${pageMaker.cri.amount}');
             paginationForm.find('input[name=pagesPerPage]').val('${pageMaker.cri.pagesPerPage}');
             paginationForm.find('input[name=type]').val('${pageMaker.cri.type}');
-            paginationForm.find('input[name=keyWord]').val('${pageMaker.cri.keyWord}');
+            paginationForm.find('input[name=keyword]').val('${pageMaker.cri.keyword}');
             
             paginationForm.submit();
         });
@@ -152,7 +152,8 @@
         box-sizing: border-box;
 
         text-align: center;
-        line-height: 30px;
+        line-height: 28px;
+        flex-direction: column
     }
     #pagination li:last-child {
         border-right: 1px solid #999;
@@ -296,11 +297,11 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th scope="col" width="10%">번호</th>
-                                        <th scope="col" width="*">제목</th>
-                                        <th scope="col" width="10%">작성자</th>
-                                        <th scope="col" width="15%">등록일</th>
-                                        <th scope="col" width="10%">조회수</th>
+                                        <th scope="col">번호</th>
+                                        <th scope="col">제목</th>
+                                        <th scope="col">작성자</th>
+                                        <th scope="col">등록일</th>
+                                        <th scope="col">조회수</th>
                                     </tr>
                                 </thead>
                 
@@ -357,7 +358,7 @@
                                     <input type="hidden" name="amount">
                                     <input type="hidden" name="pagesPerPage">
                                     <input type="hidden" name="type">
-                                    <input type="hidden" name="keyWord">
+                                    <input type="hidden" name="keyword">
                                     <ul>
                                         <!-- <c:if test="${pageMaker.prev}">
                                             <li class="prev"><a href="/notice/list"><<</a></li>
@@ -376,7 +377,7 @@
                                                 <a 
                                                 id="mmw"
                                                 class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}"
-                                                href="/notice/list?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyWord=${pageMaker.cri.keyWord}"
+                                                href="/notice/list?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"
                                                 >
                                                 ${pageNum}
                                                 </a>
@@ -409,7 +410,7 @@
                                             <option value="W" ${ ( "W" eq pageMaker.cri.type ) ? "selected" : "" }>작성자</option>
                                             <option value="TC" ${ ("TC" eq pageMaker.cri.type ) ? "selected" : ""}>제목+내용</option>
                                         </select>
-                                        <input type="text" name="keyWord" class="search2" value="${pageMaker.cri.keyWord}">
+                                        <input type="text" name="keyword" class="search2" value="${pageMaker.cri.keyword}">
                                         
                                         <button class="search1">Search</button>
                                     </form>
