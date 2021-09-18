@@ -19,19 +19,12 @@
     </select>
 	
 	<insert id="replyInsert">
-		<selectKey keyProperty="reno" order="BEFORE" resultType="int">
-		<![CDATA[
-			SELECT "ADMIN"."ISEQ$$_103245".nextval FROM dual
-		]]>
-		</selectKey>
 		<![CDATA[
 			INSERT INTO tbl_reply
-				(RENO,
-				 BNO, 
+				(BNO, 
 				 RECONTENT, 
 				 MEMBERID)
 			VALUES(
-				#{reno},
 				#{bno}, 
 				#{recontent}, 
 				#{memberid})

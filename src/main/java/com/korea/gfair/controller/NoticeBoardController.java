@@ -129,8 +129,11 @@ public class NoticeBoardController {
 	}
 	
 	@PostMapping("answer")
-	public String answer(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs) {
+	public String answer(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs, @RequestParam("file") MultipartFile file) throws Exception {
+		
 		this.board_service.writeAnswer(dto);
+		this.file_service.uploadFileByWrite(dto, file);
+		
 		rttrs.addAttribute("currPage", cri.getCurrPage());
 		rttrs.addAttribute("amount", cri.getAmount());
 		rttrs.addAttribute("pagesPerPage", cri.getPagesPerPage());

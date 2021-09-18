@@ -103,7 +103,7 @@
 		<![CDATA[
 			UPDATE tbl_board 
 			SET fid = "ADMIN"."ISEQ$$_103229".currval
-			WHERE bno = #{bno}
+			WHERE bno = (SELECT last_number FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'ISEQ$$_103239')-2
 		]]>
 	</update>
 	

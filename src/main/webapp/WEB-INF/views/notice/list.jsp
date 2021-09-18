@@ -329,7 +329,12 @@
                                         <td> <!-- 게시글 인덱스 No. -->
                                             ${pageMaker.totalAmount - (pageMaker.cri.currPage - 1) * pageMaker.cri.amount - i.index}
                                         </td>
-                                        <td><a href="/notice/get?bno=${board.bno}&currPage=${pageMaker.cri.currPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${board.title}</a></td>
+                                        <td>
+                                        	<c:forEach begin="1" end="${board.repindent}">
+						                    	<%= "&nbsp;&nbsp;" %>
+						                    </c:forEach>
+					                    	<a href="/notice/get?bno=${board.bno}&currPage=${pageMaker.cri.currPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${board.title}</a>
+                                        </td>
                                         <td>${board.memberid}</td>
                                         <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
                                         <td>${board.readcnt}</td>

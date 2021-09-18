@@ -177,6 +177,14 @@
 	
 	<!-- 답변달기 -->
 	<insert id="repInsert">
+        <selectKey keyProperty="bno" order="BEFORE" resultType="int">
+            <![CDATA[ 
+            SELECT 
+                "ADMIN"."ISEQ$$_103239".nextval
+            FROM
+                dual
+            ]]>
+        </selectKey>
 		<![CDATA[
 			INSERT INTO tbl_board(bno, 
 								   reproot, 
@@ -191,7 +199,7 @@
 								   public_tf,
 								   reply_tf )
 								   
-			VALUES				  ("ADMIN"."ISEQ$$_103239".nextval, 
+			VALUES				  (#{bno}, 
 								   #{reproot}, 
 								   ${repstep+1}, 
 								   ${repindent+1}, 
