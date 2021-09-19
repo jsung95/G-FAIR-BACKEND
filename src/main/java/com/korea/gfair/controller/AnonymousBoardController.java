@@ -64,7 +64,7 @@ public class AnonymousBoardController {
 	}//iist
 	
 	
-	@GetMapping("get")
+	@GetMapping({"getPage"})
 	public void get(
 			@ModelAttribute("cri") Criteria cri, 
 			Integer bno, 
@@ -94,7 +94,7 @@ public class AnonymousBoardController {
 	}//getui
 	
 	
-	@GetMapping({"modify"})
+	@GetMapping({"get","modify"})
 	public void modify(
 			@ModelAttribute("cri") Criteria cri, 
 			Integer bno, 
@@ -122,7 +122,7 @@ public class AnonymousBoardController {
 	@GetMapping({"register","retrieve"})
 	public void registerui( @ModelAttribute("cri") Criteria cri,
 							@ModelAttribute("board") BoardDTO boardDTO) throws Exception {
-		log.debug("register() invoked");
+		log.debug("registerui({}) invoked",boardDTO);
 		
 	}//register
 	

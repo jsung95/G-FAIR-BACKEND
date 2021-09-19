@@ -19,17 +19,17 @@
 
             <choose>
                 <when test="cri.type eq 'T'.toString()">
-                    AND title LIKE '%'||#{cri.keyWord}||'%'
+                    AND title LIKE '%'||#{cri.keyword}||'%'
                 </when>
                 <when test="cri.type eq 'C'.toString()">
-                    AND content LIKE '%'||#{cri.keyWord}||'%'
+                    AND content LIKE '%'||#{cri.keyword}||'%'
                 </when>
                 <when test="cri.type eq 'W'.toString()">
-                    AND memberid LIKE '%'||#{cri.keyWord}||'%'
+                    AND memberid LIKE '%'||#{cri.keyword}||'%'
                 </when>
                 <when test="cri.type eq 'TC'.toString()">
-                    AND (content LIKE '%'||#{cri.keyWord}||'%'
-                        OR title LIKE '%'||#{cri.keyWord}||'%')
+                    AND (content LIKE '%'||#{cri.keyword}||'%'
+                        OR title LIKE '%'||#{cri.keyword}||'%')
                 </when>
             </choose>
 
@@ -130,17 +130,17 @@
         ]]>
         <choose>
             <when test="cri.type eq 'T'.toString()">
-                AND title LIKE '%'||#{cri.keyWord}||'%'
+                AND title LIKE '%'||#{cri.keyword}||'%'
             </when>
             <when test="cri.type eq 'C'.toString()">
-                AND content LIKE '%'||#{cri.keyWord}||'%'
+                AND content LIKE '%'||#{cri.keyword}||'%'
             </when>
             <when test="cri.type eq 'W'.toString()">
-                AND memberid LIKE '%'||#{cri.keyWord}||'%'
+                AND memberid LIKE '%'||#{cri.keyword}||'%'
             </when>
             <when test="cri.type eq 'TC'.toString()">
-                AND (content LIKE '%'||#{cri.keyWord}||'%'
-                    OR title LIKE '%'||#{cri.keyWord}||'%')
+                AND (content LIKE '%'||#{cri.keyword}||'%'
+                    OR title LIKE '%'||#{cri.keyword}||'%')
             </when>
         </choose>
 

@@ -1,221 +1,284 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
-
-
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
 
-        <link rel="stylesheet" href="../resources/css/mypage.css">
+<head>
+    <meta charset="UTF-8">
+    <title>지페어 코리아</title>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
-			
-        <script>
-            $(function(){
-
-                $('#selectDelBtn').on('click',function(e){//체크박스 눌렀을 때
-                    e.preventDefault();
-
-                    if( $('input[name=bno]:checked').length >0 ){
-
-                        var result = confirm("정말 삭제하시겠습니까?");
-
-                        if(result){//확인 눌렀을 때
-                            console.log("True")
-
-                            var checkboxDelForm = $('#checkboxDelForm');
-                            
-                            checkboxDelForm.attr('action','/myBoard/remove');
-                            checkboxDelForm.attr('method','POST');
-                            
-                            checkboxDelForm.submit();
-                            
-                        } else {//취소 눌렀을 때
-                            console.log("False")
-                            return false;
-                        }//if-else
-
-                    } else {
-                        alert("선택된 것이 없습니다.")
-                    }//if-else
-
-                })//selectDelBtn
-
-
-                // 페이징
-                $('a.prev, a.next, a.end').on('click',function(e) {
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/css/myBoard.css" rel="stylesheet" type="text/css" />
     
-                    e.preventDefault();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    <script src="/resources/js/fullnav.js"></script>
 
-                    var paginationForm = $('#paginationForm');
+</head>
 
-                    paginationForm.attr('action','/myBoard/list');
-                    paginationForm.attr('method','GET');
+<style>
 
-                    paginationForm.find('input[name=currPage]').val($(this).attr('href'));
-                    paginationForm.find('input[name=amount]').val('${page.cri.amount}');
-                    paginationForm.find('input[name=pagesPerPage]').val('${page.cri.pagesPerPage}');
-                    paginationForm.submit();
+</style>
 
-                })//onclick
+<script>
+    $(function(){
+    	var tmp;
+    	
+        var subName = $('.subName').text();
+        
+        $('.chk').each(function(index,obj){
+            var t = index;
+            var o = $(this).text();
+            console.log(t + ':' + o)
+            if(o == subName) {
+            	tmp = t;
+            }
+        });
 
-                var boardVal='';
+        console.log(tmp)
+        
+        $('#parent').children().eq(tmp).children().css({
+            'font-size': '18px',
+            'font-weight':'bold',
+            'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+            'background-position': 'right center'
+        });
+        
 
+    })//end jq
+</script>
+<script>
+    $(function(){
 
-                $('#boardOption').change(function(){//
-                   
-                    boardVal = $(this).val();
+        $('#selectDelBtn').on('click',function(e){//체크박스 눌렀을 때
+            e.preventDefault();
+
+            if( $('input[name=bno]:checked').length >0 ){
+
+                var result = confirm("정말 삭제하시겠습니까?");
+
+                if(result){//확인 눌렀을 때
+                    console.log("True")
+
+                    var checkboxDelForm = $('#checkboxDelForm');
                     
-                    console.log('boardVal값:',boardVal);
+                    checkboxDelForm.attr('action','/myBoard/remove');
+                    checkboxDelForm.attr('method','POST');
+                    
+                    checkboxDelForm.submit();
+                    
+                } else {//취소 눌렀을 때
+                    console.log("False")
+                    return false;
+                }//if-else
 
-                    var selectBoardForm = $('#selectBoardForm');
-                    selectBoardForm.attr('action','/myBoard/list');
-                    selectBoardForm.attr('method','GET');
+            } else {
+                alert("선택된 것이 없습니다.")
+            }//if-else
 
-                    selectBoardForm.append('<input type="hidden" name="memberid" value="${__LOGIN__.memberid}">');
-                    selectBoardForm.append('<input type="hidden" name="currPage" value="1">');
-                    selectBoardForm.append('<input type="hidden" name="amount" value="${page.cri.amount}">');
-                    selectBoardForm.append('<input type="hidden" name="pagesPerPage" value="${page.cri.pagesPerPage}">');
-                    selectBoardForm.append('<input type="hidden" name="bname" value="'+boardVal+'">');
-                    selectBoardForm.append('<input type="hidden" name="type" value="${page.cri.type}">');
-                    selectBoardForm.append('<input type="hidden" name="keyWord" value="${page.cri.keyWord}">');
-                    selectBoardForm.submit();
+        })//selectDelBtn
 
-                })//boardOption
 
-            })//.jq
-        </script>
+        // 페이징
+        $('a.prev, a.next, a.end').on('click',function(e) {
 
-    </head>
-    <body>
-        <h1>WEB-INF/views/myboard/list.jsp</h1>
-        ${__LOGIN__.memberid}
-        ${page.cri.type}
-        
-        <hr>
+            e.preventDefault();
 
-        <div id="myboard">
-            <table>
-                <thead>
-                    <form id="selectBoardForm"></form>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <th>no</th>
-                            <th>제목</th>
-                            <th>내용</th>
-                            <th>작성일</th>
-                            <th>조회수</th>
-                            <th>
-                                <select id="boardOption" name="bname" class="searchcss">
-                                    <option value=>전체게시판</option>
-                                    <option value="anony" ${("anony" eq cri.bname) ? 'selected' : ''}>고객의소리</option>
-                                    <option value="quest" ${("quest" eq cri.bname) ? 'selected' : ''}>질문게시판</option>
-                                    <option value="free" ${("free" eq cri.bname) ? 'selected' : ''}>자유게시판</option>
+            var paginationForm = $('#paginationForm');
 
-                                </select>
-                            </th>
-                        </tr>
-                    </form>
-                </thead>
-                <tbody>
-                    <form id="checkboxDelForm">
-                        <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+            paginationForm.attr('action','/myBoard/list');
+            paginationForm.attr('method','GET');
 
-                        <c:set var="num" value="${page.totalAmount - ( page.cri.currPage - 1 ) * page.cri.amount}"/>
-                        <c:forEach items="${list}" var="board">
-                            <tr>
-                                <td><input type="checkbox" name="bno" value="${board.bno}"></td>
-                                <td>${num}</td>
-                                <td>
-                                    <c:forEach begin="1" end="${board.repstep}">
-                                        &nbsp;[re:]
-                                    </c:forEach>
-                                    <a href="/${board.bname}/get?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}">
-                                    ${board.title}</a>
-                                    
-                                    <c:if test="${board.renoCount > 0}">
-                                    [${board.renoCount}]
-                                    </c:if>
-                                </td>
+            paginationForm.find('input[name=currPage]').val($(this).attr('href'));
+            paginationForm.find('input[name=amount]').val('${page.cri.amount}');
+            paginationForm.find('input[name=pagesPerPage]').val('${page.cri.pagesPerPage}');
+            paginationForm.submit();
 
-                                <td>${board.content}</td>
-                                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.insert_ts}"/></td>
-                                <td>${board.readcnt}</td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${board.bname eq 'anony'}">고객의소리</c:when>
-                                        <c:when test="${board.bname eq 'quest'}">질문게시판</c:when>
-                                        <c:when test="${board.bname eq 'free'}">자유게시판</c:when>
-                                        <c:otherwise>${board.bname}</c:otherwise>
-                                    </c:choose>
-                                </td>
-                            </tr>
-                            <c:set var="num" value="${num-1}"/>
-                        </c:forEach>
-                    </form>
-                </tbody>
-            </table>
-            <div><button type="button" id="selectDelBtn" class="buttonstyle">선택삭제</button></div>
-        
-            <p>&nbsp;</p>
+        })//onclick
 
-            <div id="pagination">
-                <form action="/myBoard/list" id="paginationForm">
-                    <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
-                    <input type="hidden" name="currPage">
-                    <input type="hidden" name="amount">
-                    <input type="hidden" name="pagesPerPage">
+        var boardVal='';
 
-                    <ul>
-                        <c:if test="${page.prev}">
-                            <li class="prev"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyWord=${page.cri.keyWord}&bname=${page.cri.bname}"><<</a></li>
-                            <li class="prev"><a class="prev" href="${page.startPage-1}"><</a></li>
-                        </c:if>
 
-                        <c:forEach var="pageNum" begin="${page.startPage}" end="${page.endPage}">
-                            <li class="${page.cri.currPage == pageNum ? 'currPage' : ''}">
-                                <a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=${pageNum}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyWord=${page.cri.keyWord}&bname=${page.cri.bname}">${pageNum}</a>
-                            </li>
-                        </c:forEach>
+        $('#boardOption').change(function(){//
+           
+            boardVal = $(this).val();
+            
+            console.log('boardVal값:',boardVal);
 
-                        <c:if test="${page.next}">
-                            <li class="next"><a class="next" href="${page.endPage+1}">></a></li>
-                            <li class="next"><a class="end" href="${page.realEndPage}">>></a></li>
-                        </c:if>
-                    </ul>
-                </form>
+            var selectBoardForm = $('#selectBoardForm');
+            selectBoardForm.attr('action','/myBoard/list');
+            selectBoardForm.attr('method','GET');
+
+            selectBoardForm.append('<input type="hidden" name="memberid" value="${__LOGIN__.memberid}">');
+            selectBoardForm.append('<input type="hidden" name="currPage" value="1">');
+            selectBoardForm.append('<input type="hidden" name="amount" value="${page.cri.amount}">');
+            selectBoardForm.append('<input type="hidden" name="pagesPerPage" value="${page.cri.pagesPerPage}">');
+            selectBoardForm.append('<input type="hidden" name="bname" value="'+boardVal+'">');
+            selectBoardForm.append('<input type="hidden" name="type" value="${page.cri.type}">');
+            selectBoardForm.append('<input type="hidden" name="keyword" value="${page.cri.keyword}">');
+            selectBoardForm.submit();
+
+        })//boardOption
+
+    })//.jq
+</script>
+<body>
+    <div id="wrap">
+ 	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+        <div id="container">
+            <div id="aside">
+                <h2 class="asideMenu">마이페이지</h2>
+                <ul id="parent">
+                    <li><a class="chk" href="#">비밀번호변경</a></li>
+                    <li><a class="chk" href="/mypage/myInfo">회원정보변경</a></li>
+                    <li><a class="chk" href="/myBoard/list">내가쓴글</a></li>
+                    <li><a class="chk" href="#">내가쓴댓글</a></li>
+                    <li><a class="chk" href="#">회원탈퇴</a></li>
+                </ul>
+
             </div>
-            <ul id="searchMenu">
-                <li>
-                    <form action="/myBoard/list" method="GET" id="searchMenuForm">
-                        <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
-                        <input type="hidden" name="currPage" value="1">
-                        <input type="hidden" name="amount" value="${page.cri.amount}">
-                        <input type="hidden" name="pagesPerPage" value="${page.cri.pagesPerPage}">
-                        <input type="hidden" name="bname" value="${cri.bname}">
-                        
-                        <select name="type" class="searchcss">
-                            <option>검색조건</option>
-                            <option value="T" ${("T" eq page.cri.type) ? 'selected' : ''}>제목</option>
-                            <option value="C" ${("C" eq page.cri.type) ? 'selected' : ''}>내용</option>
-                            <option value="TC" ${("TC" eq page.cri.type) ? 'selected' : ''}>제목+내용</option>
-                        </select>
+            <div id="content">
+                <div class="title">
+                    <div class="map">home > 마이페이지 >  </div>
+                    <h2 class="subName"> </h2>
+                </div>
 
-                        <input type="text" class="searchcss" name="keyWord" value="${page.cri.keyWord}">
-                        <button type="submit" id="searchBtn" class="buttonstyle">Search</button>
-                    </form>
-                </li>
-            </ul>
+                <div class="contentIn">
+                    <p>&nbsp;</p>
+                    <table>
+                        <thead>
+                            <form id="selectBoardForm"></form>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>no</th>
+                                    <th>제목</th>
+                                    <th>내용</th>
+                                    <th>등록일</th>
+                                    <th>조회수</th>
+                                    <th>
+                                        <select id="boardOption" name="bname" class="searchcss">
+                                            <option value=>전체게시판</option>
+                                            <option value="anony" ${("anony" eq cri.bname) ? 'selected' : ''}>고객의소리</option>
+                                            <option value="quest" ${("quest" eq cri.bname) ? 'selected' : ''}>질문게시판</option>
+                                            <option value="free" ${("free" eq cri.bname) ? 'selected' : ''}>자유게시판</option>
+        
+                                        </select>
+                                    </th>
+                                </tr>
+                            </form>
+                        </thead>
+                        <tbody>
+                            <form id="checkboxDelForm">
+                                <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+        
+                                <c:set var="num" value="${page.totalAmount - ( page.cri.currPage - 1 ) * page.cri.amount}"/>
+                                <c:forEach items="${list}" var="board">
+                                    <tr>
+                                        <td><input type="checkbox" name="bno" value="${board.bno}"></td>
+                                        <td>${num}</td>
+                                        <td>
+                                            <c:forEach begin="1" end="${board.repstep}">
+                                                &nbsp;[re:]
+                                            </c:forEach>
+                                            <a href="/${board.bname}/get?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}">
+                                            ${board.title}</a>
+                                            
+                                            <c:if test="${board.renoCount > 0}">
+                                            [${board.renoCount}]
+                                            </c:if>
+                                        </td>
+        
+                                        <td>${board.content}</td>
+                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.insert_ts}"/></td>
+                                        <td>${board.readcnt}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${board.bname eq 'anony'}">고객의소리</c:when>
+                                                <c:when test="${board.bname eq 'quest'}">질문게시판</c:when>
+                                                <c:when test="${board.bname eq 'free'}">자유게시판</c:when>
+                                                <c:otherwise>${board.bname}</c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                    </tr>
+                                    <c:set var="num" value="${num-1}"/>
+                                </c:forEach>
+                            </form>
+                        </tbody>
+                    </table>
+                    <div><button type="button" id="selectDelBtn" class="buttonstyle">선택삭제</button></div>
+                
+                    <p>&nbsp;</p>
+        
+                    <div id="pagination">
+                        <form action="/myBoard/list" id="paginationForm">
+                            <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+                            <input type="hidden" name="currPage">
+                            <input type="hidden" name="amount">
+                            <input type="hidden" name="pagesPerPage">
+        
+                            <ul>
+                                
+                                <li class="prev"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}"><<</a></li>
+                                <c:if test="${!page.prev}">
+                                    <li class="prev"><a href="/anony/list"><</a></li>
+                                </c:if>
+
+                                <c:if test="${page.prev}">
+                                    <li class="prev"><a class="prev" href="${page.startPage-1}"><</a></li>
+                                </c:if>
+
+                                <c:forEach var="pageNum" begin="${page.startPage}" end="${page.endPage}">
+                                    <li class="${page.cri.currPage == pageNum ? 'currPage' : ''}">
+                                        <a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=${pageNum}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">${pageNum}</a>
+                                    </li>
+                                </c:forEach>
+        
+                                <c:if test="${page.next}">
+                                    <li class="next"><a class="next" href="${page.endPage+1}">></a></li>
+                                </c:if>
+
+                                <c:if test="${!page.next}">
+                                    <li class="next"><a class="end" href="${page.realEndPage}">></a></li>
+                                </c:if>
+
+                                <li class="next"><a class="end" href="${page.realEndPage}">>></a></li>
+                            </ul>
+                        </form>
+                    </div>
+                    <ul id="searchMenu">
+                        <li>
+                            <form action="/myBoard/list" method="GET" id="searchMenuForm">
+                                <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+                                <input type="hidden" name="currPage" value="1">
+                                <input type="hidden" name="amount" value="${page.cri.amount}">
+                                <input type="hidden" name="pagesPerPage" value="${page.cri.pagesPerPage}">
+                                <input type="hidden" name="bname" value="${cri.bname}">
+                                
+                                <select name="type" class="searchcss">
+                                    <option>검색조건</option>
+                                    <option value="T" ${("T" eq page.cri.type) ? 'selected' : ''}>제목</option>
+                                    <option value="C" ${("C" eq page.cri.type) ? 'selected' : ''}>내용</option>
+                                    <option value="TC" ${("TC" eq page.cri.type) ? 'selected' : ''}>제목+내용</option>
+                                </select>
+        
+                                <input type="text" class="searchcss" name="keyword" value="${page.cri.keyword}">
+                                <button type="submit" id="searchBtn" class="buttonstyle">검색</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
-    </body>
+
+   
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    </div> <!--wrap-->
+</body>
 </html>
