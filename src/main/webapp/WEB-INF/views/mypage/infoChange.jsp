@@ -19,7 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
 
-        <link rel="stylesheet" href="../resources/css/infoChange.css">
+        <link rel="stylesheet" href="/resources/css/infoChange.css">
 
         <script>
             $(function(){
@@ -29,8 +29,8 @@
                     location.href = "/mypage/checkPass";
                 })//changeCancel
 
-                var numberRegex = /0[0-9]{1,2}-[^0][0-9]{2,3}-[0-9]{3,4}$/;//숫자만(연락처)
-                var cbnoRegex = /[^0][0-9]{1}[0-9]{9}$/;//숫자만 사업자번호
+                var numberRegex = /0[0-9]{1,2}-[^0][0-9]{3,4}-[0-9]{4}$/;//숫자만(연락처)
+                var cbnoRegex = /[^0][1-9]{1}[0-9]{9}$/;//숫자만 사업자번호
                 var emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;//이메일
                
                 var changeEmailAddress = '${member.email}';//바뀔 이메일 주소=> 기본값 원래 주소
@@ -362,36 +362,39 @@
 
                 // 사업자진위여부 체크 눌렀을 때
                 $('#cbnoBtn').on('click',function(){//사업자진위여부 체크
-                        console.log('cbnoBtn!!',cbnoInput.value);
+                    console.log('cbnoBtn!!',cbnoInput.value);
 
-                        cbnoCheck()//사업자번호 정규표현식,자리수 체크
+                    //사업자번호 정규표현식,자리수 체크
+                    cbnoCheck()
 
-                        let fileWrap = document.getElementById('fileWrap');
+                    let fileWrap = document.getElementById('fileWrap');
 
-                        $.ajax({
-                            url: "/mypage/cbnoCheck?cbno="+cbnoInput.value,
-                            type: "GET",
-                            success: function(result){
-                                console.log(result);
+                    $.ajax({
+                        url: "/mypage/cbnoCheck?cbno="+cbnoInput.value,
+                        type: "GET",
+                        success: function(result){
+                            console.log(result);
 
-                                if(result == 1){//진위여부 성공시
+                            if(result == 1){//진위여부 성공시
 
-                                    if(changeCbno != cbnoInput.value){//기존 사업자등록번호랑 다를 때
-                                        console.log('cbno display change....');
+                                if(changeCbno != cbnoInput.value){//기존 사업자등록번호랑 다를 때
+                                    console.log('cbno display change....');
 
-                                        fileWrap.style.display = 'block';
-                                        $('#cbnoFile').attr("disabled",false);//파일업로드 비활성 꺼버리기
-                                    }//if
-                                    
-                                    //진위여부 성공되면 값 넣어주기
-                                    changeCbno = cbnoInput.value;
-                                    console.log('success changeCbno:',changeCbno);
+                                    fileWrap.style.display = 'block';
+                                    $('#cbnoFile').attr("disabled",false);//파일업로드 비활성 꺼버리기
                                 }//if
+                                
+                                //진위여부 성공되면 값 넣어주기
+                                changeCbno = cbnoInput.value;
+                                console.log('success changeCbno:',changeCbno);
+                            }else if(result == 0){//null 값일때
+                                alert("일치하는 정보가 없습니다.");
+                            }//if-elseif
 
-                            }//success
-                        })//ajax
+                        }//success
+                    })//ajax
 
-                    })//cbnoBtn
+                })//cbnoBtn
             });//.jq        
         </script>
         <script language="javascript">
@@ -434,114 +437,114 @@
         </script>
     </head>
     <body>
-        <h1>WEB-INF/views/mypage/infoChange.jsp</h1>
-        
-        
-        <hr>
-        <form action="/mypage/infoChange" method="POST" id="infoChange" name="form" enctype="multipart/form-data" >
-            <div class="memberInfoWrap">
-                <input type="hidden" name="mno" value="${member.mno}">
-                <input type="hidden" name="fid" value="${member.fid}">
-                <div class="memberInfo">
-                    <div class='contentLine'>
-                        <h4>아이디</h4>
-                        <div><input type="hidden" name="memberid" value="${member.memberid}">${member.memberid}</div>
-                    </div>
-                    <p>&nbsp;</p>
-                    <div class='contentLine'>
-                        <h4>회원명</h4>
-                        <div><input type="hidden" name="membername" value="${member.membername}">${member.membername}</div>
-                    </div>
-                    <p>&nbsp;</p>
-                    <div class='contentLine'>
-                        <h4>주소</h4>
-                        <div>
-                            <input type="text" id="roadFullAddr" name="memberaddress" value="${member.memberaddress}" required>
-                            <button type="button" class="mailbuttonStyle" onclick="goPopup()">주소찾기</button>
-                        </div>
-                    </div>
-                    <p>&nbsp;</p>
-                    <div class='contentLine'>
-                        <h4>연락처</h4>
-                        <div><input type="tel" name="phone" id="phone" placeholder="${member.phone}" value="${member.phone}" required>'-'을 붙여서 입력해주세요<br>
-                            <p id="p_phone"></p></div>
-                    </div>
-                    
-                    <p>&nbsp;</p>
-                    <c:if test="${member.membertype == '기업'}">
+        <div class="infoWrap">
+                
+            <form action="/mypage/infoChange" method="POST" id="infoChange" name="form" enctype="multipart/form-data" >
+                <div class="memberInfoWrap">
+                    <input type="hidden" name="mno" value="${member.mno}">
+                    <input type="hidden" name="fid" value="${member.fid}">
+                    <div class="memberInfo">
                         <div class='contentLine'>
-                            <h4>사업자번호</h4>
-                            <div><input type="text" name="cbno" id="cbno" value="${member.cbno}" required>
-                                <button type="button" class="mailbuttonStyle" id="cbnoBtn">사업자진위확인</button>
-                                <span id="p_cbno"></span>
-                            </div>
-                        <!-- 파일첨부 숨겨놓기 -->
-                            <div class='contentLine' id="fileWrap" style="display: none;">
-                                <p style="color: blue; font-weight: bold;">인증완료! 사업자등록증을 첨부해주세요.(2MB이하 jpg,pnp파일)</p><br>
-                                <input type="file" name="uploadFile" id="cbnoFile" disabled="disabled" required>
+                            <p>아이디</p>
+                            <div><input type="hidden" name="memberid" value="${member.memberid}">${member.memberid}</div>
+                        </div>
+                        <p>&nbsp;</p>
+                        <div class='contentLine'>
+                            <p>회원명</p>
+                            <div><input type="hidden" name="membername" value="${member.membername}">${member.membername}</div>
+                        </div>
+                        <p>&nbsp;</p>
+                        <div class='contentLine'>
+                            <p>주소</p>
+                            <div>
+                                <input type="text" id="roadFullAddr" name="memberaddress" value="${member.memberaddress}" required>
+                                <button type="button" class="mailbuttonStyle" onclick="goPopup()">주소찾기</button>
                             </div>
                         </div>
                         <p>&nbsp;</p>
-                    </c:if>
-
-                    <div class='contentLine'>
-                        <h4>가입일자</h4>
-                        <div><input type="hidden" name="signdate" value="${member.signdate}">
-                            <fmt:formatDate pattern="yyyy-MM-dd" value="${member.signdate}"/></div>
-                    </div>
-                    <p>&nbsp;</p>
-                    <div class='contentLine'>
-                        <h4>회원유형</h4>
-                        <div><input type="hidden" name="membertype" value="${member.membertype}">${member.membertype}</div>
-                    </div>
-                    <p>&nbsp;</p>
-                    
-                    <div class='contentLine'>
-                    <h4>이메일</h4>
-                        <input type="hidden" name="email" id='mailParam' value="${member.email}">${member.email}
-                        <button type="button" class="mailbuttonStyle" id="emailBtn">수정하기</button>
-                    </div>
-
-                    <p>&nbsp;</p>
-                    <!--============================================= 이메일관련  =============================================-->                            
-                    <div class='contentLine' id="mail_wrap" style="display: none;">
-                        <div class="mail_name"><h5>변경할 이메일주소</h5></div>
-                        <div class="mail_input_box">
-                            <input class="mail_input" id='email' name="emailSub" value="">
-                            <p id="pemail"></p>
+                        <div class='contentLine'>
+                            <p>연락처</p>
+                            <div><input type="tel" name="phone" id="phone" placeholder="${member.phone}" value="${member.phone}" required>'-'을 붙여서 입력해주세요<br>
+                                <p id="p_phone"></p></div>
                         </div>
                         
-                        <div class="mail_check_wrap">
-                            <div class="mail_check_input_box" id="mail_check_input_box_false">
-                                <input class="mail_check_input" disabled="disabled"><!-- 인증코드 체크 -->
+                        <p>&nbsp;</p>
+                        <c:if test="${member.membertype == '기업'}">
+                            <div class='contentLine'>
+                                <p>사업자번호</p>
+                                <div><input type="text" name="cbno" id="cbno" value="${member.cbno}" required>
+                                    <button type="button" class="mailbuttonStyle" id="cbnoBtn">사업자진위확인</button>
+                                    <span id="p_cbno"></span>
+                                </div>
+                            <!-- 파일첨부 숨겨놓기 -->
+                                <div class='contentLine' id="fileWrap" style="display: none;">
+                                    <p style="color: blue; font-weight: bold;">인증완료! 사업자등록증을 첨부해주세요.(2MB이하 jpg,pnp파일)</p><br>
+                                    <label class="custom-file-upload">파일업로드
+                                    <input type="file" name="uploadFile" id="cbnoFile" disabled="disabled" required>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="mail_check_button">
-                                <span>인증메일발송</span>
-                            </div>
+                            <p>&nbsp;</p>
+                        </c:if>
+
+                        <div class='contentLine'>
+                            <p>가입일자</p>
+                            <div><input type="hidden" name="signdate" value="${member.signdate}">
+                                <fmt:formatDate pattern="yyyy-MM-dd" value="${member.signdate}"/></div>
+                        </div>
+                        <p>&nbsp;</p>
+                        <div class='contentLine'>
+                            <p>회원유형</p>
+                            <div><input type="hidden" name="membertype" value="${member.membertype}">${member.membertype}</div>
+                        </div>
+                        <p>&nbsp;</p>
+                        
+                        <div class='contentLine'>
+                        <p>이메일</p>
+                            <input type="hidden" name="email" id='mailParam' value="${member.email}">${member.email}
+                            <button type="button" class="mailbuttonStyle" id="emailBtn">수정하기</button>
                         </div>
 
-                        <div class="mail_check_wrap">
-                            <span id="mail_check_input_box_warn">&nbsp;</span><!-- 인증번호 일치여부 -->
+                        <p>&nbsp;</p>
+                        <!--============================================= 이메일관련  =============================================-->                            
+                        <div class='contentLine' id="mail_wrap" style="display: none;">
+                            <div class="mail_name"><p>변경할 이메일주소</p></div>
+                            <div class="mail_input_box">
+                                <input class="mail_input" id='email' name="emailSub" value="">
+                                <p id="pemail"></p>
+                            </div>
                             
-                            <div class="time"></div>
-                        </div>    
+                            <div class="mail_check_wrap">
+                                <div class="mail_check_input_box" id="mail_check_input_box_false">
+                                    <input class="mail_check_input" disabled="disabled"><!-- 인증코드 체크 -->
+                                </div>
+                                <div class="mail_check_button">
+                                    <span>인증메일발송</span>
+                                </div>
+                            </div>
+
+                            <div class="mail_check_wrap">
+                                <span id="mail_check_input_box_warn">&nbsp;</span><!-- 인증번호 일치여부 -->
+                                
+                                <div class="time"></div>
+                            </div>    
+                            
+                            <div class="mail_check_wrap">
+                                <button type="button" class="mail_check_Message">인증번호확인</button>
+                                <button type="button" id="mailCancleBtn" class="cancleBtnStyle">수정취소</button>
+                            </div>
+                        </div>  
+                        <!--============================================= 이메일관련  =============================================-->
                         
-                        <div class="mail_check_wrap">
-                            <button type="button" class="mail_check_Message">인증번호확인</button>
-                            <button type="button" id="mailCancleBtn" class="cancleBtnStyle">수정취소</button>
-                        </div>
-                    </div>  
-                    <!--============================================= 이메일관련  =============================================-->
-                    
-                </div> 
-            </div>
+                    </div> 
+                </div>
 
-            <p>&nbsp;</p>
-            <div>
-                <button type="submit" id="infoChangeBtn" class="buttonstyle">변경</button>
-                <button type="button" id="changeCancel" class="buttonstyle" >취소</button>
-            </div>
-        </form>
-
+                <p>&nbsp;</p>
+                <div>
+                    <button type="submit" id="infoChangeBtn" class="buttonstyle">변경</button>
+                    <button type="button" id="changeCancel" class="buttonstyle" >취소</button>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

@@ -1,14 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 
         <header>
             <div class="header_wrapper">
                 <div class="top_wrap">
                     <div class="topNav">
                         <ul class="topMenu">
-                            <li class="tm1"><a href="/login/login">로그인</a></li>
-                            <li class="tm1"><a href="/member/agreement">회원가입</a></li>
+                            <!-- 로그인 정보 있을 때 -->
+                            <c:if test="${__LOGIN__.memberid != null}">
+                                <li class="tm1"><a href="/login/logout">로그아웃</a></li>
+                                <!-- 마이페이지라고 적고싶은데 메뉴 깨져서 임시로 마이라고 적음.. -->
+                                <li class="tm1"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}">마이</a></li>
+                            </c:if>
+                            <!-- 로그인 정보 없을 때 -->
+                            <c:if test="${__LOGIN__.memberid == null}">
+                                <li class="tm1"><a href="/login/login">로그인</a></li>
+                                <li class="tm1"><a href="/member/agreement">회원가입</a></li>
+                            </c:if>
                             <li class="tm1"><a href="#">원격지원</a></li>
                             <li class="tm2"><a href="https://blog.naver.com/g_fair_korea" target="blank"><img src="/resources/img/blog.png" alt=""></a></li>
                             <li class="tm2"><a href="https://www.facebook.com/gfairkr" target="blank"><img src="/resources/img/facebook.png" alt=""></a></li>
@@ -25,7 +34,7 @@
                                 <ul>
                                     <li><a href="#">전시회안내</a></li>
                                     <li><a href="#">연혁</a></li>
-                                    <li><a href="#">전시회일정</a></li>
+                                    <li><a href="/exhibition/calendar">전시회일정</a></li>
                                     <li><a href="#">부대시설</a></li>
                                     <li><a href="#">찾아오시는길</a></li>
                                 </ul>
@@ -53,7 +62,7 @@
                                     <li><a href="#">사전관람신청자</a></li>
                                 </ul>
                             </li>
-                            <li class="menu"><h3><a href="#">고객 센터</a></h3>
+                            <li class="menu"><h3><a href="/notice/list">고객 센터</a></h3>
                                 <ul>
                                     <li><a href="/notice/list">공지사항</a></li>
                                     <li><a href="/news/listPerPage">보도자료</a></li>

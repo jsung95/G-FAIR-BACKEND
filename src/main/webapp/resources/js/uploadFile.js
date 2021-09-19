@@ -4,7 +4,7 @@ $(function(){
 
     var maxSize = 2097152;//2mb
 
-    function checkExtension(fileName,fileSize){//파일확장자와 크기를 확인해주는 메소드
+    function checkExtension(forname,fileSize){//파일확장자와 크기를 확인해주는 메소드
 
         if(fileSize >= maxSize){
             alert("첨부파일이 너무 큽니다.");
@@ -13,7 +13,7 @@ $(function(){
             return false;
         }//파일사이즈
 
-        if(!regex.test(fileName)){
+        if(!regex.test(forname)){
             alert("해당 종류의 파일은 업로드할 수 없습니다.");
 
             return false;
@@ -29,7 +29,7 @@ $(function(){
 
     var uploadResult = $('.uploadResult ul');
 
-    function showUploadedFile(uploadResultArr){//업로드파일 썸네일을 보여주고 다운로드 처리
+    function showImage(uploadResultArr){//업로드파일 썸네일을 보여주고 다운로드 처리
 
         if(!uploadResultArr || uploadResultArr.length == 0){
             
@@ -43,45 +43,24 @@ $(function(){
 
             console.dir(obj);
 
-            if(obj.fileType){//이미지파일일때
-                //encoding 작업
-                var fileCallPath = encodeURIComponent(obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
-                console.log('0. fileCallPath : ',fileCallPath);
-                
-                str += "<li data-uploadpath='"+obj.uploadPath+"'";
-                str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-filetype='"+obj.fileType+"'";
-                str += "><div>";
-                // 여기까지 데이터전송값. DTO에서 받는다!
-
-                str += "<span>"+obj.fileName+"</span>";
-
-                // 아래 $('.uploadResult').on('click','button',function(e){에 있는 값 전송
-                str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn-circle'><i class='times'>X</i></button><br>";
-                str += "<img src='/file/display?fileName="+fileCallPath+"'>";
-                str += "</div></li>";
-
+            //encoding 작업
+            var fileCallPath = encodeURIComponent(obj.fpath+"/s_"+obj.frename+"_"+obj.forname);
+            console.log('0. fileCallPath : ',fileCallPath);
             
-                console.log(">>>>>>>>>>>>>>>>> str:",str);
-            }else {//이미지 파일이 아닐때
+            str += "<li data-fpath='"+obj.fpath+"'";
+            str += " data-frename='"+obj.frename+"' data-forname='"+obj.forname+"' data-filetype='false'";
+            str += "><div>";
+            // 여기까지 데이터전송값. DTO에서 받는다!
 
-                var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
-                
-                var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+            str += "<span>"+obj.forname+"</span>";
 
-                str += "<li data-uploadpath='"+obj.uploadPath+"'";
-                str += " data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"'data-filetype='"+obj.fileType+"'";
-                str += "><div>";
-                // 여기까지 데이터전송값. DTO에서 받는다!
-                str += "<span>"+obj.fileName+"</span>";
-                str += "<button type='button' data-file=\'"+fileCallPath+"\'data-type='file' class='btn-circle'><i class='times'>X</i></button><br>";
-                str += "<a href='/file/download?fileName="+fileCallPath+"'>";
-                str += "<img class='notImg' src='/resources/img/attach.png'></a>";
-                str += "</div></li>";
+            // 아래 $('.uploadResult').on('click','button',function(e){에 있는 값 전송
+            str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn-circle'><i class='times'>X</i></button><br>";
+            str += "<img src='/file/display?forname="+fileCallPath+"'>";
+            str += "</div></li>";
 
-                
-                console.log(">>>>>>>>>>>>>>>>> str:",str);
-            }//if-else
-            
+        
+            console.log(">>>>>>>>>>>>>>>>> str:",str);
         });//파일갯수에 따른 li태그 생성
 
         uploadResult.append(str);
@@ -119,7 +98,7 @@ $(function(){
             success: function(result){
                 console.log(result);
 
-                showUploadedFile(result);
+                showImage(result);
 
 
                 alert("Uploaded!")
@@ -152,10 +131,10 @@ $(function(){
             // regForm.attr('action','/anony/register');
             regForm.attr('method','POST');
 
-            regForm.find('input[name=fileName]').val(jobj.data("filename"));
-            regForm.find('input[name=uuid]').val(jobj.data("uuid"));
-            regForm.find('input[name=uploadPath]').val(jobj.data("uploadpath"));
-            regForm.find('input[name=fileType]').val(jobj.data("filetype"));
+            regForm.find('input[name=forname]').val(jobj.data("forname"));
+            regForm.find('input[name=frename]').val(jobj.data("frename"));
+            regForm.find('input[name=fpath]').val(jobj.data("fpath"));
+            regForm.find('input[name=filetype]').val(jobj.data("filetype"));
 
             regForm.submit();
         });
@@ -177,7 +156,7 @@ $(function(){
 
         $.ajax({
             url:'/file/deleteFile',
-            data: {fileName: targetFile, type:type},
+            data: {forname: targetFile, type:type},
             dataType:'text',
             type: 'POST',
             success: function(result){

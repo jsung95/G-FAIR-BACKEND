@@ -137,7 +137,7 @@
                 <ul id="parent">
                     <li><a class="chk" href="#">비밀번호변경</a></li>
                     <li><a class="chk" href="/mypage/myInfo">회원정보변경</a></li>
-                    <li><a class="chk" href="/myBoard/list">내가쓴글</a></li>
+                    <li><a class="chk" href="/myBoard/list?memberid=${__LOGIN__.memberid}">내가쓴글</a></li>
                     <li><a class="chk" href="#">내가쓴댓글</a></li>
                     <li><a class="chk" href="#">회원탈퇴</a></li>
                 </ul>
@@ -145,8 +145,8 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 마이페이지 >  </div>
-                    <h2 class="subName"> </h2>
+                    <div class="map">home > 마이페이지 > 내가쓴글</div>
+                    <h2 class="subName">내가쓴글</h2>
                 </div>
 
                 <div class="contentIn">

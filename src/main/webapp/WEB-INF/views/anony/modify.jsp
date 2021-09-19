@@ -112,9 +112,9 @@
                                     <input type="hidden" name="reply_tf" value="F">
             
                                 
-                                    <input type='hidden' name='filename'>
-                                    <input type='hidden' name='uuid'>
-                                    <input type='hidden' name='uploadpath'>
+                                    <input type='hidden' name='forname'>
+                                    <input type='hidden' name='frename'>
+                                    <input type='hidden' name='fpath'>
                                     <input type='hidden' name='filetype' value="false">
                 
                                     

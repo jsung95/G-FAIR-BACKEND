@@ -8,19 +8,6 @@
 
 <mapper namespace="memberMapper">
    
-    <select id="login" resultType="com.korea.gfair.domain.MemberVO">
-        <![CDATA[ 
-            SELECT
-                *
-            FROM
-                tbl_member
-            WHERE
-                memberid = #{memberid} 
-                AND memberpw = #{memberpw}
-                AND drop_tf = 'F'
-        ]]>
-    </select>
-
     <update id="memberUpdate">
         <![CDATA[ 
             UPDATE 

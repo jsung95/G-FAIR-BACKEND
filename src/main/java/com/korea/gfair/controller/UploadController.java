@@ -45,29 +45,29 @@ public class UploadController {
 	
 	@GetMapping("display")
 	@ResponseBody
-	public ResponseEntity<byte[]> getFile(String fileName) throws Exception{
+	public ResponseEntity<byte[]> getFile(String forname) throws Exception{
 		log.debug("getFile(fileName) invoked");
 		
 		//byte[]를 바디안에 담아서 넘겨줌
-		return this.service.getFile(fileName);
+		return this.service.getFile(forname);
 	}//getFile
 	
 	
 	@GetMapping(path="download", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(String fileName) throws Exception{
-		log.debug("fileName({}) invoked",fileName);
+	public ResponseEntity<Resource> downloadFile(String forname) throws Exception{
+		log.debug("fileName({}) invoked",forname);
 		
-		return this.service.downloadFile(fileName);
+		return this.service.downloadFile(forname);
 	}//downloadFile
 	
 	
 	@PostMapping("deleteFile")
 	@ResponseBody
-	public ResponseEntity<String> deleteFile(String fileName, String type) throws Exception{
-		log.debug("deleteFile({},{}) invoked",fileName,type);
+	public ResponseEntity<String> deleteFile(String forname, String type) throws Exception{
+		log.debug("deleteFile({},{}) invoked",forname,type);
 		
-		return this.service.delete(fileName, type);
+		return this.service.delete(forname, type);
 	}//deleteFile
 
 }//end class

@@ -2,12 +2,12 @@
 
 
 /* base */
-body,input,textarea,select,button,table{font-family:'Noto sans KR'; font-size:12px; color:#333;}
+body,input,textarea,select,button,table{font-family:'Noto sans KR'; font-size:15px; color:#333;}
 body,div,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,p,form,fieldset,input,table,tr,th,td{margin:0;padding:0;}
 ul,ol{list-style:none;}
 fieldset,img{border:0; vertical-align:top;}
 address{font-style:normal;}
-p,li,dd{font-size:15px; line-height:1.5em; text-align:justify; list-style: none;}
+p,li,dd{font-size:20px; line-height:1.5em; text-align:justify; list-style: none; color: #005bbb;}
 /* a-style */
 a{color:#333;text-decoration:none;}
 a:hover,a:active,a:focus,a:visited{color:#333;text-decoration:none;}
@@ -17,27 +17,43 @@ button:hover {
 }
 
 /* checkPass */
+.topBottom {
+    height: 200px;
+}
+
+.checkPass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+
+    border: 3px solid rgb(187, 187, 187, 0.3);
+    border-radius: 10px;
+}
+
 .passSize {
+    margin-top: 20px;
+
+    height: 40px;
     width: 300px;
+
     font-size: 20px;
     border: 1px solid gray;
 }
 
+.checkBtn {
+    margin-top: 20px;
 
-.buttonstyle {
-    right: 0px;
     height: 40px;
-    width: 60px;
+    width: 300px;
     
+    /* line-height: 40px; */
+    text-align: center;
 
-    border: 0;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    color: white;
     background-color: #005bbb;
-    border-radius: 10%;
+    color: #fff;
+    font-size: 20px;
     
 }
 
@@ -52,24 +68,30 @@ button:hover {
     border: 3px solid rgb(187, 187, 187, 0.3);
     border-radius: 10px;
 }
-#infoChange {
-    width: 90%;
-}
-.infoBtn {
-    height: 40px;
-    width: 200px;
-    border: 0;
-
+#infoPage > h4 {
     font-size: 15px;
-    font-weight: bold;
+}
+.infoWrap {
+    padding: 30px 0px 30px 10px;
+}
+.buttonstyle {
+    height: 40px;
+    width: 150px;
+    
+    /* line-height: 40px; */
+    text-align: center;
 
-    color: white;
     background-color: #005bbb;
-    border-radius: 10%;
+    color: #fff;
+    font-size: 20px;
 }
 /* ----------------------------------------------- */
+input {
+    height: 30px;
+    font-size: 15px;
+}
 .contentLine {
-    width: 95%;
+    padding: 0px 0px 10px 10px;
     border-bottom: 2px solid rgb(187, 187, 187, 0.3);
 }
 
@@ -110,37 +132,53 @@ button:hover {
     display: inline-flex;
 }
 
-/* 메일수정하기 / 인증번호 전송버튼 */
-.mail_check_button, .mailbuttonStyle {
+/* 메일수정하기 */
+.mail_check_button {
     cursor: pointer;
 
     width: 150px;
-    height: 20px;
+    height: 40px;
 
-    color: white;
-    font-size: small;
+    color: #fff;
+    font-size: 20px;
     text-align: center;
+    line-height: 40px;
 
-    border: 1px solid #005bbb;
-    border-radius: 5px;
+    border: 1px solid #fff;
 
     background-color: #005bbb;
+
+}
+/* 인증번호 전송버튼 */
+.mailbuttonStyle {
+    cursor: pointer;
+
+    width: 150px;
+    height: 40px;
+
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    
+    border: 1px solid #fff;
+
+    background-color: #005bbb;
+
 }
 /* 이메일 인증번호 / 수정취소버튼 */
 .cancleBtnStyle, .mail_check_Message {
     cursor: pointer;
 
     width: 200px;
-    height: 30px;
+    height: 40px;
 
-    color: white;
-    font-size: small;
+    color: #fff;
+    font-size: 20px;
     text-align: center;
     
     line-height: 100%;
     
-    border: 1px solid #005bbb;
-    border-radius: 5px;
+    border: 1px solid #fff;
 
     background-color: #005bbb;
 }
@@ -148,13 +186,11 @@ button:hover {
 /* 변경이메일 기입창 */
 #email {
     width: 400px;
-    height: 20px;
     border: 1px solid gray;
 }
 /* 인증코드 기입창 */
 .mail_check_input {
     width: 250px;
-    height: 20px;
     border: 1px solid gray;
 }
 input#roadFullAddr, .roadFull {

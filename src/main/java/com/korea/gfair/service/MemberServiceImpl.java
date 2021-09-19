@@ -3,6 +3,7 @@ package com.korea.gfair.service;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -10,16 +11,20 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.korea.gfair.domain.LoginDTO;
+import com.korea.gfair.domain.MailInfo;
 import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.mapper.MemberMapper;
+import com.korea.gfair.persistence.MemberDAO;
 import com.korea.gfair.util.UUIDGenerator;
 
 import lombok.NoArgsConstructor;
@@ -37,6 +42,10 @@ public class MemberServiceImpl implements MemberService {
 	//===========이진성===========//
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper mapper;
+	
+	@Autowired private UploadFileService fileService;
+	@Autowired private MemberDAO memberDAO;
+	
 
 	@Override
 	public int checkCBNO(MemberDTO dto) {
@@ -447,7 +456,117 @@ public class MemberServiceImpl implements MemberService {
     }//get
 
 
+    //=================나현아====================//
+    //=================나현아====================//
+    @Override
+	public boolean memberModify(MemberDTO memberDTO, @Nullable MultipartFile uploadFile) throws Exception {
+		log.debug("login({}) invoked",memberDTO);
+		//기존멤버 fid정보 파라미터로 넘겨받았음
+		
+		Objects.nonNull(this.memberDAO);
+		Objects.nonNull(this.fileService);
+		
+		if(uploadFile != null) {//업로드된 파일이 있을 때
+			
+			if(memberDTO.getFid() != null) {//기존회원의 파일정보가 있을 때
+				
+				//기존 이미지파일 삭제하기
+				this.fileService.imgFileDelete(memberDTO.getFid());//기존 이미지파일 삭제
+				
+				//FID는 놔두고 새 정보로 파일수정
+				this.fileService.fileModify(memberDTO.getFid(),uploadFile);
+				
+			} else {//파일정보가 없을 때
+				//파일 인서트하고 반환받은 fid로 set해줌
+				Integer fid = this.fileService.fileInsert(uploadFile);
+				
+				memberDTO.setFid(fid);
+			}//if-else
+		}//if
+		
+		
+		MemberVO memberVO = new MemberVO(memberDTO.getMno(),
+				memberDTO.getMemberid(),
+				memberDTO.getMemberpw(),
+				memberDTO.getMembername(),
+				memberDTO.getMemberaddress(),
+				memberDTO.getPhone(),
+				memberDTO.getEmail(),
+				memberDTO.getCbno(),
+				memberDTO.getFid(),
+				null,
+				null,
+				null,
+				null);
+		
+		return this.memberDAO.memberUpdate(memberVO);
+	}//memberModify
 
 
+	@Override
+	public String sendMail(String toEmail) throws Exception {
+		log.debug("sendMail({}) invoked",toEmail);
+		
+		
+		//인증번호(난수)생성
+		Random random = new Random();
+		
+		//6자리 랜덤수 생성(111111~999999)
+		int number = random.nextInt(888888)+111111;
+		log.info("인증번호 확인!!!!"+number);
+		
+		String toMail = "zene623@gmail.com";
+		
+		MailInfo mail = new MailInfo(number, toMail);
+		
+		
+//		이메일 전송을 위한 코드
+		//메일센더를 이용해서 MimeMessage 객체 생성
+		MimeMessage message = mailSender.createMimeMessage();
+		
+		//MimeMessage를 도와줄 헬퍼 생성(보조랑 비슷한듯?)
+		MimeMessageHelper helper = new MimeMessageHelper(message,true,"UTF-8");
+		
+		//helper에 우리가 보낼 값을 저장함
+		helper.setFrom(mail.getSetFrom());
+		helper.setTo(mail.getToMail());
+		helper.setSubject(mail.getTitle());
+		helper.setText(mail.getContent(),true);
+		
+		//저장된 값으로 전송
+		mailSender.send(message);
+		
+		return Integer.toString(number);
+		
+	}//sendMail
 	
-}
+	@Override
+	public MemberVO searchMember(String memberid) throws Exception {
+		log.debug("searchMember({}) invoked",memberid);
+		
+		MemberVO memberVO = this.memberDAO.getMember(memberid);
+		
+		return memberVO;
+	}//searchMember
+	
+	@Override
+	public Integer checkInfoCount(MemberDTO memberDTO) throws Exception {
+		log.debug("checkInfoCount({}) invoked",memberDTO);
+		
+		MemberVO memberVO = new MemberVO(memberDTO.getMno(),
+				memberDTO.getMemberid(),
+				memberDTO.getMemberpw(),
+				memberDTO.getMembername(),
+				memberDTO.getMemberaddress(),
+				memberDTO.getPhone(),
+				memberDTO.getEmail(),
+				memberDTO.getCbno(),
+				memberDTO.getFid(),
+				memberDTO.getSigndate(),
+				memberDTO.getDrop_tf(),
+				memberDTO.getDropdate(),
+				memberDTO.getMembertype());
+		
+		return this.memberDAO.checkInfoCount(memberVO);
+	}//checkInfoCount
+}//end class

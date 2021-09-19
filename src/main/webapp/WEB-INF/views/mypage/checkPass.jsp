@@ -16,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
 
-        <link rel="stylesheet" href="../resources/css/boardBasic.css">
+        <link rel="stylesheet" href="/resources/css/infoChange.css">
 
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
@@ -66,17 +66,22 @@
     </head>
     
     <body>
-        <h1>WEB-INF/views/mypage/checkPass.jsp</h1>
-        <H2>${__LOGIN__.memberid}</H2>
-        <H2>${__LOGIN__.memberpw}</H2>
-        <form action="/mypage/checkPass" method="POST">
+        <div>
+            <div class="checkPass">
+                <form action="/mypage/checkPass" method="POST">
+                    <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+                    <p class="topBottom"></p>
 
-            <div>
-                <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
-                
-                비밀번호 : <input type="password" name="memberpw" id="pw" placeholder="MemberPassword">
+                    <div>
+                        <p>비밀번호 확인</p>
+                        <input class="passSize" type="password" name="memberpw" id="pw" placeholder="기존 비밀번호를 입력하세요.">
+                    </div>
+                    <div>
+                        <button type="submit" class="checkBtn" id="loginBtn">확인</button>
+                    </div>
+                    <p class="topBottom"></p>
+                </form>
             </div>
-            <div><button type="submit" class="buttonstyle" id="loginBtn">로그인</button></div>
-        </form>
+        </div>
     </body>
 </html>

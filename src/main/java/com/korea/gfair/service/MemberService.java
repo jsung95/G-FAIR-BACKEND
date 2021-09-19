@@ -7,6 +7,9 @@ import java.security.NoSuchAlgorithmException;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.lang.Nullable;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.korea.gfair.domain.LoginDTO;
 import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.MemberVO;
@@ -69,5 +72,16 @@ public interface MemberService {
     public abstract MemberVO get(String memberid);
 	
 	
-	
-}
+    //=================나현아====================//
+    //=================나현아====================//
+    //회원정보 변경
+  	public abstract boolean memberModify(MemberDTO memberDTO, @Nullable MultipartFile uploadFile) throws Exception;
+  	//인증메일보내기
+  	public abstract String sendMail(String email) throws Exception;//인증코드메일 보내기
+  	//아이디로 패스워드찾기 --> 검증용
+  	public abstract MemberVO searchMember(String memberid) throws Exception;//아이디로 패스워드찾기
+  	//기존휴대폰번호, 기존이메일주소, 사업자등록번호 DB중복저장 확인
+  	public abstract Integer checkInfoCount(MemberDTO memberDTO) throws Exception;
+
+
+}//end interface

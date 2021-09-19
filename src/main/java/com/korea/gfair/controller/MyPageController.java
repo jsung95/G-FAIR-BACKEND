@@ -1,17 +1,21 @@
 package com.korea.gfair.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.ClientProtocolException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -21,19 +25,25 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.korea.gfair.domain.BoardReplyJoinVO;
 import com.korea.gfair.domain.Criteria;
+import com.korea.gfair.domain.LoginDTO;
 import com.korea.gfair.domain.MemberDTO;
+import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.domain.ReplyDTO;
+import com.korea.gfair.service.MemberService;
 import com.korea.gfair.service.MyPageService;
 import com.korea.gfair.util.ApiCaptchaImage;
 import com.korea.gfair.util.ApiCaptchaNkey;
 import com.korea.gfair.util.ApiCaptchaNkeyResult;
 import com.korea.gfair.util.Captcha;
+import com.korea.gfair.util.HomeTaxCBNO;
 import com.korea.gfair.util.UUIDGenerator;
 
 import lombok.NoArgsConstructor;
@@ -52,6 +62,8 @@ public class MyPageController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Autowired private MemberService memberService;
 //	---------------------------------------------------------------
 	@GetMapping("sample")
 	public String sample(RedirectAttributes attrs,HttpServletRequest req) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -308,5 +320,110 @@ public class MyPageController {
 		
 		return "redirect:/mypage/replymanage";
 	}//replyDelete
+	
+	
+	//=================== 현아 ===================//
+	//=================== 현아 ===================//
+	//주소API관련
+	@PostMapping("jusoPopup")
+	public void jusoPopup(String roadFullAddr) {
+		log.debug("jusoPopup({}) invoked",roadFullAddr);
+		
+	}//jusoPopup
+	
+	
+	//VIEW만 호출용
+	@GetMapping({"checkPass","jusoPopup","myInfo"})
+	public void VIEW() throws Exception{
+		log.debug("VIEW : checkPass,jusoPopup() invoked");
+		
+	}//VIEW
+	
+	//패스워드 확인용
+	@GetMapping({"getPass"})
+	@ResponseBody
+	public String getPass(String memberid) throws Exception{//전송받은 아이디값으로 패스워드를 알려줌
+		log.debug("getPass() invoked",memberid);
+		
+		MemberVO memberVO = this.memberService.searchMember(memberid);
+		log.info("memberVO : ",memberVO);
+		
+		return memberVO.getMemberpw();
+	}//checkPass
+	
+	
+	//입력받은 패스워드로 회원 찾아서 정보 올림
+	@PostMapping("checkPass")
+	public String checkPass(LoginDTO dto, Model model) throws Exception{
+		log.debug("checkPass(dto,model) invoked");
+		
+		Objects.nonNull(this.memberService);
+		log.info("\t+ memberService: "+this.memberService);
+		
+		MemberVO user = this.memberService.login(dto);
+		
+		model.addAttribute("member",user);
+		
+		if(user != null) {//로그인이 성공했다면! == 비밀번호가 일치한다면!
+			
+			return "/mypage/infoChange";
+		}//if
+		return "/mypage/checkPass";
+	}//checkPass
+	
+	
+	//회원정보변경
+	@PostMapping("infoChange")
+	public String infoChange(MemberDTO memberDTO, @Nullable MultipartFile uploadFile) throws Exception{
+		log.debug("infoChange({},{}) invoked",memberDTO,uploadFile);
+		
+		Objects.nonNull(this.memberService);
+		
+		this.memberService.memberModify(memberDTO,uploadFile);
+		
+		return "redirect:/mypage/checkPass";
+	}//checkPass
+	
+	
+	//이메일인증시 인증코드 보내기
+	@GetMapping("sendMail")
+	@ResponseBody
+	public String sendMail(String email) throws Exception {
+		log.debug("sendMail({}) invoked",email);
+		
+		return this.memberService.sendMail(email);
+//			return "success";
+	}//end class
+	
+	
+	//사업자 진위여부 체크
+	@GetMapping("cbnoCheck")
+	@ResponseBody
+	public String cbnoCheck(String cbno) throws ClientProtocolException, IOException {
+		log.debug("cbnoCheck({}) invoked",cbno);
+		
+		Double result = HomeTaxCBNO.homeTaxCBNO(cbno);
+		
+		log.info("result :"+result);
+		
+		if(result == null) {
+			
+			return "0";
+		}else {
+			return result.toString();
+		}//if-else
+	}//cbnoCheck
+	
+	
+	//기존휴대폰번호, 기존이메일주소, 사업자등록번호 확인 --> 다른회원의 정보일 때
+	@PostMapping("checkInfo")
+	@ResponseBody
+	public String checkInfo(MemberDTO memberDTO,String emailSub) throws Exception {
+		log.debug("checkInfo({},{}) invoked",memberDTO,emailSub);
+		
+		memberDTO.setEmail(emailSub);//입력된 값으로 넣어주기
+		
+		return this.memberService.checkInfoCount(memberDTO).toString();//test = 0
+	}//checkInfo
 	
 }//end class
