@@ -2,6 +2,7 @@ package com.korea.gfair.service;
 
 import java.util.List;
 
+import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 
@@ -12,7 +13,7 @@ public interface FreeBoardService {
 	
 	public abstract BoardVO read(Integer bno);	//게시판 상세보기
 	public abstract boolean write(BoardVO vo);	//게시글 작성하기
-	public abstract boolean modify(BoardVO vo); //게시글 수정하기
+	public abstract boolean modify(BoardDTO dto); //게시글 수정하기
 	public abstract boolean remove(Integer bno);//게시글 삭제하기
 	public abstract void readcnt(Integer bno);	//조회수
 	

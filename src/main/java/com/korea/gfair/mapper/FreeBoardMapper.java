@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 
@@ -15,7 +16,7 @@ public interface FreeBoardMapper {
 	
 	public abstract BoardVO select(Integer bno);	//자세히 보기
 	public abstract boolean insert(BoardVO vo);		//새로운 글 작성
-	public abstract boolean update(BoardVO vo);		//글 수정하기
+	public abstract boolean update(BoardDTO dto);	//글 수정하기
 	public abstract boolean delete(Integer bno);	//특정 게시글 삭제
 	public abstract void readcnt(Integer bno);		//조회수
 	

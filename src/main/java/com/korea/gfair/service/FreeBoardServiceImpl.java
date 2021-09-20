@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.mapper.FreeBoardMapper;
@@ -80,11 +82,11 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}//write
 
 	@Override
-	public boolean modify(BoardVO vo) {
+	public boolean modify(BoardDTO dto) {
 		
 		log.debug("modify() invoked.");
 		
-		boolean modify = mapper.update(vo);
+		boolean modify = mapper.update(dto);
 		
 		return modify;
 		

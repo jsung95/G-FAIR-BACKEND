@@ -48,19 +48,19 @@
 	<div id="wrap">
         <h1>modify</h1>
         <form action="/free/modify" method="post">
-	        <p><label for="BNO">Bno</label></p>
+	        <p><label for="BNO">글번호</label></p>
 	        <p><input type="text" name="bno" id="BNO" value="${__READ__.bno}" readonly></p>
 	
-	        <p><label for="TITLE">Title</label></p>
+	        <p><label for="TITLE">제목</label></p>
 	        <p><input type="text" name="title" id="TITLE" value="${__READ__.title}"></p>
 	
-	        <p><label for="CONTENT">Content</label></p>
+	        <p><label for="CONTENT">내용</label></p>
 	        <p><input type="text" name="content" id="CONTENT" value="${__READ__.content}"></p>
 			
-			<p><label for="MEMBERID">Memberid</label></p>
-	        <p><input type="text" name="memberid" id="MEMBERID" value="${__READ__.memberid}"></p>
+			<p><label for="MEMBERID">작성자</label></p>
+	        <p><input type="text" name="memberid" id="MEMBERID" value="${__READ__.memberid}" readonly></p>
 	
-			<p><label for="READCNT">Readcnt</label></p>
+			<p><label for="READCNT">조회수</label></p>
 	        <p><input type="text" name="readcnt" id="READCNT" value="${__READ__.readcnt}" readonly></p>
 
 	        <input type="submit" id="submitBtn" value="수정하기">

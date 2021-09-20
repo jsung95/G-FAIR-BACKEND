@@ -19,6 +19,10 @@
 </head>
 
 <style>
+	#totalCount{
+		margin: 10px 0;
+	}
+
     table{
         width: 1200px;
 
@@ -29,33 +33,37 @@
     }
 
     th{	
-        padding: 10px;
-        color: white;
-        background-color: black;
+    	font-size:20px;
+    	height: 50px;
+	    font-size: 20px;
+	    border-top: 3px solid #005bbb;
+        color: #000;
+        background-color: #eee;
         
     }
 
     td{
-        padding: 3px;
+        height: 40px;
+	    font-size: 15px;
+	    text-align: center;
     }
 
     #regBtn{
-        width: 150px;
-        height: 40px;
-
-        cursor: pointer;
-
-        border: 0;
-
-        font-size: 15px;
-        font-weight: bold;
-
-        color: white;
-        background-color: black;
+		width: 100px;
+		height: 40px;
+		line-hight: 40px;
+		text-align:center;
+		background:#005bbb;
+		color:#fff;
+		font-size:15px;
+		border:0;
+		cursor:pointer;
+		float:right;
+		margin-top:10px;
     }
 
     tr:hover{
-        background-color: rgb(239, 253, 226);
+        background-color: #005bbb;
     }
 
     a, a:link, a:visited{
@@ -63,6 +71,13 @@
         color: black;
         cursor: pointer;
     }
+    td:nth-child(2) {
+	    text-align: left;
+	    padding-left: 10px;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
 
     td:nth-child(3){
         text-align: left;
@@ -73,6 +88,11 @@
     
     .insertDate{
   	  width:170px;
+    }
+    
+    table ul{
+    	display:flex;
+    	justify-content: center;
     }
     
     .updateDate{
@@ -86,8 +106,9 @@
     }
 
     #pagination .page{
-    	width: 464px;
-        margin: 10px auto;
+        display: flex;
+        justify-content: center;
+        margin:20px 0;
         
     }
 
@@ -121,6 +142,25 @@
         background-color: #999;
         color: #fff;
     }
+    .search1{
+    	height:35px;
+    }
+    .search2{
+    	height:35px;
+    }
+        
+    .search3{
+        display: block;
+        background-color: #005bbb;
+        color: #fff;
+        font-size: 15px;
+        width: 100px;
+        height: 40px;
+		border:0;
+        line-height: 40px;
+        text-align: center;
+    }
+
 
 </style>
 
@@ -183,11 +223,7 @@
         
 
     })//end jq
-    
-    
-    
-    
-    
+
     
     
 </script>
@@ -212,20 +248,20 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 공지사항 </div>
-                    <h2 class="subName">공지사항</h2>
+                    <div class="map">home > 고객센터 > 자유게시판 </div>
+                    <h2 class="subName">자유게시판</h2>
                 </div>
                 <div class="contentIn">
                 
-                <p>전체글 수 : ${pageMaker.totalAmount}</p>
+                <p id="totalCount">전체글 수 : ${pageMaker.totalAmount}</p>
 		        <table border=1>
 		            <thead>
 		                <tr>
-		                    <th>번호</th>
-		                    <th>제목</th>
-		                    <th>작성자</th>
-		                    <th>등록일</th>
-		                    <th>조회수</th>
+		                    <th width=10%>no</th>
+		                    <th width=*>제목</th>
+		                    <th width=10%>작성자</th>
+		                    <th width=15%>등록일</th>
+		                    <th width=10%>조회수</th>
 		                </tr>
 		            </thead>
 		            
@@ -242,7 +278,7 @@
 		                </tbody>
 		            </c:forEach> 
 		        </table>
-		
+				<button id="regBtn" type="button">글쓰기</button>
 		        
 		        <div id="pagination">
 		            <form action="" id="pagenationForm">
@@ -254,10 +290,13 @@
 		                <input type="hidden" name="keyword">
 		                
 		                <ul class="page">
-		                    <c:if test="${pageMaker.prev}">
+		                
+							<%-- 	
+			                    <c:if test="${pageMaker.prev}">
 		                        <li class="prev"><a href="/free/board?currPage=${pageMaker.startPage - 1}">Prev</a></li>
-		                    </c:if>
-		                    
+		                    </c:if> --%>
+                               <li class="prev"><a class="start" href="/free/board"><<</a></li>
+                               <li class="prev"><a class="prev" href="${pageMaker.startPage}"><</a></li>
 		                    <c:forEach
 		                    	 begin="${pageMaker.startPage}"
 		                    	 end="${pageMaker.endPage}" 
@@ -271,16 +310,19 @@
 		
 		                    </c:forEach>
 		
-		                    <c:if test="${pageMaker.next}">
+							<%-- 		                    
+								<c:if test="${pageMaker.next}">
 		                        <li class="next"><a href="/free/board?currPage=${pageMaker.endPage + 1}">Next</a></li>
-		                    </c:if>
+		                    </c:if> --%>
+                            <li class="next"><a class="next" href="${pageMaker.endPage}">></a></li>
+                            <li class="next"><a class="end" href="${pageMaker.realEndPage}">>></a></li>
 		                    
 		                </ul>
 		            
 		            </form>
 		
 		        </div>
-				            <table>
+		            <table>
 		                <caption>
 		                    <ul>
 		                        <li>
@@ -296,12 +338,12 @@
 		                                </select>
 		
 		                                <input type="text" name="keyword" class="search2" value="${pageMaker.cri.keyword}">
-		                                <button class="search1">검색</button>
+		                                <button class="search3">검색</button>
 		                            </form>
 		                        </li>
-		                        <li><button id="regBtn" type="button">글쓰기</button></li>
 		                    </ul>
 		                </caption>
+		                
 		            </table>
                 </div>
             </div>

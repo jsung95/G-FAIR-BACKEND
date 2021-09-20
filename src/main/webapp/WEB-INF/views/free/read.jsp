@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 
@@ -47,7 +47,7 @@
     <p>제 목:${__READ__.title}</p>
     <p>내 용:${__READ__.content}</p>
     <p>작성자:${__READ__.memberid}</p>
-    <p>등록일:${__READ__.insert_ts}</p>
+    <p>등록일:<fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${__READ__.insert_ts}"/></p>
     <p>조회수${__READ__.readcnt}</p>
     
     <button id="modifyBtn" type="button">수정하기</button>
