@@ -57,8 +57,8 @@
 	        <p><label for="CONTENT">Content</label></p>
 	        <p><input type="text" name="content" id="CONTENT" value="${__READ__.content}"></p>
 			
-			<p><label for="MEMBERID">MemberId</label></p>
-	        <p><input type="text" name="memberId" id="MEMBERID" value="${__READ__.memberId}"></p>
+			<p><label for="MEMBERID">Memberid</label></p>
+	        <p><input type="text" name="memberid" id="MEMBERID" value="${__READ__.memberid}"></p>
 	
 			<p><label for="READCNT">Readcnt</label></p>
 	        <p><input type="text" name="readcnt" id="READCNT" value="${__READ__.readcnt}" readonly></p>

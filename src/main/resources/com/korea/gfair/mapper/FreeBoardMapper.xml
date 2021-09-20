@@ -13,25 +13,25 @@
   <select id="getListWithPaging" resultType="com.korea.gfair.domain.BoardVO">
     SELECT /*+ index_desc(tbl_board) */ *
     FROM tbl_board
-  	where bname = '자유게시판'
+  	where bname = #{bname}
 
         <choose>
-            <when test="type == 'T'.toString()">
-                and title LIKE '%'||#{keyword}||'%'
+            <when test="cri.type == 'T'.toString()">
+                and title LIKE '%'||#{cri.keyword}||'%'
             </when>
 
-            <when test="type == 'C'.toString()">
-                and content LIKE '%'||#{keyword}||'%'
+            <when test="cri.type == 'C'.toString()">
+                and content LIKE '%'||#{cri.keyword}||'%'
             </when>
 
-            <when test="type == 'W'.toString()">
-                and memberid LIKE '%'||#{keyword}||'%'
+            <when test="cri.type == 'W'.toString()">
+                and memberid LIKE '%'||#{cri.keyword}||'%'
             </when>
         </choose>
 
     
-    OFFSET ( #{currPage} - 1) * #{amount} ROWS
-    FETCH NEXT #{amount} ROWS ONLY
+    OFFSET ( #{cri.currPage} - 1) * #{cri.amount} ROWS
+    FETCH NEXT #{cri.amount} ROWS ONLY
 
   </select>
 
@@ -81,10 +81,26 @@
   </delete>
 
   <select id="getTotalCount" resultType="int">
-    SELECT count(bno)
-    FROM tbl_board
-    WHERE bno > 0
-
+	  <![CDATA[ 
+	      SELECT
+	      /*+ INDEX_DESC(tbl_board)*/
+	          count(bno)
+	      FROM
+	          tbl_board
+	      WHERE
+	          bname = #{bname}
+	  ]]>
+	  <choose>
+	      <when test="cri.type eq 'T'.toString()">
+	          AND title LIKE '%'||#{cri.keyword}||'%'
+	      </when>
+	      <when test="cri.type eq 'C'.toString()">
+	          AND content LIKE '%'||#{cri.keyword}||'%'
+	      </when>
+	      <when test="cri.type eq 'W'.toString()">
+	          AND memberid LIKE '%'||#{cri.keyword}||'%'
+	      </when>
+	  </choose>
   </select>
   
   

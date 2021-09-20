@@ -34,13 +34,13 @@ public class FreeBoardController {
 	@GetMapping("board")
 	public String listPerPage(@ModelAttribute("cri") Criteria cri, Model model) {
 		
-		List<BoardVO> boards = service.getListPerPage(cri);
+		List<BoardVO> boards = service.getListPerPage(cri,"자유게시판");
 		
 		Objects.requireNonNull(boards);
 		
 		boards.forEach(log::info);
 		
-		PageDTO pageDTO= new PageDTO(cri,service.getTotal(cri));
+		PageDTO pageDTO= new PageDTO(cri,service.getTotal(cri,"자유게시판"));
 		
 		model.addAttribute("__LIST__",boards);
 		model.addAttribute("pageMaker",pageDTO);

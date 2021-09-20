@@ -33,22 +33,22 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}//getList
 	
 	@Override
-	public List<BoardVO> getListPerPage(Criteria cri) {
-		log.debug("getListPerPage({}) invoked.",cri);
+	public List<BoardVO> getListPerPage(Criteria cri,String bname) {
+		log.debug("getListPerPage({}) invoked.",cri,bname);
 		
 		Objects.requireNonNull(mapper);
 		
-		return mapper.getListWithPaging(cri);
+		return mapper.getListWithPaging(cri,bname);
 	}//getListPerPage
 	
 	
 	@Override
-	public int getTotal(Criteria cri) {
+	public int getTotal(Criteria cri,String bname) {
 		log.debug("getListPerPage({}) invoked.",cri);
 		
 		Objects.requireNonNull(mapper);
 		
-		return mapper.getTotalCount(cri);
+		return mapper.getTotalCount(cri,bname);
 		
 	}//getTotal
 	
