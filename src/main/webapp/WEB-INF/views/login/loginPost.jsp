@@ -11,14 +11,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>WEB-INF/views/user/loginPost.jsp</h1>
+    <p>로그인 중입니다 잠시만 기다려주세요...</p>
 
     <hr>
 
     <script>
         setTimeout(function() {
-            location.href="/main";
-        }, 3000);
+            location.href="/";
+        }, 2000);
 
     </script>
 

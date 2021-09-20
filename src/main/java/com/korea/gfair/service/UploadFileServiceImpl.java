@@ -628,7 +628,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 	@Override
 	public void load_img(BoardDTO dto, AttachFileVO file, HttpServletResponse response) {
 
-		String path = "/Users/jinsung/Desktop/opt/eclipse/workspace/PROJECT/G-Fair-BackEnd/src/main/webapp/resources/img" + file.getFpath() + "/";
+		String path = imgFileName + file.getFpath() + "/";
 		String fileReName = file.getFrename();
 		
 		File img = new File(path + fileReName);

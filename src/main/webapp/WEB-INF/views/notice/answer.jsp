@@ -205,12 +205,12 @@ tfoot tr td {
                 <h2 class="asideMenu">고객센터</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="#">보도자료</a></li>
-                    <li><a class="chk" href="#">질문게시판</a></li>
-                    <li><a class="chk" href="#">자주묻는질문</a></li>
-                    <li><a class="chk" href="#">고객의소리</a></li>
-                    <li><a class="chk" href="#">자유게시판</a></li>
-                    <li><a class="chk" href="#">이벤트</a></li>
+                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
+                    <li><a class="chk" href="/question/list">질문게시판</a></li>
+                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
+                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
+                    <li><a class="chk" href="/free/board">자유게시판</a></li>
+                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
                 </ul>
 
             </div>
