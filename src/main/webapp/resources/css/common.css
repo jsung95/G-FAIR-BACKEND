@@ -49,7 +49,7 @@ header .topNav{
 
 header .topMenu{
     float: right;
-    width: 330px;
+    width: 380px;
 } 
 
 header .topMenu li{
@@ -59,7 +59,7 @@ header .topMenu li{
     
 }
 header .topMenu .tm1{
-    width: 50px;
+    width: 60px;
     margin-top: 16px;
     padding:5px;
     text-align: center;

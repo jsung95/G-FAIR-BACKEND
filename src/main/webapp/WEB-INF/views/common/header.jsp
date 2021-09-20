@@ -10,8 +10,7 @@
                             <!-- 로그인 정보 있을 때 -->
                             <c:if test="${__LOGIN__.memberid != null}">
                                 <li class="tm1"><a href="/login/logout">로그아웃</a></li>
-                                <!-- 마이페이지라고 적고싶은데 메뉴 깨져서 임시로 마이라고 적음.. -->
-                                <li class="tm1"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}">마이</a></li>
+                                <li class="tm1"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}">마이페이지</a></li>
                             </c:if>
                             <!-- 로그인 정보 없을 때 -->
                             <c:if test="${__LOGIN__.memberid == null}">

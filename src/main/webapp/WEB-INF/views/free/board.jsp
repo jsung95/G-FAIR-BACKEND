@@ -126,6 +126,39 @@
 
 <script>
     $(function(){
+        console.clear();
+        console.debug('jq started');
+
+        $('#regBtn').click(function(){
+            console.debug('onClick on #regBtn clicked');
+
+            location.href = "/free/write?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+            
+        });
+
+        $('a.prev , a.next').on('click', function(e) {
+            console.debug('onclicked for a.next or a.prev');
+            console.log('\t+ this:', this);
+
+            e.preventDefault(); //Event에 의한 선택된 요소의 기본동작을 금지(무력화)
+
+            var pagenationForm = $('pagenationForm');
+
+            pagenationForm.attr('action','/board/listPerPage');
+            pagenationForm.attr('method','GET');
+            
+            paginationForm.find('input[name=currPage]').val($(this).attr('href'));
+            paginationForm.find('input[name=amount]').val('${pageMaker.cri.amount}');
+            paginationForm.find('input[name=pagesPerPage]').val('${pageMaker.cri.pagesPerPage}');
+
+            pagenationForm.submit();
+        });
+        
+        
+    });
+</script>
+<script>
+    $(function(){
     	var tmp;
     	
         var subName = $('.subName').text();
@@ -150,6 +183,13 @@
         
 
     })//end jq
+    
+    
+    
+    
+    
+    
+    
 </script>
 <body>
     <div id="wrap">
@@ -176,15 +216,15 @@
                     <h2 class="subName">공지사항</h2>
                 </div>
                 <div class="contentIn">
+                
+                <p>전체글 수 : ${pageMaker.totalAmount}</p>
 		        <table border=1>
 		            <thead>
 		                <tr>
-		                    <th>글번호</th>
-		                    <th>원본글번호</th>
+		                    <th>번호</th>
 		                    <th>제목</th>
 		                    <th>작성자</th>
 		                    <th>등록일</th>
-		                    <th>수정일</th>
 		                    <th>조회수</th>
 		                </tr>
 		            </thead>
@@ -193,11 +233,9 @@
 		                <tbody>
 		                    <tr>
 		                        <td>${list.bno}</td>
-		                        <td>${list.reproot}</td>
 		                        <td><a href="read?bno=${list.bno}">${list.title}</a></td>
 		                        <td>${list.memberid}</td>
 		                        <td class="insertDate"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${list.insert_ts}" /></td>
-			                    <td class="updateDate"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${list.update_ts}" /></td>
 		                        <td>${list.readcnt}</td>
 		                    </tr>
 		                    
@@ -261,7 +299,6 @@
 		                                <button class="search1">검색</button>
 		                            </form>
 		                        </li>
-		                        <li>전체 게시글 수(${pageMaker.totalAmount})</li>
 		                        <li><button id="regBtn" type="button">글쓰기</button></li>
 		                    </ul>
 		                </caption>
