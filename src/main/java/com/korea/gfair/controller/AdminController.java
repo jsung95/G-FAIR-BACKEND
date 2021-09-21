@@ -27,6 +27,12 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 	
+//	뷰 역할만 하는 Mapping
+	@GetMapping({"adminPage"})
+	public void view() {
+		
+	}//view
+	
 	@GetMapping("apply")
 	public void apply(Model model) throws Exception {
 		log.debug("apply() invoked.");

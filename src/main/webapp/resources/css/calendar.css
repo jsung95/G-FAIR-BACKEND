@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+#content {
+    font-family:'Noto sans KR';
+    font-size:20px;
+
+    margin:0;padding:0;
+}
+#totalCount {
+    padding: 20px 0px 10px 0px;
+}
+    /* 버튼CSS */
+.btn > button {
+    height: 50px;
+    width: 180px;
+    margin-top: 10px;
+    margin-left: 10px;
+    
+    text-align: center;
+
+    background-color: rgb(44, 62, 80);
+    color: #fff;
+    font-size: 20px;
+    
+}
+.btn {
+    display: flex;
+    justify-content: flex-end;
+}
+/* --------------------------------------- */
+.exhibitionWrap th {
+    font-size: 20px;
+    width: 150px;
+}
+.exhibitionWrap input {
+    font-size: 20px;
+    width: 310px;
+}
+.exBtnStyle {
+    height: 50px;
+    width: 270px;
+    margin-top: 10px;
+    margin-left: 13px;
+ 
+    font-size: 20px;
+    text-align: center;
+
+    background-color: #005bbb;
+    color: #fff;
+    font-size: 20px;
+}

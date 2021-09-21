@@ -259,9 +259,9 @@
                 <!-- 등록일 / 수정일 / 조회수-->
                 <div class="regDate">
                     <p>
-                        &nbsp;등록일:<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.insert_ts}"/>
+                        &nbsp;등록일:<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${board.insert_ts}"/>
                         <c:if test="${board.update_ts != null}">
-                            &nbsp;&nbsp;&nbsp;수정일:<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board.update_ts}"/>
+                            &nbsp;&nbsp;&nbsp;수정일:<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${board.update_ts}"/>
                         </c:if>
                     </p>
                     

@@ -103,13 +103,14 @@
                     <div class="map">home > 고객센터 > 고객의소리 </div>
                     <h2 class="subName">고객의소리</h2>
                 </div>
-                <p>&nbsp;</p>
+
                 <!-- 게시판넣기 -->
                 <div class="contentIn">
+                    <p id="totalCount">전체글 수 : ${page.totalAmount}</p>
                     <table border="1">
                         <thead>
                             <tr>
-                                <th class="noStyle">no</th>
+                                <th class="noStyle">번호</th>
                                 <th>제목</th>
                                 <th class="writerStyle">작성자</th>
                                 <th class="dateStyle">등록일</th>
@@ -123,16 +124,19 @@
                                 <tr>
                                     <td>${number}</td>
                                     <td>
-                                        <c:forEach begin="1" end="${board.repstep}">
-                                            &nbsp;ㄴre:
-                                        </c:forEach> &nbsp;
-        
                                         <a href="/anony/get?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}">
-                                        ${board.title}</a>
-                                        
-                                        <c:if test="${board.renoCount > 0}">
-                                            [${board.renoCount}]
-                                        </c:if>
+                                            <p class="ptitle">
+                                                <!-- 답글 -->
+                                                <c:forEach begin="1" end="${board.repstep}">
+                                                    &nbsp;ㄴre:
+                                                </c:forEach>
+                                                <!-- 제목 -->
+                                                ${board.title}
+                                                <c:if test="${board.renoCount > 0}">
+                                                    [${board.renoCount}]
+                                                </c:if>
+                                            </p>
+                                        </a>
                                     </td>
         
                                     <c:choose>
@@ -144,7 +148,7 @@
                                         </c:otherwise>
                                     </c:choose>
         
-                                    <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.insert_ts}"/></td>
+                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
                                     <td>${board.readcnt}</td>
                                     <!-- 파일fid여부로 첨부파일 알려주기 -->
                                     <td>
