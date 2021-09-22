@@ -62,7 +62,9 @@ public class QuestionBoardController {
 			BoardDTO dto, Model model) throws Exception {
 		log.debug("modifyUi() invoked.");
 		
+		BoardVO board=this.service.getOneList(dto);
 		
+		model.addAttribute("__LIST__", board);
 	}//modifyUi
 	
 	@GetMapping({"get"})
