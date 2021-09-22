@@ -315,7 +315,7 @@
 
         <footer>
         <div id="footer_wrapper">
-                <div class="footer_logo"><img src="../publishing/img/footer_logo.png"></div>
+                <div class="footer_logo"><img src="/resources/img/footer_logo.png"></div>
                 <div class="footer_info">         
                     <ul class="personal">
                         <li><a href="#">개인정보처리방침 | </a></li>
