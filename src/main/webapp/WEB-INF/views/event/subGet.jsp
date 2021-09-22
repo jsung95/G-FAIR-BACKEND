@@ -21,7 +21,7 @@
 </head>
 
 <style>
-    .btn {
+    .btn1 {
         width: 100px;
         height: 40px;
 
@@ -100,7 +100,8 @@
         let iframe = document.querySelector("#child-iframe");
 
         iframe.addEventListener('load', function () {
-            iframe.style.height = iframe.contentDocument.body.scrollHeight + 'px';
+            iframe.height = iframe.contentWindow.document.body.scrollHeight +390+ 'px'; 
+            console.log(iframe.height);
         });
 
     }); //jq
@@ -143,8 +144,8 @@
                 </div>
                 <div id="bottom_space">
                     <div id="btn_area">
-                        <button type="button" class="btn" id="modifyBtn">글 수정</button>
-                        <button type="button" class="btn" id="listBtn">목록</button>
+                        <button type="button" class="btn1" id="modifyBtn">글 수정</button>
+                        <button type="button" class="btn1" id="listBtn">목록</button>
                     </div>
                 </div>
             </div>
