@@ -12,10 +12,80 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>질문게시판</title>
+        <style>
+             *{
+                margin: 0 auto;
+                font-family: "Noto Sans KR Light";
+            }
 
+            #content{
+                width: 1200px;
+            }
+
+            #modifycontent{
+                width: 900px;
+            }
+            #title{
+                display: inline-block;
+                width: 900px;
+                height: 30px;
+
+                border: none;
+                border-bottom: 1px solid grey;
+                
+            }
+
+            td{
+                padding: 5px;
+            }
+
+            #file{
+                display: none;
+            }
+            .input-file-button{
+                
+                width: 100px;
+                height: 40px;
+                font-size: 15px;
+                text-align: center;
+
+                line-height: 40px;
+                display: inline-block;
+                background-color:white;
+                /* border-radius: 4px; */
+                color: #005bbb;
+                cursor: pointer;
+
+                border: 1px solid #005bbb;
+            }
+
+            
+            button{
+                border: none;
+                width: 100px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                background: #005bbb;
+                color: #fff;
+                font-size: 15px;
+            }
+
+            #writer{
+                display: inline-block;
+                width: 100px;
+                height: 30px;
+
+                border: none;
+            }
+        </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
 
+        <!-- Summer note -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 
         <script>
             $(function () {
@@ -35,50 +105,62 @@
                 
                });//onclick list
 
+               $('#summernote').summernote({
+                height: 300,
+                width: 900,   
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+                });//summer note
             });//jq
         </script>
     </head>
     <body>
-        <div id="wrapper">
+        <div id="content">
 
             <form action="/question/modify" method="POST">
                 <input type="hidden" name="currPage" value="${cri.currPage}">
                 <input type="hidden" name="amount" value="${cri.amount}">
                 <input type="hidden" name="pagesPerPage" value="${cri.pagesPerPage}">
+
+                <input type="hidden" name="bno" value="${__LIST__.bno}" readonly>
                 
-                <table border="1">
+                <table id="modifycontent">
                     <tbody>
                         <tr>
-                            <th><label for="title">title</label></th>   <!-- for 속성에는 id 값을 넣는다. -->
-                            <th colspan="3">제목 : <input type="text" id="title" name="title" value="${__LIST__.title}"></th>
+                            <td><input type="text" id="title" name="title" value="${__LIST__.title}"></td>
                         </tr>
                         <tr>
-                            <td><label for="writer">writer</label></td>
-                            <td>작성자 : <input type="text" id="writer" name="memberid" value="${__LIST__.memberid}" readonly></td>
-
-                            <td><label for="bno">bno</label></td>
-                            <td>글번호 : <input type="text" name="bno" value="${__LIST__.bno}" readonly></td>
+                            <td>작성자 <input type="text" id="writer" name="memberid" value="${__LIST__.memberid}" readonly>
+                                <input type="radio" name="public_tf" value="T" checked>공개&nbsp;
+                                <input type="radio" name="public_tf" value="F">비공개
+                            </td>
                         </tr>
                         <tr>
-                            <td><label for="content">content</label></td>
-                            <td colspan="3">내용 : <input type="text" id="content" name="content" value="${__LIST__.content}"></td>
+                            <td><textarea id="summernote" name="editordata" value="${__LIST__.content}" ></textarea></td>
                         </tr>
                         <tr>
-                            <td><input type="file" name="file"></td>
-                            <td><input type="hidden" name="notice_tf" value="F"></td>
+                            <td> 
+                                <label for="file" class="input-file-button">파일업로드</label>
+                                <input type="file" name="file" id="file">
+                            </td>
                         </tr>
-
                         <tr>
-                            <td><input type="radio" name="public_tf" value="T" checked>공개</td>
-                            <td><input type="radio" name="public_tf" value="F">비공개</td>
+                            <td>
+                                <button type="submit" id="submitBtn">수정</button>
+                                <button type="button" id="removeBtn">삭제</button>
+                                <button type="button" id="listBtn">목록</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
                 
-                <button type="submit" id="submitBtn">SUBMIT</button>
-
-                <button type="button" id="removeBtn"> REMOVE</button>
-                <button type="button" id="listBtn"> LIST</button>
+                
             </form>
 
         </div>

@@ -16,35 +16,120 @@
         <style>
             *{
                 margin: 0 auto;
+                font-family: "Noto Sans KR Light";
             }
-            #wrapper{
-                width: 1000px;
+            #content{
+                width: 1200px;
+                
                 display: flex;
                 flex-direction: column;
-            }
-            table {
-                width: 900px;
 
-                border: 1px ridge rgb(46, 118, 252);
-                border-collapse: collapse;
-                
+               
+            }
+            
+            #board{
+                width: 1100px;
+                margin-top: 50px;
+                margin-bottom: 20px;
+
+                display: flex;
+                flex-direction: column;
+
+                font-weight: bold;
+            }
+
+            #title{
+                width: 100%;
+                height: 40px;
+                font-size: 20px;
+
+                display: flex;
+                justify-content: space-between;
+
+            }
+
+            #title span{
+                margin: 0 5px;
+            }
+
+            #content_info{
+                width: 100%;
+                height: 40px;
+                font-size: 15px;
+
+                background-color: #eee;
+
+                margin-bottom: 10px;
+
+                display: flex;
+                justify-content: space-between;
+            }
+
+            #content_info span{
+                margin: 0 5px;
+            }
+
+            #board_content{
+                width: 99%;
+                font-size: 15px;
+
+                border-top: 1px solid #999;
+                border-bottom: 1px solid #999;
+
+                padding: 30px 0 30px 10px;
+            }
+
+            button{
+                border: none;
+                width: 100px;
+                height: 40px;
+                line-height: 40px;
                 text-align: center;
+                background: #005bbb;
+                color: #fff;
+                font-size: 15px;
             }
 
-            th {
-                padding: 10px;
+            #buttons{
+                width: 1100px;
 
-                color: white;
-                background-color: cornflowerblue;
-
-                font-size: 16px;
+                display: flex;
+         
             }
 
-            td{
-                padding: 3px;
+            #buttons :nth-child(3){
+                margin-left: 790px;
+                padding: 0;
             }
 
-   
+            #reply{
+                margin-top: 20px;
+                width: 1100px;
+                
+                display: flex;
+                justify-content: space-around;
+            }
+
+            #reply textarea{
+                width: 700px;
+            }
+
+            #memberid{
+                width: 100px;
+                height: 40px;
+            }
+
+            #replylist{
+                width: 1100px;
+            }
+
+            #replylist tr td:nth-child(2){
+                width: 700px;
+            }
+
+            #replylist tr td:nth-child(3){
+                width: 100px;
+            }
         </style>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -85,7 +170,7 @@
         
     </head>
     <body>
-        <div id="wrapper">
+        <div id="content">
 
            
 
@@ -94,7 +179,7 @@
                     <input type="hidden" name="amount">
                     <input type="hidden" name="pagesPerPage">
                     
-                    <table border="1" id="board">
+                    <div id="board">
 
 
                       
@@ -104,76 +189,86 @@
                         <c:choose>
                             <c:when test="${__LIST__.public_tf == 'T'}">
                                 
-                                <tbody>
-                    
-                                    <tr>
-                                        <td>글번호 : ${__LIST__.bno}</td>
-                                        <td>작성자 : ${__LIST__.memberid}</td>
-                                        <td>작성일 : ${__LIST__.insert_ts}</td>
-                                    </tr>
-                    
-                                    <tr>
-                                        <td colspan='3'>제목: ${__LIST__.title}</td>
-                                    </tr>
-                    
-                                    <tr>
-                                        <td>내용</td>
-                                        <td colspan='2'>${__LIST__.content}</td>
-                                    </tr>
-                                 
+                                <div id="title">
+                                    <span>
+                                        ${__LIST__.title}
+                                    </span>
+                                    
+                                    <span>
+                                        작성자 :  ${__LIST__.memberid}
+                                    </span>
+                                </div>
+                                <div id="content_info">
+                                    <span>
+                                        등록일 : ${__LIST__.insert_ts} 
+                                        수정일 : ${__LIST__.update_ts}
+                                    </span>
+                                    <span>
+                                        조회수 : ${__LIST__.readcnt}
+                                    </span>
+                                </div>
+                                <div id="board_content">
+                                    ${__LIST__.content}
+                                    
                                     <c:if test="${__FILE__.fid>0}">
-                                        <tr>
-                                            <td>첨부파일</td>
-                                            <td colspan='2'><img src="/resources/img/${__FILE__.fpath}${__FILE__.frename}" alt="" width="600" height="400" ></td>
-                                        </tr>
+                                        
+                                        <img src="/resources/img/${__FILE__.fpath}${__FILE__.frename}" alt="" width="600" height="400" >
+                               
                                     </c:if>
-                                    
-                                    
-                                </tbody>
+                                </div>
 
                             </c:when>
                            
                             <c:otherwise>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <h5>비공개 글입니다.</h5>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <div id="title">
+                                    <span>
+                                        ${__LIST__.title}
+                                    </span>
+                                    
+                                    <span>
+                                        작성자 :  ${__LIST__.memberid}
+                                    </span>
+                                </div>
+                                <div id="content_info">
+                                    <span>
+                                        등록일 : ${__LIST__.insert_ts} 
+                                        수정일 : ${__LIST__.update_ts}
+                                    </span>
+                                    <span>
+                                        조회수 : ${__LIST__.readcnt}
+                                    </span>
+                                </div>
+                                <div id="board_content">
+                                    비공개 글 입니다. 
+                                </div>
                             </c:otherwise>
                         </c:choose>
-                    </table>
-
-                    <button type="button" id="listBtn">LIST</button>
-                    <button type="button" id="modifyBtn">MODIFY</button>
-                    <button type="button" id="retrieveBtn">RETRIEVE</button>
+                   
+                    </div>
+                    <div id="buttons">
+                        <button type="button" id="modifyBtn">수정</button>
+                        <button type="button" id="retrieveBtn">답글</button>
+                        <button type="button" id="listBtn">목록</button>
+                    </div>
+                    
                 </form>
-                <p>&nbsp;</p>
-                <hr>
+         
 
-                <c:if test="${__LIST__.public_tf != 'F'}" >
-                    <form action="/question/replyRegister" method="POST">
-                        <table border="1" id="reply">
-                            <tr>
-                            
-                                <td colspan="2"> 
-                                    <input type="hidden" name="bno" value="${__LIST__.bno}">
-                                    <textarea name="recontent" id="recontent" cols="50" rows="3" placeholder="댓글 내용을 입력하세요">
-                                    </textarea>
-                                </td>
-                                
-                                <td><input type="text" name="memberid" size="10" placeholder="작성자"></td>
-                                <td><button type="submit" id="replyRegisterBtn">등록</button></td>
-                            </tr>
-                          
-                        </table>
+                <c:if test="${__LIST__.public_tf != 'F' && not empty __LOGIN__.memberid}" >
+                    <form action="/question/replyRegister" method="POST" id="replyRegister">
+                        <div id="reply">
+                            <input type="hidden" name="bno" value="${__LIST__.bno}">
+                            <textarea name="recontent" id="recontent" cols="50" rows="3" placeholder="댓글 내용을 입력하세요">
+                            </textarea>
+                            <input type="text" name="memberid" size="10" value="${__LOGIN__.memberid}" readonly id="memberid">
+                            <button type="submit" id="replyRegisterBtn">등록</button>
+                        </div>
                     </form>
 
                       <!-- 이미 작성된 댓글  -->
                     <form action="/question/replyRemove" method="POST">
-                        <table>
-                            <tr>
+                        <table id="replylist">
+                          
                                 <c:forEach items="${__REPLY__}" var="re">
                                     <tr>
                                         <td>
@@ -187,7 +282,7 @@
                                         
                                     </tr>
                                 </c:forEach>
-                            </tr>
+                         
                         </table>
                     </form>
                 </c:if>

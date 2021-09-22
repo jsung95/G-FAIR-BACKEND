@@ -13,6 +13,75 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>질문게시판</title>
 
+        <style>
+            *{
+                margin: 0 auto;
+                font-family: "Noto Sans KR Light";
+            }
+
+            #content{
+                width: 1200px;
+            }
+
+            #register{
+                width: 900px;
+            }
+
+            #title{
+                display: inline-block;
+                width: 900px;
+                height: 30px;
+
+                border: none;
+                border-bottom: 1px solid grey;
+                
+            }
+
+            #memberid{
+                display: inline-block;
+                width: 100px;
+                height: 30px;
+
+                border: none;
+            }
+
+    
+
+            button{
+                border: none;
+                width: 100px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                background: #005bbb;
+                color: #fff;
+                font-size: 15px;
+            }
+            #file{
+                display: none;
+            }
+            .input-file-button{
+                
+                width: 100px;
+                height: 40px;
+                font-size: 15px;
+                text-align: center;
+
+                line-height: 40px;
+                display: inline-block;
+                background-color:white;
+                /* border-radius: 4px; */
+                color: #005bbb;
+                cursor: pointer;
+
+                border: 1px solid #005bbb;
+            }
+
+            td{
+                padding: 5px;
+            }
+        </style>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" ></script>
 
@@ -31,8 +100,9 @@
                });//onclick list
 
                $('#summernote').summernote({
+                height: 300,
+                width: 900,   
                 toolbar: [
-                    // [groupName, [list of button]]
                     ['style', ['bold', 'italic', 'underline', 'clear']],
                     ['font', ['strikethrough', 'superscript', 'subscript']],
                     ['fontsize', ['fontsize']],
@@ -47,51 +117,44 @@
    
     </head>
     <body>
-        <div id="wrapper">
+        <div id="content">
 
             <form action="/question/register" method="POST" enctype="multipart/form-data">
                	
-                
-                <table border="1">
-                    <tbody>
-                       
-                            <tr>
-                                <td><label for="title">제목</label></td>
-                                <td><input type="text" name="title" id="title" size="50" placeholder="제목을 입력하세요"></td>
-                            </tr>
-        
-                            <tr>
-                                <td><label for="memberid">작성자</label></td>
-                                <td><input type="text" name="memberid" id="memberid" size="20" placeholder="작성자"></td>
-                            </tr>
-                            
-                            <!-- <tr>
-                                <td><label for="content">내용</label></td>
-                                <td><textarea name="content" id="content" cols="48" rows="10" placeholder="내용을 입력하세요"></textarea></td>
-                            </tr> -->
-                            <tr>
-                                <td colspan="2"><textarea id="summernote" name="editordata" ></textarea></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><input type="file" name="file"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td><input type="radio" name="public_tf" value="T" checked>공개</td>
-                                <td><input type="radio" name="public_tf" value="F">비공개</td>
-                            </tr>
-        
-                            <tr>
-                                <td colspan="2">
-                                    <button type="submit" id="submitBtn">SUBMIT</button>
-                                    <button type="button" id="listBtn">LIST</button>
-                                </td>
-                            </tr>
-                    </tbody>
+                <table id="register">
+                    <tr>
+                        <td>
+                            <input type="text" name="title" id="title" size="50" placeholder="제목을 입력하세요">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            작성자 <input type="text" name="memberid" id="memberid" size="20" value="${__LOGIN__.memberid}">
+                            <input type="radio" name="public_tf" value="T" checked>공개&nbsp;
+                            <input type="radio" name="public_tf" value="F">비공개
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea id="summernote" name="editordata" ></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="file" class="input-file-button">파일업로드</label>
+                            <input type="file" name="file" id="file">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="submit" id="submitBtn">등록</button>
+                            <button type="button" id="listBtn">목록</button>
+                        </td>
+                    </tr>
+                    
                 </table>
-                
+
+               
             </form>
 
         </div>
