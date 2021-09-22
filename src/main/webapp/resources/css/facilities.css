@@ -1,8 +1,13 @@
   #container{
-            width: 1400px;
-            overflow: hidden;
-            margin: 0 auto;
-           
+     
+	    width: 1400px;
+	    overflow: hidden;
+	    margin: 0 auto;
+	    margin-left: 123px;
+	    position: relative;
+	    left: -243px;
+  		bottom: -3px;
+	
         }
 
         #container #aside{

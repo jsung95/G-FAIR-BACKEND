@@ -38,11 +38,11 @@
                         <ul class="dropdownmenu">
                             <li class="menu"><h3><a href="#">전시회 소개</a></h3>
                                 <ul>
-                                    <li><a href="#">전시회안내</a></li>
-                                    <li><a href="#">연혁</a></li>
+                                    <li><a href="/intro/main">전시회안내</a></li>
+                                    <li><a href="/history/main">연혁</a></li>
                                     <li><a href="/exhibition/calendar">전시회일정</a></li>
-                                    <li><a href="#">부대시설</a></li>
-                                    <li><a href="#">찾아오시는길</a></li>
+                                    <li><a href="/facilities/main">부대시설</a></li>
+                                    <li><a href="/traffic/main">찾아오시는길</a></li>
                                 </ul>
                             </li>
                             <li class="menu"><h3><a href="#">미디어 센터</a></h3>

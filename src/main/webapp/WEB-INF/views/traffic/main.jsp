@@ -72,6 +72,18 @@
  		    });
 
  	</script>
+ 	
+ 	<style>
+  #container{
+     
+	    width: 1400px;
+	    overflow: hidden;
+	    margin: 0 auto;
+	        position: relative;
+    right: 242px
+	
+        }
+</style>
 </head>
 
 <body>
@@ -87,7 +99,7 @@
                             <li class="tm2"><a href="https://blog.naver.com/g_fair_korea" target="blank"><img src="/resources/img/blog.png" alt=""></a></li>
                             <li class="tm2"><a href="https://www.facebook.com/gfairkr" target="blank"><img src="/resources/img/facebook.png" alt=""></a></li>
                             <li class="tm2"><a href="https://www.instagram.com/gfairkorea/" target="blank"><img src="/resources/img/instagram.png" alt=""></a></li>
-                            <li class="tm2"><a href="#" target="blank"><img src="../publishing/img/mail.png" alt=""></a></li>
+                            <li class="tm2"><a href="#" target="blank"><img src="/resources/img/mail.png" alt=""></a></li>
                         </ul>
                     </div>
                 </div>
@@ -97,11 +109,11 @@
                         <ul class="dropdownmenu">
                             <li class="menu"><h3><a href="#">전시회 소개</a></h3>
                                 <ul>
-                                    <li><a href="#">전시회안내</a></li>
-                                    <li><a href="#">연혁</a></li>
-                                    <li><a href="#">전시회일정</a></li>
-                                    <li><a href="#">부대시설</a></li>
-                                    <li><a href="#">찾아오시는길</a></li>
+                                    <li><a href="/intro/main">전시회안내</a></li>
+                                    <li><a href="/history/main">연혁</a></li>
+                                    <li><a href="/exhibition/calendar">전시회일정</a></li>
+                                    <li><a href="/facilities/main">부대시설</a></li>
+                                    <li><a href="/traffic/main">찾아오시는길</a></li>
                                 </ul>
                             </li>
                             <li class="menu"><h3><a href="#">미디어 센터</a></h3>
@@ -129,14 +141,14 @@
                             </li>
                             <li class="menu"><h3><a href="#">고객 센터</a></h3>
                                 <ul>
-                                    <li><a href="#">공지사항</a></li>
-                                    <li><a href="#">보도자료</a></li>
-                                    <li><a href="#">질문게시판</a></li>
-                                    <li><a href="#">자주묻는질문</a></li>
-                                    <li><a href="#">고객의소리</a></li>
-                                    <li><a href="#">자유게시판</a></li>
-                                    <li><a href="#">이벤트</a></li>
-                                </ul>       
+                                    <li><a href="/notice/list">공지사항</a></li>
+                                    <li><a href="/news/listPerPage">보도자료</a></li>
+                                    <li><a href="/question/list">질문게시판</a></li>
+                                    <li><a href="/often/question">자주묻는질문</a></li>
+                                    <li><a href="/annoy/list">고객의소리</a></li>
+                                    <li><a href="/free/board">자유게시판</a></li>
+                                    <li><a href="/event/listPerPage">이벤트</a></li>
+                                </ul>          
                             </li>
                         </ul>
                     </div>
@@ -150,14 +162,12 @@
             <div id="aside">
                 <h2 class="asideMenu">전시회 소개</h2>
                 <ul>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">보도자료</a></li>
-                    <li><a href="#">질문게시판</a></li>
-                    <li><a href="#">자주묻는질문</a></li>
-                    <li><a href="#">고객의소리</a></li>
-                    <li><a href="#">자유게시판</a></li>
-                    <li><a href="#">이벤트</a></li>
-                </ul>
+	                 <li><a href="/intro/main">전시회안내</a></li>
+	                 <li><a href="/history/main">연혁</a></li>
+	                 <li><a href="#">전시회일정</a></li>
+	                 <li><a href="/facilities/main">부대시설</a></li>
+	                 <li><a href="/traffic/main">찾아오시는길</a></li>
+	             </ul>
 
             </div>
             <div id="content">
