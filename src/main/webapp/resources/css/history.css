@@ -1,14 +1,4 @@
-  #container{
-     
-	    width: 1400px;
-	    overflow: hidden;
-	    margin: 0 auto;
-	    margin-left: 123px;
-	    position: relative;
-	    left: -243px;
-  		bottom: -3px;
-	
-        }
+
         #container #aside{
             width: 180px;
             float: left;
@@ -16,7 +6,7 @@
         #container #aside .asideMenu{
             height: 200px;
             color: #fff;
-            background-image: url(../img/side_h2.jpg);
+            background-image: url(/resources/img/side_h2.jpg);
             font-size: 27px;
             text-align: center;
             line-height: 200px;
@@ -48,7 +38,7 @@
         #container #aside ul li a:hover{
             font-size: 18px;
             font-weight: bold;
-            background: url(../img/side_li_bg.jpg) no-repeat;
+            background: url(/resources/img/side_li_bg.jpg) no-repeat;
             background-position: right center;
         }
 
@@ -64,7 +54,7 @@
         #container #content .title{
             width: 1200px;
             height: 200px;
-            background: url(../img/title_img.jpg) no-repeat;
+            background: url(/resources/img/title_img.jpg) no-repeat;
             background-size: cover;
             border-bottom: solid 1px #000;
             overflow: hidden;
