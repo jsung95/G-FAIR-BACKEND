@@ -335,7 +335,7 @@ public class MemberController {
 		
 		String result = reg_service.memberIdFind(email);
 
-		rttrs.addFlashAttribute("id", result);		
+		rttrs.addFlashAttribute("id", result);	
 		return "redirect:/member/find_id_p_result";
 		
 	}//find_id_p

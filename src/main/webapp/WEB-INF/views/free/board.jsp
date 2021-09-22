@@ -63,7 +63,7 @@
     }
 
     tr:hover{
-        background-color: #005bbb;
+        background-color: #eee;
     }
 
     a, a:link, a:visited{
@@ -108,49 +108,82 @@
     #pagination .page{
         display: flex;
         justify-content: center;
-        margin:20px 0;
+        margin:50px 0 20px 0;
         
     }
 
     #pagination li{
         float: left;
-
         width: 30px;
         height: 30px;
-        border: 1px solid black;
-
         text-align: center;
         list-style: none;
         line-height: 30px;
+        font-size:16px;
         
-
+        margin-right:10px;
     }
+    
+    #pagination li a{
+    	display:block;
+    	
+   	}
 
+	.start{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        border:1px solid #eee;
 
-    .prev , .next {
-        width: 70px!important;
-        background-color: black;
-        
-    }
+	}
+	
+	.prev{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-30px;
+        border:1px solid #eee;
+	}
+	
+	.next{		
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-60px;
+        border:1px solid #eee;
+	
+	}
+	
+	.end{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-90px;
+        border:1px solid #eee;
+	
+	}
 
-    .prev a, .next a {
-        color: #fff;
+    .start a .prev a, .next a .end a{
+    	display:block;
         
     }
 
     .currPage{
-        background-color: #999;
-        color: #fff;
+    	border: 1px solid #000;
     }
     .search1{
     	height:35px;
     }
     .search2{
-    	height:35px;
+    	height:30px;
     }
         
     .search3{
-        display: block;
+        display: inline-block;
         background-color: #005bbb;
         color: #fff;
         font-size: 15px;
@@ -174,24 +207,6 @@
 
             location.href = "/free/write?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
             
-        });
-
-        $('a.prev , a.next').on('click', function(e) {
-            console.debug('onclicked for a.next or a.prev');
-            console.log('\t+ this:', this);
-
-            e.preventDefault(); //Event에 의한 선택된 요소의 기본동작을 금지(무력화)
-
-            var pagenationForm = $('pagenationForm');
-
-            pagenationForm.attr('action','/board/listPerPage');
-            pagenationForm.attr('method','GET');
-            
-            paginationForm.find('input[name=currPage]').val($(this).attr('href'));
-            paginationForm.find('input[name=amount]').val('${pageMaker.cri.amount}');
-            paginationForm.find('input[name=pagesPerPage]').val('${pageMaker.cri.pagesPerPage}');
-
-            pagenationForm.submit();
         });
         
         
@@ -265,10 +280,10 @@
 		                </tr>
 		            </thead>
 		            
-		            <c:forEach items="${__LIST__}" var="list">
+		            <c:forEach items="${__LIST__}" var="list" varStatus="i">
 		                <tbody>
 		                    <tr>
-		                        <td>${list.bno}</td>
+		                        <td>${pageMaker.totalAmount - (pageMaker.cri.currPage - 1) * pageMaker.cri.amount - i.index}</td>
 		                        <td><a href="read?bno=${list.bno}">${list.title}</a></td>
 		                        <td>${list.memberid}</td>
 		                        <td class="insertDate"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${list.insert_ts}" /></td>
@@ -295,8 +310,8 @@
 			                    <c:if test="${pageMaker.prev}">
 		                        <li class="prev"><a href="/free/board?currPage=${pageMaker.startPage - 1}">Prev</a></li>
 		                    </c:if> --%>
-                               <li class="prev"><a class="start" href="/free/board"><<</a></li>
-                               <li class="prev"><a class="prev" href="${pageMaker.startPage}"><</a></li>
+                               <li><a class="start" href="/free/board">첫페이지</a></li>
+                               <li><a class="prev" href="/free/board?currPage=${pageMaker.startPage - 1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
 		                    <c:forEach
 		                    	 begin="${pageMaker.startPage}"
 		                    	 end="${pageMaker.endPage}" 
@@ -314,8 +329,8 @@
 								<c:if test="${pageMaker.next}">
 		                        <li class="next"><a href="/free/board?currPage=${pageMaker.endPage + 1}">Next</a></li>
 		                    </c:if> --%>
-                            <li class="next"><a class="next" href="${pageMaker.endPage}">></a></li>
-                            <li class="next"><a class="end" href="${pageMaker.realEndPage}">>></a></li>
+                            <li><a class="next" href="/free/board?currPage=${pageMaker.endPage + 1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a></li>
+                            <li><a class="end" href="/free/board?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">끝페이지</a></li>
 		                    
 		                </ul>
 		            

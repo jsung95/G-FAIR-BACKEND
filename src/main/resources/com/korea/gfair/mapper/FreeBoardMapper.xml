@@ -14,7 +14,6 @@
     SELECT /*+ index_desc(tbl_board) */ *
     FROM tbl_board
   	WHERE bname = #{bname}
-
         <choose>
             <when test="cri.type == 'T'.toString()">
                 and title LIKE '%'||#{cri.keyword}||'%'
@@ -29,7 +28,7 @@
             </when>
         </choose>
 
-    
+    ORDER BY bno desc
     OFFSET ( #{cri.currPage} - 1) * #{cri.amount} ROWS
     FETCH NEXT #{cri.amount} ROWS ONLY
 

@@ -25,14 +25,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Setter(onMethod_= @Autowired)
 	private FreeBoardMapper mapper;
 	
-	@Override
-	public List<BoardVO> list() {
-		log.debug("getList() invoked.");
-		
-		List<BoardVO> list = mapper.selectList();
-		
-		return list;
-	}//getList
+
 	
 	@Override
 	public List<BoardVO> getListPerPage(Criteria cri,String bname) {
@@ -72,7 +65,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		
 		boolean write = mapper.insert(vo);
 		
-		log.info("write=@@@"+write);
 		if(write) {
 			return true;
 		}else {
