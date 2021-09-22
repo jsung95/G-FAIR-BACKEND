@@ -94,7 +94,7 @@ public class PreviewApplicationController {
 		
 		this.preAppService.register(applications);
 		
-		return "redirect:/main/index";
+		return "redirect:/index";
 	}//register()
 	
 	
