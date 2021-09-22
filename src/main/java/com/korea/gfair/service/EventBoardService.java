@@ -17,9 +17,13 @@ public interface EventBoardService {
 	
 	public abstract EventVO get(Integer bno);
 	
+	public abstract EventVO getWithFid(Integer fid);
+	
 	public abstract int modify(EventDTO dto);
 	
 	public abstract boolean remove(Integer bno);
+	
+	public abstract boolean removeWithFid(Integer fid);
 	
 	public abstract int getTotal(Criteria cri);
 	
@@ -30,4 +34,6 @@ public interface EventBoardService {
 	public abstract ResponseEntity<byte[]> getFile(String fileName);
 
 	public abstract boolean readcnt(Integer bno);
+	
+	public abstract boolean readcntWithFid(Integer fid);
 }//end interface

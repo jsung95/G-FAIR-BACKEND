@@ -58,7 +58,7 @@ public class PhotoBoardController {
 		log.debug("listPerPage(cri, model) invoked.");
 		log.info("\t+ cri: {}, model: {}", cri, model);
 		
-		cri.setAmount(12);
+		cri.setAmount(16);
 		List<PhotoVO2> photos = this.service.getListPerPage(cri);
 		
 		Objects.requireNonNull(photos);
@@ -95,9 +95,9 @@ public class PhotoBoardController {
 				cri, uploadFile, rttrs);
 		
 		this.eventService.register("img", eventDTO, uploadFile);
-		
 		log.info("uploadFileName: " + uploadFile.getOriginalFilename());
 		log.info("uploadFile: " + uploadFile);
+		
 		
 		rttrs.addFlashAttribute(
 				"result", uploadFile);
@@ -131,11 +131,13 @@ public class PhotoBoardController {
 		log.info("fileNo: {}, model: {}", fid, model);
 		
 		PhotoVO photo = this.service.read(fid);
-		
-		assert photo != null;
-		
 		log.info("\t+ photo: " + photo);
 		
+		EventVO board = this.eventService.getWithFid(fid);
+		log.info("\t+ board: " + board);
+		
+		this.eventService.readcntWithFid(fid);
+		model.addAttribute("board", board);
 		model.addAttribute("file", photo);
 	}//get()
 	
@@ -181,9 +183,19 @@ public class PhotoBoardController {
 	@PostMapping("remove")
 	public String remove(
 			@ModelAttribute("cri") Criteria cri,
-			@RequestParam("fid") Integer fid, 
+			@RequestParam(value="fid", required=false) Integer fid, 
 			RedirectAttributes rttrs) {
 		log.debug("remove({}, {}) invoked,", fid, rttrs);
+		
+		boolean childRemoved = this.eventService.removeWithFid(fid);
+		
+		if(childRemoved) {
+			log.info("자식레코드가 삭제되었습니다.");
+			
+		}else {
+			log.info("자식레코드 삭제실패.");
+			
+		}
 		
 		boolean isRemoved = this.service.remove(fid);
 		

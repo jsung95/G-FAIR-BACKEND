@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <td><label for="memberID">작성자</label></td>
-                        <td><input type="text" id="memberID" name="memberID" value="${event.memberID}" readonly></td>
+                        <td><input type="text" id="memberID" name="memberID" value="${event.memberid}" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="bName">게시판유형</label></td>

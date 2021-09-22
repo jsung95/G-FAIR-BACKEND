@@ -1,115 +1,200 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
-
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>register.jsp</title>
-        <style> 
+<head>
+    <meta charset="UTF-8">
+    <title>지페어 코리아</title>
 
-            #submitBtn{
-                width: 100px;
-                height: 40px;
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    <script src="/resources/js/fullnav.js"></script>
 
-                border: 0;
+</head>
 
-                font-size: 15px;
-                font-weight: bold;
+<style>
+    #container1{
+        width: 1200px;
+        margin-top: 50px;
+        font-weight: bold;
+    }
 
-                color: white;
-                background-color: green;
+    .clear{
+        clear: both;
+    }
+    #title_area{
+        border-bottom: 1px solid rgb(201, 201, 201);
+        border-top: 1px solid #6f2b89;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+    }
+    
+    #title_input{
+        width: 40%;
+    }
 
+    #textarea{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 40%;
+    }
+    #writer{
+        float: right;
+        width: 20%;
+    }
+
+    .uploadDiv{
+        width: 40%;
+    }
+
+    .btn {
+        width: 100px;
+        height: 40px;
+
+        border: 0;
+        text-align: center;
+        background: #005bbb;
+        color: #fff;
+        font-size: 15px;
+        border-radius: 4px;
+
+        cursor: pointer;
+	}
+
+    input[type="file"]{
+        display: none;
+    }
+
+    .custom-file-upload {
+        float: right;
+        background-color: #005bbb;
+        padding: 6px 12px;
+        cursor: pointer;
+
+        font-size: 20px;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+</style>
+
+<script>
+    $(function(){
+    	var tmp;
+    	
+        var subName = $('.subName').text();
+        
+        $('.chk').each(function(index,obj){
+            var t = index;
+            var o = $(this).text();
+            console.log(t + ':' + o)
+            if(o == subName) {
+            	tmp = t;
             }
-            #submitBtn:hover{
-                cursor: pointer;
+        });
 
-            }
-            #listBtn{
-                width: 100px;
-                height: 40px;
+        console.log(tmp)
+        
+        $('#parent').children().eq(tmp).children().css({
+            'font-size': '18px',
+            'font-weight':'bold',
+            'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+            'background-position': 'right center'
+        });
+        
+        $("#listBtn").on('click', function () {
+	        console.log('#listBtn button clicked.');
+	
+	        
+	        location.href = "/event/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+	
+	    }); // .onclick
+    })//end jq
+</script>
+<body>
+    <div id="wrap">
+ 	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-                border: 0;
-
-                font-size: 15px;
-                font-weight: bold;
-
-                color: white;
-                background-color: blue;
-
-            }
-            #listBtn:hover{
-                cursor: pointer;
-
-            }
-        </style>
-
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
-
-        <script>
-            $(function () {
-                console.clear();
-                console.debug("jq started.");
-
-                $('#listBtn').click(function () {
-                    
-                    //GET, Request URI: /board/list
-                    location.href = "/event/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPages=${cri.pagesPerPage}";
-
-                });//onclick for #listBtn
-
-            }); //jq
-        </script>
-    </head>
-    <body>
-        <h1>Register</h1>
-        <hr>
         <div id="container">
-            <form action="/event/register" method="POST" enctype="multipart/form-data">
-                <!-- 어느화면에서든, 게시판 목록 페이지로 이동시, 반드시 아래 3개의 기준 전송파라미터를 전송시키기위해,
-                    hiiden 값으로 설정 -->
-                <input type="hidden" name="currPage" value="${cri.currPage}">
-                <input type="hidden" name="amount" value="${cri.amount}">
-                <input type="hidden" name="pagesPerPage" value="${cri.pagesPerPage}">
-                    
-                <table>
-                    <div class="uploadDiv">
-                        <input type="file" id="file" name="uploadFile">
+            <div id="aside">
+                <h2 class="asideMenu">고객센터</h2>
+                <ul id="parent">
+                    <li><a class="chk" href="/notice/list">공지사항</a></li>
+                    <li><a class="chk" href="#">보도자료</a></li>
+                    <li><a class="chk" href="#">질문게시판</a></li>
+                    <li><a class="chk" href="#">자주묻는질문</a></li>
+                    <li><a class="chk" href="#">고객의소리</a></li>
+                    <li><a class="chk" href="#">자유게시판</a></li>
+                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
+                </ul>
+
+            </div>
+            <div id="content">
+                <div class="title">
+                    <div class="map">home > 고객센터 > 아벤트 </div>
+                    <h2 class="subName">이벤트</h2>
+                </div>
+                <div class="contentIn">
+                	
+                    <!-- 여기에 게시판 넣으면 됩니다. -->
+                    <div id="container1">
+                        <form action="/event/register" method="POST" enctype="multipart/form-data">
+                            <!-- 어느화면에서든, 게시판 목록 페이지로 이동시, 반드시 아래 3개의 기준 전송파라미터를 전송시키기위해,
+                                hiiden 값으로 설정 -->
+                            <input type="hidden" name="currPage" value="${cri.currPage}">
+                            <input type="hidden" name="amount" value="${cri.amount}">
+                            <input type="hidden" name="pagesPerPage" value="${cri.pagesPerPage}">
+
+                            
+                            <input type="hidden" name="bname" value="이벤트게시판">
+                            <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+                            <input type="hidden" name="reproot" value="${board.reproot}">
+                            <input type="hidden" name="repstep" value="${board.repstep}">
+                            <input type="hidden" name="repindent" value="${board.repindent}">
+                            <input type="hidden" name="readcnt" value="0">
+                            <input type="hidden" name="notice_tf" value="F">
+                            <input type="hidden" name="reply_tf" value="F">
+
+
+                            <div id="title_area">
+                                <input type="text" name="title" id="title_input" placeholder="제목을 입력하세요">
+                                <span id="writer">작성자 &nbsp;&nbsp; ${__LOGIN__.memberid}</span>
+                            </div>
+                            
+                            
+                            <div>
+                                <textarea  
+                                    name="content" 
+                                    id="textarea" 
+                                    cols="48" 
+                                    rows="10" 
+                                    placeholder="내용을 입력하세요"></textarea>
+                            </div>
+
+                            <div class="uploadDiv">
+                                <label class="custom-file-upload">
+                                    파일첨부<input class="buttonstyle" type="file" name="uploadFile" accept="image/*">
+                                </label>
+                            </div>
+
+                            <button type="summit" class="btn" id="registerBtn">등록</button>
+                            <button type="button" class="btn" id="listBtn">목록</button>
+                        </form>
                     </div>
-                    <tr>
-                        <td><label for="title"></label> 제목</td>
-                        <td><input type="text" name="title" id="title" size="50" placeholder="제목을 입력하세요"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="content"></label>내용</td>
-                        <td><textarea name="content" id="content" cols="48" rows="10" placeholder="내용을 입력하세요"></textarea></td>
-                    </tr>
-                    <tr><!-- <c:out value="${__LOGIN__.memberID}"></c:out> -->
-                        <td><label for="memberID"></label>작성자</td>
-                        <td><input type="text" name="memberID" id="memberID" size="20" placeholder="작성자"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="bName">게시판유형</label></td>
-                        <td><input type="text" name="bName" id="bName" size="50" placeholder="게시판유형"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <button type="submit" id="submitBtn">Register</button>
-                            <button type="button" id="listBtn">List</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+                </div>
+            </div>
         </div>
-    </body>
+
+   
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    </div> <!--wrap-->
+</body>
 </html>

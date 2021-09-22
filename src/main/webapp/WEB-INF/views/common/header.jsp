@@ -47,7 +47,7 @@
                             </li>
                             <li class="menu"><h3><a href="#">미디어 센터</a></h3>
                                 <ul>
-                                    <li><a href="#">포토갤러리</a></li>
+                                    <li><a href="/photo/listPerPage">포토갤러리</a></li>
                                     <li><a href="#">영상자료실</a></li>
                                 </ul>
                             </li>
@@ -64,8 +64,8 @@
                             <li class="menu"><h3><a href="#">사전 신청</a></h3>
                                 <ul>
                                     <li><a href="#">사전관람안내</a></li>
-                                    <li><a href="#">사전관람신청</a></li>
-                                    <li><a href="#">사전관람신청자</a></li>
+                                    <li><a href="/pre/agreement">사전관람신청</a></li>
+                                    <li><a href="/pre/verify">사전관람신청확인</a></li>
                                 </ul>
                             </li>
                             <li class="menu"><h3><a href="/notice/list">고객 센터</a></h3>

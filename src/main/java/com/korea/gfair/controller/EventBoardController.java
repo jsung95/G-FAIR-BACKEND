@@ -65,7 +65,7 @@ public class EventBoardController {
 	
 	@GetMapping("register")
 	public void registerui(@ModelAttribute("cri")Criteria cri) {
-		log.debug("register() invoked.");
+		log.debug("registerui() invoked.");
 		log.info("\t+ cri: " + cri);
 		
 	}//registerui()
@@ -117,8 +117,35 @@ public class EventBoardController {
 		
 	}//test
 	
-	@GetMapping({"get", "modify"})
+	@GetMapping("get")
 	public void get(
+			@ModelAttribute("cri") Criteria cri,
+			@RequestParam("bno") Integer bno,
+			Model model
+			) {
+		log.debug("get(cri, bno, model) invoked.");
+		log.info(
+				"\t+ cri: {}, bno: {}, model: {}",
+				cri, bno, model);
+		
+		
+		EventVO eventVO = this.service.get(bno);
+		log.info("\t+ eventVO: " + eventVO.getFid());
+		
+		PhotoVO photoVO = this.photoService.read(eventVO.getFid());
+		log.info("\t+ photoVO: " + photoVO);
+		
+		
+		model.addAttribute("photo", photoVO);
+		
+		model.addAttribute("board", eventVO);
+		
+		this.service.readcnt(bno);
+		
+	}//get()
+	
+	@GetMapping({"subGet", "modify"})
+	public void get1(
 			@ModelAttribute("cri") Criteria cri,
 			@RequestParam("bno") Integer bno,
 			Model model
@@ -140,10 +167,8 @@ public class EventBoardController {
 		
 		model.addAttribute("event", eventVO);
 		
-		this.service.readcnt(bno);
 		
 	}//get()
-	
 	
 	@PostMapping("modify")
 	public String modify(

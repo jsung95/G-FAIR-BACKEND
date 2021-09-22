@@ -171,6 +171,16 @@ public class EventBoardServiceImpl
 	
 	
 	
+	//=========================== 6. get ==========================//
+	@Override
+	public EventVO getWithFid(Integer fid) {
+		log.debug("getWithFid(fid) invoked.");
+		log.info("\t+ fid: " + fid);
+		
+		return this.mapper.getWithFid(fid);
+	}//getWithFid
+	
+	
 	//=========================== 4. modify ==========================//
 	@Override
 	public int modify(EventDTO dto) {
@@ -191,6 +201,14 @@ public class EventBoardServiceImpl
 		return this.mapper.delete(bno) == 1;
 	}//remove()
 
+	@Override
+	public boolean removeWithFid(Integer fid) {
+		log.debug("remove(fid) invoked.");
+		log.info("\t+ fid: " + fid);
+
+		return this.mapper.deleteWithFid(fid) == 1;
+	}//remove()
+	
 	
 	
 	//=========================== 7. getTotal ==========================//
@@ -288,7 +306,16 @@ public class EventBoardServiceImpl
 		log.info("\t+ bno: " + bno);
 
 		return this.mapper.readcnt(bno);
-	}//readCount
+	}
+
+
+
+	//=========================== 11. readcntWithFid ==========================//
+	@Override
+	public boolean readcntWithFid(Integer fid) {
+		return this.mapper.readcntWithFid(fid);
+	}
+
 
 	
 }//end class

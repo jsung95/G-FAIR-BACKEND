@@ -1,58 +1,113 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <!DOCTYPE html>
-
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>사전관람신청</title>
+<head>
+    <meta charset="UTF-8">
+    <title>지페어 코리아</title>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
-        <script>
-            $(function () {
-                $("#quitBtn").on("click", function () {
-                    location.href = "/event/listPerPage";
-                });
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    <script src="/resources/js/fullnav.js"></script>
+
+</head>
+
+<style>
+    h1{
+        font-size: 25px;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    $(function(){
+    	var tmp;
+    	
+        var subName = $('.subName').text();
+        
+        $('.chk').each(function(index,obj){
+            var t = index;
+            var o = $(this).text();
+            console.log(t + ':' + o)
+            if(o == subName) {
+            	tmp = t;
+            }
+        });
+
+        console.log(tmp)
+        
+        $('#parent').children().eq(tmp).children().css({
+            'font-size': '18px',
+            'font-weight':'bold',
+            'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+            'background-position': 'right center'
+        });
+        
+
+        $("#quitBtn").on("click", function () {
+            location.href = "/event/listPerPage";
+        });
 
 
-                $("#submitBtn").on("click", function () {
-                    let exhiname = $('#exname').val();
-                    let exno = 0;
-                    console.log('exhiname: ', exhiname);
+        $("#submitBtn").on("click", function () {
+            let exhiname = $('#exname').val();
+            let exno = 0;
+            console.log('exhiname: ', exhiname);
 
-                    <c:forEach items="${__EXHI__}" var="ex">
-                        if('${ex.exname}' == exhiname){
-                            console.log('exno', '${ex.exno}'),
-                            exno = '${ex.exno}',
-                            $('#exno').attr('value', exno)
-                        }
-                    </c:forEach>
+            <c:forEach items="${__EXHI__}" var="ex">
+                if('${ex.exname}' == exhiname){
+                    console.log('exno', '${ex.exno}'),
+                    exno = '${ex.exno}',
+                    $('#exno').attr('value', exno)
+                }
+            </c:forEach>
 
-                    console.log("exno ==========>", $('#exno').val());
-                    if(exhiname == 'selected'){
-                        alert('전시회를 선택해주세요')
-                    }else{
-                        let formObj = $('form')
-                        formObj.submit();
+            if(exhiname == 'selected'){
+                alert('전시회를 선택해주세요')
+            }else{
+                let formObj = $('#form')
 
-                    }//if - else
-                });
+                // formObj.attr('action', "/pre/registerAction");
+                // formObj.attr('method', "POST");
+                formObj.submit();
+                
+                alert('사전예약이 완료되었습니다.')
 
-            });
-        </script>
-    </head>
-    <body>
-        <div class="container">
-            <form action="/pre/registerAction" method="POST">
+            }//if - else
+        });
+    })//end jq
+</script>
+<body>
+    <div id="wrap">
+ 	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+        <div id="container">
+            <div id="aside">
+                <h2 class="asideMenu">관람정보</h2>
+                <ul id="parent">
+                    <li><a class="chk" href="#">사전관람안내</a></li>
+                    <li><a class="chk" href="/pre/agreement">사전관람신청</a></li>
+                    <li><a class="chk" href="/pre/verify">사전관람신청확인</a></li>
+                </ul>
+            </div>
+            <div id="content">
+                <div class="title">
+                    <div class="map">home > 관람정보 > 사전관람신청 </div>
+                    <h2 class="subName">사전관람신청</h2>
+                </div>
+                <div class="contentIn">
+                	
+                    <!-- 여기에 게시판 넣으면 됩니다. -->
+                <h1> id: ${__LOGIN__.memberid}</h1>
+        <div class="container1">
+            <form action="/pre/registerAction" method="POST" id="form">
                 <table border="1">
                     <tbody>
                         <tr>
@@ -61,21 +116,21 @@
                             </th>
                             <td>
                                 <div>
-                                    <input type="text" id="applyer" name="applyer" value="${member.memberName}" readonly>
+                                    <input type="text" id="applyer" name="applyer" value="${__LOGIN__.membername}" readonly>
                                 </div>
                             </td>
                             <th><label for="email">전자우편</label></th>
                             <td>
-                                <input type="text" id="email" name="email" value="${member.email}" readonly>
+                                <input type="text" id="email" name="email" value="${__LOGIN__.email}" readonly>
                             </td>
                         </tr>   
                         <tr>
                             <th><label for="phone">휴대전화</label></th>
-                            <td><input type="text" id="phone" name="phone" value="${member.phone}" readonly></td>
+                            <td><input type="text" id="phone" name="phone" value="${__LOGIN__.phone}" readonly></td>
                             <th><label for="appname">전시회</label></th>
                             <td>
                                 <div>
-                                    <input type="hidden" name="memberid" value="Blognation">
+                                    <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
                                     <select name="appname" id="exname">
                                         <option value="selected">전시회 선택</option>
                                         <c:forEach items="${__EXHI__}" var="ex">
@@ -263,5 +318,12 @@
                 <button type="button" id="quitBtn">취소</button>
             </form>
         </div>
-    </body>
-    </html>
+                </div>
+            </div>
+        </div>
+
+   
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    </div> <!--wrap-->
+</body>
+</html>
