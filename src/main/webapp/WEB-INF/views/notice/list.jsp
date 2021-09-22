@@ -235,6 +235,18 @@
 
         line-height: 40px;
         text-align: center;
+    }    .search1{
+        display: block;
+
+        background-color: #005bbb;
+        color: #fff;
+        font-size: 15px;
+
+        width: 100px;
+        height: 40px;
+
+        line-height: 40px;
+        text-align: center;
     }
     
 </style>

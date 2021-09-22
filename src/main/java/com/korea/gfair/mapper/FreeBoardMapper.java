@@ -10,7 +10,6 @@ import com.korea.gfair.domain.Criteria;
 
 public interface FreeBoardMapper {
 	
-	public abstract List<BoardVO> selectList();		//전체 게시판 목록 조회
 	public abstract List<BoardVO> getListWithPaging(@Param("cri")Criteria cri ,@Param("bname")String bname);	//페이징 처리 된 게시판 목록조회
 	public abstract int getTotalCount(@Param("cri")Criteria cri,@Param("bname")String bname); 					//게시판 총 레코드 건수 얻기
 	
