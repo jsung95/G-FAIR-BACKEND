@@ -27,19 +27,14 @@
     	      });    	  
     	});
 </script>
-
-<style>
-  #container{
-     
+	<style>
+ 	  #container{
 	    width: 1400px;
 	    overflow: hidden;
 	    margin: 0 auto;
-	        position: relative;
-    right: 242px
-	
+		clear: both;
         }
-</style>
-
+ 	</style>
 
 </head>
 
@@ -372,7 +367,7 @@
    
         <footer>
         <div id="footer_wrapper">
-                <div class="footer_logo"><img src="../publishing/img/footer_logo.png"></div>
+                <div class="footer_logo"><img src="/resources/img/footer_logo.png"></div>
                 <div class="footer_info">         
                     <ul class="personal">
                         <li><a href="#">개인정보처리방침 | </a></li>

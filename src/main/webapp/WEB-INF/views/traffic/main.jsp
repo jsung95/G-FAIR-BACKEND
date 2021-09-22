@@ -72,18 +72,15 @@
  		    });
 
  	</script>
- 	
  	<style>
-  #container{
-     
+ 	  #container{
 	    width: 1400px;
 	    overflow: hidden;
 	    margin: 0 auto;
-	        position: relative;
-    right: 242px
-	
+		clear: both;
         }
-</style>
+ 	</style>
+ 
 </head>
 
 <body>
@@ -162,11 +159,11 @@
             <div id="aside">
                 <h2 class="asideMenu">전시회 소개</h2>
                 <ul>
-	                 <li><a href="/intro/main">전시회안내</a></li>
-	                 <li><a href="/history/main">연혁</a></li>
-	                 <li><a href="#">전시회일정</a></li>
-	                 <li><a href="/facilities/main">부대시설</a></li>
-	                 <li><a href="/traffic/main">찾아오시는길</a></li>
+	                 <li><a href="/intro/main">  전시회안내</a></li>
+	                 <li><a href="/history/main">  연혁</a></li>
+	                 <li><a href="/exhibition/calendar">  전시회일정</a></li>
+	                 <li><a href="/facilities/main">  부대시설</a></li>
+	                 <li><a href="/traffic/main">  찾아오시는길</a></li>
 	             </ul>
 
             </div>
