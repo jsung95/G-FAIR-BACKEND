@@ -34,7 +34,7 @@ import lombok.extern.log4j.Log4j2;
 public class PhotoBoardController {
 	
 	@Autowired
-	private PhotoBoardService service;
+	private PhotoBoardService photoService;
 	
 	@Autowired
 	private EventBoardService eventService;
@@ -44,7 +44,7 @@ public class PhotoBoardController {
 		log.debug("list() invoked.");
 		log.info("\t+ model: " + model);
 		
-		List<PhotoVO2> photos = this.service.getList();
+		List<PhotoVO2> photos = this.photoService.getList();
 		
 		Objects.requireNonNull(photos);
 		
@@ -59,12 +59,12 @@ public class PhotoBoardController {
 		log.info("\t+ cri: {}, model: {}", cri, model);
 		
 		cri.setAmount(16);
-		List<PhotoVO2> photos = this.service.getListPerPage(cri);
+		List<PhotoVO2> photos = this.photoService.getListPerPage(cri);
 		
 		Objects.requireNonNull(photos);
 		
 		photos.forEach(log::info);
-		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal(cri));
+		PageDTO pageDTO = new PageDTO(cri, this.photoService.getTotal(cri));
 		
 		model.addAttribute("list", photos);
 		model.addAttribute("pageMaker", pageDTO);
@@ -130,7 +130,7 @@ public class PhotoBoardController {
 		log.debug("get() invoked.");
 		log.info("fileNo: {}, model: {}", fid, model);
 		
-		PhotoVO photo = this.service.read(fid);
+		PhotoVO photo = this.photoService.read(fid);
 		log.info("\t+ photo: " + photo);
 		
 		EventVO board = this.eventService.getWithFid(fid);
@@ -146,15 +146,21 @@ public class PhotoBoardController {
 	@PostMapping("modify")
 	public String modify(
 			@ModelAttribute("cri") Criteria cri,
-			PhotoDTO PhotoDTO, 
+			EventDTO eventDTO,
+			Integer fid,
+			MultipartFile uploadFile, 
 			RedirectAttributes rttrs
 			) {
 		log.debug("modify(cri, eventDTO, rttrs) invoked.");
 		log.info(
 				"\t+ cri: {}, eventDTO: {}, rttrs: {}"
-				,cri, PhotoDTO, rttrs);
+				,cri, uploadFile, rttrs);
 		
-		this.service.modify(PhotoDTO);
+		log.info("\t+ ===============eventDTO: " + eventDTO);
+		
+		
+		this.eventService.modify(eventDTO, uploadFile);
+		this.photoService.modify(fid, uploadFile);
 		
 		rttrs.addFlashAttribute(
 				"result",
@@ -197,7 +203,7 @@ public class PhotoBoardController {
 			
 		}
 		
-		boolean isRemoved = this.service.remove(fid);
+		boolean isRemoved = this.photoService.remove(fid);
 		
 		if(isRemoved) {//삭제 성공일때
 			rttrs.addFlashAttribute("result", "success");

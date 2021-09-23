@@ -12,13 +12,13 @@ import com.korea.gfair.domain.PhotoVO2;
 
 public interface PhotoBoardService {
 	
-	public abstract List<PhotoVO2> getList();                        //게시판 목록조회
+public abstract List<PhotoVO2> getList();                        //게시판 목록조회
 	
 	public abstract List<PhotoVO2> getListPerPage(Criteria cri);     //한 페이지 분량만큼만 목록조회
 	
 	public abstract boolean register(MultipartFile uploadFile);               //새로운 게시글 등록
 	
-	public abstract boolean modify(PhotoDTO updateFile);                 //기존 게시글 변경
+	public abstract boolean modify(Integer fid, MultipartFile uploadFile);                 //기존 게시글 변경
 	
 	public abstract boolean remove(Integer fid);                    //기존 게시글 삭제
 	
@@ -31,5 +31,10 @@ public interface PhotoBoardService {
 	public abstract String getFolder();
 	
 	public abstract ResponseEntity<byte[]> getFile(String fileName);
+
+	public abstract void fileDelete(Integer fid);//db정보만 삭제하기
+
+	public void imgFileDelete(Integer fid);//그림파일만 삭제하기
+
 
 }//end interface

@@ -94,7 +94,7 @@
             console.log('#modifyBtn button clicked..');
 
                     // location.href = "/board/modify?bno=${board.bno}";
-                    location.href = "/event/modify?bno=${event.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
+                    location.href = "/event/modify?bno=${board.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
         }) // .onclick
 
         let iframe = document.querySelector("#child-iframe");
@@ -137,7 +137,7 @@
                     <!-- 여기에 게시판 넣으면 됩니다. -->
                     <iframe 
                         id="child-iframe" 
-                        src="/event/get?bno=${event.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" 
+                        src="/event/get?bno=${board.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" 
                         frameborder="0" 
                         width="1200" 
                         scrolling="no"></iframe>

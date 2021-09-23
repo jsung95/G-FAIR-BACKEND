@@ -19,7 +19,7 @@
 </head>
 
 <style>
-    .btn1 {
+    .btn {
         width: 100px;
         height: 40px;
 
@@ -152,29 +152,32 @@
                 	
                     <!-- 여기에 게시판 넣으면 됩니다. -->
                     <div id="modify_form">
-                        <form action="/photo/modify" method="POST" id="form">
+                        <form action="/photo/modify" method="POST" id="form" enctype="multipart/form-data">
 
                             <!-- <input type="hidden" name="bno" value="${board.bno}"> -->
                             <input type="hidden" name="currPage" value="${cri.currPage}">
                             <input type="hidden" name="amount" value="${cri.amount}">
                             <input type="hidden" name="pagesPerPage" value="${cri.pagesPerPage}">
-                            <input type="hidden" name="fid" value="${file.fid}">
-                            <br>
+                            
+                            <input type="hidden" name="content" value="$이미지파일첨부">
+                            <input type="hidden" name="bname" value="포토게시판">
+                            <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+                            <input type="hidden" name="bno" value="${board.bno}">
 
+                            <br>
                             <div id="title_change">
                                 <label for="title">제목</label>
                                 <input type="text" name="title" value="${board.title}">
+                                파일번호 : <input type="text" name="fid" value="${file.fid}" readonly>
                             </div>
 
-                            <div id="img_change">
+                            <div class="uploadDiv">
                                 <img src="/resources/img/${file.fpath}${file.frename}">
-                                <button 
-                                    class="btn1" 
-                                    type="file" 
-                                    id="changeBtn" 
-                                    name="changeFile" 
-                                    accept="image/*">이미지변경</button>
+                                <label class="custom-file-upload">
+                                    이미지변경<input class="buttonstyle" type="file" name="uploadFile" accept="image/*">
+                                </label>
                             </div>
+                            
                             <!-- <table border="1">
                                 <tr>
                                     <td><label for="fid">fid</label></td>
@@ -199,9 +202,9 @@
                                 
                             </table> -->
                             <br>
-                            <button class="btn1" type="submit" id="submitBtn">수정완료</button>
-                            <button class="btn1" type="button" id="removeBtn">삭제</button>
-                            <button class="btn1" type="button" id="listBtn">목록보기</button>
+                            <button class="btn" type="submit" id="submitBtn">수정완료</button>
+                            <button class="btn" type="button" id="removeBtn">삭제</button>
+                            <button class="btn" type="button" id="listBtn">목록보기</button>
                         </form>
                     </div>
                 </div>

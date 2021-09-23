@@ -138,21 +138,25 @@
                 <div class="contentIn">
                 	
                     <!-- 여기에 게시판 넣으면 됩니다. -->
-                    <form action="/event/modify" method="POST">
+                    <form action="/event/modify" method="POST" enctype="multipart/form-data">
                         <!-- <input type="hidden" name="bno" value="${board.bno}"> -->
                         <input type="hidden" name="currPage" value="${cri.currPage}">
                         <input type="hidden" name="amount" value="${cri.amount}">
                         <input type="hidden" name="pagesPerPage" value="${cri.pagesPerPage}">
-                        <input type="hidden" name="fid" value="${file.fid}">
-                        
+
+                        <input type="hidden" name="fid" value="${photo.fid}">
+                        <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+                        <input type="hidden" name="bname" value="이벤트게시판">
+                        <input type="hidden" name="bno" value="${board.bno}">
+
                         <!-- 제목변경 -->
                         <div id="title_area">
-                            <input type="text" name="title" id="title_input" placeholder="변경할 제목을 입력하세요">
+                            <input type="text" name="title" id="title_input" value="${board.title}" placeholder="변경할 제목을 입력하세요">
                             <span id="writer">작성자 &nbsp;&nbsp; ${__LOGIN__.memberid}</span>
                         </div>
                         
                         <div id="original_img_area">
-                            <img src="/resources/img/${file.fpath}${file.frename}">
+                            <img src="/resources/img/${photo.fpath}${photo.frename}">
                         </div>
                         <div>
                             <textarea  
@@ -160,7 +164,7 @@
                                 id="textarea" 
                                 cols="48" 
                                 rows="10" 
-                                placeholder="변경할 내용을 입력하세요"></textarea>
+                                placeholder="변경할 내용을 입력하세요">${board.content}</textarea>
                                 
                         </div>
 

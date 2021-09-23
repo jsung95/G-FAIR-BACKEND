@@ -54,7 +54,7 @@
         width: 40%;
     }
 
-    .btn1 {
+    .btn {
         width: 100px;
         height: 40px;
 
@@ -179,14 +179,15 @@
                                     placeholder="내용을 입력하세요"></textarea>
                             </div>
 
+                            <!-- 파일첨부 -->
                             <div class="uploadDiv">
                                 <label class="custom-file-upload">
                                     파일첨부<input class="buttonstyle" type="file" name="uploadFile" accept="image/*">
                                 </label>
                             </div>
 
-                            <button type="summit" class="btn1" id="registerBtn">등록</button>
-                            <button type="button" class="btn1" id="listBtn">목록</button>
+                            <button type="summit" class="btn" id="registerBtn">등록</button>
+                            <button type="button" class="btn" id="listBtn">목록</button>
                         </form>
                     </div>
                 </div>

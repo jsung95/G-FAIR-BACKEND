@@ -165,7 +165,7 @@ public class EventBoardController {
 		
 		model.addAttribute("photo", photoVO);
 		
-		model.addAttribute("event", eventVO);
+		model.addAttribute("board", eventVO);
 		
 		
 	}//get()
@@ -173,7 +173,8 @@ public class EventBoardController {
 	@PostMapping("modify")
 	public String modify(
 			@ModelAttribute("cri") Criteria cri,
-			EventDTO eventDTO, 
+			EventDTO eventDTO,
+			MultipartFile uploadFile, 
 			RedirectAttributes rttrs
 			) {
 		log.debug("modify(cri, eventDTO, rttrs) invoked.");
@@ -181,8 +182,9 @@ public class EventBoardController {
 				"\t+ cri: {}, eventDTO: {}, rttrs: {}"
 				,cri, eventDTO, rttrs);
 		
-		this.service.modify(eventDTO);
-		
+		this.service.modify(eventDTO, uploadFile);
+		this.photoService.modify(eventDTO.getFid(), uploadFile);
+
 		rttrs.addFlashAttribute(
 				"result",
 				"success"

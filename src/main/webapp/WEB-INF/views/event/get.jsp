@@ -461,7 +461,6 @@
     <body>
 
 
-        asdsadsdasdads${board.bno}
         <div id="container1">
 
             <!-- 제목, 작성자, 등록일, 수정일, 조회수 -->
@@ -485,7 +484,7 @@
                     ${board.content} <br>
                 </p>
                 <div id="content_img">
-                    <img src="/resources/event_img/${photo.fpath}${photo.frename}" alt="">
+                    <img src="/resources/img/${photo.fpath}${photo.frename}" alt="">
                 </div>
             </div>
 

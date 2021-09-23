@@ -11,7 +11,7 @@ import com.korea.gfair.domain.EventVO;
 
 public interface EventBoardService {
 	
-	public abstract List<EventVO> getListPerPage(Criteria cri);
+public abstract List<EventVO> getListPerPage(Criteria cri);
 	
 	public abstract boolean register(String path, EventDTO dto, MultipartFile uploadFile);
 	
@@ -19,7 +19,7 @@ public interface EventBoardService {
 	
 	public abstract EventVO getWithFid(Integer fid);
 	
-	public abstract int modify(EventDTO dto);
+	public abstract int modify(EventDTO boardDTO, MultipartFile uploadFile);
 	
 	public abstract boolean remove(Integer bno);
 	
