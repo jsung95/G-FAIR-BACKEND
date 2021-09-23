@@ -54,7 +54,7 @@
         width: 40%;
     }
 
-    .btn {
+    .btn1 {
         width: 100px;
         height: 40px;
 
@@ -185,8 +185,8 @@
                                 </label>
                             </div>
 
-                            <button type="summit" class="btn" id="registerBtn">등록</button>
-                            <button type="button" class="btn" id="listBtn">목록</button>
+                            <button type="summit" class="btn1" id="registerBtn">등록</button>
+                            <button type="button" class="btn1" id="listBtn">목록</button>
                         </form>
                     </div>
                 </div>

@@ -19,7 +19,7 @@
 </head>
 
 <style>
-    .btn {
+    .btn1 {
         width: 100px;
         height: 40px;
 
@@ -169,7 +169,7 @@
                             <div id="img_change">
                                 <img src="/resources/img/${file.fpath}${file.frename}">
                                 <button 
-                                    class="btn" 
+                                    class="btn1" 
                                     type="file" 
                                     id="changeBtn" 
                                     name="changeFile" 
@@ -199,9 +199,9 @@
                                 
                             </table> -->
                             <br>
-                            <button class="btn" type="submit" id="submitBtn">수정완료</button>
-                            <button class="btn" type="button" id="removeBtn">삭제</button>
-                            <button class="btn" type="button" id="listBtn">목록보기</button>
+                            <button class="btn1" type="submit" id="submitBtn">수정완료</button>
+                            <button class="btn1" type="button" id="removeBtn">삭제</button>
+                            <button class="btn1" type="button" id="listBtn">목록보기</button>
                         </form>
                     </div>
                 </div>
