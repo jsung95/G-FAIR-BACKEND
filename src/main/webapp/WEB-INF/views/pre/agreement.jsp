@@ -111,9 +111,9 @@
             <div id="aside">
                 <h2 class="asideMenu">관람정보</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">사전관람안내</a></li>
-                    <li><a class="chk" href="#">사전관람신청</a></li>
-                    <li><a class="chk" href="#">사전관람신청확인</a></li>
+                    <li><a class="chk" href="/pre/guide">사전관람안내</a></li>
+                    <li><a class="chk" href="/pre/agreement">사전관람신청</a></li>
+                    <li><a class="chk" href="/pre/verify">사전관람신청확인</a></li>
                 </ul>
 
             </div>

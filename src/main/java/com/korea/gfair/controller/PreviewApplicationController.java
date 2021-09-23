@@ -49,6 +49,15 @@ public class PreviewApplicationController {
 	@Setter(onMethod_= {@Autowired})
 	private EventBoardService eventBoardService;
 	
+	
+//	뷰만 올려주는 맵핑
+	@GetMapping("guide")
+	public void view() {
+		
+	}//view
+	
+	
+	
 	@GetMapping("sample")
 	public String sample(RedirectAttributes rttrs, HttpServletRequest req) {
 		log.debug("sample(rttrs, req) invoked.");
