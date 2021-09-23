@@ -21,8 +21,6 @@
 <style>
  #wrapper {
         width: 1200px;
-        height: 700px;
-        font-size: 14px;
         
         display: flex;
         flex-direction: column;
@@ -32,39 +30,22 @@
 
     input.search2{
         display: block;
-        width: 300px;
-        height: 30px;
+        width: 200px;
+        height: 35px;
 
-        border: none;
-        border-bottom: 1px solid grey;
+       
         
     }
 
-    .search1{
-        display: block;
+    select.search1{
         width: 100px;
-        height: 30px;
-
-        border: 1px solid #ddd;
+        height: 40px;
     }
-
-    button.search1{
-        color: black;
-        background-color:  white;
+    
+    .search1,.search2{
+        margin-left: 5px;
     }
-
-    select {
-        margin-left: 0;
-    }
-
-    table {
-        width: 95%;
-
-        border: 1px ridge #ddd;;
-        border-collapse: collapse;
-        
-        
-    }
+   
 
     thead {
         padding: 10px;
@@ -96,9 +77,9 @@
     #pagination {
         width: 95%;
         height: 70px;
-        margin: 0 auto;
-
+        
         display: flex;
+        justify-content: center;
     }
 
     
@@ -127,24 +108,21 @@
         width: 95%;
         height: 50px;
         
-        display: flex;
-        flex-direction: row;
-
-        
     }
 
     #searchForm{
-        width: 700px;
-        height: 50px;
+        
+        height: 70px;
 
         display: flex;
-        margin-left: 0;
+        justify-content: center;
     }
-    #registerBtn{
+    button{
         
         width: 100px;
-        height: 30px;
-        margin-right: 0;
+        height: 40px;
+        line-height: 40px;
+        
         
         color: white;
         border: 1px cornflowerblue solid;
@@ -156,7 +134,95 @@
     
     .currPage{
         background-color: #005bbb;;
+    } 
+
+    #count_list{
+        padding: 20px 0 10px 0;
+
     }
+
+   
+    button:hover {
+    cursor: pointer;
+    }
+
+    #buttons{
+        display: flex;
+        justify-content: flex-end;
+
+        margin: 10px 0 10px 0;
+    }
+
+    /* ===================================================== */
+
+    table {
+        width: 100%;
+    }
+
+    table, th, td {
+        border: 1px solid rgb(201, 201, 201);
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: rgb(245, 245, 245);
+        height: 50px;
+        font-size: 20px;
+        border-top: 3px solid #005bbb;
+
+    }
+
+    td {
+        height: 40px;
+        font-size: 15px;
+        text-align: center;
+    }
+    td:first-child {
+        color: #005bbb;
+    }
+
+    tr:hover {
+        background-color: rgba(187, 187, 187, 0.1);
+    }
+
+    a, a:link, a:visited {
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+
+    /* 제목 */
+    td:nth-child(2) {
+        text-align: justify;
+        text-align: left; 
+        padding-left: 10px;
+        /* width: 500px; */
+
+    }
+  
+    /* no*/
+    td:nth-child(1){
+        width: 70px;
+    }
+    /* 조회수  */
+    td:nth-child(5)  {
+        width: 100px;
+    }
+    /* 작성자,등록일 */
+    td:nth-child(3),td:nth-child(4) {
+        width: 130px;
+    }
+    /* 파일첨부 */
+    th:nth-child(6) {
+        font-size: 17px;
+        width: 80px;
+    }
+
+
+
+
+   
+
 </style>
 
 <script>
@@ -246,47 +312,26 @@
                 <div class="contentIn">
                 	
                     <div id="wrapper">
-                        <div id="top">
-                            <form id="searchForm" action="/question/list" method="GET">
-            
-                                <input type="hidden" name="currPage"        value="1">
-                                <input type="hidden" name="amount"          value="${__PAGE__.cri.amount}">
-                                <input type="hidden" name="pagesPerPage"    value="${__PAGE__.cri.pagesPerPage}">
-                                
-                                <select name="type" class="search1">
-                                    <option>검색조건</option>
-                                    <option value="T" ${ ("T" eq __PAGE__.cri.type) ? "selected" : ""}>제목</option>
-                                    <option value="C" ${ ("C" eq __PAGE__.cri.type) ? "selected" : ""}>내용</option>
-                                    <option value="W" ${ ("W" eq __PAGE__.cri.type) ? "selected" : ""}>작성자</option>
-                                    <option value="TC" ${ ("TC" eq __PAGE__.cri.type) ? "selected" : ""}>제목+내용</option>
-                                </select>
-            
-                                <input type="text" name="keyword" class="search2" value="${__PAGE__.cri.keyword}">
-            
-                                <button class="search1">검색</button>
-                            </form>
-            
-                            <button type="button" id="registerBtn">글쓰기</button>
-                        </div>
+                            
+                        <p id="count_list">전체 글 수 : ${__PAGE__.totalAmount}</p>
+
                         <table border="1">
                             
                             <thead>
                                 <tr>
-                                    <td>bno</td>
-                                    <td>reproot</td>
-                                    <td>repstep</td>
-                                    <td>title</td>
-                                    <td>readcnt</td>
-                                    <td>memberid</td>
-                                    <td>insert_ts</td>
+                                    <th>번호</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>등록일</th>
+                                    <th>조회수</th>
+                                    <th>첨부파일</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <c:forEach items="${__LIST__}" var="list">
                                     <tr>
                                         <td>${list.bno}</td>
-                                        <td>${list.reproot}</td>
-                                        <td>${list.repstep}</td>
+                                        
                                         
                                         <td>
                                           <c:if test="${list.repindent>0}" >
@@ -297,50 +342,84 @@
                                           </c:if>  
                                             <a href="/question/get?bno=${list.bno}&currPage=${__PAGE__.cri.currPage}&amount=${__PAGE__.cri.amount}&pagesPerPage=${__PAGE__.cri.pagesPerPage}">${list.title}</a>
                                         </td>
-                                        
-                                        <td>${list.readcnt}</td>
+
                                         <td>${list.memberid}</td>
-                                        <td>${list.insert_ts}</td>
+                                        
+                                        <td>
+                                            <fmt:formatDate value="${list.insert_ts}" type="date"/>
+                                        </td>
+                                        <td>${list.readcnt}</td>
+                                        <td>
+                                            <c:if test="${not empty list.fid}">
+                                                <img src="/resources/file.png">
+                                            </c:if>
+                                        </td>
                                     </tr>
                 
                                 </c:forEach>
                             </tbody>
                         </table>
-                       
+
+                        
+                        <div id="buttons">
+                            <button type="button" id="registerBtn">글쓰기</button>
+                        </div>
+                        
+                        <!-- paging -->
                         <div id="pagination">
                             <form id="paginationform">
                                 <input type="hidden" name="currPage">
                                 <input type="hidden" name="amount">
                                 <input type="hidden" name="pagesPerPage">
-            
+                                
                                 <ul>
                                     <c:if test="${__PAGE__.prev}">
                                         <li class="prev"><a class="prev" href="${__PAGE__.startPage-1}">Prev</a></li>
                                     </c:if>
-            
+                                    
                                     <c:forEach 
-                                        begin="${__PAGE__.startPage}" 
+                                    begin="${__PAGE__.startPage}" 
                                         end="${__PAGE__.endPage}" 
                                         var="pageNum">
                                         <li class="${__PAGE__.cri.currPage == pageNum? 'currPage' : ''}">
-            
+                                            
                                             <a 	class="${__PAGE__.cri.currPage == pageNum? 'currPage' : ''}" 
-                                                href="/question/list?currPage=${pageNum}&amount=${__PAGE__.cri.amount}&pagesPerPage=${__PAGE__.cri.pagesPerPage}&type=${__PAGE__.cri.type}&keyword=${__PAGE__.cri.keyword}">
-                                                ${pageNum}
-                                            </a>
-            
-                                        </li>
-                                    </c:forEach>
-            
+                                            href="/question/list?currPage=${pageNum}&amount=${__PAGE__.cri.amount}&pagesPerPage=${__PAGE__.cri.pagesPerPage}&type=${__PAGE__.cri.type}&keyword=${__PAGE__.cri.keyword}">
+                                            ${pageNum}
+                                        </a>
+                                        
+                                    </li>
+                                </c:forEach>
+                                
                                     <c:if test="${__PAGE__.next}" >
                                         <li class="next"><a class="next" href="${__PAGE__.endPage+1}">Next</a></li>
                                     </c:if>
                                 </ul>
                             </form>
                         </div>
+
+                        <!-- =================search================= -->
+                        <form id="searchForm" action="/question/list" method="GET">
             
+                            <input type="hidden" name="currPage"        value="1">
+                            <input type="hidden" name="amount"          value="${__PAGE__.cri.amount}">
+                            <input type="hidden" name="pagesPerPage"    value="${__PAGE__.cri.pagesPerPage}">
+                            
+                            <select name="type" class="search1">
+                                <option>검색조건</option>
+                                <option value="T" ${ ("T" eq __PAGE__.cri.type) ? "selected" : ""}>제목</option>
+                                <option value="C" ${ ("C" eq __PAGE__.cri.type) ? "selected" : ""}>내용</option>
+                                <option value="W" ${ ("W" eq __PAGE__.cri.type) ? "selected" : ""}>작성자</option>
+                                <option value="TC" ${ ("TC" eq __PAGE__.cri.type) ? "selected" : ""}>제목+내용</option>
+                            </select>
+        
+                            <input type="text" name="keyword" class="search2" value="${__PAGE__.cri.keyword}">
+        
+                            <button class="search1">검색</button>
+                        </form>
+                        
                     </div>
-                
+                    
                 </div>
             </div>
         </div>
