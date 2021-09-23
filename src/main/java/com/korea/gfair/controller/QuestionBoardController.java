@@ -149,9 +149,10 @@ public class QuestionBoardController {
 	}//register
 	
 	@PostMapping("retrieve")
-	public String retrieve(@ModelAttribute("cri") Criteria cri,BoardDTO dto, RedirectAttributes rttrs) throws Exception {
+	public String retrieve(@ModelAttribute("cri") Criteria cri,BoardDTO dto, RedirectAttributes rttrs,String editordata) throws Exception {
 		log.debug("retrieve({}, {}) invoked.", dto, rttrs);
 		
+		dto.setContent(editordata);
 		boolean result=this.service.retrieve(dto);
 		
 		if(result) {
