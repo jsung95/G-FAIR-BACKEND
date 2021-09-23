@@ -133,11 +133,11 @@
             <div id="aside">
                 <h2 class="asideMenu">전시회 소개</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="#">전시회안내</a></li>
-                    <li><a class="chk" href="#">연혁</a></li>
+                    <li><a class="chk" href="/intro/main">전시회안내</a></li>
+                    <li><a class="chk" href="/history/main">연혁</a></li>
                     <li><a class="chk" href="/exhibition/calendar">전시회일정</a></li>
-                    <li><a class="chk" href="#">부대시설</a></li>
-                    <li><a class="chk" href="#">찾아오시는길</a></li>
+                    <li><a class="chk" href="/facilities/main">부대시설</a></li>
+                    <li><a class="chk" href="/traffic/main">찾아오시는길</a></li>
                 </ul>
 
             </div>

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+button:hover {
+    cursor: pointer;
+}
+
 #content {
     font-family:'Noto sans KR';
     font-size:20px;
@@ -38,9 +42,8 @@
 }
 .exBtnStyle {
     height: 50px;
-    width: 270px;
+    width: 230px;
     margin-top: 10px;
-    margin-left: 13px;
  
     font-size: 20px;
     text-align: center;
@@ -48,4 +51,9 @@
     background-color: #005bbb;
     color: #fff;
     font-size: 20px;
+}
+#exRegisterForm > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
