@@ -127,6 +127,11 @@ public class ApplyController {
 		
 	}//applyStatus
 	
+	//=== 진성 - 전시장 배치도 페이지 매핑 === 	
+	@GetMapping("map")
+	public void map() {
+		
+	}
 	
 	
 }//end class

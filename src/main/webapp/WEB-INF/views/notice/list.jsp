@@ -124,83 +124,6 @@
 
 
 
-    /* paging */
-    #pagination {
-        width: 95%;
-        margin: 0 auto;
-    }
-
-    /* #pagination ul {
-        width: 310px;
-        height: 32px;
-        margin: 0 auto;
-        
-    } */
-    #pagination ul {
-        display: flex;
-        justify-content: center;
-
-    }
-    #pagination li {
-        width: 30px;
-        height: 30px;
-        display: flex;
-
-        border-left: 1px solid #999;
-        border-top: 1px solid #999;
-        border-bottom: 1px solid #999;
-        box-sizing: border-box;
-
-        text-align: center;
-        line-height: 28px;
-        flex-direction: column
-    }
-    #pagination li:last-child {
-        border-right: 1px solid #999;
-    }
-
-    /* #pagination li {
-        float: left;
-
-        width: 30px;
-        height: 30px;
-
-        border-left: 1px solid #999;
-        border-top: 1px solid #999;
-        border-bottom: 1px solid #999;
-        box-sizing: border-box;
-
-        text-align: center;
-        line-height: 30px;
-
-        list-style: none;
-    }
-
-    #pagination li:last-child {
-        border-right: 1px solid #999;
-    } */
-
-    .prev, .next {
-        width: 40px !important;
-        
-        color: white;
-        background-color: rgb(246, 246, 255);
-    }
-
-    .currPage {
-        height: 29px!important;
-        color: white;
-        background-color: rgb(255, 231, 251);
-        border-bottom: 1px solid #999;
-        box-sizing: border-box;
-    }
-
-    #mmw {
-        display: block;
-        width: 30px;
-        height: 30px;
-    }
-
     .notice td, .notice a {
         color: black;
         background-color: rgb(246, 246, 255);
@@ -235,18 +158,88 @@
 
         line-height: 40px;
         text-align: center;
-    }    .search1{
-        display: block;
+    }    
+    
+    .search1 {
+        border: 1px solid #eee;
+    }
+    
+    #pagination{
+        width: 100%;
+        margin: 0 auto; 
+        position: relative;
+    }
 
-        background-color: #005bbb;
-        color: #fff;
-        font-size: 15px;
+    #pagination .page{
+        display: flex;
+        justify-content: center;
+        margin:10px 0 20px 0;
+        
+    }
 
-        width: 100px;
-        height: 40px;
-
-        line-height: 40px;
+    #pagination li{
+        float: left;
+        width: 30px;
+        height: 30px;
         text-align: center;
+        list-style: none;
+        line-height: 30px;
+        font-size:16px;
+        
+        margin-right:10px;
+    }
+    
+    #pagination li a{
+    	display:block;
+    	
+   	}
+   	
+
+	.start{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        border:1px solid #eee;
+
+	}
+	
+	.prev{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-30px;
+        border:1px solid #eee;
+	}
+	
+	.next{		
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-60px;
+        border:1px solid #eee;
+	
+	}
+	
+	.end{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-90px;
+        border:1px solid #eee;
+	
+	}
+
+    .start a .prev a, .next a .end a{
+    	display:block;
+        
+    }
+
+    .currPage{
+    	border: 1px solid #000;
     }
     
 </style>
@@ -379,13 +372,13 @@
                                     <input type="hidden" name="pagesPerPage">
                                     <input type="hidden" name="type">
                                     <input type="hidden" name="keyword">
-                                    <ul>
+                                    <ul class="page">
                                         <!-- <c:if test="${pageMaker.prev}">
                                             <li class="prev"><a href="/notice/list"><<</a></li>
                                             <li class="prev"><a class="prev" href="${pageMaker.startPage - 1}"><</a></li>
                                         </c:if> -->
-                                        <li class="prev"><a class="start" href="/notice/list"><<</a></li>
-                                        <li class="prev"><a class="prev" href="${pageMaker.startPage}"><</a></li>
+                                        <li><a class="start" href="/notice/list">첫페이지</a></li>
+                                        <li><a class="prev" href="${pageMaker.startPage}">이전페이지</a></li>
                                         
                                         
                                         <c:forEach 
@@ -408,8 +401,8 @@
                                             <li class="next"><a class="next" href="${pageMaker.endPage}">></a></li>
                                             <li class="next"><a class="end" href="${pageMaker.realEndPage}">>></a></li>
                                         </c:if> -->
-                                        <li class="next"><a class="next" href="${pageMaker.endPage}">></a></li>
-                                        <li class="next"><a class="end" href="${pageMaker.realEndPage}">>></a></li>
+                                        <li><a class="next" href="${pageMaker.endPage}">다음페이지</a></li>
+                                        <li><a class="end" href="${pageMaker.realEndPage}">끝페이지</a></li>
                                         
                                         
                                     </ul>
