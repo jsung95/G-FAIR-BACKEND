@@ -89,8 +89,8 @@ public class FreeBoardController {
 	}//write
 	
 	@PostMapping("remove")
-	public String remove(@RequestParam("bno")Integer bno) {
-		
+	public String remove(@RequestParam("bno") Integer bno) {
+		log.info("integer bno : " + bno);
 		service.remove(bno);
 		
 		return "redirect:/free/board";

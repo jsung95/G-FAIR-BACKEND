@@ -40,38 +40,106 @@
 	            'background-position': 'right center'
 	        });
 	        
+	        $(function(){
+	            console.clear();
+	            console.debug('jq started.');
+
+	            $('#listBtn').on('click', function(){
+	                console.log('listBtn button clicked...');
+
+	                location.href="/free/board";
+	                
+	            });//onclick
+	            
+	            $('#removeBtn').on('click', function(){
+	                console.log('removeBtn button clicked...');
+					var obj = $('#form');
+			/*		obj.attr('action','/free/remove?bno='+${__READ__.bno});*/
+					obj.attr('action','/free/remove');
+					obj.attr('method','POST');
+					obj.submit();
+	            });//onclick
+	            
+	            
+
+	        }); //jq
 	
 	    })//end jq
 	</script>
 
-    <script>
-        $(function(){
-            console.clear();
-            console.debug('jq started.');
-
-            $('#listBtn').on('click', function(){
-                console.log('listBtn button clicked...');
-
-                location.href="/free/board";
-                
-            });//onclick
-            
-            $('#removeBtn').on('click', function(){
-                console.log('removeBtn button clicked...');
-				var obj = $('form')
-                
-				obj.attr('action','/free/remove');
-				obj.attr('methood','POST');
-				obj.submit();
-            });//onclick
-            
-            
-
-        }); //jq
-    </script>
-
     <style>
-
+		#write_no{
+			margin:50px 0 10px 0;
+		}
+		#write_title_wrap{
+			width:100%;
+			height:80px;
+			background:#eee;
+			border-top:3px solid #005bbb;
+		}
+		#write_title_wrap .write_title_area{
+			width:100px;
+			padding:10px;
+			margin-top:20px;
+			float:left;
+			line-height:18px;
+			text-align:center;
+			font-size:20px;
+			font-weight:bold;
+		}
+		
+		#write_title_wrap .write_title{
+			width:900px;
+			margin-top:15px;
+			padding:10px;
+			float:left;
+			font-size:18px;
+			font-weight:bold;
+		}
+		#write_info{
+			width:100%;
+			height:50px;
+			
+		}
+		
+		#write_info .writer_area{
+			width:85%;
+			float:left;
+			height:50px;
+			line-height:50px;
+			font-size:15px;
+			text-indent:10px;
+		}
+		
+		#write_info .readcnt_area{
+			width:15%;
+			float:right;
+			height:50px;
+			line-height:50px;
+			font-size:15px;
+			text-align:center;
+			
+		}
+		
+		.btn{
+			width: 100px;
+			height: 40px;
+			line-hight: 40px;
+			text-align:center;
+			background:#005bbb;
+			color:#fff;
+			font-size:15px;
+			border:0;
+			cursor:pointer;
+			margin-top:10px;
+		}
+		
+		#listBtn{
+			float:right;
+		}
+		
+		
+		
     </style>
 </head>
 <body>
@@ -99,34 +167,32 @@
                     <h2 class="subName">자유게시판</h2>
                 </div>
                 <div class="contentIn">
-			        <form action="/free/modify" method="post">
+			        <form id="form" action="/free/modify" method="post">
 			        	<input type="hidden" name="bno" value="${__READ__.bno}">
 			        	
-		        		<div>글번호${__READ__.bno}</div>
-			        		
-				        
-						
-						
-				        <span><label for="TITLE">제목</label></span>
-				        <span><input type="text" name="title" id="TITLE" value="${__READ__.title}"></span>
+		        		<div id="write_no">글번호:${__READ__.bno}</div>
+		        		<div id="write_title_wrap">
+			        		<div class="write_title_area">제목</div>
+			        		<div><input type="text" name="title" class="write_title" value="${__READ__.title}"></div>
+		        		</div>
+		        		<div id="write_info">
+							<div class="writer_area">작성자:${__READ__.memberid}</div>
+							<div class="readcnt_area">조회수:${__READ__.readcnt}</div>
+						</div>
 				
 				        <textarea id="editor" name="content">${__READ__.content}</textarea>
 						
-						<p><label for="MEMBERID">작성자</label>${__READ__.memberid}</p>
-				        
-				
-						<p><label for="READCNT">조회수</label>${__READ__.readcnt}</p>
 				        
 			
-				        <input type="submit" id="submitBtn" value="수정">
-				        <button id="removeBtn" type="button">삭제</button>
-				        <button id="listBtn" type="button">목록</button>
+				        <input id="submitBtn" class="btn" type="submit" value="수정">
+				        <button id="removeBtn" class="btn" type="button">삭제</button>
+				        <button id="listBtn" class="btn" type="button">목록</button> 
 			        </form>
 			        
 			            <script>
 				        CKEDITOR.replace( 'editor', {
 				        	enterMode: CKEDITOR.ENTER_BR, //줄바꿈시에 P태그로 입력되는걸 -> </br> 태그로 치환
-				        	width: '98%',
+				        	width: '100%',
 				        	height: '350'
 				        });
 				    	</script>

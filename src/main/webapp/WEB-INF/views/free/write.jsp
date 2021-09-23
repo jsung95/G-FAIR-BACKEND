@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+   	<script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
 
 </head>
 
@@ -26,11 +27,11 @@
             console.clear();
             console.debug('jq started...');
 
-            $('#listBtn').click(function() {
-                console.log('onclick for #listBtn clicked...');
+            $('#cancelBtn').click(function() {
+                console.log('onclick for #cancelBtn clicked...');
 
                 location.href = '/free/board';
-            });//onclick for #listBtn
+            });//onclick for #cancelBtn
             
             
 
@@ -39,33 +40,85 @@
 	
         
     </script>
-<script>
-    $(function(){
-    	var tmp;
-    	
-        var subName = $('.subName').text();
-        
-        $('.chk').each(function(index,obj){
-            var t = index;
-            var o = $(this).text();
-            console.log(t + ':' + o)
-            if(o == subName) {
-            	tmp = t;
-            }
-        });
-
-        console.log(tmp)
-        
-        $('#parent').children().eq(tmp).children().css({
-            'font-size': '18px',
-            'font-weight':'bold',
-            'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
-            'background-position': 'right center'
-        });
-        
-
-    })//end jq
-</script>
+	<script>
+	    $(function(){
+	    	var tmp;
+	    	
+	        var subName = $('.subName').text();
+	        
+	        $('.chk').each(function(index,obj){
+	            var t = index;
+	            var o = $(this).text();
+	            console.log(t + ':' + o)
+	            if(o == subName) {
+	            	tmp = t;
+	            }
+	        });
+	
+	        console.log(tmp)
+	        
+	        $('#parent').children().eq(tmp).children().css({
+	            'font-size': '18px',
+	            'font-weight':'bold',
+	            'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+	            'background-position': 'right center'
+	        });
+	        
+	
+	    })//end jq
+	</script>
+	
+	<style>
+		#write_title_wrap{
+			width:100%;
+			height:80px;
+			background:#eee;
+			border-top:3px solid #005bbb;
+			margin:50px 0 10px 0;
+		}
+		
+		#write_title_wrap .write_title_area{
+			width:100px;
+			padding:10px;
+			margin-top:20px;
+			float:left;
+			line-height:18px;
+			text-align:center;
+			font-size:20px;
+			font-weight:bold;
+		}
+		
+		#write_title_wrap .write_title{
+			width:900px;
+			margin-top:15px;
+			padding:10px;
+			float:left;
+			font-size:18px;
+			font-weight:bold;
+		}
+		
+		.btn{
+			width: 100px;
+			height: 40px;
+			line-hight: 40px;
+			text-align:center;
+			background:#005bbb;
+			color:#fff;
+			font-size:15px;
+			border:0;
+			cursor:pointer;
+			margin-top:10px;
+		}
+		
+		#submitBtn{
+			float:right;
+			margin-left:5px;
+		}
+		
+		#cancelBtn{
+			float:right;
+		}
+	</style>
 <body>
     <div id="wrap">
  	
@@ -92,27 +145,30 @@
                 </div>
                 <div class="contentIn">
                     <form action="/free/write" method="post">
-                        <table>
+                       
                             <input type='hidden' name="bname"  value="자유게시판"/>
                             <input type='hidden' name="memberid" value="${__LOGIN__.memberid}"/>
                             
-                            <tr>
-                                <td><label for="TITLE">제목</label></td>
-                                <td><input type="text" name="title" id="TITLE" size="50" placeholder="제목을 입력하세요"></td>
-                            </tr>
+		        		<div id="write_title_wrap">
+			        		<div class="write_title_area" placeholder="제목을 입력하세요">제목</div>
+			        		<div><input type="text" name="title" class="write_title" value="${__READ__.title}"></div>
+		        		</div>
                             
+							<textarea id="editor" name="content" placeholder="내용을 입력하세요">${__READ__.content}</textarea>
+						<table>
                             <tr>
-                                <td><label for="CONTENT">내용</label></td>
-                                <td><textarea name="content" id="CONTENT" cols="52" rows="10" placeholder="내용을 입력하세요"></textarea></td>
+                                <button type="submit" id="submitBtn" class="btn">글쓰기</button>
+                                <button type="button" id="cancelBtn" class="btn">취소</button>
                             </tr>
-
-                            <tr>
-                                <button type="submit" id="submitBtn">글쓰기</button>
-                                <button type="button" id="listBtn">목록</button>
-                            </tr>
-                            
                         </table>
                     </form>
+		            <script>
+			        CKEDITOR.replace( 'editor', {
+			        	enterMode: CKEDITOR.ENTER_BR, //줄바꿈시에 P태그로 입력되는걸 -> </br> 태그로 치환
+			        	width: '100%',
+			        	height: '350'
+			        });
+			    	</script>
                 </div>
     
            	</div>

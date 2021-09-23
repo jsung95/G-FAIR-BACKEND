@@ -21,10 +21,10 @@
                     <input type="hidden">
                     <select name="#" id="#">
                         <option value="#">관련기관 선택</option>
-                        <option value="www.naver.com">네이버</option>
-                        <option value="www.kakaocorp.com">카카오</option>
-                        <option value="www.daum.net">다음</option>
-                        <option value="www.bitcapm.co.kr">비트캠프</option>
+                        <option value="www.naver.com" selected="selected">네이버</option>
+                        <option value="www.kakaocorp.com" selected="selected">카카오</option>
+                        <option value="www.daum.net" selected="selected">다음</option>
+                        <option value="www.bitcapm.co.kr" selected="selected">비트캠프</option>
                     </select>
                 </form>
 

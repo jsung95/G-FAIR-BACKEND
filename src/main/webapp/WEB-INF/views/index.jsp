@@ -94,11 +94,11 @@
         <div id="quick_Menu_Wrap">
             <div id="quick_Menu">
                 <ul>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_1.png" alt="">전시회 일정</a></li>
+                    <li class="quick"><a href="/exhibition/calendar"><img src="/resources/img/quick_1.png" alt="">전시회 일정</a></li>
                     <li class="quick"><a href="#"><img src="/resources/img/quick_2.png" alt="">참가 신청</a></li>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_3.png" alt="">사전관람 신청</a></li>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_4.png" alt="">이벤트</a></li>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_5.png" alt="">찾아오시는길</a></li>
+                    <li class="quick"><a href="/pre/agreement"><img src="/resources/img/quick_3.png" alt="">사전관람 신청</a></li>
+                    <li class="quick"><a href="event/listPerPage"><img src="/resources/img/quick_4.png" alt="">이벤트</a></li>
+                    <li class="quick"><a href="traffic/main"><img src="/resources/img/quick_5.png" alt="">찾아오시는길</a></li>
                 </ul>
             </div>
         </div>

@@ -20,7 +20,7 @@
 
 <style>
 	#totalCount{
-		margin: 10px 0;
+		margin: 50px 0 10px 0;
 	}
 
     table{
@@ -306,12 +306,12 @@
 		                
 		                <ul class="page">
 		                
-							<%-- 	
-			                    <c:if test="${pageMaker.prev}">
-		                        <li class="prev"><a href="/free/board?currPage=${pageMaker.startPage - 1}">Prev</a></li>
-		                    </c:if> --%>
                                <li><a class="start" href="/free/board">첫페이지</a></li>
-                               <li><a class="prev" href="/free/board?currPage=${pageMaker.startPage - 1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
+                               
+                               <c:if test="">
+                               <li><a class="prev" href="/free/board?currPage=${pageMaker.startPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
+		                    	</c:if>
+		                    	
 		                    <c:forEach
 		                    	 begin="${pageMaker.startPage}"
 		                    	 end="${pageMaker.endPage}" 
@@ -325,11 +325,10 @@
 		
 		                    </c:forEach>
 		
-							<%-- 		                    
-								<c:if test="${pageMaker.next}">
-		                        <li class="next"><a href="/free/board?currPage=${pageMaker.endPage + 1}">Next</a></li>
-		                    </c:if> --%>
-                            <li><a class="next" href="/free/board?currPage=${pageMaker.endPage + 1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a></li>
+                            <c:if test="">
+                            <li><a class="next" href="/free/board?currPage=${pageMaker.endPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a></li>
+                            </c:if>
+                            
                             <li><a class="end" href="/free/board?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">끝페이지</a></li>
 		                    
 		                </ul>

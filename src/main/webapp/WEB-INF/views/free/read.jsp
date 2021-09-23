@@ -111,6 +111,7 @@
 			font-size:20px;
 			height:40px;
 			line-height:40px;
+			text-align:center;
 		}
 		
 
@@ -131,12 +132,13 @@
 			
 		}
 		
-		#date_wrap .read_count{
+		#date_wrap .readcnt{
 			width:15%;
 			float:right;
 			font-size:15px;
 			height:40px;
 			line-height:40px;
+			text-align:center;
 			
 		}
 		
@@ -215,7 +217,7 @@
 				    
 				    <div id="date_wrap">
 				    <div class="reg_date">작성일:<fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${__READ__.insert_ts}"/></div>
-				    <div class="read_count">조회수${__READ__.readcnt}</div>
+				    <div class="readcnt">조회수:${__READ__.readcnt}</div>
 				    </div>
 				    
 				    
