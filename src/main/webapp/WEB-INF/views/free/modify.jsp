@@ -149,7 +149,7 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
                     <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
@@ -163,7 +163,7 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 자유게시판 </div>
+                    <div class="map">home > 커뮤니티 > 자유게시판 </div>
                     <h2 class="subName">자유게시판</h2>
                 </div>
                 <div class="contentIn">

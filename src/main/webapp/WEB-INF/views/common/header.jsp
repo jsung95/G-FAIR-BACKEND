@@ -55,9 +55,9 @@
                                 <ul>
                                     <li><a href="#">참가신청안내</a></li>
                                     <li><a href="#">참가신청</a></li>
-                                    <li><a href="#">참가규정</a></li>
+                                    <li><a href="/apply/rule">참가규정</a></li>
                                     <li><a href="#">부스안내</a></li>
-                                    <li><a href="#">전시장배치도</a></li>
+                                    <li><a href="/apply/map">전시장배치도</a></li>
                                     <li><a href="#">참가기업목록</a></li>
                                 </ul>
                             </li>
@@ -68,7 +68,7 @@
                                     <li><a href="/pre/verify">사전관람신청확인</a></li>
                                 </ul>
                             </li>
-                            <li class="menu"><h3><a href="/notice/list">고객 센터</a></h3>
+                            <li class="menu"><h3><a href="/notice/list">커뮤니티</a></h3>
                                 <ul>
                                     <li><a href="/notice/list">공지사항</a></li>
                                     <li><a href="/news/listPerPage">보도자료</a></li>

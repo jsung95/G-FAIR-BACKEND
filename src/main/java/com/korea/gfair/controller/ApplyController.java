@@ -133,5 +133,11 @@ public class ApplyController {
 		
 	}
 	
+	//=== 희용 - 전시 규정 페이지 매핑 ===
+	@GetMapping("rule")
+	public void rule() {
+		
+	}
+	
 	
 }//end class
