@@ -22,6 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
     
+    <script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+    
     <script type="text/javascript" src="/resources/js/uploadFile.js"></script>
 
 </head>
@@ -130,9 +132,9 @@
                                         <input type="radio" name="public_tf" value="F">비공개
                                     </p>
 
-                                    <p>&nbsp;</p>
-                                    <div><textarea class="fontSize" name="content" cols="30" rows="10" required>${board.content}</textarea></div>
-                                    <p>&nbsp;</p>
+                                    <div class="editorContent">
+                                        <textarea name="editor1" placeholder="내용을 입력해 주세요" required>${board.content}</textarea>
+                                    </div>
                                     
                                     <!----------- 파일첨부 ----------->
                                     <div class="uploadDiv">
@@ -154,24 +156,27 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
-                                <p>&nbsp;</p>
                             </div>
-                            
-                            <button type="submit" class="buttonstyle" id="uploadBtn">수정</button>
-                            
-                            <button type="button" class="buttonstyle" id="removeBtn">삭제</button>
-                            
-                            <button type="button" class="buttonstyle" id="listBtn">목록</button>
+                            <div class="getBtn">
+                                <div>
+                                    <button type="submit" class="buttonstyle" id="uploadBtn">수정</button>
+                                    <button type="button" class="buttonstyle" id="removeBtn">삭제</button>
+                                </div>
+                                <div>
+                                    <button type="button" class="buttonstyle" id="listBtn">목록</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-   
+        <script>
+            CKEDITOR.replace('editor1', {//초기높이
+                height: 500
+            });
+        </script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

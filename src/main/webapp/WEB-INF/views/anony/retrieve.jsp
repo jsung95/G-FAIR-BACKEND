@@ -19,6 +19,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
 
+    <script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+    
     <script src="/resources/js/uploadFile.js"></script>
 
 </head>
@@ -112,20 +114,20 @@
                                 <p>&nbsp;</p>
                                 <p class='bnameSize'>고객의소리</p>
                                 <p class="fontSize">&nbsp;원글제목 : ${board.title}</p>
-                                <p>&nbsp;</p>
+
+                                <div class="fontLine"><input class="fontSize" type="text" name="title" placeholder="제목을 입력해 주세요" required></div>
                                 
-                                <div><input class="fontSize" type="text" name="title" placeholder="제목을 입력해 주세요" required></div>
-                                <p>&nbsp;</p>
-                                <p class="fontSize">
-                                    작성자&nbsp;&nbsp;${__LOGIN__.memberid}
-                                    
-                                    <input type="radio" name="public_tf" value="T" checked>공개
-                                    <input type="radio" name="public_tf" value="F">비공개
-                                </p> 
-                                
-                                <p>&nbsp;</p>
-                                <div><textarea class="fontSize" name="content" cols="30" rows="10" placeholder="내용을 입력해 주세요" required></textarea></div>
-                                <p>&nbsp;</p>
+                                <div class="fontLine">
+                                    <p class="fontSize">
+                                        작성자 : ${__LOGIN__.memberid}
+                                        
+                                        &nbsp;&nbsp;<input type="radio" name="public_tf" value="T" checked>공개
+                                        &nbsp;&nbsp;<input type="radio" name="public_tf" value="F">비공개
+                                    </p> 
+                                </div>
+                                <div class="editorContent">
+                                    <textarea name="editor1" placeholder="내용을 입력해 주세요" required></textarea>
+                                </div>
                 
                             <!----------- 파일첨부 ----------->
                                 <div class="uploadDiv">
@@ -148,14 +150,10 @@
                                 </div>
                 
                             </div>
-                            
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            <p>&nbsp;</p>
-                            
-                            <button type="submit" class="buttonstyle" id="uploadBtn">등록</button>
-                            <button type="button" class="buttonstyle" id="listBtn">목록</button>
+                            <div class="getBtn">
+                                <button type="submit" class="buttonstyle" id="uploadBtn">등록</button>
+                                <button type="button" class="buttonstyle" id="listBtn">목록</button>
+                            </div>
                         </form>
                     </div>
                 
@@ -163,7 +161,11 @@
             </div>
         </div>
 
-   
+        <script>
+            CKEDITOR.replace('editor1', {//초기높이
+                height: 500
+            });
+        </script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

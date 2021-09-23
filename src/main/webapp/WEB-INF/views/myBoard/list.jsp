@@ -249,14 +249,14 @@
         
                             <ul>
                                 <!-- 무조건 처음페이지로 -->
-                                <li class="prev"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}"><<</a></li>
+                                <li class="start"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">첫페이지</a></li>
                                 <!-- 활성화x일때 처음 페이지로 -->
                                 <c:if test="${!page.prev}">
-                                    <li class="prev"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}"><</a></li>
+                                    <li class="prev"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">이전</a></li>
                                 </c:if>
 
                                 <c:if test="${page.prev}">
-                                    <li class="prev"><a class="prev" href="${page.startPage-1}"><</a></li>
+                                    <li><a class="prev" href="${page.startPage-1}"><</a></li>
                                 </c:if>
                                 <!--  -->
                                 <c:forEach var="pageNum" begin="${page.startPage}" end="${page.endPage}">
@@ -266,14 +266,14 @@
                                 </c:forEach>
                                 <!--  -->
                                 <c:if test="${page.next}">
-                                    <li class="next"><a class="next" href="${page.endPage+1}">></a></li>
+                                    <li><a class="next" href="${page.endPage+1}">다음</a></li>
                                 </c:if>
 
                                 <c:if test="${!page.next}">
-                                    <li class="next"><a class="end" href="${page.realEndPage}">></a></li>
+                                    <li><a class="next" href="${page.realEndPage}">다음</a></li>
                                 </c:if>
 
-                                <li class="next"><a class="end" href="${page.realEndPage}">>></a></li>
+                                <li><a class="end" href="${page.realEndPage}">마지막페이지</a></li>
                             </ul>
                         </form>
                     </div>

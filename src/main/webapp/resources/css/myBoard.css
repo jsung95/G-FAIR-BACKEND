@@ -122,18 +122,14 @@ td:nth-child(7) {
     height: 30px;
     display: flex;
 
-    border-left: 1px solid #999;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    box-sizing: border-box;
+    font-size: 16px;
+    margin-right: 10px;
 
     text-align: center;
-    line-height: 28px;
+    line-height: 30px;
     flex-direction: column
 }
-#pagination li:last-child {
-    border-right: 1px solid #999;
-}
+
 
 /* 하단 버튼 */
 .reg {
@@ -146,20 +142,52 @@ td:nth-child(7) {
 }
 
 /* 페이징 버튼 */
-.prev, .next, .end {
-    width: 40px !important;
-    
-    color: white;
-    background-color: rgb(246, 246, 255);
+
+.start{
+    text-indent:-9999em;
+    background-image: url(/resources/img/btn_pagination.png);
+    background-repeat: no-repeat;
+    background-size: 120px 30px;
+    border:1px solid #eee;
+
 }
+
+.prev{
+    text-indent:-9999em;
+    background-image: url(/resources/img/btn_pagination.png);
+    background-repeat: no-repeat;
+    background-size: 120px 30px;
+    background-position:-30px;
+    border:1px solid #eee;
+}
+
+.next{		
+    text-indent:-9999em;
+    background-image: url(/resources/img/btn_pagination.png);
+    background-repeat: no-repeat;
+    background-size: 120px 30px;
+    background-position:-60px;
+    border:1px solid #eee;
+
+}
+
+.end{
+    text-indent:-9999em;
+    background-image: url(/resources/img/btn_pagination.png);
+    background-repeat: no-repeat;
+    background-size: 120px 30px;
+    background-position:-90px;
+    border:1px solid #eee;
+
+}
+
 
 /* 현재페이지 버튼 */
 .currPage {
-    height: 29px!important;
+    height: 30px!important;
     color: white;
     background-color: rgb(255, 231, 251);
-    border-bottom: 1px solid #999;
-    box-sizing: border-box;
+    border: 1px solid #999;
 }
 
 

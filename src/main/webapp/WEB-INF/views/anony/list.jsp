@@ -176,14 +176,14 @@
                             <input type="hidden" name="pagesPerPage">
                             
                             <ul>
-                                <li class="prev"><a href="/anony/list"><<</a></li>
+                                <li class="start"><a href="/anony/list">첫페이지</a></li>
 
                                 <c:if test="${!page.prev}">
-                                    <li class="prev"><a href="/anony/list"><</a></li>
+                                    <li class="prev"><a href="/anony/list">이전</a></li>
                                 </c:if>
 
                                 <c:if test="${page.prev}">
-                                    <li class="prev"><a class="prev" href="${page.startPage-1}"><</a></li>
+                                    <li><a class="prev" href="${page.startPage-1}">이전</a></li>
                                 </c:if>
                                 
                                 <c:forEach var="pageNum" begin="${page.startPage}" end="${page.endPage}">
@@ -193,14 +193,14 @@
                                 </c:forEach>
                                 
                                 <c:if test="${page.next}">
-                                    <li class="next"><a class="next" href="${page.endPage+1}">></a></li>
+                                    <li><a class="next" href="${page.endPage+1}">다음</a></li>
                                 </c:if>
 
                                 <c:if test="${!page.next}">
-                                    <li class="next"><a class="end" href="${page.realEndPage}">></a></li>
+                                    <li><a class="next" href="${page.realEndPage}">다음</a></li>
                                 </c:if>
 
-                                <li class="next"><a class="end" href="${page.realEndPage}">>></a></li>
+                                <li><a class="end" href="${page.realEndPage}">끝페이지</a></li>
                             </ul>
                         </form>
                     </div>
