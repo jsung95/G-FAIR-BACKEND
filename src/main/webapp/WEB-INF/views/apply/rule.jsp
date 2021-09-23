@@ -153,12 +153,12 @@
             <div id="aside">
                 <h2 class="asideMenu">참가안내</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">참가신청안내</a></li>
-                    <li><a class="chk" href="/news/listPerPage">참가신청</a></li>
-                    <li><a class="chk" href="/question/list">참가규정</a></li>
-                    <li><a class="chk" href="/often/question">부스안내</a></li>
-                    <li><a class="chk" href="/anony/list">전시장배치도</a></li>
-                    <li><a class="chk" href="/free/board">참가기업목록</a></li>
+                    <li><a class="chk" href="#">참가신청안내</a></li>
+                    <li><a class="chk" href="#">참가신청</a></li>
+                    <li><a class="chk" href="#">참가규정</a></li>
+                    <li><a class="chk" href="#">부스안내</a></li>
+                    <li><a class="chk" href="/apply/map">전시장배치도</a></li>
+                    <li><a class="chk" href="#">참가기업목록</a></li>
                 </ul>
 
             </div>
@@ -305,6 +305,9 @@
 	               					<td class="td_content">헬스케어, 수면, 레저, 스포츠, 건강기능식품, 여행용품, 의약품, 위생용품 등</td>
 	               				</tr>
                				</table>
+               				
+               				<p class="add_explanation">※ 위 사항을 적용하여 킨텍스 제1전시장 1~2홀 입구부터 시작되는 메인 통로를 기점으로 순차적 부스 배치 기준을 원칙으로 설정하고, 참가기업의 부스 이동 및 희망 위치 반영은 불가하며 원칙에 의거하여 부스 배정 후 “참가자”에게 부스 위치 안내 진행</p>
+               				<p class="add_explanation">1.동종제품군 2.독립부스(4개 이상 신청기업) 3.복수부스(조립부스 2~3개 신청기업) 4.입금일과 신청일</p>
                			</div>
                 	
                 	</div>
