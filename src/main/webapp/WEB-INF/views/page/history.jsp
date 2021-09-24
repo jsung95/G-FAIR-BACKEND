@@ -91,7 +91,7 @@ $(function(){
                                                 <br>
                                                 <span class="text_date"> 2020.10.21&lpar;수&rpar; ~ 10.23&lpar;금&rpar;</span>
                                             </p>
-                                            <p class="historyBtn">상세보기</p>
+                                            <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>     
                                     
                                     <li class="history2019">
@@ -102,7 +102,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2019.10.31&lpar;목&rpar; ~ 11.03&lpar;일&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                       <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li> 
 
                                     <li class="history2018">      
@@ -113,7 +113,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2018.10.24&lpar;수&rpar; ~ 11.27&lpar;토&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                        <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>   
                                 </div> <!-- box 1-->
 
@@ -126,7 +126,7 @@ $(function(){
                                                 <br>
                                                 <span class="text_date"> 2017.11.01&lpar;수&rpar; ~ 11.04&lpar;토&rpar;</span>
                                             </p>
-                                            <p class="historyBtn">상세보기</p>
+                                           <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>     
                                     
                                     <li class="history2019">
@@ -137,7 +137,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2016.10.26&lpar;수&rpar; ~ 10.29&lpar;토&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                       <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li> 
 
                                     <li class="history2018">      
@@ -148,7 +148,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2015.11.05&lpar;목&rpar; ~ 11.08&lpar;일&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                        <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>   
                                 </div> <!-- box 1-->
 
@@ -161,7 +161,7 @@ $(function(){
                                                 <br>
                                                 <span class="text_date"> 2014.10.01&lpar;수&rpar; ~ 10.04&lpar;토&rpar;</span>
                                             </p>
-                                            <p class="historyBtn">상세보기</p>
+                                            <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>     
                                     
                                     <li class="history2019">
@@ -172,7 +172,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2013.10.09&lpar;수&rpar; ~ 10.12&lpar;토&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                        <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li> 
 
                                     <li class="history2018">      
@@ -183,7 +183,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2012.10.17&lpar;수&rpar; ~ 10.20&lpar;토&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                      <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>   
                                 </div> <!-- box 1-->
 
@@ -196,7 +196,7 @@ $(function(){
                                                 <br>
                                                 <span class="text_date"> 2011.10.25&lpar;화&rpar; ~ 10.27&lpar;목&rpar;</span>
                                             </p>
-                                            <p class="historyBtn">상세보기</p>
+                                            <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>     
                                     
                                     <li class="history2019">
@@ -207,7 +207,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2010.10.26&lpar;수&rpar; ~ 10.29&lpar;금&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                       <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li> 
 
                                     <li class="history2018">      
@@ -218,7 +218,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2009.09.24&lpar;목&rpar; ~ 09.26&lpar;토&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                        <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>   
                                 </div> <!-- box 1-->
 
@@ -231,7 +231,7 @@ $(function(){
                                                 <br>
                                                 <span class="text_date"> 2008.10.29&lpar;수&rpar; ~ 10.31&lpar;금&rpar;</span>
                                             </p>
-                                            <p class="historyBtn">상세보기</p>
+                                            <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li>     
                                     
                                     <li class="history2019">
@@ -242,7 +242,7 @@ $(function(){
                                             <br>
                                             <span class="text_date"> 2007.10.11&lpar;목&rpar; ~ 10.13&lpar;토&rpar;</span>
                                         </p>
-                                        <p class="historyBtn">상세보기</p>
+                                       <p class="historyBtn"><a href="#">상세보기</a></p>
                                     </li> 
 
                                 </div> <!-- box 1-->

@@ -40,16 +40,16 @@
 }
 
 #container #content .contentIn .parkingInfo .parkingInfo_2 #parkingPay{
-
-    width: 318px;
-    height: 66px;
+    width: 260px;
+    height: 61px;
     /* border: 1px black solid; */
     text-align: center;
     padding-top: 15px;
-    margin-left: 400px;
+    margin-left: 462px;
     background-color: #095bba;
     color: #fff;
 }
+
 #container #content .contentIn .parkingInfo .parkingInfo_2 #parkingPay span{
     font-size: 30px;
     font-family: 'Noto-sans KR';
