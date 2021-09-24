@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.service.AdminService;
 
 import lombok.NoArgsConstructor;
@@ -64,5 +65,15 @@ public class AdminController {
 		
 		return "redirect:/admin/apply";
 	}//applyUpdatePayment
+	
+	
+	//이진성 - 관리자페이지 > 회원관리
+	@GetMapping("memberList")
+	public void memberList(@RequestParam("membertype") String membertype, Model model) {
+		
+		List<MemberVO> members = this.service.getMemberList(membertype);
+		
+		model.addAttribute("members", members);
+	}
 	
 }//end class
