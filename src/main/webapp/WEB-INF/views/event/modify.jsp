@@ -63,24 +63,49 @@
         background: #005bbb;
         color: #fff;
         font-size: 15px;
-        border-radius: 4px;
 
         cursor: pointer;
 	}
-
+    .btn_area{
+        margin-top: 10px;
+    }
     input[type="file"]{
         display: none;
     }
 
-    .custom-file-upload {
-        float: right;
+    .uploadDiv{
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid rgb(201, 201, 201);
+    }
+    
+    .buttonstyle {
+        right: 0px;
+        height: 50px;
+        width: 100px;
+        
+        margin: 20px 0px 10px 0px;
+
+        font-size: 15px;
+        font-weight: bold;
+
+        color: white;
         background-color: #005bbb;
+    }
+
+    .custom-file-upload {
+        
+        padding: 10px;
+        border: 1px solid #005bbb;
         padding: 6px 12px;
         cursor: pointer;
 
-        font-size: 20px;
-        color: #fff;
-        border-radius: 4px;
+        font-size: 15px;
+        color: #005bbb;
+        font-weight: bold;
+
+        background-color: white;
     }
 </style>
 
@@ -118,22 +143,21 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="#">보도자료</a></li>
-                    <li><a class="chk" href="#">질문게시판</a></li>
-                    <li><a class="chk" href="#">자주묻는질문</a></li>
-                    <li><a class="chk" href="#">고객의소리</a></li>
-                    <li><a class="chk" href="#">자유게시판</a></li>
+                    <li><a class="chk" href="notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/question/list">질문게시판</a></li>
+                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
+                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
+                    <li><a class="chk" href="/free/board">자유게시판</a></li>
                     <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 공지사항 </div>
-                    <h2 class="subName">공지사항</h2>
+                    <div class="map">home > 커뮤니티 > 이벤트 </div>
+                    <h2 class="subName">이벤트</h2>
                 </div>
                 <div class="contentIn">
                 	
@@ -173,10 +197,12 @@
                                 이미지변경<input class="buttonstyle" type="file" name="uploadFile" accept="image/*">
                             </label>
                         </div>
-                        <button type="submit" class="btn1" id="submitBtn">수정하기</button>
-        
-                        <button type="button" class="btn1" id="removeBtn">삭제</button>
-                        <button type="button" class="btn1" id="listBtn">목록보기</button>
+                        
+                        <div class="btn_area">
+                            <button type="submit" class="btn1" id="submitBtn">수정하기</button>
+                            <button type="button" class="btn1" id="removeBtn">삭제</button>
+                            <button type="button" class="btn1" id="listBtn">목록보기</button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -81,6 +81,7 @@
         console.clear();
         console.debug('jq started..!');
         
+        //목록버튼 이벤트
         $("#listBtn").on('click', function () {
             console.log('#listBtn button clicked.');
             
@@ -89,7 +90,7 @@
             
         }); // .onclick
         
-        
+        //수정버튼 이벤트
         $("#modifyBtn").on('click', function () {
             console.log('#modifyBtn button clicked..');
 
@@ -97,12 +98,24 @@
                     location.href = "/event/modify?bno=${board.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
         }) // .onclick
 
+        //삭제버튼 이벤트
+        $('#removeBtn').on('click', function () {
+            var result = confirm('정말 삭제하실?');
+
+            if(result) {
+                let formObj = $('form');
+                formObj.attr('action', '/event/remove?bno='+${board.bno});
+                formObj.attr('method', 'POST');
+                formObj.submit();
+            }
+        })
         let iframe = document.querySelector("#child-iframe");
 
         iframe.addEventListener('load', function () {
             iframe.height = iframe.contentWindow.document.body.scrollHeight +390+ 'px'; 
             console.log(iframe.height);
         });
+
 
     }); //jq
 
@@ -115,21 +128,20 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="#">공지사항</a></li>
-                    <li><a class="chk" href="#">보도자료</a></li>
-                    <li><a class="chk" href="#">질문게시판</a></li>
-                    <li><a class="chk" href="#">자주묻는질문</a></li>
-                    <li><a class="chk" href="#">고객의소리</a></li>
-                    <li><a class="chk" href="#">자유게시판</a></li>
+                    <li><a class="chk" href="notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/question/list">질문게시판</a></li>
+                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
+                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
+                    <li><a class="chk" href="/free/board">자유게시판</a></li>
                     <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 이벤트 </div>
+                    <div class="map">home > 커뮤니티 > 이벤트 </div>
                     <h2 class="subName">이벤트</h2>
                 </div>
                 <div class="contentIn">
@@ -144,7 +156,8 @@
                 </div>
                 <div id="bottom_space">
                     <div id="btn_area">
-                        <button type="button" class="btn1" id="modifyBtn">글 수정</button>
+                        <button type="button" class="btn1" id="modifyBtn">수정</button>
+                        <button type="button" class="btn1" id="removeBtn">삭제</button>
                         <button type="button" class="btn1" id="listBtn">목록</button>
                     </div>
                 </div>

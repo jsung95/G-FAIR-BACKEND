@@ -82,7 +82,7 @@
         margin-bottom: 10px;
     }
 
-    .btn {
+    .btn1{
         width: 100px;
         height: 40px;
 
@@ -92,8 +92,47 @@
         background: #005bbb;
         color: #fff;
         font-size: 15px;
-        
+
         cursor: pointer;
+    }
+
+    input[type="file"]{
+        display: none;
+    }
+
+    .uploadDiv{
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        border-bottom: 1px solid rgb(201, 201, 201);
+    }
+    
+    .buttonstyle {
+        right: 0px;
+        height: 50px;
+        width: 100px;
+        
+        margin: 20px 0px 10px 0px;
+
+        font-size: 15px;
+        font-weight: bold;
+
+        color: white;
+        background-color: #005bbb;
+    }
+
+    .custom-file-upload {
+        
+        padding: 10px;
+        border: 1px solid #005bbb;
+        padding: 6px 12px;
+        cursor: pointer;
+
+        font-size: 15px;
+        color: #005bbb;
+        font-weight: bold;
+
+        background-color: white;
     }
 
     #regBtn{
@@ -102,21 +141,9 @@
     }
     /* paging */
     #pagination {
-        width: 95%;
+        width: 100%;
         margin: 0 auto;
-    }
-
-    #pagination li{
-        float:left;
-
-        width: 30px;
-        height: 30px;
-
-        list-style: none;
-
-        text-align: center;
-        line-height: 30px;
-        border: 1px dotted black;
+        position: relative;
     }
 
     #pagination ul {
@@ -126,34 +153,19 @@
     }
 
     #pagination li {
+        float: left;
         width: 30px;
         height: 30px;
-        display: flex;
-
-        border-left: 1px solid #999;
-        border-top: 1px solid #999;
-        border-bottom: 1px solid #999;
-        box-sizing: border-box;
-
         text-align: center;
-        line-height: 28px;
-        flex-direction: column
-    }
-
-    #pagination li:last-child {
-        border-right: 1px solid #999;
-    }
-
-    .prev, .next {
-        width: 40px !important;
+        list-style: none;
+        line-height: 30px;
+        font-size:16px;
         
-        color: white;
-        background-color: rgb(246, 246, 255);
+        margin-right:10px;
     }
 
-    .currPage{
-        background-color: cornflowerblue;
-        color: white;
+    .currPage {
+        border: 1px solid #000;
     }
 
     #totalAmount{
@@ -161,11 +173,6 @@
         float: left;
     }
 
-    #mmw {
-        display: block;
-        width: 30px;
-        height: 30px;
-    }
 
     #search_area {
         display: flex;
@@ -173,20 +180,54 @@
         margin-top: 20px;
     }
     
-    #searchBtn{
-        width: 80px;
-        height: 25px;
-
-        border: 0;
-        
-        text-align: center;
-        background: #005bbb;
-        color: #fff;
-        font-size: 15px;
-        
-        cursor: pointer;
-    }
     
+
+    #pagination li a{
+        display:block;
+
+    }
+    .start{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        border:1px solid #eee;
+
+	}
+
+    .prev{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-30px;
+        border:1px solid #eee;
+	}
+
+    .next{		
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-60px;
+        border:1px solid #eee;
+	
+	}
+
+    .end{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-90px;
+        border:1px solid #eee;
+	
+	}
+
+    .start a .prev a, .next a .end a{
+    	display:block;
+        
+    }
 </style>
 
 <script>
@@ -231,7 +272,7 @@
                 <h2 class="asideMenu">미디어센터</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/photo/listPerPage">포토갤러리</a></li>
-                    <li><a class="chk" href="#">영상자료실</a></li>
+                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     
                 </ul>
 
@@ -245,11 +286,10 @@
                 	
                     <!-- 여기에 게시판 넣으면 됩니다. -->
                     <div id="photo_area">
-                        <div id="topmenu">
-                            <p id="totalAmount">전체글 수 : ${pageMaker.totalAmount}</p>
-                            <button class="btn" id="regBtn" type="button">사진업로드</button>
-                            <br>
-                            <br>
+                        <div class="uploadDiv">
+                            <label class="custom-file-upload">
+                                파일업로드<input class="buttonstyle" type="file" name="uploadFile" accept="image/*">
+                            </label>
                         </div>
                         
                         <div id="photo_zone">
@@ -278,13 +318,13 @@
                                     <!-- <c:if test="${pageMaker.prev}">
                                         <li class="prev"><a class="prev" href="${pageMaker.startPage - 1}">Prev</a></li>
                                     </c:if> -->
-                                    <li class="prev"><a class="start" href="/photo/listPerPage"><<</a></li>
-                                    <li class="prev"><a class="prev" href="/photo/listPerPage?currPage=${pageMaker.startPage}"><</a></li>
+                                    <li><a class="start" href="/photo/listPerPage">첫 페이지</a></li>
+                                    <li><a class="prev" href="/photo/listPerPage?currPage=${pageMaker.startPage}">이전</a></li>
                                     <!-- begin ~ end 까지 반복하고, 현재의 번호값은 var속성에 넣어준다 -->
                                     <c:forEach begin="${pageMaker.startPage}" 
                                                 end="${pageMaker.endPage}" 
                                                 var="pageNum">
-                                        <li class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}">
+                                        <li>
                                             <a 
                                                 id="mmw"
                                                 class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}" 
@@ -297,8 +337,8 @@
                                     <!-- <c:if test="${pageMaker.next}">
                                         <li class="next"><a class="next" href="${pageMaker.endPage + 1}">Next</a></li>
                                     </c:if> -->
-                                    <li class="next"><a class="next" href="/photo/listPerPage?currPage=${pageMaker.endPage}">></a></li>
-                                    <li class="next"><a class="end" href="/photo/listPerPage?currPage=${pageMaker.realEndPage}">>></a></li>
+                                    <li><a class="next" href="/photo/listPerPage?currPage=${pageMaker.endPage}">다음페이지</a></li>
+                                    <li><a class="end" href="/photo/listPerPage?currPage=${pageMaker.realEndPage}">끝페이지</a></li>
                                 </ul>
                             </form>
                         </div>
@@ -319,7 +359,7 @@
 
                                     <input type="text" name="keyword" class="search2" value="${pageMaker.cri.keyword}">
                                     
-                                    <button id="searchBtn">Search</button>
+                                    <button class="btn1" id="searchBtn">Search</button>
                                 </form>
                             </li>
                         </div>

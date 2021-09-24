@@ -19,7 +19,7 @@
 </head>
 
 <style>
-    .btn {
+    .btn1{
         width: 100px;
         height: 40px;
 
@@ -29,26 +29,22 @@
         background: #005bbb;
         color: #fff;
         font-size: 15px;
-
-        border-radius: 4px;
 
         cursor: pointer;
     }
 
-    .buttonstyle{
+    .buttonstyle {
         right: 0px;
-
+        height: 50px;
         width: 100px;
-        height: 40px;
+        
+        margin: 20px 0px 10px 0px;
 
-        border: 0;
-        
-        text-align: center;
-        background: #005bbb;
-        color: #fff;
         font-size: 15px;
-        
-        cursor: pointer;
+        font-weight: bold;
+
+        color: white;
+        background-color: #005bbb;
     }
 
     input[type="file"]{
@@ -56,15 +52,17 @@
     }
 
     .custom-file-upload {
-        display: inline-block;
-        background-color: #005bbb;
+        
+        padding: 10px;
+        border: 1px solid #005bbb;
         padding: 6px 12px;
         cursor: pointer;
 
-        font-size: 20px;
-        color: #fff;
+        font-size: 15px;
+        color: #005bbb;
         font-weight: bold;
-        border-radius: 4px;
+
+        background-color: white;
     }
 
     #title_change{
@@ -73,6 +71,10 @@
 
     #changeBtn{
         margin-left: 10px;
+    }
+
+    #listBtn{
+        float: right;
     }
 </style>
 
@@ -136,10 +138,10 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">미디어센터</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/photo/listPerPage">포토갤러리</a></li>
-                    <li><a class="chk" href="#">영상자료실</a></li>
+                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                 </ul>
 
             </div>
@@ -202,9 +204,12 @@
                                 
                             </table> -->
                             <br>
-                            <button class="btn" type="submit" id="submitBtn">수정완료</button>
-                            <button class="btn" type="button" id="removeBtn">삭제</button>
-                            <button class="btn" type="button" id="listBtn">목록보기</button>
+
+                            <div class="btn_area">
+                                <button class="btn1" type="submit" id="submitBtn">수정</button>
+                                <button class="btn1" type="button" id="removeBtn">삭제</button>
+                                <button class="btn1" type="button" id="listBtn">목록보기</button>
+                            </div>
                         </form>
                     </div>
                 </div>

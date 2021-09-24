@@ -94,42 +94,21 @@
 
     }
     #pagination li {
+        float: left;
         width: 30px;
         height: 30px;
-        display: flex;
-
-        border-left: 1px solid #999;
-        border-top: 1px solid #999;
-        border-bottom: 1px solid #999;
-        box-sizing: border-box;
-
         text-align: center;
-        line-height: 28px;
-        flex-direction: column
-    }
-    #pagination li:last-child {
-        border-right: 1px solid #999;
+        list-style: none;
+        line-height: 30px;
+        font-size:16px;
+        
+        margin-right:10px;
     }
 
-    .prev, .next {
-        width: 40px !important;
-        
-        color: white;
-        background-color: rgb(246, 246, 255);
-    }
 
     .currPage {
-        height: 29px!important;
-        color: white;
-        background-color: rgb(255, 231, 251);
-        border-bottom: 1px solid #999;
-        box-sizing: border-box;
-    }
+        border: 1px solid #000;
 
-    #mmw {
-        display: block;
-        width: 30px;
-        height: 30px;
     }
 
     #totalCount {
@@ -141,9 +120,9 @@
         justify-content: center;
         margin-top: 20px;
     }
-
-    .btn {
-
+    .btn1 {
+        width: 100px;
+        height: 40px;
 
         border: 0;
         
@@ -161,12 +140,30 @@
         margin-top: 10px;
 
         width: 100px;
-        height: 30px;
+        height: 40px;
+
+        border: 0;
+        
+        text-align: center;
+        background: #005bbb;
+        color: #fff;
+        font-size: 15px;
+        
+        cursor: pointer;
     }
 
     #searchBtn{
         width: 100px;
-        height: 30px;
+        height: 40px;
+
+        border: 0;
+        
+        text-align: center;
+        background: #005bbb;
+        color: #fff;
+        font-size: 15px;
+        
+        cursor: pointer;
     }
 
 
@@ -188,6 +185,52 @@
 
         line-height: 40px;
         text-align: center;
+    }
+    #pagination li a{
+    	display:block;
+    	
+   	}
+    .start{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        border:1px solid #eee;
+
+	}
+
+    .prev{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-30px;
+        border:1px solid #eee;
+	}
+
+    .next{		
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-60px;
+        border:1px solid #eee;
+	
+	}
+
+    .end{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-90px;
+        border:1px solid #eee;
+	
+	}
+
+    .start a .prev a, .next a .end a{
+    	display:block;
+        
     }
 </style>
 
@@ -227,21 +270,20 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="#">보도자료</a></li>
-                    <li><a class="chk" href="#">질문게시판</a></li>
-                    <li><a class="chk" href="#">자주묻는질문</a></li>
-                    <li><a class="chk" href="#">고객의소리</a></li>
-                    <li><a class="chk" href="#">자유게시판</a></li>
+                    <li><a class="chk" href="notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/question/list">질문게시판</a></li>
+                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
+                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
+                    <li><a class="chk" href="/free/board">자유게시판</a></li>
                     <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 이벤트 </div>
+                    <div class="map">home > 커뮤니티 > 이벤트 </div>
                     <h2 class="subName">이벤트</h2>
                 </div>
                 <div class="contentIn">
@@ -262,10 +304,10 @@
                                     </tr>
                                 </thead>
 
-                                <c:forEach items="${list}" var="event">
+                                <c:forEach items="${list}" var="event" varStatus="i">
                                     <tbody>
                                         <tr class="event">
-                                            <td>${event.bno}</td>
+                                            <td>${pageMaker.totalAmount - (pageMaker.cri.currPage - 1) * pageMaker.cri.amount - i.index}</td>
                                             <td><a 
                                                 href="/event/subGet?bno=${event.bno}&currPage=${pageMaker.cri.currPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">
                                                 <c:out value="${event.title}"/></a></td>
@@ -299,16 +341,15 @@
                                     <!-- <c:if test="${pageMaker.prev}">
                                         <li class="prev"><a class="prev" href="${pageMaker.startPage - 1}">Prev</a></li>
                                     </c:if> -->
-                                    <li class="prev"><a class="start" href="/event/listPerPage"><<</a></li>
-                                    <li class="prev"><a class="prev" href="/event/listPerPage?currPage=${pageMaker.startPage}"><</a></li>
+                                    <li><a class="start" href="/event/listPerPage">첫페이지</a></li>
+                                    <li><a class="prev" href="/event/listPerPage?currPage=${pageMaker.startPage}">이전</a></li>
                                     <!-- begin ~ end 까지 반복하고, 현재의 번호값은 var속성에 넣어준다 -->
                                     <c:forEach begin="${pageMaker.startPage}" 
                                                 end="${pageMaker.endPage}" 
                                                 var="pageNum">
             
-                                        <li class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}">
+                                        <li>
                                             <a 
-                                                id="mmw"
                                                 class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}" 
                                                 href="/event/listPerPage?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">
                                                 ${pageNum}
@@ -319,8 +360,8 @@
                                     <!-- <c:if test="${pageMaker.next}">
                                         <li class="next"><a class="next" href="${pageMaker.endPage + 1}">Next</a></li>
                                     </c:if> -->
-                                    <li class="next"><a class="next" href="/event/listPerPage?currPage=${pageMaker.endPage}">></a></li>
-                                    <li class="next"><a class="end" href="/event/listPerPage?currPage=${pageMaker.realEndPage}">>></a></li>
+                                    <li><a class="next" href="/event/listPerPage?currPage=${pageMaker.endPage}">다음페이지</a></li>
+                                    <li><a class="end" href="/event/listPerPage?currPage=${pageMaker.realEndPage}">끝페이지</a></li>
             
                                 </ul>
                             </form>

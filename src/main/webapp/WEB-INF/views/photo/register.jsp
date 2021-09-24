@@ -122,7 +122,7 @@
                 <h2 class="asideMenu">고객센터</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/photo/listPerPage">포토갤러리</a></li>
-                    <li><a class="chk" href="#">영상자료실</a></li>
+                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                 </ul>
 
             </div>

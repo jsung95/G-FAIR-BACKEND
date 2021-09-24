@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.EventDTO;
 import com.korea.gfair.domain.EventVO;
@@ -20,6 +21,7 @@ import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.domain.PhotoVO;
 import com.korea.gfair.service.EventBoardService;
 import com.korea.gfair.service.PhotoBoardService;
+import com.korea.gfair.service.ReplyService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,6 +42,8 @@ public class EventBoardController {
 	@Setter(onMethod_= {@Autowired})
 	private PhotoBoardService photoService;
 	
+	@Setter(onMethod_= {@Autowired})
+	private ReplyService replyService;
 	
 	@GetMapping("listPerPage")
 	public String listPerPage(@ModelAttribute("cri")Criteria cri, Model model) {
@@ -213,6 +217,7 @@ public class EventBoardController {
 	public String remove(
 			@ModelAttribute("cri") Criteria cri,
 			@RequestParam("bno") Integer bno,
+//			@RequestParam("reno") Integer reno,
 			RedirectAttributes rttrs
 			) {
 		
@@ -220,6 +225,17 @@ public class EventBoardController {
 		log.info(
 				"\t+ cri: {}, bno: {}, rttrs: {}",
 				cri, bno, rttrs);
+		
+//		int childRemoved = this.replyService.remove(reno);
+//		
+//		if(childRemoved == 1) {
+//			log.info("자식레코드가 삭제되었습니다.");
+//			
+//		}else {
+//			log.info("자식레코드 삭제실패.");
+//			
+//		}
+		
 		
 		boolean isRemoved = this.service.remove(bno);
 		
