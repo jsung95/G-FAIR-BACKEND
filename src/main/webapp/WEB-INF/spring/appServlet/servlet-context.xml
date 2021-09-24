@@ -74,30 +74,6 @@
 		view-name="/main/main" 
 		status-code="200" />
 		
-	<view-controller 
-		path="/traffic/main" 
-		view-name="/traffic/main" 
-		status-code="200"/>
-		
-	<view-controller 
-		path="/facilities/main" 
-		view-name="/facilities/main" 
-		status-code="200"/>
-		
-	<view-controller 
-		path="/history/main" 
-		view-name="/history/main" 
-		status-code="200"/>
-		
-	<view-controller 
-		path="/intro/main" 
-		view-name="/intro/main" 
-		status-code="200"/>
-		
-	<view-controller 
-		path="/often/question" 
-		view-name="/often/question" 
-		status-code="200"/>
 		
 	<interceptors>
 		<interceptor>

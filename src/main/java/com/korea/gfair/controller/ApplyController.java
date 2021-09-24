@@ -146,5 +146,13 @@ public class ApplyController {
 		
 	}//booth()
 	
+	//=====다솜 - 참가신청안내
+	@GetMapping("info")
+	public void info() {
+		log.debug("info() invoked.");
+		
+		
+	}//info()
+	
 	
 }//end class

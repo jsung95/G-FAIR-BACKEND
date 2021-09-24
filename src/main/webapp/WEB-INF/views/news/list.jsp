@@ -325,7 +325,10 @@ td:nth-child(4) {
 					       			 </tr>
 					          <c:set var="number" value="${number-1}"/>
 					      	  </c:forEach>
-							<button type="button" id="regBtn"> 등록하기 </button></li>
+                                <c:if test="${__LOGIN__.memberid != null}">
+                                    <button type="button" id="regBtn"> 등록하기 </button>
+
+                                </c:if>
 					</table>
 			</div>
 

@@ -97,7 +97,7 @@ public class NewsBoardController {
 		rttrs.addAttribute("amount",cri.getAmount());
 		rttrs.addAttribute("pagesPerPage",cri.getPagesPerPage());
 		
-		return "redirect:/news/list";		
+		return "redirect:/news/listPerPage";		
 	}
 	
 	@GetMapping("register")  // 등록화면 >> 페이지정보를 남겨야함
