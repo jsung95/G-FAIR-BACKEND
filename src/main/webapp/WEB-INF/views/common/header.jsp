@@ -33,45 +33,46 @@
                     </div>
                 </div>
                 <div class="gnb_wrapper">
-                    <h1 class="logo"><a href="/index">로고</a></h1>
+                    <h1 class="logo"><a href="/">로고</a></h1>
                     <div id="nav">
                         <ul class="dropdownmenu">
-                            <li class="menu"><h3><a href="#">전시회 소개</a></h3>
+                            <li class="menu"><h3><a href="/page/intro">전시회소개</a></h3>
                                 <ul>
-                                    <li><a href="/intro/main">전시회안내</a></li>
-                                    <li><a href="/history/main">연혁</a></li>
+                                    <li><a href="/page/intro">전시회안내</a></li>
+                                    <li><a href="/page/history">연혁</a></li>
                                     <li><a href="/exhibition/calendar">전시회일정</a></li>
-                                    <li><a href="/facilities/main">부대시설</a></li>
-                                    <li><a href="/traffic/main">찾아오시는길</a></li>
+                                    <li><a href="/page/facilities">부대시설</a></li>
+                                    <li><a href="/page/traffic">찾아오시는길</a></li>
                                 </ul>
                             </li>
-                            <li class="menu"><h3><a href="#">미디어 센터</a></h3>
+                            <li class="menu"><h3><a href="/photo/listPerPage">미디어센터</a></h3>
                                 <ul>
                                     <li><a href="/photo/listPerPage">포토갤러리</a></li>
-                                    <li><a href="#">영상자료실</a></li>
+                                    <li><a href="/news/listPerPage">보도자료</a></li>
                                 </ul>
                             </li>
-                            <li class="menu"><h3><a href="#">참가안내</a></h3>
+                            <li class="menu"><h3><a href="/apply/info">참가안내</a></h3>
                                 <ul>
-                                    <li><a href="#">참가신청안내</a></li>
-                                    <li><a href="#">참가신청</a></li>
+                                    <li><a href="/apply/info">참가신청안내</a></li>
+                                    <li><a href="/apply/app">참가신청</a></li>
+                                    <li><a href="/apply/applystatus">참가신청확인</a></li>
                                     <li><a href="/apply/rule">참가규정</a></li>
                                     <li><a href="/apply/booth">부스안내</a></li>
                                     <li><a href="/apply/map">전시장배치도</a></li>
-                                    <li><a href="#">참가기업목록</a></li>
+                                    <li><a href="/apply/companyList">참가기업목록</a></li>
                                 </ul>
                             </li>
-                            <li class="menu"><h3><a href="#">사전 신청</a></h3>
+                            <li class="menu"><h3><a href="/pre/agreement">사전신청</a></h3>
                                 <ul>
                                     <li><a href="/pre/guide">사전관람안내</a></li>
                                     <li><a href="/pre/agreement">사전관람신청</a></li>
                                     <li><a href="/pre/verify">사전관람신청확인</a></li>
+                                    
                                 </ul>
                             </li>
                             <li class="menu"><h3><a href="/notice/list">커뮤니티</a></h3>
                                 <ul>
                                     <li><a href="/notice/list">공지사항</a></li>
-                                    <li><a href="/news/listPerPage">보도자료</a></li>
                                     <li><a href="/question/list">질문게시판</a></li>
                                     <li><a href="/often/question">자주묻는질문</a></li>
                                     <li><a href="/anony/list">고객의소리</a></li>

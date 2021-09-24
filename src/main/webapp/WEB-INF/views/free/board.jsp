@@ -79,15 +79,11 @@
 	    white-space: nowrap;
 	}
 
-    td:nth-child(3){
-        text-align: left;
 
-        width: 200px;
-        padding-left: 10px;
-    }
+
     
     .insertDate{
-  	  width:170px;
+  	 	width:170px;
     }
     
     table ul{
@@ -275,7 +271,7 @@
 		                    <th width=10%>no</th>
 		                    <th width=*>제목</th>
 		                    <th width=10%>작성자</th>
-		                    <th width=15%>등록일</th>
+		                    <th width=10%>등록일</th>
 		                    <th width=10%>조회수</th>
 		                </tr>
 		            </thead>
@@ -286,7 +282,7 @@
 		                        <td>${pageMaker.totalAmount - (pageMaker.cri.currPage - 1) * pageMaker.cri.amount - i.index}</td>
 		                        <td><a href="read?bno=${list.bno}">${list.title}</a></td>
 		                        <td>${list.memberid}</td>
-		                        <td class="insertDate"><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${list.insert_ts}" /></td>
+		                        <td class="insertDate"><fmt:formatDate pattern="yyyy/MM/dd" value="${list.insert_ts}" /></td>
 		                        <td>${list.readcnt}</td>
 		                    </tr>
 		                    
