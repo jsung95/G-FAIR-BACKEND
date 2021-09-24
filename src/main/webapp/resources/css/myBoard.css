@@ -185,9 +185,7 @@ td:nth-child(7) {
 /* 현재페이지 버튼 */
 .currPage {
     height: 30px!important;
-    color: white;
-    background-color: rgb(255, 231, 251);
-    border: 1px solid #999;
+    border: 1px solid #000;
 }
 
 
@@ -196,7 +194,6 @@ td:nth-child(7) {
 .buttonstyle {
     height: 40px;
     width: 100px;
-    margin-top: 10px;
     
     border: 0px;
     text-align: center;
@@ -205,4 +202,12 @@ td:nth-child(7) {
     color: #fff;
     font-size: 15px;
     
+}
+/* 버튼위치 */
+.getBtn {
+
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 20px;
 }

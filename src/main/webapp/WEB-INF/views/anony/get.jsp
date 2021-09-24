@@ -44,10 +44,6 @@
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
         });
-        
-        function removeBtnChild(){
-            $('form').attr('action','/anony/remove').attr('method','POST').submit();
-        }
     })//end jq
 </script>
 <script>
@@ -57,7 +53,7 @@
         let iframe = document.getElementById("child-iframe"); 
 
         iframe.addEventListener('load', function() { 
-            iframe.height = iframe.contentWindow.document.body.scrollHeight +490+ 'px'; 
+            iframe.height = iframe.contentWindow.document.body.scrollHeight +390+ 'px'; 
             console.log(iframe.height);
             // iframe.style.width = iframe.contentDocument.body.scrollWidth + 'px'; 
         });
@@ -91,29 +87,9 @@
                 
                 <!-- 상세페이지 -->
                 <div class="contentIn">
-                    <iframe id="child-iframe" src="/anony/getPage?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" frameborder="0" width="1200" scrolling='no'></iframe>
+                    <iframe id="child-iframe" target="_parent" src="/anony/getPage?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" frameborder="0" width="1200" scrolling='no'></iframe>
                 </div>
-                <!-- 버튼 -->
-                <!-- <div class=getBtn>
-                    <div>
-                        <c:if test="${__LOGIN__.memberid != null}">
-                            <button type="button" class="buttonstyle" id="regBtn">글쓰기</button>&nbsp;&nbsp;
-                            <button type="button" class="buttonstyle" id="reregBtn">답글</button>
-                        </c:if>
-                        <c:if test="${__LOGIN__.memberid eq board.memberid}">
-                            <button type="button" class="buttonstyle" id="modifyBtn">수정</button>
-                        </c:if>
-                    </div>
-                    <div>
-                        <button type="button" class="buttonstyle" id="listBtn">목록</button>
-                    </div>
-                </div> -->
 
-                <!-- test -->
-                <form action="/anony/remove" method="POST" id="removeForm">
-                    <input type="hidden" name="bno" value="${board.bno}">
-        
-                </form>
                 <p>&nbsp;</p>
             </div>
         </div>

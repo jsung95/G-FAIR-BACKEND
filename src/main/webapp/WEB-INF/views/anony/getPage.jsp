@@ -44,20 +44,6 @@
                     
                 })//modifyBtn
 
-                $('#removeBtn').on('click',function(){
-
-                    var con = confirm("정말 삭제하시겠습니까?");
-                    if(con){//확인 눌렀을 때
-
-                        $('#removeForm').attr('action','/anony/remove').attr('method','POST').submit();
-
-                        top.location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-                    }else {
-                        return false;
-                    }
-                                
-                });//removeBtn
-
                 $('#listBtn').on('click',function(){
                     
                     window.parent.location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
@@ -390,7 +376,6 @@
             <div>
                 <c:if test="${__LOGIN__.memberid eq board.memberid}">
                         <button type="button" class="buttonstyle" id="modifyBtn">수정</button>
-                        <button type="button" class="buttonstyle" id="removeBtn">삭제</button>&nbsp;&nbsp;
                 </c:if>
                 <c:if test="${__LOGIN__.memberid != null}">
                     <button type="button" class="buttonstyle" id="reregBtn">답글</button>

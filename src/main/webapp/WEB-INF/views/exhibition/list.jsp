@@ -43,7 +43,6 @@
             'background-position': 'right center'
         });
         
-
     })//end jq
 </script>
 <script>
@@ -112,6 +111,20 @@
             location.href = "/exhibition/calendar";
         })
 
+        // 체크박스 전체선택
+        $("input:checkbox[name='exno']").click(function(){
+            if($(this).is(":checked")){
+                $("input:checkbox[name='exno']").each(function() {
+                    $(this).prop("checked",true);
+                });
+                
+            }else{
+                $("input:checkbox[name='exno']").each(function() {
+                    $(this).prop("checked",false);
+                });
+                
+            }
+        });
     })//.jq
 </script>
 <body>
@@ -144,7 +157,7 @@
                              <table>
                                  <thead>
                                      <tr>
-                                         <th>&nbsp;</th>
+                                         <th><input type="checkbox" name="exno" value="${ex.exno}"></th>
                                          <th>번호</th>
                                          <th>전시명</th>
                                          <th>전시시작일</th>

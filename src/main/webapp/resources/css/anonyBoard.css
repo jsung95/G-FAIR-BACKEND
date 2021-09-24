@@ -57,6 +57,7 @@ td:nth-child(2) {
     /* width: 500px; */
 
 }
+/* 제목 */
 .ptitle {
     width: 99%;
     
@@ -64,6 +65,10 @@ td:nth-child(2) {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+/* 제목+댓글 붙이기
+.titleReply > a p {
+    display: inline-block;
+} */
 /* no*/
 td:nth-child(1){
     width: 70px;

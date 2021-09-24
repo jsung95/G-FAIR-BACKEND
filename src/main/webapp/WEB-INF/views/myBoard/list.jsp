@@ -120,6 +120,21 @@
 
         })//boardOption
 
+
+        // 체크박스 전체선택
+        $("input:checkbox[name='bno']").click(function(){
+            if($(this).is(":checked")){
+                $("input:checkbox[name='bno']").each(function() {
+                    $(this).prop("checked",true);
+                });
+                
+            }else{
+                $("input:checkbox[name='bno']").each(function() {
+                    $(this).prop("checked",false);
+                });
+                
+            }
+        });
     })//.jq
 </script>
 <body>
@@ -151,7 +166,7 @@
                         <thead>
                             <form id="selectBoardForm"></form>
                                 <tr>
-                                    <th>&nbsp;</th>
+                                    <th><input type="checkbox" name="bno" value="${board.bno}"></th>
                                     <th>번호</th>
                                     <th>제목</th>
                                     <th>내용</th>
@@ -236,7 +251,10 @@
                             </form>
                         </tbody>
                     </table>
-                    <div><button type="button" id="selectDelBtn" class="buttonstyle">선택삭제</button></div>
+                    <div class="getBtn">
+                        <div><button type="button" id="selectDelBtn" class="buttonstyle">선택삭제</button></div>
+                        <div><button type="button" id="listBtn" class="buttonstyle">목록</button></div>
+                    </div>
                 
                     <p>&nbsp;</p>
         

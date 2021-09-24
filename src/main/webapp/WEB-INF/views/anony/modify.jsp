@@ -66,9 +66,10 @@
         $('#removeBtn').on('click',function(){
             var removeConfirm = confirm("정말 삭제하시겠습니까?");
 
-            if(removeConfirm){
-                parent.removeBtnChild();
-                
+            if(removeConfirm){//확인 눌렀을 때
+
+                $('#Reg').attr('action','/anony/remove').attr('method','POST').submit();
+                        
             } else {
                 return false;
             }//if-else

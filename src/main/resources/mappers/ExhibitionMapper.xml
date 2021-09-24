@@ -29,14 +29,14 @@
         <where>
             <choose>
                 <when test="type eq 'T'.toString()">
-                    exname LIKE '%'||#{keyWord}||'%'
+                    exname LIKE '%'||#{keyword}||'%'
                 </when>
                 <when test="type eq 'C'.toString()">
-                    excontent LIKE '%'||#{keyWord}||'%'
+                    excontent LIKE '%'||#{keyword}||'%'
                 </when>
                 <when test="type eq 'TC'.toString()">
-                    (content LIKE '%'||#{keyWord}||'%'
-                    OR exname LIKE '%'||#{keyWord}||'%')
+                    (content LIKE '%'||#{keyword}||'%'
+                    OR exname LIKE '%'||#{keyword}||'%')
                 </when>
             </choose>
         </where>
@@ -115,14 +115,14 @@
         <where>
             <choose>
                 <when test="type eq 'T'.toString()">
-                    exname LIKE '%'||#{keyWord}||'%'
+                    exname LIKE '%'||#{keyword}||'%'
                 </when>
                 <when test="type eq 'C'.toString()">
-                    excontent LIKE '%'||#{keyWord}||'%'
+                    excontent LIKE '%'||#{keyword}||'%'
                 </when>
                 <when test="type eq 'TC'.toString()">
-                    (content LIKE '%'||#{keyWord}||'%'
-                    OR exname LIKE '%'||#{keyWord}||'%')
+                    (content LIKE '%'||#{keyword}||'%'
+                    OR exname LIKE '%'||#{keyword}||'%')
                 </when>
             </choose>
         </where>
