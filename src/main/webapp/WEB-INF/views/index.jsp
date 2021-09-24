@@ -119,7 +119,16 @@
                 <h3>지페어 코리아에 더 많은 정보를 얻고 싶으신가요?</h3>
                 <div><a href="member/agreement" class="member_Join_btn">회원가입</a></div>
             </div>
-
+            <c:choose>
+            	<c:when test="${__LOGIN__.memberid == null}">
+			        <h3>지페어 코리아에 더 많은 정보를 얻고 싶으신가요?</h3>
+			        <div><a href="member/agreement" class="member_Join_btn">회원가입</a></div>
+                </c:when>
+                <c:otherwise>
+	                <h3>지페어 코리아의 일정이 궁금하다면?</h3>
+			        <div><a href="exhibition/calendar" class="member_Join_btn">일정조회</a></div>
+                </c:otherwise>
+            </c:choose>
         </div>
 
 

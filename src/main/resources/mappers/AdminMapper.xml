@@ -92,4 +92,15 @@
 		</foreach>
 	
 	</update>
+	
+	
+		<!-- 이진성 - 관리자페이지 > 회원관리 -->
+	<select id="selectMemberList" resultType="com.korea.gfair.domain.MemberVO">
+		SELECT
+			/*+ index_desc(tbl_member) */ *
+		FROM
+			tbl_member
+		WHERE
+			membertype = #{membertype}
+	</select>
 </mapper>
