@@ -70,12 +70,12 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 공지사항 </div>
-                    <h2 class="subName">공지사항</h2>
+                    <div class="map">home > 고객센터 > 자주묻는질문 </div>
+                    <h2 class="subName">자주묻는질문</h2>
                 </div>
                 <div class="contentIn">
                     <div id="topmenu">
-                        <p>자주하는 질문</p> 
+                        <p>자주묻는질문</p> 
                         <span>Q&A</span>
                     </div>
 

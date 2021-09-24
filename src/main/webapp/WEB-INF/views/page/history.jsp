@@ -24,58 +24,58 @@
 </style>
 
 <script>
-    $(function(){
-    	var tmp;
-    	
-        var subName = $('.subName').text();
-        
-        $('.chk').each(function(index,obj){
-            var t = index;
-            var o = $(this).text();
-            console.log(t + ':' + o)
-            if(o == subName) {
-            	tmp = t;
-            }
-        });
+$(function(){
+	var tmp;
+	
+    var subName = $('.subName').text();
+    
+    $('.chk').each(function(index,obj){
+        var t = index;
+        var o = $(this).text();
+        console.log(t + ':' + o)
+        if(o == subName) {
+        	tmp = t;
+        }
+    });
 
-        console.log(tmp)
-        
-        $('#parent').children().eq(tmp).children().css({
-            'font-size': '18px',
-            'font-weight':'bold',
-            'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
-            'background-position': 'right center'
-        });
-        
+    console.log(tmp)
+    
+    $('#parent').children().eq(tmp).children().css({
+        'font-size': '18px',
+        'font-weight':'bold',
+        'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+        'background-position': 'right center'
+    });
+    
 
-    })//end jq
+})//end jq
+
 </script>
 <body>
-    <div id="wrap">
+   <div id="wrap">
  	
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
         <div id="container">
             <div id="aside">
                 <h2 class="asideMenu">전시회 소개</h2>
-                     <ul>
-                    <li><a href="/intro/main">전시회안내</a></li>
-                    <li><a href="/history/main">연혁</a></li>
-                    <li><a href="/exhibition/calendar">전시회일정</a></li>
-                    <li><a href="/facilities/main">부대시설</a></li>
-                    <li><a href="/traffic/main">찾아오시는 길</a></li>
-              
+                <ul id="parent">
+                    <li><a class="chk" href="/page/intro">전시회안내</a></li>
+                    <li><a class="chk" href="/page/history">연혁</a></li>
+                    <li><a class="chk" href="/exhibition/calendar">전시회일정</a></li>
+                    <li><a class="chk" href="/page/facilities">부대시설</a></li>
+                    <li><a class="chk" href="/page/traffic">찾아오시는길</a></li>
                 </ul>
 
             </div>
-                <div id="content">
+            <div id="content">
                 <div class="title">
-                    <div class="map">home > 전시회 소개 > <strong>연혁</strong> </div>
+                    <div class="map">home > 전시회 소개 > 연혁 </div>
                     <h2 class="subName">연혁</h2>
                 </div>
-                  <div class="contentIn">
+                <div class="contentIn">
                         <div id="topmenu">
-                            <p>연 혁</p> 
+                            <p>연혁</p> 
                             <span>G-fair가 걸어온 길</span>
                         </div>
 

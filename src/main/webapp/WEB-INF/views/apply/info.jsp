@@ -57,22 +57,22 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">참가안내</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
-                    <li><a class="chk" href="/question/list">질문게시판</a></li>
-                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
-                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
-                    <li><a class="chk" href="/free/board">자유게시판</a></li>
-                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
+                    <li><a class="chk" href="/apply/info">참가신청안내</a></li>
+                    <li><a class="chk" href="/apply/app">참가신청</a></li>
+                    <li><a class="chk" href="/apply/applystatus">참가신청확인</a></li>
+                    <li><a class="chk" href="/apply/rule">참가규정</a></li>
+                    <li><a class="chk" href="/apply/booth">부스안내</a></li>
+                    <li><a class="chk" href="/apply/map">전시장배치도</a></li>
+                    <li><a class="chk" href="#">참가기업목록</a></li>
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 공지사항 </div>
-                    <h2 class="subName">공지사항</h2>
+                    <div class="map">home > 참가안내 > 참가신청안내 </div>
+                    <h2 class="subName">참가신청안내</h2>
                 </div>
                          <div class="contentIn">
                     <div id="topmenu">
