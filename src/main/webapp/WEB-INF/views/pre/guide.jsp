@@ -12,67 +12,12 @@
 
     <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
 
 </head>
-
-<style>
-    #container1{
-        width: 1200px;
-        margin-top: 50px;
-        font-weight: bold;
-    }
-
-    h1{
-        font-size: 25px;
-        font-weight: bold;
-    }
-
-    .btn1 {
-        width: 100px;
-        height: 40px;
-
-        border: 0;
-        
-        text-align: center;
-        background: #005bbb;
-        color: #fff;
-        font-size: 15px;
-        
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    table{
-        margin: 0 auto;
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .buttons{
-        width: 770px;
-        margin-left: 500px;
-    }
-
-    .background_color{
-        width: 150px;
-        background-color: #eee;
-        
-    }
-
-    .info{
-        width: 300px;
-        line-height: 40px;
-        height: 40px;
-    }
-
-    #exname{
-        width: 448px;
-        height: 40px;
-    }
-</style>
-
 <script>
     $(function(){
     	var tmp;
@@ -96,42 +41,8 @@
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
         });
-        
-
-        $("#quitBtn").on("click", function () {
-            location.href = "/event/listPerPage";
-        });
-
-
-        $("#submitBtn").on("click", function () {
-            let exhiname = $('#exname').val();
-            let exno = 0;
-            console.log('exhiname: ', exhiname);
-
-            <c:forEach items="${__EXHI__}" var="ex">
-                if('${ex.exname}' == exhiname){
-                    console.log('exno', '${ex.exno}'),
-                    exno = '${ex.exno}',
-                    $('#exno').attr('value', exno)
-                }
-            </c:forEach>
-
-            if(exhiname == 'selected'){
-                alert('전시회를 선택해주세요')
-            }else{
-                let formObj = $('#form')
-
-                // formObj.attr('action', "/pre/registerAction");
-                // formObj.attr('method', "POST");
-                formObj.submit();
-                
-                alert('사전예약이 완료되었습니다.')
-
-            }//if - else
-        });
     })//end jq
 </script>
-<<<<<<< HEAD
 <style>
     .contentIn > div {
         margin-top: 20px;
@@ -170,8 +81,6 @@
         color: red;
     }
 </style>
-=======
->>>>>>> parent of a2e3643 (jsp modify)
 <body>
     <div id="wrap">
  	
@@ -188,21 +97,16 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 관람정보 > 사전관람신청 </div>
-                    <h2 class="subName">사전관람신청</h2>
+                    <div class="map">home > 관람정보 > 사전관람안내 </div>
+                    <h2 class="subName">사전관람안내</h2>
                 </div>
                 <div class="contentIn">
-<<<<<<< HEAD
                     <p>개별신청</p>
                     <div class="guideWrap">
                         <div class="guideImg"></div>
                         <p>사전등록 시 현장에서의 별도 등록절차가 없으므로 현장의 혼잡을 피할 수 있습니다.</p>
                         <p>※ 사전등록하신 분에 한하여, 현장 방문시 추첨을 통하여 다양한 경품을 드립니다.</p>
                     </div>
-=======
-                	
-                    <!-- 여기에 게시판 넣으면 됩니다. -->
->>>>>>> parent of a2e3643 (jsp modify)
                 </div>
             </div>
         </div>
