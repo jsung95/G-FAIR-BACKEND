@@ -86,10 +86,9 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
@@ -100,7 +99,7 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 고객의소리 </div>
+                    <div class="map">home > 커뮤니티 > 고객의소리 </div>
                     <h2 class="subName">고객의소리</h2>
                 </div>
 
