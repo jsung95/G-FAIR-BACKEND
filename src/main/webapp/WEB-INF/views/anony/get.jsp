@@ -45,41 +45,19 @@
             'background-position': 'right center'
         });
         
-
+        function removeBtnChild(){
+            $('form').attr('action','/anony/remove').attr('method','POST').submit();
+        }
     })//end jq
 </script>
 <script>
     $(function(){
 
-        $('#regBtn').on('click',function(){
-            
-            location.href = "/anony/register?bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        });//regBtn
-        
-        $('#reregBtn').on('click',function(){
-            
-            location.href = "/anony/retrieve?title=${board.title}&reproot=${board.reproot}&repstep=${board.repstep}&repindent=${board.repindent}&bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        });//reregBtn
-        
-        $('#modifyBtn').on('click',function() {
-            
-            location.href = "/anony/modify?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        })//modifyBtn
-        
-        $('#listBtn').on('click',function(){
-            
-            location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        });//listBtn
-
         //iframe 높이 자동조절
         let iframe = document.getElementById("child-iframe"); 
 
         iframe.addEventListener('load', function() { 
-            iframe.height = iframe.contentWindow.document.body.scrollHeight +390+ 'px'; 
+            iframe.height = iframe.contentWindow.document.body.scrollHeight +490+ 'px'; 
             console.log(iframe.height);
             // iframe.style.width = iframe.contentDocument.body.scrollWidth + 'px'; 
         });
@@ -110,12 +88,13 @@
                     <h2 class="subName">고객의소리</h2>
                 </div>
                 <p>&nbsp;</p>
+                
                 <!-- 상세페이지 -->
                 <div class="contentIn">
                     <iframe id="child-iframe" src="/anony/getPage?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" frameborder="0" width="1200" scrolling='no'></iframe>
                 </div>
                 <!-- 버튼 -->
-                <div class=getBtn>
+                <!-- <div class=getBtn>
                     <div>
                         <c:if test="${__LOGIN__.memberid != null}">
                             <button type="button" class="buttonstyle" id="regBtn">글쓰기</button>&nbsp;&nbsp;
@@ -128,7 +107,13 @@
                     <div>
                         <button type="button" class="buttonstyle" id="listBtn">목록</button>
                     </div>
-                </div>
+                </div> -->
+
+                <!-- test -->
+                <form action="/anony/remove" method="POST" id="removeForm">
+                    <input type="hidden" name="bno" value="${board.bno}">
+        
+                </form>
                 <p>&nbsp;</p>
             </div>
         </div>

@@ -31,6 +31,39 @@
         <script>
             $(function(){
 
+                // 버튼클릭관련
+                $('#reregBtn').on('click',function(){
+                    
+                    window.parent.location.href = "/anony/retrieve?title=${board.title}&reproot=${board.reproot}&repstep=${board.repstep}&repindent=${board.repindent}&bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                    
+                });//reregBtn
+                
+                $('#modifyBtn').on('click',function() {
+                    
+                    window.parent.location.href = "/anony/modify?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                    
+                })//modifyBtn
+
+                $('#removeBtn').on('click',function(){
+
+                    var con = confirm("정말 삭제하시겠습니까?");
+                    if(con){//확인 눌렀을 때
+
+                        $('#removeForm').attr('action','/anony/remove').attr('method','POST').submit();
+
+                        top.location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                    }else {
+                        return false;
+                    }
+                                
+                });//removeBtn
+
+                $('#listBtn').on('click',function(){
+                    
+                    window.parent.location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                    
+                });//listBtn
+
            
 
                  // 댓글관련 처리
@@ -323,7 +356,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+                        <h4 class="modal-title" id="myModalLabel">댓글</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -340,10 +373,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
-                        <button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
-                        <button id="modalRegisterBtn" type="button" class="btn btn-default" data-dismiss="modal">Register</button>
-                        <button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
+                        <button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
+                        <button id="modalRegisterBtn" type="button" class="btn btn-default" data-dismiss="modal">등록</button>
+                        <button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                     </div>
                 </div>
                 <!-- modal-content -->
@@ -353,5 +386,19 @@
         <!-- modal -->
     <!-- -------------------------------------------------------------------------------------------------- -->
         
+        <div class=getBtn>
+            <div>
+                <c:if test="${__LOGIN__.memberid eq board.memberid}">
+                        <button type="button" class="buttonstyle" id="modifyBtn">수정</button>
+                        <button type="button" class="buttonstyle" id="removeBtn">삭제</button>&nbsp;&nbsp;
+                </c:if>
+                <c:if test="${__LOGIN__.memberid != null}">
+                    <button type="button" class="buttonstyle" id="reregBtn">답글</button>
+                </c:if>
+            </div>
+            <div>
+                <button type="button" class="buttonstyle" id="listBtn">목록</button>
+            </div>
+        </div>
     </body>
 </html>

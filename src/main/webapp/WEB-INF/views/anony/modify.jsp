@@ -64,7 +64,14 @@
         });//regBtn
         
         $('#removeBtn').on('click',function(){
-            $('form').attr('action','/anony/remove').attr('method','POST').submit();
+            var removeConfirm = confirm("정말 삭제하시겠습니까?");
+
+            if(removeConfirm){
+                parent.removeBtnChild();
+                
+            } else {
+                return false;
+            }//if-else
                         
         });//removeBtn
     })//.jq

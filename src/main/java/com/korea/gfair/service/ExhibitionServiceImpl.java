@@ -2,6 +2,7 @@ package com.korea.gfair.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -50,20 +51,25 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 	public List<FullCalendarDTO> getVisitPartList(List<ExhibitionVO> exList) {//부분만추출
 		log.debug("getVisitPartList() invoked");
 		
-//		FullCalendarDTO dto = new FullCalendarDTO();
+		//캘린더 객체 얻기
+		Calendar cal = Calendar.getInstance();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		String url = "get?exno=";
 		List<FullCalendarDTO> reExList = new ArrayList<>();
-		//void accept(T t);
-//		exList.forEach(log::info);
+		
 		exList.forEach(t -> {
 			FullCalendarDTO dto = new FullCalendarDTO();
 			
 			dto.setUrl(url+t.getExno().toString());
 			dto.setTitle(t.getExname());
 			dto.setStart(sdf.format(t.getExstart()));
-			dto.setEnd(sdf.format(t.getExend()));
+			
+			//일정캘린더용으로 쓰려면 하루를 더해야한다!
+			cal.setTime(t.getExend());//날짜를 넣어줌
+			cal.add(Calendar.DATE,+1);//넣은 날짜 +1
+			dto.setEnd(sdf.format(cal.getTime()));
 			
 			log.info("\t + 객체정보 :" +t);
 			reExList.add(dto);

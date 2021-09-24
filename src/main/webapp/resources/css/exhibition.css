@@ -185,7 +185,8 @@ td:nth-child(7)  {
     
     /* line-height: 40px; */
     text-align: center;
-
+    border: 0px;
+    
     background-color: #005bbb;
     color: #fff;
     font-size: 15px;

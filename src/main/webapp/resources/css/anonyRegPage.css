@@ -29,6 +29,8 @@ button:hover {
     font-size: 15px;
     font-weight: bold;
 
+    border: 0px;
+    
     color: white;
     background-color: #005bbb;
 }

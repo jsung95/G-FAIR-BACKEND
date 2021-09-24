@@ -20,6 +20,7 @@ button:hover {
     margin-top: 10px;
     margin-left: 10px;
     
+    border: 0px;
     text-align: center;
 
     background-color: rgb(44, 62, 80);
@@ -46,6 +47,7 @@ button:hover {
 .exhibitionWrap input,textarea {
     margin: 10px;
     font-size: 20px;
+    min-width: 280px;
     width: 100%;
 }
 .exBtnStyle {

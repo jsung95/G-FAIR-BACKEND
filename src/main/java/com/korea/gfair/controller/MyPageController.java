@@ -36,7 +36,6 @@ import com.korea.gfair.domain.LoginDTO;
 import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.domain.PageDTO;
-import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.service.MemberService;
 import com.korea.gfair.service.MyPageService;
 import com.korea.gfair.util.ApiCaptchaImage;
@@ -340,15 +339,28 @@ public class MyPageController {
 	}//VIEW
 	
 	//패스워드 확인용
-	@GetMapping({"getPass"})
+	@PostMapping({"getPass"})
 	@ResponseBody
-	public String getPass(String memberid) throws Exception{//전송받은 아이디값으로 패스워드를 알려줌
-		log.debug("getPass() invoked",memberid);
+	public String getPass(LoginDTO dto) throws Exception{//전송받은 아이디값으로 패스워드를 알려줌
+		log.debug("getPass() invoked",dto);
 		
-		MemberVO memberVO = this.memberService.searchMember(memberid);
-		log.info("memberVO : ",memberVO);
+		MemberVO memberVO = this.memberService.searchMember(dto.getMemberid());
+		String digest = UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(dto.getMemberpw());
 		
-		return memberVO.getMemberpw();
+		log.info("pw : "+memberVO.getMemberpw().toString());
+		log.info("digest:"+digest.toString());
+		
+		
+		if(memberVO.getMemberpw().equals(digest)) {
+			log.info("성공>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			
+			return "success";
+			
+		}else {
+			log.info("실패>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			
+			return "fail";
+		}//if-else
 	}//checkPass
 	
 	
@@ -359,6 +371,9 @@ public class MyPageController {
 		
 		Objects.nonNull(this.memberService);
 		log.info("\t+ memberService: "+this.memberService);
+		
+		String digest = UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(dto.getMemberpw());
+		dto.setMemberpw(digest);
 		
 		MemberVO user = this.memberService.login(dto);
 		
