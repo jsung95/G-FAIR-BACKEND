@@ -56,7 +56,7 @@
                                     <li><a href="#">참가신청안내</a></li>
                                     <li><a href="#">참가신청</a></li>
                                     <li><a href="/apply/rule">참가규정</a></li>
-                                    <li><a href="#">부스안내</a></li>
+                                    <li><a href="/apply/booth">부스안내</a></li>
                                     <li><a href="/apply/map">전시장배치도</a></li>
                                     <li><a href="#">참가기업목록</a></li>
                                 </ul>

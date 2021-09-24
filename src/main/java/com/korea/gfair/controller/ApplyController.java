@@ -139,5 +139,12 @@ public class ApplyController {
 		
 	}
 	
+	@GetMapping("booth")
+	public void booth() {
+		log.debug("booth() invoked.");
+		
+		
+	}//booth()
+	
 	
 }//end class
