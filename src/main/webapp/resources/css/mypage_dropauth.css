@@ -1,6 +1,8 @@
 
 #wrapper{
     width: 1200px;
+    display: flex;
+    justify-content: center;
 }
 
 #inner_con{
@@ -10,6 +12,11 @@
     flex-direction: column;
 
     
+}
+
+#buttons{
+	display: flex;
+    justify-content: center;
 }
 
 input{

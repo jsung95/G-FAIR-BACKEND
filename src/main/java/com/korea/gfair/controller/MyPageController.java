@@ -148,23 +148,23 @@ public class MyPageController {
 		dto.setMemberpw(currentPassword);
 		
 		HttpSession session =req.getSession();
-		MemberDTO sessionDto =(MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO sessionVO =(MemberVO)session.getAttribute("__LOGIN__");
 		
 		log.info("parameter dto password : {}",dto.getMemberpw());
-		log.info("session dto password : {}", sessionDto.getMemberpw());
+		log.info("session dto password : {}", sessionVO.getMemberpw());
 		
 		
 		//입력한 기존비밀번호와 세션영역에 올라온 비밀번호가 일치했을때 
-		if(sessionDto.getMemberpw().equals(dto.getMemberpw())) {
+		if(sessionVO.getMemberpw().equals(dto.getMemberpw())) {
 			
 			
 			//1. 새 비밀번호 암호화 
 			String encodedNewPassword =
 			UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(newMemberpw);
-			//2. 새 비밀번호로 sessiondto에 set
-			sessionDto.setMemberpw(encodedNewPassword);
+			//2. 새 비밀번호로 dto set
+			dto.setMemberpw(encodedNewPassword);  // 
 			//3. 서비스 메소드 호출 
-			boolean result=this.service.modifyPassword(sessionDto);
+			boolean result=this.service.modifyPassword(dto);
 			
 				if(result) {	//업데이트 성공시 
 					attrs.addFlashAttribute("__RESULT__", "비밀번호 변경 성공");
@@ -200,9 +200,9 @@ public class MyPageController {
 		dto.setMemberpw(currentPassword);
 		
 		HttpSession session =req.getSession();
-		MemberDTO sessionDto =(MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO sessionVO =(MemberVO)session.getAttribute("__LOGIN__");
 		
-		if(!sessionDto.getMemberpw().equals(dto.getMemberpw())) {	//만약 기존 비밀번호 틀릴경우
+		if(!sessionVO.getMemberpw().equals(dto.getMemberpw())) {	//만약 기존 비밀번호 틀릴경우
 			model.addAttribute("__RESULT__","false");
 		}//if
 		
@@ -215,11 +215,11 @@ public class MyPageController {
 		log.debug("emailCode(req) invoked.");
 		HttpSession session =req.getSession();
 		
-		MemberDTO dto = (MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO vo = (MemberVO)session.getAttribute("__LOGIN__");
 		//------------------------------------------------------------------		
 		//1. session에 올라간 dto이용해 email 가져오기 
 		//------------------------------------------------------------------		
-		String toEmail =this.service.getEmail(dto);
+		String toEmail =this.service.getEmail(vo);
 		//------------------------------------------------------------------		
 		//2. email 발송
 		//------------------------------------------------------------------
@@ -271,9 +271,9 @@ public class MyPageController {
 		
 		HttpSession session =req.getSession();
 		
-		MemberDTO dto = (MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO vo = (MemberVO)session.getAttribute("__LOGIN__");
 		
-		boolean result = this.service.fireMember(dto);
+		boolean result = this.service.fireMember(vo);
 		
 		if(result) {
 			session.invalidate();
@@ -291,11 +291,11 @@ public class MyPageController {
 		
 		HttpSession session =req.getSession();
 		
-		MemberDTO dto = (MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO vo = (MemberVO)session.getAttribute("__LOGIN__");
 		
-		PageDTO pageDTO = new PageDTO(cri,this.service.getReplyTotalCount(cri,dto));
+		PageDTO pageDTO = new PageDTO(cri,this.service.getReplyTotalCount(cri,vo));
 		
-		List<BoardReplyJoinVO> replyList =this.service.getReplyList(cri,dto);
+		List<BoardReplyJoinVO> replyList =this.service.getReplyList(cri,vo);
 		
 		model.addAttribute("__REPLY__", replyList);
 		model.addAttribute("__PAGE__",pageDTO);

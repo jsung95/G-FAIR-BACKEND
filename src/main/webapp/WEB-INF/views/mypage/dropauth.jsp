@@ -101,7 +101,9 @@
                                     <input type="password" id="memberpw" name="memberpw">
                                 </div>
                                 
-                                <button type="button" id="passBtn">확인</button>
+                                <div id="buttons">
+                                    <button type="button" id="passBtn">확인</button>
+                                </div>
                             </form>
                         </div>
                     </div>

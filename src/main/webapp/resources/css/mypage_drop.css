@@ -1,14 +1,10 @@
-*{
-    margin: 0 auto;
-    padding: 0;
-    font-family: "Noto Sans KR Light";
-    
-}
 
-#content{
+
+#wrapper{
     width: 1200px;
     
-    
+    display: flex;
+    justify-content:center;
 }
 
 form{
@@ -35,6 +31,10 @@ input{
     align-self: stretch;
 }
 
+h2{
+	font-size : 18px;
+}
+
 button{
     cursor: pointer;
     border: solid 1px #005bbb;
@@ -44,6 +44,12 @@ button{
     width: 100px;
     height: 44px;
     margin-bottom: 1px;
+}
+
+#buttons{
+	width:300px;
+	display: flex;
+    justify-content:center;
 }
 
 div#info_agree{
@@ -62,6 +68,8 @@ div.info_user{
     height: 100px;
 
     border: 1px solid #e1e1e1;
+    
+    text-align: center;
 }
 
 div.info_user em{
@@ -88,8 +96,9 @@ div#info_user_check h3{
 }
 
 div#formdata,div#formdata2{
-    width: 700px;
+    width: 100%;
     display: flex;
+    justify-content:center;
 }
 
 div#emailbox{
