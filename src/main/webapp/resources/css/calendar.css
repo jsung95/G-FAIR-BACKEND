@@ -32,17 +32,25 @@ button:hover {
     justify-content: flex-end;
 }
 /* --------------------------------------- */
+.exhibitionWrap table {
+    margin: 0px auto;
+}
+.exhibitionWrap tr {
+    font-size: 20px;
+    width: 100%;
+}
 .exhibitionWrap th {
     font-size: 20px;
-    width: 150px;
+    width: 25%;
 }
-.exhibitionWrap input {
+.exhibitionWrap input,textarea {
+    margin: 10px;
     font-size: 20px;
-    width: 310px;
+    width: 100%;
 }
 .exBtnStyle {
     height: 50px;
-    width: 230px;
+    width: 40%;
     margin-top: 10px;
  
     font-size: 20px;

@@ -44,13 +44,40 @@
     })//end jq
 </script>
 <style>
+    .contentIn > div {
+        margin-top: 20px;
+    }
+    .contentIn > p {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 30px;
+    }
+    .contentIn > p {
+        margin-left: 30px;
+        background-image: url("/resources/img/guide_bul.jpg");
+        background-repeat: no-repeat;
+        height: 20px;
+        line-height: 20px;
+        padding-left: 23px;
+    }
     .guideImg {
-        background-image: url();
+        width: 100%;
+        height: 300px;
+        padding: 30px;
+        background-image: url("/resources/img/guide.jpg");
+        background-repeat: no-repeat;
     }
-    .contentIn > p:nth-child(1){
+    .guideWrap {
+        margin-left: 60px;
+        height: 800px;
+    }
+    .guideWrap > p:nth-child(2){
+        font-size: 20px;
         font-weight: bold;
+        margin-top: 30px;
     }
-    .contentIn > p:nth-child(2){
+    .guideWrap > p:nth-child(3){
+        font-size: 20px;
         color: red;
     }
 </style>
@@ -74,10 +101,12 @@
                     <h2 class="subName">사전관람안내</h2>
                 </div>
                 <div class="contentIn">
-                	
-                    <div class="guideImg"></div>
-                    <p>사전등록 시 현장에서의 별도 등록절차가 없으므로 현장의 혼잡을 피할 수 있습니다.</p>
-                    <p>※ 사전등록하신 분에 한하여, 현장 방문시 추첨을 통하여 다양한 경품을 드립니다.</p>
+                    <p>개별신청</p>
+                    <div class="guideWrap">
+                        <div class="guideImg"></div>
+                        <p>사전등록 시 현장에서의 별도 등록절차가 없으므로 현장의 혼잡을 피할 수 있습니다.</p>
+                        <p>※ 사전등록하신 분에 한하여, 현장 방문시 추첨을 통하여 다양한 경품을 드립니다.</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -61,7 +61,6 @@
     </head>
     <body>
         <div class="exhibitionWrap">
-            <p id="totalCount"></p>
             <form id="exRegisterForm">
                 <table>
                     <tbody>
@@ -79,7 +78,7 @@
                         </tr>
                         <tr>
                             <th>전시내용</th>
-                            <td><textarea name="excontent"cols="40" rows="15" placeholder="전시일정 내용을 입력해주세요" required></textarea></td>
+                            <td><textarea name="excontent" rows="10" placeholder="전시일정 내용을 입력해주세요" required></textarea></td>
                         </tr>
                     </tbody>
                 </table>

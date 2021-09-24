@@ -113,7 +113,7 @@
 
     $(function(){
         $('#exRegBtn').on('click',function(){
-            window.open("/exhibition/calRegister","tst","width=400, height=400, toolbar=no, menubar=no,scrollbars=no,resizable=yes");
+            window.open("/exhibition/calRegister","tst","width=500, height=500, toolbar=no, menubar=no,scrollbars=no,resizable=yes");
         })//exRegBtn
 
         $('#exListBtn').on('click',function(){
