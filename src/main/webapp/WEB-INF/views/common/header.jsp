@@ -11,11 +11,11 @@
                             <c:if test="${__LOGIN__.memberid != null}">
                                 <li class="tm1"><a href="/login/logout">로그아웃</a></li>
                                 <!-- 관리자가 로그인 했을 때 -->
-                                <c:if test="${__LOGIN__.membertype == '관리자'}">
+                                <c:if test="${__LOGIN__.memberid == 'admin'}">
                                     <li class="tm1"><a href="/admin/adminPage">관리페이지</a></li>
                                 </c:if>
                                 <!-- 회원이 로그인 했을 때 -->
-                                <c:if test="${__LOGIN__.membertype != '관리자'}">
+                                <c:if test="${__LOGIN__.memberid != 'admin'}">
                                     <li class="tm1"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}">마이페이지</a></li>
                                 </c:if>
                             </c:if>

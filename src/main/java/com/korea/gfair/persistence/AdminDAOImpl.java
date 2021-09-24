@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.korea.gfair.domain.ApplyVO;
-import com.korea.gfair.domain.MemberVO;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -127,23 +126,5 @@ public class AdminDAOImpl implements AdminDAO {
 		}//try-with-resources
 		
 	}//updateApplyPaymentTF
-	
-	
-	
-	//이진성 - 관리자페이지 > 회원관리
-	@Override
-	public List<MemberVO> selectMemberList(String membertype) {
-		
-		String sqlId = "selectMemberList";
-		String sql = AdminDAOImpl.namespace+"."+sqlId;
-		
-		SqlSession session = this.sqlSessionFactory.openSession();
-		
-		try(session;) {
-			List<MemberVO> applylist = session.selectList(sql);
-			
-			return applylist;
-		}
-	}
 
 }//end class
