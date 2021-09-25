@@ -109,11 +109,13 @@
                                 <input type='hidden' name='fpath'>
                                 <input type='hidden' name='filetype' value="false">
                 
-                                <p class='bnameSize'>고객의소리</p>
-                                
-                                <div class="fontLine"><input class="fontSize" type="text" name="title" placeholder="제목을 입력해 주세요" required></div>
+                                <p class='bnameSize'>고객의소리 글쓰기</p>
                                 
                                 <div class="fontLine">
+                                    <div><input class="fontSize" type="text" name="title" placeholder="제목을 입력해 주세요" required></div>
+                                </div>
+                                
+                                <div>
                                     <p class="fontSize">
                                         작성자 : ${__LOGIN__.memberid}
                                         

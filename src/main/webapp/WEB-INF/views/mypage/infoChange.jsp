@@ -29,24 +29,16 @@
                     location.href = "/mypage/checkPass";
                 })//changeCancel
 
-                var numberRegex = /0[0-9]{1,2}-[^0][0-9]{3,4}-[0-9]{4}$/;//숫자만(연락처)
-                var cbnoRegex = /[^0][1-9]{1}[0-9]{9}$/;//숫자만 사업자번호
+                // var numberRegex = /0[0-9]{1,2}-[^0][0-9]{1}[0-9]{2,3}-[^0][0-9]{1}[0-9]{3}$/;//숫자만(연락처)
+                var numberRegex = /^\d{2,3}-\d{3,4}-\d{4}/g;
+                // var cbnoRegex = /[^0][1-9]{1}[0-9]{9}$/;//숫자만 사업자번호
                 var emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;//이메일
                
                 var changeEmailAddress = '${member.email}';//바뀔 이메일 주소=> 기본값 원래 주소
 
                 
 // ---------------------------------이메일변경----------------------------------------------
-                        
-                //로직 : 0. 이메일수정버튼을 누르면 인증번호전송 탭이 나타난다 ==ok!
-                // 1. 제대로 수행했을 때 ( 변경할 이메일을 입력하고 인증과정 수행) ==ok!
-                // 2. 제대로 수행 안했을 때 ( 인증을 제대로 수행안하고 회원변경 버튼 눌렀을 때) ==ok!
-                // 3. 인증을 수행했는데 취소했을때 ==ok!
-                // 4. 그냥 취소했을 때 ==ok!
-
-                //추가. 변경할 이메일주소가 기존회원메일이면 안된다!
-
-
+               
                 var mailWrapBtn = document.getElementById('mail_wrap');//이메일 인증관련 body
                 var email = $('.mail_input');//메일적는칸 가져오기
                 
@@ -79,8 +71,8 @@
                 var infoChangeForm;
 
                 // 인증번호 이메일 전송
-                $('.mail_check_button').click(function(){//인증코드버튼 눌렀을 때 --> 메일을 발송하고 시간체크해야함.
-
+                $('.mail_check_button').click(function(){//인증코드버튼 눌렀을 때 
+                    
                    // -----------------------이메일 체크------------------  
                     var emailElement = document.getElementById('email');//id값으로 요소얻기
                     var pemail = document.getElementById('pemail');//id값으로 요소얻기
@@ -108,7 +100,7 @@
 
                         console.log('3. emailReseult',emailResult);
 
-                        alert("이미 등록된 정보입니다.");
+                        alert("이미 등록된 정보입니다. 수정한 내용을 확인해주세요");
                         emailElement.focus();
 
                         return false;
@@ -129,7 +121,7 @@
                         //시간표시영역
                         var display = $('.time');
                         //유효시간 설정
-                        var leftSec = 20;
+                        var leftSec = 180;
                         
                         startTimer(leftSec, display);
 
@@ -189,7 +181,7 @@
 
                         }else {//시간이 초과 안됏을 때
                             
-                            $('.mail_check').on('click',function(){//인증번호확인 눌렀을 때
+                            $('.mail_check_Message').on('click',function(){//인증번호확인 눌렀을 때
 
                                 if( inputCode == code){//if - 번호 일치했을 때
                                     
@@ -200,7 +192,16 @@
                                     $(".mail_check_input").attr('disabled',true);
                                     changeEmailAddress = email.val();//입력된 값으로
 
-                                }//if - 번호 일치했을 때
+                                }else{//불일치
+                                    let checkResult = $('#mail_check_input_box_warn');
+
+                                    checkResult.html('인증번호를 다시 확인해주세요.');
+                                    checkResult.attr('class','incorrect');
+
+                                    //기존 메일주소를 전송함
+                                    changeEmailAddress = '${member.email}'; // 
+                                    
+                                }//if-else 
                             })//인증번호확인 눌렀을 때
 
                         }//if-else
@@ -271,7 +272,7 @@
 
                     if(pcResult != 0){//결과값으로 등록된 정보 체크
                         console.log('2. pcResult',pcResult);
-                        alert("이미 등록된 정보입니다.");
+                        alert("이미 등록된 정보입니다. 수정한 내용을 확인해주세요");
 
                         return false;
                     }
@@ -281,13 +282,6 @@
                    
                     if(numberRegex.test(phone.value)){//정규표현식에 만족할 때
 
-                        if(phone.value.length > 13 || phone.value.length < 9){
-                            phone.focus();
-
-                            pphone.innerHTML="자릿수가 안맞습니다.";
-
-                            return false;
-                        }//폰번호가 9자리보다 작거나 11자리가 넘을때
                         phone.style.color = "black";
 
                         pphone.innerHTML="&nbsp;";
@@ -307,7 +301,28 @@
                    
                     // ------------------------------------사업자번호 체크---------------------------------------------------
                     
-                    cbnoCheck()//사업자번호 정규표현식,자리수 체크
+                    console.log('cbnoCheck')
+                
+                    var cbno = document.getElementById('cbno');//id값으로 요소얻기
+                    var pcbno = document.getElementById('p_cbno');//id값으로 요소얻기
+                        
+
+                    if(cbnoRegex.test(cbno.value)){//정규표현식에 만족할 때
+
+                        cbno.style.color = "black";
+                        pcbno.innerHTML="&nbsp;";
+
+                        console.log("사업자번호 완료!");
+
+                    } else {//숫자만 아닐때
+                        cbno.focus();
+                        cbno.style.color = "red";
+
+                        pcbno.innerHTML="형식이 안맞습니다.";
+                        pcbno.style.color = "red"
+                        
+                        return false;
+                    }//if-else
 
 // --------------------------------파일형식체크------------------------------------------------------  
                     var regex = new RegExp("(.*?)\.(JPG|PNG|jpg|png)$");//파일확장명 제한
@@ -365,7 +380,29 @@
                     console.log('cbnoBtn!!',cbnoInput.value);
 
                     //사업자번호 정규표현식,자리수 체크
-                    cbnoCheck()
+                    console.log('cbnoCheck')
+                    
+                    var cbnoRegex = /^[1-9]\d{9}$/g;//숫자만 사업자번호
+                    var cbno = document.getElementById('cbno');//id값으로 요소얻기
+                    var pcbno = document.getElementById('p_cbno');//id값으로 요소얻기
+                        
+
+                    if(cbnoRegex.test(cbno.value)){//정규표현식에 만족할 때
+
+                        cbno.style.color = "black";
+                        pcbno.innerHTML="&nbsp;";
+
+                        console.log("사업자번호 완료!");
+
+                    } else {//숫자만 아닐때
+                        cbno.focus();
+                        cbno.style.color = "red";
+
+                        pcbno.innerHTML="형식이 안맞습니다.";
+                        pcbno.style.color = "red"
+                        
+                        return false;
+                    }//if-else
 
                     let fileWrap = document.getElementById('fileWrap');
 
@@ -409,31 +446,31 @@
                 document.form.roadFullAddr.value = roadFullAddr;
 			}//jusoCallBack
 
-            function cbnoCheck(){
-                console.log('cbnoCheck')
+            // function cbnoCheck(){
+            //     console.log('cbnoCheck')
                 
-                var cbnoRegex = /^[1-9]\d{9}$/g;//숫자만 사업자번호
-                var cbno = document.getElementById('cbno');//id값으로 요소얻기
-                var pcbno = document.getElementById('p_cbno');//id값으로 요소얻기
+            //     var cbnoRegex = /^[1-9]\d{9}$/g;//숫자만 사업자번호
+            //     var cbno = document.getElementById('cbno');//id값으로 요소얻기
+            //     var pcbno = document.getElementById('p_cbno');//id값으로 요소얻기
                     
 
-                if(cbnoRegex.test(cbno.value)){//정규표현식에 만족할 때
+            //     if(cbnoRegex.test(cbno.value)){//정규표현식에 만족할 때
 
-                    cbno.style.color = "black";
-                    pcbno.innerHTML="&nbsp;";
+            //         cbno.style.color = "black";
+            //         pcbno.innerHTML="&nbsp;";
 
-                    console.log("사업자번호 완료!");
+            //         console.log("사업자번호 완료!");
 
-                } else {//숫자만 아닐때
-                    cbno.focus();
-                    cbno.style.color = "red";
+            //     } else {//숫자만 아닐때
+            //         cbno.focus();
+            //         cbno.style.color = "red";
 
-                    pcbno.innerHTML="형식이 안맞습니다.";
-                    pcbno.style.color = "red"
+            //         pcbno.innerHTML="형식이 안맞습니다.";
+            //         pcbno.style.color = "red"
                     
-                    return false;
-                }//if-else
-            }//cbnoCheck
+            //         return false;
+            //     }//if-else
+            // }//cbnoCheck
         </script>
     </head>
     <body>
@@ -443,17 +480,22 @@
                 <div class="memberInfoWrap">
                     <input type="hidden" name="mno" value="${member.mno}">
                     <input type="hidden" name="fid" value="${member.fid}">
+
+                    <div class='bnameSize'>기본정보변경</div>
+
                     <div class="memberInfo">
+                        
+
                         <div class='contentLine'>
                             <p>아이디</p>
                             <div><input type="hidden" name="memberid" value="${member.memberid}">${member.memberid}</div>
                         </div>
-                        <p>&nbsp;</p>
+                        
                         <div class='contentLine'>
                             <p>회원명</p>
                             <div><input type="hidden" name="membername" value="${member.membername}">${member.membername}</div>
                         </div>
-                        <p>&nbsp;</p>
+                        
                         <div class='contentLine'>
                             <p>주소</p>
                             <div>
@@ -461,14 +503,14 @@
                                 <button type="button" class="mailbuttonStyle" onclick="goPopup()">주소찾기</button>
                             </div>
                         </div>
-                        <p>&nbsp;</p>
+                        
                         <div class='contentLine'>
                             <p>연락처</p>
                             <div><input type="tel" name="phone" id="phone" placeholder="${member.phone}" value="${member.phone}" required>'-'을 붙여서 입력해주세요<br>
-                                <p id="p_phone"></p></div>
+                                <span id="p_phone"></span></div>
                         </div>
                         
-                        <p>&nbsp;</p>
+                        
                         <c:if test="${member.membertype == '기업'}">
                             <div class='contentLine'>
                                 <p>사업자번호</p>
@@ -484,34 +526,36 @@
                                     </label>
                                 </div>
                             </div>
-                            <p>&nbsp;</p>
+                            
                         </c:if>
 
                         <div class='contentLine'>
                             <p>가입일자</p>
-                            <div><input type="hidden" name="signdate" value="${member.signdate}">
-                                <fmt:formatDate pattern="yyyy-MM-dd" value="${member.signdate}"/></div>
+                            <div><fmt:formatDate pattern="yyyy-MM-dd" value="${member.signdate}"/></div>
                         </div>
-                        <p>&nbsp;</p>
+                        
                         <div class='contentLine'>
                             <p>회원유형</p>
                             <div><input type="hidden" name="membertype" value="${member.membertype}">${member.membertype}</div>
                         </div>
-                        <p>&nbsp;</p>
+                        
                         
                         <div class='contentLine'>
                         <p>이메일</p>
-                            <input type="hidden" name="email" id='mailParam' value="${member.email}">${member.email}
+                        <input type="hidden" name="email" id='mailParam' value="${member.email}">
+                        <div class="inlineDiv">
+                            <div>${member.email}</div>
                             <button type="button" class="mailbuttonStyle" id="emailBtn">수정하기</button>
                         </div>
+                        </div>
 
-                        <p>&nbsp;</p>
+                        
                         <!--============================================= 이메일관련  =============================================-->                            
                         <div class='contentLine' id="mail_wrap" style="display: none;">
                             <div class="mail_name"><p>변경할 이메일주소</p></div>
                             <div class="mail_input_box">
                                 <input class="mail_input" id='email' name="emailSub" value="">
-                                <p id="pemail"></p>
+                                <span id="pemail"></span>
                             </div>
                             
                             <div class="mail_check_wrap">
@@ -519,7 +563,7 @@
                                     <input class="mail_check_input" disabled="disabled"><!-- 인증코드 체크 -->
                                 </div>
                                 <div class="mail_check_button">
-                                    <span>인증메일발송</span>
+                                    <div>인증메일발송</div>
                                 </div>
                             </div>
 
@@ -539,7 +583,7 @@
                     </div> 
                 </div>
 
-                <p>&nbsp;</p>
+                
                 <div>
                     <button type="submit" id="infoChangeBtn" class="buttonstyle">변경</button>
                     <button type="button" id="changeCancel" class="buttonstyle" >취소</button>

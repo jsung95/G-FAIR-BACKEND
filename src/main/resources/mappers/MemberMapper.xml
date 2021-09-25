@@ -15,12 +15,17 @@
             SET
                 memberaddress = #{memberaddress},
                 phone = #{phone},
-                email = #{email},
+        ]]>
+            <if test="cbno != null and cbno != ''">
                 cbno = #{cbno},
-                fid = #{fid, jdbcType=INTEGER}
+            </if>
+            <if test="fid != null and fid != ''">
+                fid = #{fid, jdbcType=INTEGER},
+            </if>
+                email = #{email}
             WHERE
                 memberid = #{memberid}
-        ]]>
+        
     </update>
 
     <select id="getMember" resultType="com.korea.gfair.domain.MemberVO">
@@ -43,8 +48,11 @@
             WHERE
                 memberid != #{memberid}
                 AND ( phone = #{phone} 
-                    OR cbno = #{cbno}
-                    OR email = #{email})
         ]]>
+                <if test="cbno != null and cbno != ''">
+                   OR cbno = #{cbno}
+                </if>
+                    OR email = #{email})
+        
     </select>
 </mapper>

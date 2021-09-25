@@ -127,17 +127,19 @@
                                     <input type='hidden' name='filetype' value="false">
                 
                                     
-                                    <p class='bnameSize'>고객의소리</p>
-                                    <p>&nbsp;</p>
+                                    <p class='bnameSize'>고객의소리 글수정</p>
+                                    <div class="fontLine">
+                                        <div><input class="fontSize" type="text" name="title" value="${board.title}" required></div>
+                                    </div>
 
-                                    <div><input class="fontSize" type="text" name="title" value="${board.title}" required></div>
-                                    <p>&nbsp;</p>
-                                    <p class="fontSize">
-                                        작성자&nbsp;&nbsp;${__LOGIN__.memberid}
-
-                                        <input type="radio" name="public_tf" value="T" checked>공개
-                                        <input type="radio" name="public_tf" value="F">비공개
-                                    </p>
+                                    <div>
+                                        <p class="fontSize">
+                                            작성자&nbsp;&nbsp;${__LOGIN__.memberid}
+                                            
+                                            <input type="radio" name="public_tf" value="T" checked>공개
+                                            <input type="radio" name="public_tf" value="F">비공개
+                                        </p>
+                                    </div>
 
                                     <div class="editorContent">
                                         <textarea name="editor1" placeholder="내용을 입력해 주세요" required>${board.content}</textarea>

@@ -112,7 +112,7 @@
         })
 
         // 체크박스 전체선택
-        $("input:checkbox[name='exno']").click(function(){
+        $("input:checkbox[name='exnoAll']").click(function(){
             if($(this).is(":checked")){
                 $("input:checkbox[name='exno']").each(function() {
                     $(this).prop("checked",true);
@@ -140,6 +140,7 @@
                     <li><a class="chk" href="/admin/memberBoard">회원글관리</a></li>
                     <li><a class="chk" href="/admin/memberReply">회원댓글관리</a></li>
 
+                    <li><a class="chk" href="/mypage/adminInfo">기본정보변경</a></li>
                     <li><a class="chk" href="/admin/apply">참가기업관리</a></li>
                     <li><a class="chk" href="/exhibition/list">전시일정관리</a></li>
                 </ul>
@@ -152,12 +153,14 @@
                 </div>
                 <div class="contentIn">
                     <div id="exhibitionWrap">
-                        <p id="totalCount"></p>
+                        
+                        <p id="totalCount">전체글 수 : ${page.totalAmount}</p>
+
                         <form id="checkboxDelForm">
                              <table>
-                                 <thead>
+                                 <thead class="exHeadLine">
                                      <tr>
-                                         <th><input type="checkbox" name="exno" value="${ex.exno}"></th>
+                                         <th><input type="checkbox" name="exnoAll"></th>
                                          <th>번호</th>
                                          <th>전시명</th>
                                          <th>전시시작일</th>

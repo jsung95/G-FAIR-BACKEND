@@ -122,7 +122,7 @@
 
 
         // 체크박스 전체선택
-        $("input:checkbox[name='bno']").click(function(){
+        $("input:checkbox[name='bnoAll']").click(function(){
             if($(this).is(":checked")){
                 $("input:checkbox[name='bno']").each(function() {
                     $(this).prop("checked",true);
@@ -146,11 +146,11 @@
             <div id="aside">
                 <h2 class="asideMenu">마이페이지</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="#">비밀번호변경</a></li>
+                    <li><a class="chk" href="/mypage/modifypassword">비밀번호변경</a></li>
                     <li><a class="chk" href="/mypage/myInfo">회원정보변경</a></li>
                     <li><a class="chk" href="/myBoard/list?memberid=${__LOGIN__.memberid}">내가쓴글</a></li>
-                    <li><a class="chk" href="#">내가쓴댓글</a></li>
-                    <li><a class="chk" href="#">회원탈퇴</a></li>
+                    <li><a class="chk" href="/mypage/replymanage">내가쓴댓글</a></li>
+                    <li><a class="chk" href="/mypage/dropauth">회원탈퇴</a></li>
                 </ul>
 
             </div>
@@ -166,7 +166,7 @@
                         <thead>
                             <form id="selectBoardForm"></form>
                                 <tr>
-                                    <th><input type="checkbox" name="bno" value="${board.bno}"></th>
+                                    <th><input type="checkbox" name="bnoAll"></th>
                                     <th>번호</th>
                                     <th>제목</th>
                                     <th>내용</th>

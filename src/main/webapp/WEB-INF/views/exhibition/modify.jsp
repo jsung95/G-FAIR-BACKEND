@@ -90,7 +90,9 @@
                 <div class="contentIn">
                     <div class="exhibitionWrap">
                         <form id="exModifyForm" action="/exhibition/modify" method="POST">
-                            <h2>전시회일정 수정</h2>
+                            <p class='bnameSize'>전시회일정 수정</p>
+                            <div class="fontLine"></div>
+                            
                             <input type="hidden" name="currPage" value=${cri.currPage}>
                             <input type="hidden" name="amount" value=${cri.amount}>
                             <input type="hidden" name="pagesPerPage" value=${cri.pagesPerPage}>
@@ -104,15 +106,15 @@
                                     </tr>
                                     <tr>
                                         <th>전시시작일</th>
-                                        <td><input type="date" name="exstart" value="${schedule.exstart}" required></td>
+                                        <td><input type="date" name="exstart" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${schedule.exstart}"/>' required></td>
                                     </tr>
                                     <tr>
                                         <th>전시마감일</th>
-                                        <td><input type="date" name="exend" value="${schedule.exend}" required></td>
+                                        <td><input type="date" name="exend" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${schedule.exend}"/>' required></td>
                                     </tr>
                                     <tr>
                                         <th>전시내용</th>
-                                        <td><textarea name="excontent"cols="40" rows="10" value="${schedule.excontent}" required>${schedule.excontent}</textarea></td>
+                                        <td><textarea name="excontent" rows="15" value="${schedule.excontent}" required>${schedule.excontent}</textarea></td>
                                     </tr>
                                 </tbody>
                             </table>

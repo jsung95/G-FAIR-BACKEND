@@ -48,12 +48,11 @@
 </script>
 <script>
     $(function(){
-        //일정등록
-        $('#exRegBtn').on('click',function(){
-            
-            location.href = "/exhibition/register?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-
-        });//regBtn
+        //일정삭제
+        $('#removeBtn').on('click',function(){
+            $('form').attr('action','/exhibition/remove?exno=${schedule.exno}').attr('method','POST').submit();
+                        
+        });//removeBtn
 
         //수정하기
         $('#exModifyBtn').on('click',function() {
@@ -71,6 +70,29 @@
 
     })
 </script>
+<style>
+    /* 테이블(전시정보) */
+.exInfo {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 99%;
+}
+.exInfo > tr,th {
+    border-top: none;
+}
+.exInfo td {
+    width: 600px;
+}
+.exInfo p {
+    padding: 20px;
+
+    text-align: center;
+    font-size: 20px;
+}
+td:nth-child(2) {
+    color: #000;
+}
+</style>
 <body>
     <div id="wrap">
  	
@@ -84,10 +106,6 @@
                     <li><a class="chk" href="/admin/memberBoard">회원글관리</a></li>
                     <li><a class="chk" href="/admin/memberReply">회원댓글관리</a></li>
 
-                    <li><a class="chk" href="/admin/adminInfo">관리자정보관리</a></li>
-                    <li><a class="chk" href="/admin/list">관리자글관리</a></li>
-                    <li><a class="chk" href="/admin/reply">관리자댓글관리</a></li>
-
                     <li><a class="chk" href="/admin/apply">참가기업관리</a></li>
                     <li><a class="chk" href="/exhibition/list">전시일정관리</a></li>
                 </ul>
@@ -99,7 +117,7 @@
                     <h2 class="subName">전시일정관리</h2>
                 </div>
                 <div class="contentIn">
-                    <div id="exWrapper">
+                    <!-- <div id="exWrapper"> -->
                         <div id="getPage">
                            <div class="subjectLine">
                                 <!-- 글제목 -->
@@ -141,8 +159,8 @@
                             <div class=btn>
                                 <div>
                                     <c:if test="${__LOGIN__.memberid == 'admin'}">
-                                        <button type="button" class="buttonstyle" id="exRegBtn">일정등록</button>&nbsp;&nbsp;
                                         <button type="button" class="buttonstyle" id="exModifyBtn">수정</button>
+                                        <button type="button" class="buttonstyle" id="removeBtn">삭제</button>&nbsp;&nbsp;
                                     </c:if>
                                 </div>
                                 <div>
@@ -150,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>

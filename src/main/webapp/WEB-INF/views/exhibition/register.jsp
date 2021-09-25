@@ -82,7 +82,8 @@
                 <div class="contentIn">
                     <div class="exhibitionWrap">
                         <form id="exRegisterForm" method="POST" action="/exhibition/register">
-                            <h2>전시회일정 등록</h2>
+                            <p class='bnameSize'>전시회일정 등록</p>
+                            <div class="fontLine"></div>
                             <table>
                                 <tbody>
                                     <tr>
@@ -99,7 +100,7 @@
                                     </tr>
                                     <tr>
                                         <th>전시내용</th>
-                                        <td><textarea name="excontent"cols="20" rows="30" placeholder="전시일정 내용을 입력해주세요" required></textarea></td>
+                                        <td><textarea name="excontent" rows="15" placeholder="전시일정 내용을 입력해주세요" required></textarea></td>
                                     </tr>
                                 </tbody>
                             </table>

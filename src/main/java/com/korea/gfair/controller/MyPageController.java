@@ -315,9 +315,9 @@ public class MyPageController {
 	
 	
 	//VIEW만 호출용
-	@GetMapping({"checkPass","jusoPopup","myInfo"})
+	@GetMapping({"checkPass","jusoPopup","myInfo","adminInfo"})
 	public void VIEW() throws Exception{
-		log.debug("VIEW : checkPass,jusoPopup() invoked");
+		log.debug("VIEW : checkPass,jusoPopup,myInfo,adminInfo() invoked");
 		
 	}//VIEW
 	

@@ -51,7 +51,7 @@
         let iframe = document.getElementById("child-iframe"); 
 
         iframe.addEventListener('load', function() { 
-            iframe.height = iframe.contentWindow.document.body.scrollHeight+500+ 'px'; 
+            iframe.height = iframe.contentWindow.document.body.scrollHeight+300+ 'px'; 
             console.log(iframe.height);
             // iframe.style.width = iframe.contentDocument.body.scrollWidth + 'px'; 
         });
@@ -64,20 +64,22 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">마이페이지</h2>
+                <h2 class="asideMenu">관리페이지</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/mypage/modifypassword">비밀번호변경</a></li>
-                    <li><a class="chk" href="/mypage/myInfo">회원정보변경</a></li>
-                    <li><a class="chk" href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=10&pagesPerPage=10">내가쓴글</a></li>
-                    <li><a class="chk" href="/mypage/replymanage">내가쓴댓글</a></li>
-                    <li><a class="chk" href="/mypage/dropauth">회원탈퇴</a></li>
+                    <li><a class="chk" href="/admin/memberList">회원관리</a></li>
+                    <li><a class="chk" href="/admin/memberBoard">회원글관리</a></li>
+                    <li><a class="chk" href="/admin/memberReply">회원댓글관리</a></li>
+
+                    <li><a class="chk" href="/mypage/adminInfo">기본정보변경</a></li>
+                    <li><a class="chk" href="/admin/apply">참가기업관리</a></li>
+                    <li><a class="chk" href="/exhibition/list">전시일정관리</a></li>
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 마이페이지 > 회원정보변경 </div>
-                    <h2 class="subName">회원정보변경</h2>
+                    <div class="map">home > 관리페이지 > 기본정보변경 </div>
+                    <h2 class="subName">기본정보변경</h2>
                 </div>
                
                 <div class="contentIn">

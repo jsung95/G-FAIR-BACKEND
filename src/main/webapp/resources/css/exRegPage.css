@@ -35,18 +35,14 @@ th, td {
 }
 
 /* ----------------------------------------------- */
-.exhibitionWrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
-    width: 99%;
+#exModifyForm input,textarea {
+    font-size: 15px;
+    padding: 5px;
+    width: 98%;
 
-    border: 3px solid rgb(187, 187, 187, 0.3);
-    border-radius: 10px;
-}
-#exRegisterForm, #exModifyForm {
-    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 #exRegisterForm input,textarea {
     font-size: 15px;
@@ -56,22 +52,16 @@ th, td {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-#exModifyForm input,textarea {
-    font-size: 15px;
-    padding: 5px;
-    width: 98%;
-
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
 /* ------------------------register----------------------- */
 /* 게시판명 */
 .bnameSize {
     margin: 20px 0px 10px 0px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
+}
+.fontLine {
+    border-top: 3px solid #005bbb;
+    width: 100%;
 }
 /* content fontSize */
 .fontSize {
@@ -90,6 +80,6 @@ th, td {
 .getBtn {
     display: flex;
     justify-content: space-around;
-    margin-top: 100px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 100px;
 }
