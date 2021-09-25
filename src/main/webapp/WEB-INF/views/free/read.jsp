@@ -39,6 +39,15 @@
                 location.href = "/free/write?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
             });
             
+            $('#removeBtn').on('click', function(){
+                console.log('removeBtn button clicked...');
+				var obj = $('#form');
+		/*		obj.attr('action','/free/remove?bno='+${__READ__.bno});*/
+				obj.attr('action','/free/remove');
+				obj.attr('method','POST');
+				obj.submit();
+            });//onclick
+            
 
 
         }); //jq
@@ -65,13 +74,21 @@
     	
     	}
     	
+
+		#modifyBtn{
+			float: left;
+			margin-left:5px;
+		}
+		
+		#removeBtn{
+			float: left;
+			margin-left:5px;
+		}
+		
 		#regBtn{
 			float:left;
-		
-		}
-		#modifyBtn{
-			float: right;
 			margin-left:5px;
+		
 		}
 		
 		#listBtn{
@@ -224,8 +241,9 @@
 				    <div id="content_wrap">${__READ__.content}</div>
 				    
 				    <div id="btn_wrap">
-					    <button id="regBtn" class="btn" type="button">글쓰기</button>
-					    <button id="modifyBtn" class="btn" type="button">수정</button>					    
+					    <button id="modifyBtn" class="btn" type="button">수정</button>	
+				        <button id="removeBtn" class="btn" type="button">삭제</button>
+					    <button id="regBtn" class="btn" type="button">글쓰기</button>				    
 					    <button id="listBtn" class="btn" type="button">목록</button>
 	    			</div>
                 </div>

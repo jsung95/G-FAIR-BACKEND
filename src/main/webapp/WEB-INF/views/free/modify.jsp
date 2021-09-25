@@ -60,7 +60,11 @@
 					obj.submit();
 	            });//onclick
 	            
+	            $('#modifyBtn').on('click', function(){
+	                console.log('listBtn button clicked...');
 	            
+	            	location.href="modify?bno=${__READ__.bno}";
+	            });//onclick
 
 	        }); //jq
 	
@@ -121,6 +125,11 @@
 			
 		}
 		
+    	#btn_wrap{
+    		width:100%;
+    		height:50px;
+    	}
+		
 		.btn{
 			width: 100px;
 			height: 40px;
@@ -134,8 +143,18 @@
 			margin-top:10px;
 		}
 		
+		
+		#modifyBtn{
+			float: left;
+		}
+		
+		#removeBtn{
+			float: left;
+			margin-left:5px;
+		}
+		
 		#listBtn{
-			float:right;
+			float: right;
 		}
 		
 		
@@ -183,10 +202,11 @@
 				        <textarea id="editor" name="content">${__READ__.content}</textarea>
 						
 				        
-			
-				        <input id="submitBtn" class="btn" type="submit" value="수정">
-				        <button id="removeBtn" class="btn" type="button">삭제</button>
-				        <button id="listBtn" class="btn" type="button">목록</button> 
+						<div id="btn_wrap">
+					   		<button id="modifyBtn" class="btn" type="button">수정</button>	
+					        <button id="removeBtn" class="btn" type="button">삭제</button>
+					        <button id="listBtn" class="btn" type="button">목록</button>
+				        </div>
 			        </form>
 			        
 			            <script>

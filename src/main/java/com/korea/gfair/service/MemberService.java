@@ -56,15 +56,15 @@ public interface MemberService {
 	//=================김희용====================//
 	//=================김희용====================//
     public abstract void sendMailAuth(MemberDTO dto,HttpSession session) throws MessagingException;         //메일발송
-    public abstract Integer memberIdCheck(String memberid);                                    //아이디 중복 검사
-    public abstract Integer emailCheck(String email);                                       //이메일 중복 검사
-    public abstract Integer phoneCheck(String phone);                                       //연락처 중복 검사
-    public abstract boolean authKeyCheck(HttpSession session,String email, String inputCode);         //인증키 검사
-    public abstract void memberJoin(MemberDTO dto);                                          //회원가입
-    public abstract String memberIdFind(String email) throws IOException;                        //개인회원 아이디 찾기   
-    public abstract Integer memberPwFind(String memberid,String email);                           //개인 비밀번호 찾기(정보검색)
-    public abstract Integer newPassword(String memberid,String email,String pw) throws NoSuchAlgorithmException, UnsupportedEncodingException;                                                //비밀번호 변경
-    public abstract void sendMailPw(HttpSession session,String memberid,String email,String pw);                     //비밀번호 메일발송 
+    public abstract Integer memberIdCheck(String memberid);                                    				//아이디 중복 검사
+    public abstract Integer emailCheck(String email);                                       				//이메일 중복 검사
+    public abstract Integer phoneCheck(String phone);                                       				//연락처 중복 검사
+    public abstract boolean authKeyCheck(HttpSession session,String email, String inputCode);       		//인증키 검사
+    public abstract void memberJoin(MemberDTO dto);                                          				//회원가입
+    public abstract String memberIdFind(String email) throws IOException;                        			//개인회원 아이디 찾기   
+    public abstract Integer memberPwFind(String memberid,String email);                           			//개인 비밀번호 찾기(정보검색)
+    public abstract Integer newPassword(String memberid,String email,String pw) throws NoSuchAlgorithmException, UnsupportedEncodingException; //비밀번호찾기시 비밀번호변경                                            //비밀번호 변경
+    public abstract void sendMailPw(HttpSession session,String memberid,String email,String pw);            //비밀번호 메일발송 
 	   
     
 	//=================원승대====================//

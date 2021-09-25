@@ -147,20 +147,20 @@
 	<!--==================== 김희용 ====================-->
 	<!--==================== 김희용 ====================-->
 	<select id="selectMemberId" resultType="int">
-		SELECT count(*)
+		SELECT count(memberid)
 		FROM tbl_member
 		WHERE memberid = #{memberid}
 	</select>
 	
 	<select id="selectPhone" resultType="int">
-		SELECT count(*)
+		SELECT count(phone)
 		FROM tbl_member
 		WHERE phone = #{phone}
 	</select>
 	
 	
 	<select id="selectEmail" resultType="int">
-		SELECT count(*)
+		SELECT count(email)
 		FROM tbl_member
 		WHERE email = #{email}
 	</select>

@@ -376,11 +376,11 @@ public class MemberController {
 	@PostMapping("/sendMailPw")
 	public String sendMailPw(HttpSession session,String memberid,String email) throws Exception {
 		
-		String password = (String)session.getAttribute("pw");			//패스워드 난수값 얻기
+		String password = (String)session.getAttribute("pw");				//패스워드 난수값 얻기
 		int result = reg_service.newPassword(memberid, email, password);	//비밀번호 암호화
 		reg_service.sendMailPw(session, memberid, email, password);			//임시 비밀번호 메일 발송
 		
-			log.info("!@#$!@#!@$!@#!#!@#"+result);
+			log.info("!!!!!!!!"+result);
 			if(result == 1) {
 				
 				return "success";
@@ -413,7 +413,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/memberIdChk")
 	public String memberIdChk(@RequestParam("memberid") String memberid) throws Exception {
-		
+		log.info("#"+ memberid);
 		int result = reg_service.memberIdCheck(memberid);
 		// result = 1  이메일 존재
 		// result = 0  이메일 없음
