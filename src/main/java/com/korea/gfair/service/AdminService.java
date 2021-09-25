@@ -13,5 +13,6 @@ public interface AdminService {
 	public boolean modifyPaymentStatusAndApplyPaymentTF(List<Integer> applynoList) throws Exception;
 
 	//이진성 - 관리자페이지 > 회원관리
-	public List<MemberVO> getMemberList(String membertype);
+	public List<MemberVO> getMemberList();
+	public void delMember(List<Integer> mnoList);
 }//end interface

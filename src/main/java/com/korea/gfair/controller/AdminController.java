@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.ApplyVO;
@@ -68,11 +69,26 @@ public class AdminController {
 	
 	//이진성 - 관리자페이지 > 회원관리
 	@GetMapping("memberList")
-	public void memberList(@RequestParam("membertype") String membertype, Model model) {
+	public void memberList(Model model) {
 		
-		List<MemberVO> members = this.service.getMemberList(membertype);
+		List<MemberVO> members = this.service.getMemberList();
 		
 		model.addAttribute("members", members);
 	}
+	
+	
+	
+	
+	@PostMapping("delMember")
+	public String delMember(@RequestParam("mno")List<Integer> mnoList) {
+		log.info("mno List : {}", mnoList);
+		
+		this.service.delMember(mnoList);
+		
+		return "redirect:/admin/memberList";
+		
+	}
+	
+	
 	
 }//end class

@@ -14,5 +14,6 @@ public interface AdminDAO {
 	public boolean updateApplyPaymentTF(List<Integer> applynoList) throws Exception;
 	
 	//이진성 - 관리자페이지 > 회원관리
-	public List<MemberVO> selectMemberList(String membertype);
+	public List<MemberVO> selectMemberList();
+	public void dropMember(List<Integer> mnoList);
 }//end interface

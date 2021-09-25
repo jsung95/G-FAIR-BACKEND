@@ -96,11 +96,24 @@
 	
 		<!-- 이진성 - 관리자페이지 > 회원관리 -->
 	<select id="selectMemberList" resultType="com.korea.gfair.domain.MemberVO">
+		
 		SELECT
 			/*+ index_desc(tbl_member) */ *
 		FROM
 			tbl_member
-		WHERE
-			membertype = #{membertype}
 	</select>
+	
+	<update id="dropMember">
+		UPDATE 
+			tbl_member
+		SET
+			drop_tf = 'T',
+			dropdate = sysdate
+		WHERE 
+			mno in
+		<foreach item="mnoList" collection="list" open="(" separator="," close=")">
+			#{mnoList}
+		</foreach>
+	
+	</update>
 </mapper>
