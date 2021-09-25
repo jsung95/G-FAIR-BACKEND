@@ -54,13 +54,51 @@ input{
 }
 
 table{
-    width: 1000px;
+    width: 100%;
     border: 1px solid #005bbb;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+
+table, th, td {
+    border: 1px solid rgb(201, 201, 201);
     border-collapse: collapse;
 }
 
-tbody{
+th {
+    background-color: rgb(245, 245, 245);
+    height: 50px;
+    font-size: 20px;
+    border-top: 3px solid #005bbb;
+
+}
+
+td {
+    height: 40px;
+    font-size: 15px;
     text-align: center;
+}
+
+
+tr:hover {
+    background-color: rgba(187, 187, 187, 0.1);
+}
+
+a, a:link, a:visited {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+/* 선택 */
+td:nth-child(1){
+    width: 70px;
+}
+/* 게시판 */
+td:nth-child(2) {
+    width: 100px;
+    text-align: center; 
 }
 
 #recontent{

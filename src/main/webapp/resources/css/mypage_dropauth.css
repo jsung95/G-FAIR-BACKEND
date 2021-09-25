@@ -3,6 +3,8 @@
     width: 1200px;
     display: flex;
     justify-content: center;
+    
+    font-size: initial;
 }
 
 #inner_con{

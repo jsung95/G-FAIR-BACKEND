@@ -147,7 +147,7 @@
                                                 <td><input type="checkbox" name="reno" value="${reply.reno}"></td>
                                                 <td>${reply.bname}</td>
                                                 <td><a href="/${reply.bname}/get?bno=${reply.bno}">${reply.recontent}</a></td>
-                                                <td><fmt:formatDate value="${reply.redate}" type="date"/></td>
+                                                <td><fmt:formatDate value="${reply.redate}" pattern="yyyy/MM/dd"/></td>
                                                
                                             </tr>
                                         </c:forEach>

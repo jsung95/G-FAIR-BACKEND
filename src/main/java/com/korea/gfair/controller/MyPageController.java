@@ -63,25 +63,8 @@ public class MyPageController {
 	private JavaMailSender mailSender;
 	
 	@Autowired private MemberService memberService;
-//	---------------------------------------------------------------
-	@GetMapping("sample")
-	public String sample(RedirectAttributes attrs,HttpServletRequest req) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		log.debug("sample() invoked.");
-		
-		MemberDTO dto = new MemberDTO();
-		dto.setMemberid("dani125");
-		
-		String pw  =UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest("12345");
-		
-		dto.setMemberpw(pw);
-		
-		HttpSession session =req.getSession();
-		session.setAttribute("__LOGIN__", dto);
-		
-		return "redirect:/question/list";
-	}//sample
+
 	
-//	----------------------------------------------------------------
 	
 	@PostMapping("captchaAuth")
 	public ResponseEntity<String> captchaAuth(

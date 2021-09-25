@@ -327,9 +327,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            	<c:set var="no" value="${__PAGE__.totalAmount - (__PAGE__.cri.currPage - 1) * __PAGE__.cri.amount}"/>
                                 <c:forEach items="${__LIST__}" var="list">
                                     <tr>
-                                        <td>${list.bno}</td>
+                                        <td>${no}</td>
                                         
                                         
                                         <td>
@@ -345,7 +346,7 @@
                                         <td>${list.memberid}</td>
                                         
                                         <td>
-                                            <fmt:formatDate value="${list.insert_ts}" type="date"/>
+                                            <fmt:formatDate value="${list.insert_ts}" pattern="yyyy/MM/dd"/>
                                         </td>
                                         <td>${list.readcnt}</td>
                                         <td>
@@ -354,7 +355,7 @@
                                             </c:if>
                                         </td>
                                     </tr>
-                
+                				<c:set var="no" value="${no-1}"/>
                                 </c:forEach>
                             </tbody>
                         </table>
