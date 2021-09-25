@@ -113,7 +113,7 @@
                                 <div id="emailbox">
                                     <div id="formdata">
                                         <h4>본인확인을 위해 이메일 인증을 진행합니다.</h4>
-                                        <div id="buttons">
+                                        <div class="buttons">
                                             <button type="button" id="emailSendBtn">인증번호 발송</button>
                                         </div>
                                         
@@ -121,7 +121,9 @@
                                     <div id="formdata2">
                                         <input type="text" name="emailValue" id="emailValue" placeholder="인증번호를 입력하세요">
                                     </div>
-                                    <button type="button" id="emailAuthAndNextBtn">다음</button>
+                                    <div class="buttons">
+                                        <button type="button" id="emailAuthAndNextBtn">다음</button>
+                                    </div>
             
                                 </div>
                                 

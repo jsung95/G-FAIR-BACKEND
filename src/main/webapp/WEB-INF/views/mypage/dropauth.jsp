@@ -93,7 +93,7 @@
                 <div class="contentIn">
                     <div id="wrapper">
                         <div id="inner_con">
-                            <h3>회원탈퇴를 위해 비밀번호를 인증해주세요</h3>
+                            <h2>회원탈퇴를 위해 비밀번호를 인증해주세요</h2>
             
                             <form action="/mypage/drop" method="POST" id="passAuth">
                                 <div>

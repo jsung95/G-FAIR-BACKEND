@@ -5,17 +5,9 @@
 $(function () {
     console.debug('jq started...2');
     
-    $('#searchBtn').on('click',function () {
-        console.log('searchBtn on click triggered');
+ 
 
-        let searchForm = $('#replyForm');
-        
-        searchForm.attr('action', '/mypage/replymanage');
-        searchForm.attr('method', 'GET');
-
-        searchForm.submit();
-    });//sarch on click
-
+    // 리스트 
     $('#bname').on('change',function () {
         console.debug('bname on change event triggered');
         
@@ -25,7 +17,9 @@ $(function () {
         
         searchForm.attr('action', '/mypage/replymanage');
         searchForm.attr('method', 'GET');
-        
+        if(searchForm.find('select[name=bname]').val() == 'null'){
+            searchForm.find('select[name=bname]').val('');
+        }//if
         searchForm.submit();
     }); //on change
 });//.jq
