@@ -167,9 +167,10 @@ public class QuestionBoardController {
 	}//retrieve
 	
 	@PostMapping("modify")
-	public String modify(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs) throws Exception{
+	public String modify(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs,String editordata) throws Exception{
 		log.debug("modify({},{}) invoked.", dto, rttrs);
 		
+		dto.setContent(editordata);
 		boolean result=this.service.modify(dto);
 		
 		if(result) {

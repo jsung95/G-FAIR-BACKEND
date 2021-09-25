@@ -82,8 +82,12 @@
         justify-content: center;
     }
 
-    
     #pagination li{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+    }
+    #pagination li a{
 
         width: 30px;
         height: 30px;
@@ -93,16 +97,16 @@
         text-align: center;
         line-height: 30px;
 
-        border: 1px solid #ddd;
+        /* border: 1px solid #ddd; */
 
     }
 
-    .prev, .next{
+    /* .prev, .next{
         width: 70px !important;
         height: 30px;
         color: white;
         background-color: #005bbb;
-    }
+    } */
 
     #top{
         width: 95%;
@@ -132,10 +136,47 @@
 
     }
     
-    .currPage{
-        background-color: #005bbb;;
+    li.currPage{
+        border: 1px solid black;
     } 
 
+    .start{
+    text-indent:-9999em;
+    background-image: url(/resources/img/btn_pagination.png);
+    background-repeat: no-repeat;
+    background-size: 120px 30px;
+    border:1px solid #eee;
+
+    }
+
+    .prev{
+        text-indent:-9999em;
+        background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-30px;
+        border:1px solid #eee;
+    }
+
+    .next{		
+        text-indent:-9999em;
+        background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-60px;
+        border:1px solid #eee;
+
+    }
+
+    .end{
+        text-indent:-9999em;
+        background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-90px;
+        border:1px solid #eee;
+
+    }
     #count_list{
         padding: 20px 0 10px 0;
 
@@ -261,7 +302,7 @@
             location.href="/question/register";
         });//onclick
 
-        $('a.prev, a.next').on('click' , function (e) {
+        $('a.prev, a.next, a.end').on('click' , function (e) {
             console.debug();
             console.log('\t + this:', this);
 
@@ -281,8 +322,23 @@
             paginationForm.submit();
 
         }); //onclick for Prev, Next button
+       
+        
+        $('li.prev, li.start').on('click',function () {
+            console.log('on click triggered.. ');
 
+            var paginationForm = $('#paginationform');
 
+            paginationForm.attr('action', '/question/list');
+            paginationForm.attr('method', 'GET');
+
+            paginationForm.find('input[name=currPage]').val( '1' );
+            paginationForm.find('input[name=amount]').val( '${__PAGE__.cri.amount}');
+            paginationForm.find('input[name=pagesPerPage]').val('${__PAGE__.cri.pagesPerPage}');
+
+            paginationForm.submit();
+
+        });//li.prev on click event
     })//end jq
 </script>
 <body>
@@ -373,27 +429,41 @@
                                 <input type="hidden" name="pagesPerPage">
                                 
                                 <ul>
+
+                                    <li class="start"><a href="/question/list">첫페이지</a></li>
+
+                                    <c:if test="${!__PAGE__.prev}">
+                                        <li class="prev"><a href="/question/list">prev</a></li>
+                                    </c:if>
+
                                     <c:if test="${__PAGE__.prev}">
                                         <li class="prev"><a class="prev" href="${__PAGE__.startPage-1}">Prev</a></li>
                                     </c:if>
                                     
                                     <c:forEach 
-                                    begin="${__PAGE__.startPage}" 
+                                        begin="${__PAGE__.startPage}" 
                                         end="${__PAGE__.endPage}" 
                                         var="pageNum">
+
                                         <li class="${__PAGE__.cri.currPage == pageNum? 'currPage' : ''}">
                                             
                                             <a 	class="${__PAGE__.cri.currPage == pageNum? 'currPage' : ''}" 
                                             href="/question/list?currPage=${pageNum}&amount=${__PAGE__.cri.amount}&pagesPerPage=${__PAGE__.cri.pagesPerPage}&type=${__PAGE__.cri.type}&keyword=${__PAGE__.cri.keyword}">
                                             ${pageNum}
-                                        </a>
+                                            </a>
                                         
-                                    </li>
-                                </c:forEach>
+                                        </li>
+                                    </c:forEach>
                                 
                                     <c:if test="${__PAGE__.next}" >
-                                        <li class="next"><a class="next" href="${__PAGE__.endPage+1}">Next</a></li>
+                                        <li class="next"><a href="${__PAGE__.endPage+1}">Next</a></li>
                                     </c:if>
+
+                                    <c:if test="${!__PAGE__.next}">
+                                        <li><a class="next" href="${__PAGE__.realEndPage}">Next</a></li>
+                                    </c:if>
+
+                                    <li><a class="end" href="${__PAGE__.realEndPage}">끝페이지</a></li>
                                 </ul>
                             </form>
                         </div>

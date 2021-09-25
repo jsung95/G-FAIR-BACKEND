@@ -29,7 +29,9 @@
     }
 
     #register{
-        width: 900px;
+        width: 100%;
+        border-top: 5px solid #005bbb;
+        margin-top: 50px;
     }
 
     #title{
@@ -84,6 +86,12 @@
 
     td{
         padding: 5px;
+    }
+
+    #buttons{
+        width:900px;
+        display: flex;
+        justify-content: space-between;
     }
 </style>
 
@@ -187,8 +195,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <button type="submit" id="submitBtn">등록</button>
-                                        <button type="button" id="listBtn">목록</button>
+                                        <div id="buttons">
+                                            <button type="submit" id="submitBtn">등록</button>
+                                            <button type="button" id="listBtn">목록</button>
+
+                                        </div>
                                     </td>
                                 </tr>
                                 

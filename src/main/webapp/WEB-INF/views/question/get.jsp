@@ -52,6 +52,8 @@
         display: flex;
         justify-content: space-between;
 
+        border-top: 5px solid #005bbb;
+
     }
 
     #title span{
@@ -77,6 +79,7 @@
 
     #board_content{
         width: 99%;
+        min-height: 300px;
         font-size: 15px;
 
         border-top: 1px solid #999;
@@ -94,26 +97,34 @@
         background: #005bbb;
         color: #fff;
         font-size: 15px;
+        
     }
 
     #buttons{
         width: 1100px;
 
         display: flex;
+        justify-content:  space-between;
     
     }
 
-    #buttons :nth-child(3){
-        margin-left: 790px;
+    .hideBtn{
+        
+        width: 100px;
+        height: 40px;
+    }
+
+    #buttons :nth-child(4){
+        
         padding: 0;
     }
 
     #reply{
         margin-top: 20px;
-        width: 1100px;
-        
+        width: 1097px;
+
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     #reply textarea{
@@ -127,6 +138,11 @@
 
     #replylist{
         width: 1100px;
+        background-color: #f5f3f3;
+    }
+
+    #replylist tr{
+        border-bottom: 1px solid #eee;
     }
 
     #replylist tr td:nth-child(2){
@@ -135,6 +151,16 @@
 
     #replylist tr td:nth-child(3){
         width: 100px;
+    }
+
+    #replyRemoveBtn {
+        width: 50px;
+        height: 22px;
+        background-color: whitesmoke;
+        color: black;
+        font-size: 12px;
+        
+        line-height: 12px;
     }
 </style>
 
@@ -168,6 +194,15 @@
             console.log("event trigered");
             alert(result);
         }//if
+
+        $('#removeBtn').on('click', function () {
+            let form =$("form");
+
+            form.attr('action','/question/remove?bno=${__LIST__.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}');
+            form.attr('method','POST');
+
+            form.submit();
+        });//onclick remove
         
         $('#listBtn').on('click',function () {
             location.href="/question/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" 
@@ -266,8 +301,8 @@
                                         </div>
                                         <div id="content_info">
                                             <span>
-                                                등록일 : ${__LIST__.insert_ts} 
-                                                수정일 : ${__LIST__.update_ts}
+                                                등록일 : <fmt:formatDate value="${__LIST__.insert_ts}" pattern="yyyy/MM/dd"/>
+                                                수정일 : <fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
                                             </span>
                                             <span>
                                                 조회수 : ${__LIST__.readcnt}
@@ -281,8 +316,29 @@
                            
                             </div>
                             <div id="buttons">
-                                <button type="button" id="modifyBtn">수정</button>
-                                <button type="button" id="retrieveBtn">답글</button>
+                                <div>
+                                    
+                                    <button type="button" id="modifyBtn">수정</button>
+                                    
+                                    <c:choose>
+                                        <c:when test="${__LOGIN__.memberid == __LIST__.memberid || __LOGIN__.membertype eq '관리자'}">
+                                            <button type="button" id="removeBtn">삭제</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="hideBtn">&nbsp;</div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:choose>
+                                        <c:when test="${__LOGIN__.membertype eq '관리자'}">
+                                            <button type="button" id="retrieveBtn">답글</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="hideBtn">&nbsp;</div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+
+
                                 <button type="button" id="listBtn">목록</button>
                             </div>
                             
@@ -312,8 +368,15 @@
                                                 </td>
                                                 <td colspan="2">${re.recontent}</td>
                                                 <td>${re.memberid}</td>
-                                                <td>${re.redate}</td>
-                                                <td><button type="submit" id="replyRemoveBtn">삭제</button></td>
+                                                <td>
+                                                    <fmt:formatDate value="${re.redate}" pattern="yyyy/MM/dd"/>
+                                                </td>
+
+                                                <td>
+                                                    <c:if test="${__LOGIN__.memberid eq re.memberid}">
+                                                        <button type="submit" id="replyRemoveBtn">삭제</button>
+                                                    </c:if>
+                                                </td>
                                                 
                                             </tr>
                                         </c:forEach>

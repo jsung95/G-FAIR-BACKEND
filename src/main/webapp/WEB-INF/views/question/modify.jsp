@@ -12,9 +12,16 @@
 
     <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+
+    <!-- summernote -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+        
 
 </head>
 
@@ -25,7 +32,10 @@
     }
 
     #modifycontent{
-        width: 900px;
+        
+        width: 100%;
+        border-top: 5px solid #005bbb;
+        margin-top: 50px;
     }
     #title{
         display: inline-block;
@@ -34,12 +44,12 @@
 
         border: none;
         border-bottom: 1px solid grey;
-        
     }
 
-    td{
-        padding: 5px;
+    #modifycontent tr{
+        margin-bottom: 5px !important;
     }
+
 
     #file{
         display: none;
@@ -61,7 +71,11 @@
         border: 1px solid #005bbb;
     }
 
-    
+    #buttons{
+        width: 900px;
+        display: flex;
+        justify-content: space-between;
+    }
     button{
         border: none;
         width: 100px;
@@ -166,7 +180,8 @@
                             <input type="hidden" name="currPage" value="${cri.currPage}">
                             <input type="hidden" name="amount" value="${cri.amount}">
                             <input type="hidden" name="pagesPerPage" value="${cri.pagesPerPage}">
-            
+                            <input type="hidden" name="notice_tf" value="F">
+
                             <input type="hidden" name="bno" value="${__LIST__.bno}" readonly>
                             
                             <table id="modifycontent">
@@ -191,9 +206,14 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button type="submit" id="submitBtn">수정</button>
-                                            <button type="button" id="removeBtn">삭제</button>
-                                            <button type="button" id="listBtn">목록</button>
+                                            <div id="buttons">
+                                                <div>
+                                                    <button type="submit" id="submitBtn">수정</button>
+                                                    <button type="button" id="removeBtn">삭제</button>
+                                                </div>
+
+                                                <button type="button" id="listBtn">목록</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

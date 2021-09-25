@@ -101,7 +101,7 @@
                     <div id="wrapper">
 
                         <form action="/mypage/modifypassword" method="POST" id="modifyForm">
-                            
+                            <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
                             <div id="inner_con"> 
                                 <h4>기존 비밀번호 </h4>
                                 <input type="password" id="currPass" name="memberpw" autocomplete="off" placeholder=" 기존 비밀번호">
