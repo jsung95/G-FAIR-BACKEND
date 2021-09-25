@@ -27,11 +27,11 @@
             console.clear();
             console.debug('jq started...');
 
-            $('#cancelBtn').click(function() {
-                console.log('onclick for #cancelBtn clicked...');
+            $('#listBtn').click(function() {
+                console.log('onclick for #listBtn clicked...');
 
                 location.href = '/free/board';
-            });//onclick for #cancelBtn
+            });//onclick for #listBtn
             
             
 
@@ -111,11 +111,10 @@
 		}
 		
 		#submitBtn{
-			float:right;
-			margin-left:5px;
+			float:left;
 		}
 		
-		#cancelBtn{
+		#listBtn{
 			float:right;
 		}
 	</style>
@@ -157,8 +156,10 @@
 							<textarea id="editor" name="content" placeholder="내용을 입력하세요">${__READ__.content}</textarea>
 						<table>
                             <tr>
-                                <button type="submit" id="submitBtn" class="btn">글쓰기</button>
-                                <button type="button" id="cancelBtn" class="btn">취소</button>
+                            	<div id="btn_wrap">
+	                                <button type="submit" id="submitBtn" class="btn">등록</button>
+	                                <button type="button" id="listBtn" class="btn">목록</button>
+                                </div>
                             </tr>
                         </table>
                     </form>

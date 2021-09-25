@@ -71,6 +71,10 @@
         color: black;
         cursor: pointer;
     }
+    
+    td:nth-child(1){
+    	color:#005bbb;
+    }
     td:nth-child(2) {
 	    text-align: left;
 	    padding-left: 10px;
@@ -301,12 +305,21 @@
 		                <input type="hidden" name="keyword">
 		                
 		                <ul class="page">
-		                
-                               <li><a class="start" href="/free/board">첫페이지</a></li>
-                               
-                               <c:if test="">
-                               <li><a class="prev" href="/free/board?currPage=${pageMaker.startPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
-		                    	</c:if>
+		                	<c:set var="rep" value="${pageMaker.realEndPage}" />
+		                	<c:set var="curr" value="${pageMaker.cri.currPage}"/>
+		                	<fmt:formatNumber value="${curr}" type="number" var="currNumber" />
+                            <li><a class="start" href="/free/board">첫페이지</a></li>
+                         <c:choose>
+	                         <c:when test="${curr eq 1}">
+	                            <li><a class="prev" href="/free/board?currPage=1&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"">이전</a></li>
+	                         </c:when>
+	                         <c:when test="${curr%10 eq 1}">
+	                         	<li><a class="prev" href="/free/board?currPage=${pageMaker.startPage-10}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
+	                         </c:when>
+	                         <c:otherwise>
+	                            <li><a class="prev" href="/free/board?currPage=${pageMaker.startPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
+	                         </c:otherwise>
+                   		 </c:choose>
 		                    	
 		                    <c:forEach
 		                    	 begin="${pageMaker.startPage}"
@@ -320,10 +333,17 @@
 		                  		 </li>
 		
 		                    </c:forEach>
+		             
+		                    <c:choose>
+		                    	<c:when test="${curr eq rep}">
+		                    		<li><a class="next" href="/free/board?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"">다음</a></li>
+		                    	</c:when>
+		                    	<c:otherwise>
+                            		<li><a class="next" href="/free/board?currPage=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a></li>
+		                    	</c:otherwise>
+		                    </c:choose>
 		
-                            <c:if test="">
-                            <li><a class="next" href="/free/board?currPage=${pageMaker.endPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a></li>
-                            </c:if>
+                            
                             
                             <li><a class="end" href="/free/board?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">끝페이지</a></li>
 		                    
