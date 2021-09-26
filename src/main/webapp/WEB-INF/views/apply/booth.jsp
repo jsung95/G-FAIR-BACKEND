@@ -114,11 +114,16 @@
             }
 
             .booth_img{
+
                 margin-top: 30px;
                 margin-bottom: 30px;
-                width: 100%;
             }
 
+            .img_center{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
             .p_content{
                 font-size: 16px;
             }
@@ -285,7 +290,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <p>
+                            <p class="img_center">
                                 <img class="booth_img" src="/resources/img/sub3_3_img1.jpg">
                             </p>
 
@@ -387,9 +392,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <p>
+                            <p class="img_center">
                                 <img class="booth_img" src="/resources/img/sub3_3_img1.jpg">
                             </p>
+
 
 
                             <div>

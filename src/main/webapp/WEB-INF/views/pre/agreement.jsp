@@ -30,9 +30,7 @@
         background: #005bbb;
         color: #fff;
         font-size: 15px;
-
-        border-radius: 4px;
-
+        
         cursor: pointer;
     }
 
@@ -43,6 +41,7 @@
     }
 
     #contents{
+        font-size: 16px;
         padding: 30px 0 30px 10px;
     }
 
