@@ -114,4 +114,87 @@
 		FROM tbl_payment
 		WHERE applyno = #{applyno}
 	</select>
+	
+	<select id="applyList" resultType="com.korea.gfair.domain.ApplyFileVO">
+		SELECT
+			/*+ index_desc(tbl_apply) */
+			a.applyno,
+			a.cbno,
+			a.fid,
+			a.applycompany,
+			a.phone,
+			a.email,
+			a.memberid,
+			a.payment_tf,
+			a.agrstate_tf,
+			a.applyname,
+			a.applydate,
+			a.pno,
+			a.btno,
+			u.frename,
+			u.fpath,
+			u.forname
+		FROM 
+			tbl_apply a
+		LEFT OUTER JOIN 
+			tbl_uploadfile u
+		ON
+			a.fid = u.fid
+		WHERE
+			add_months(applydate,6) >= sysdate
+			
+		<if test="applyname != null and applyname != '' and applyname != '전체보기'">
+			AND applyname = #{applyname}
+		</if>
+		
+         OFFSET
+             (#{currPage} - 1)*#{amount} ROWS
+         FETCH NEXT #{amount} ROWS ONLY    
+          
+	</select>
+	
+	<select id="applyGet" resultType="com.korea.gfair.domain.ApplyFileVO">
+		SELECT
+			/*+ index_desc(tbl_apply) */
+			a.applyno,
+			a.cbno,
+			a.fid,
+			a.applycompany,
+			a.phone,
+			a.email,
+			a.memberid,
+			a.payment_tf,
+			a.agrstate_tf,
+			a.applyname,
+			a.applydate,
+			a.pno,
+			a.btno,
+			u.frename,
+			u.fpath,
+			u.forname
+		FROM 
+			tbl_apply a
+		LEFT OUTER JOIN 
+			tbl_uploadfile u
+		ON
+			a.fid = u.fid
+		WHERE 
+			applyno= #{applyno}
+	
+	</select>
+	
+	<select id="totalCount" resultType="int">
+        <![CDATA[ 
+            SELECT
+                count(applyno)
+            FROM
+                tbl_apply
+            WHERE
+                add_months(applydate,6) >= sysdate
+        ]]>
+        
+        <if test="applyname != null and applyname != ''">
+            AND applyname = #{applyname}
+        </if>
+    </select>
 </mapper>

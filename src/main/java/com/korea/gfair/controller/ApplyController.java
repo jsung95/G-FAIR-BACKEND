@@ -9,18 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.ApplyDTO;
+import com.korea.gfair.domain.ApplyFileVO;
 import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoothVO;
+import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.ExhibitionVO;
 import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.MemberVO;
+import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.domain.PaymentVO;
 import com.korea.gfair.service.ApplyService;
+import com.korea.gfair.service.ExhibitionService;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,6 +39,9 @@ public class ApplyController {
 	
 	@Autowired
 	ApplyService service;
+	
+	@Autowired private ExhibitionService exService;
+	
 	
 	@GetMapping("app")
 	public void appui() {
@@ -154,5 +162,42 @@ public class ApplyController {
 		
 	}//info()
 	
+	//======현아 - 참가기업목록
+	@GetMapping("companyList")
+	public void companyList(Criteria cri, 
+							@ModelAttribute("applyname") String applyname, 
+							 Model model) throws Exception {
+		log.debug("companyList({},{}) invoked.",cri,applyname);
 	
+		//한페이지에 12개씩
+		cri.setAmount(12);
+		
+		//기업리스트 최근6개월까지 가져오기
+		List<ApplyFileVO> list = this.service.getCompanyList(cri, applyname);
+		//페이징처리
+		PageDTO pageDTO = new PageDTO(cri,this.service.getTotalCount(applyname));
+		//전시회리스트 최근 6개월까지 가져오기
+		List<ExhibitionVO> exList = this.exService.getEx();
+		
+		log.info(exList);
+		
+		model.addAttribute("companyList", list);
+		model.addAttribute("page", pageDTO);
+		model.addAttribute("exList", exList);
+	
+	}//companyList
+	
+	@GetMapping("companyInfo")
+	public void companyInfo(@ModelAttribute("cri") Criteria cri, 
+							@ModelAttribute("applyname") String applyname, 
+							Integer applyno, 
+							Model model) throws Exception {
+		log.debug("companyInfo({}) invoked.",applyno);
+		
+		//해당 기업정보 1개 가져오기
+		ApplyFileVO applyFileVO = this.service.getCompany(applyno);
+		
+		model.addAttribute("company", applyFileVO);
+		
+	}//companyInfo
 }//end class

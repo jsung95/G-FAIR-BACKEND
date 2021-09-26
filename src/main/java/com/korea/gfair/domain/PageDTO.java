@@ -55,6 +55,12 @@ public class PageDTO {
 			this.endPage = this.realEndPage;
 		} // if
 
+		if (this.realEndPage == 0) {
+			this.realEndPage = 1;
+		}
+		if (this.endPage == 0) {
+			this.endPage = 1;
+		}
 		// ----------------------------------------------------------//
 		// --Step.4 : 이전 페이지번호목록으로 이동가능여부(prev) 구하기
 		// ----------------------------------------------------------//
