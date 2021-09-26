@@ -68,47 +68,55 @@
 	<context:component-scan base-package="com.korea.gfair.interceptor" />	
 	<context:component-scan base-package="com.korea.gfair.persistence" />		
 	
-	
-	<view-controller 
-		path="/main" 
-		view-name="/main/main" 
-		status-code="200" />
-		
 		
 	<interceptors>
+		<!-- ========================================= -->
+		<!-- = 로그인 처리 인터셉터 = -->
 		<interceptor>
 			<mapping path="/login/loginPost" />
 			
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
-
-		<interceptor>
-			<mapping path="/member/find_id_c_result" />
-			
-			<beans:ref bean="findInfoInterceptor" />
-		</interceptor>		
-		
-		<interceptor>
-		
-			<mapping path="/notice/answer"/>
-			<mapping path="/notice/modify"/>
-			<mapping path="/notice/register"/>
-			
-			<beans:ref bean="adminInterceptor"/>
-		</interceptor>
-		
-		<interceptor>
-			<mapping path="/main"/>
-			
-			<beans:ref bean="authInterceptor"/>
-		</interceptor>
+		<!-- ========================================= -->
 		
 		
+		<!-- ========================================= -->
+		<!-- = 사업자번호 인증 URL로 건너뛰는거 막기 = -->
 		<interceptor>
 			<mapping path="/member/join_c"/>
 			
 			<beans:ref bean="registerInterceptor"/>
 		</interceptor>
+		<!-- ========================================= -->
+
+
+		<!-- ========================================= -->
+		<!-- = 아이디 찾기 처리 인터셉터 = -->
+		<interceptor>
+			<mapping path="/member/find_id_c_result" />
+			
+			<beans:ref bean="findInfoInterceptor" />
+		</interceptor>
+		<!-- ========================================= -->
+		
+		
+		<!-- ========================================= -->
+		<!-- = 1. 관리자가 아닌 아이디로 접근 시에 페이지 접근 막기 = -->
+		<!-- = 2. 관리자가 아닌 아이디로 접근 시에 로그인 창으로 이동 = -->
+		<!-- = 3. 로그인이 안되어 있다면 로그인 창으로 이동 = -->
+		<interceptor>
+			<mapping path="/notice/answer"/>
+			<mapping path="/notice/modify"/>
+			<mapping path="/notice/register"/>
+			
+			<mapping path="/admin/adminPage"/>
+			<mapping path="/admin/memberList"/>
+			<mapping path="/admin/showDetailInfo"/>
+			
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
+		<!-- ========================================= -->
+		
 		
 
 		

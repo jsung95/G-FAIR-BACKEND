@@ -30,6 +30,21 @@
  			location.href="/notice/modify?bno=${board.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
  		});
  		
+    	// 삭제버튼 이벤트
+        $('#removeBtn').on('click', function() {
+        	var result = confirm('정말로 삭제하시겠습니까?');
+        	
+        	if(result) {
+        		let formObj = $('form');
+                formObj.attr('action', '/notice/remove/?bno='+${board.bno});
+                formObj.attr('method', 'POST');
+                formObj.submit();	
+        	}
+        	else {
+        		
+        	} //if-else
+        }); //onClick
+ 		
  		$('#answerBtn').on('click', function(){
  			location.href="/notice/answer?bno=${board.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
  		});
@@ -87,7 +102,7 @@
 
         height: 40px;
         
-        border-top: 3px solid #6f2b89;
+        border-top: 3px solid #005bbb;
     }
     
     .title_writer {
@@ -137,6 +152,7 @@
 	}
 	
 	#contents {
+		min-height: 300px;
 		border-top: 1px solid #eee;
 		border-bottom: 1px solid #eee;
 		padding: 30px 0 30px 10px;
@@ -162,7 +178,9 @@
         cursor: pointer;
 	}
 
-
+	#removeBtn {
+		margin-left: 5px;
+	}
 	#answerBtn {
 		margin-left: 5px;
 	}
@@ -292,10 +310,9 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
@@ -306,7 +323,7 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 공지사항 </div>
+                    <div class="map">home > 커뮤니티 > 공지사항 </div>
                     <h2 class="subName">공지사항</h2>
                 </div>
                 <div class="contentIn">
@@ -412,7 +429,8 @@
 							    <c:set var="insert" value="${sessionScope.__LOGIN__}" />
 							    <c:choose>
 							        <c:when test="${insert.membertype eq '관리자'}">
-							        	<button type="button" class="btn" id="modifyBtn">글수정</button>
+							        	<button type="button" class="btn" id="modifyBtn">수정</button>
+							        	<button type="button" class="btn" id="removeBtn">삭제</button>
 							            <button type="button" class="btn" id="answerBtn">답글</button>
 							        </c:when>
 							        <c:otherwise>

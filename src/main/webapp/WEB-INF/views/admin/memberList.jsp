@@ -123,7 +123,7 @@
 		cursor: pointer;
 	}
 	.contentIn {
-		min-height: 300px;
+		min-height: 750px;
 	}
 
 	#board {

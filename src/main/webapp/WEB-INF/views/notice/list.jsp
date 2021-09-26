@@ -160,8 +160,25 @@
         text-align: center;
     }    
     
-    .search1 {
-        border: 1px solid #eee;
+    .search1 { /* 검색 - 검색버튼 */
+        width: 100px;
+	    height: 40px;
+	
+	    border: 0;
+	    
+	    text-align: center;
+	    background: #005bbb;
+	    color: #fff;
+	    font-size: 15px;
+	
+	    cursor: pointer;
+    }
+    .search2 { /* 검색 - 검색 input text */
+    	height: 35px;
+    }
+    
+    #search1 { /* 검색 - 셀렉트박스 */
+    	height: 35px;
     }
     
     #pagination{
@@ -277,10 +294,9 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
@@ -291,7 +307,7 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 공지사항 </div>
+                    <div class="map">home > 커뮤니티 > 공지사항 </div>
                     <h2 class="subName">공지사항</h2>
                 </div>
                 <div class="contentIn">
