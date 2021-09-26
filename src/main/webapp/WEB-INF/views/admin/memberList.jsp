@@ -34,32 +34,9 @@
 			selectForm.submit();
 		});//onChange
 		
-		//회원 등급변경 버튼 처리
-		$('button[name=changeMemberType]').on('click', function(){
-			
-			var result = confirm('정말 변경하시겠습니까?');
-			
-			if(result) {
-				
-				var mno = $('input[name=mno]').val();
-				var boxval = $('select[id=memberTypeBox]').val();
-				
-				var checkboxDelForm = $('#checkboxDelForm');
-				
-                checkboxDelForm.attr('action','/admin/changeMemberType');
-                checkboxDelForm.attr('method','POST');
-                
-                checkboxDelForm.append('<input type="hidden" name="mno" value="'+mno+'" />');
-                checkboxDelForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />');
-                
-                
-                checkboxDelForm.submit();
-                   
-			} else {
-				e.preventDefault();
-			}//if-else
-			
-		});//onClick
+		
+
+		
 		
 		
 		//회원 탈퇴 
@@ -70,19 +47,19 @@
 				var result = confirm('정말 삭제하시겠습니까?');
 				
 				if(result) {
-					
+					/* $('#hidden_mno').attr('disabled', true); */
 					var boxval = $('#selectBox').val();
 					
-					var checkboxDelForm = $('#checkboxDelForm');
+					var checkboxForm = $('#checkboxForm');
 					
-                    checkboxDelForm.attr('action','/admin/delMember');
-                    checkboxDelForm.attr('method','POST');
+					checkboxForm.attr('action','/admin/delMember');
+					checkboxForm.attr('method','POST');
                     
-                    checkboxDelForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />')
+					checkboxForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />');
                     
-                    checkboxDelForm.submit();
+                    checkboxForm.submit();
 				} else {
-					e.preventDefault();
+					return false;
 				}//if-else
 			} else {
 				alert('탈퇴시킬 이용자를 먼저 선택해주세요.');
@@ -100,16 +77,16 @@
 				if(result) {
 					var boxval = $('#selectBox').val();
 					
-					var checkboxDelForm = $('#checkboxDelForm');
+					var checkboxForm = $('#checkboxForm');
 					
-                    checkboxDelForm.attr('action','/admin/rollbackMember');
-                    checkboxDelForm.attr('method','POST');
+					checkboxForm.attr('action','/admin/rollbackMember');
+					checkboxForm.attr('method','POST');
                     
-                    checkboxDelForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />')
+					checkboxForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />');
                     
-                    checkboxDelForm.submit();
+                    checkboxForm.submit();
 				} else {
-					e.preventDefault();
+					return false;
 				}//if-else
 			} else {
 				alert('복구시킬 이용자를 먼저 선택해주세요.');
@@ -133,10 +110,16 @@
 		
 
 	});//end jq
+	
+	
+	function show(mno) {
+		var popup = window.open('/admin/showDetailInfo?mno='+mno, 'Detail', 'width=500px,height=500px,scrollbars=no');
+	}
 </script>
 
 <style>
 	.mybtn {
+		border: 1px solid #bbb;
 		cursor: pointer;
 	}
 	.contentIn {
@@ -164,9 +147,9 @@
 	td {
 		text-align: center;
 	}
-	td:nth-child(5) {
+	/* td:nth-child(5) {
 		text-align: justify;
-	}
+	} */
 	
 	#selectBox {
 		
@@ -198,7 +181,26 @@
 	.clear {
 		clear: both;
 	}
-	
+	.modal {
+		position:absolute; 
+		width:100%; 
+		height:100%; 
+		background: rgba(0,0,0,0.8); 
+		top:0; 
+		left:0; 
+		display:none; 
+	}
+	.modal_content{
+	  	width:400px; height:200px;
+	  	background:#fff; border-radius:10px;
+	  	position:relative; top:50%; left:50%;
+	  	margin-top:-100px; margin-left:-200px;
+		text-align:center;
+	  	box-sizing:border-box; padding:74px 0;
+	  	line-height:23px; cursor:pointer;
+	}
+
+
 </style>
 
 <script>
@@ -224,8 +226,6 @@
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
         });
-        
-
     })//end jq
 </script>
 <body>
@@ -281,21 +281,17 @@
                 					</tr>
                 				</thead>
                 				
-                				<form id="checkboxDelForm">
+                				
 	                 				
-	                					
+	                			<form id="checkboxForm">
 	                				<tbody>
-	                					<c:forEach items="${members}" var="member" varStatus="i">
+	                					
+	                					<c:forEach items="${members}" var="member">
 	                					
 	                					<tr>
 	                						<td><input type="checkbox" name="mno" id="mno" value="${member.mno}" /></td>
-	                						<td>
-	                							<select id="memberTypeBox">
-	                								<option id="" value="관리자" ${('관리자' eq member.membertype) ? 'selected' : ''}>관리자</option>
-	                								<option value="개인" ${('개인' eq member.membertype) ? 'selected' : ''}>개인</option>
-	                								<option value="기업" ${('기업' eq member.membertype) ? 'selected' : ''}>기업</option>
-	                							</select>
-	                							<button class="mybtn" id="btn_${i.count}" name="changeMemberType" type="submit">변경</button>
+	                						<td>${member.membertype}
+	                							<button class="mybtn" id="changeMemberType" type="button" onClick="show(${member.mno})">변경</button>
 	                						</td>
 	                						
 	                						<td>${member.memberid}</td>
@@ -307,12 +303,15 @@
 	                						<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${member.signdate}"/></td>
 	                						<td>${member.drop_tf}</td>
 	                						<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${member.dropdate}"/></td>
+	                						
 	                					</tr>
-	                					</c:forEach>			                				
+	                					
+	                					</c:forEach>
+	                								                				
 	                				</tbody>
-		                					
+		                		</form>			
 	                				
-                				</form>
+                				
                 			
                 			</table>
                 			
@@ -321,6 +320,8 @@
                 				<button class="btn" id="memberRollbackBtn" type="button">복구처리</button>
                 					
                 			</div>
+                			
+							
                 		
                 		</div>
                 		

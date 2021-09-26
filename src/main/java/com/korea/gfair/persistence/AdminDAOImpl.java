@@ -187,4 +187,17 @@ public class AdminDAOImpl implements AdminDAO {
 		}//try-with-resources
 	}//changeMemberType
 
+	@Override
+	public MemberVO selectMember(Integer mno) {
+		String sqlId = "selectMember";
+		String sql = AdminDAOImpl.namespace+"."+sqlId;
+		
+		SqlSession session = this.sqlSessionFactory.openSession();
+		
+		try(session;) {
+			MemberVO applylist = session.selectOne(sql, mno);
+			
+			return applylist;
+		}//try-with-resources
+	}
 }//end class

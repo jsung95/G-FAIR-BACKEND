@@ -105,16 +105,22 @@ public class AdminController {
 		return "redirect:/admin/memberList?membertype=" + membertype;
 	}//rollbackMember
 	
+	@ResponseBody
 	@PostMapping("changeMemberType")
-	public String changeMemberType(Integer mno, String membertype) throws Exception {
+	public void changeMemberType(Integer mno, String membertype) throws Exception {
 		log.info("mno : {} // membertype : {}", mno, membertype);
 		
 		this.service.changeMemberType(mno, membertype);
 		
 		membertype = URLEncoder.encode(membertype, "UTF-8"); //UTF-8로 인코딩 해준 후 redirect 해줘야 한글이 ??? 로 안깨짐		
-		return "redirect:/admin/memberList?membertype=" + membertype;
-
+		/* return "redirect:/admin/memberList?membertype=" + membertype; */
 	}
 	
+	@GetMapping("showDetailInfo")
+	public void showDetailInfo(@RequestParam("mno") Integer mno, Model model) {
+		MemberVO list = this.service.showMember(mno);
+		
+		model.addAttribute("list", list);
+	}
 	
 }//end class

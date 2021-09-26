@@ -81,4 +81,10 @@ public class AdminServiceImpl implements AdminService {
 	public void changeMemberType(Integer mno, String membertype) {
 		this.dao.changeMemberType(mno, membertype);
 	}
+	
+	@Override
+	public MemberVO showMember(Integer mno) {
+		
+		return this.dao.selectMember(mno);
+	}
 }//end class
