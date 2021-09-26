@@ -127,17 +127,4 @@
             </choose>
         </where>
     </select>
-
-    <select id="searchEx" resultType="com.korea.gfair.domain.ExhibitionVO">
-        <![CDATA[ 
-            SELECT
-            /*+INDEX_DESC(tbl_exhibition) */
-                *
-            FROM
-                tbl_exhibition
-            WHERE
-			    add_months(exend,6) >= sysdate
-        ]]>
-    </select>
-
 </mapper>

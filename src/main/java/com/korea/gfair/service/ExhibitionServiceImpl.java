@@ -118,15 +118,6 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 		return this.exhibitionDAO.totalCount(cri);
 	}//getTotalCount
 
-
-	@Override
-	public List<ExhibitionVO> getEx() throws Exception {
-		log.debug("getEx() invoked");
-		
-		return this.exhibitionDAO.searchEx();
-	}//getEx
-	
-	
 	//--------------------- danny --------------------//
 	@Setter(onMethod_= {@Autowired})
 	private ExhibitionMapper mapper;
@@ -149,6 +140,4 @@ public class ExhibitionServiceImpl implements ExhibitionService {
 		
 		return this.mapper.getList();
 	}//get()
-
-
 }//end class
