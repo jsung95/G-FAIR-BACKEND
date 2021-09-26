@@ -6,15 +6,32 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.korea.gfair.mapper.NoticeBoardMapper">
-	<select id="list" resultType="com.korea.gfair.domain.BoardVO">
+	<select id="list" resultType="com.korea.gfair.domain.BoardReplyCountVO">
         <![CDATA[ 
             SELECT
             /*+ INDEX_DESC(tbl_board)*/
-                *
+                b.bno,
+                b.reproot,
+                b.repstep,
+                b.repindent,
+                b.title,
+                b.content,
+                b.memberid,
+                b.insert_ts,
+                b.update_ts,
+                b.readcnt,
+                b.bname,
+                b.fid,
+                b.public_tf,
+                count(r.reno) AS renoCount
             FROM
-                tbl_board
+                tbl_board b
+            LEFT OUTER JOIN
+            	tbl_reply r
+            ON
+            	b.bno = r.bno
             WHERE
-                bname = #{bname}
+                b.bname = #{bname}
         ]]>
 
             <choose>
@@ -32,14 +49,29 @@
                         OR title LIKE '%'||#{cri.keyword}||'%')
                 </when>
             </choose>
-
         <![CDATA[ 
-            ORDER BY repRoot desc, repStep asc
+            GROUP BY
+                (b.bno,
+                b.reproot,
+                b.repstep,
+                b.repindent,
+                b.title,
+                b.content,
+                b.memberid,
+                b.insert_ts,
+                b.update_ts,
+                b.readcnt,
+                b.bname,
+                b.fid,
+                b.public_tf)
+            ORDER BY 
+            	b.repRoot desc, b.repStep asc
             OFFSET
                 (#{cri.currPage} - 1)*#{cri.amount} ROWS
-            FETCH NEXT #{cri.amount} ROWS ONLY    
-            
-        ]]>
+            FETCH NEXT #{cri.amount} ROWS ONLY 
+        ]]>            
+
+
 
 	</select>
 	
@@ -153,12 +185,50 @@
 		]]>
 	</update>
 	
-	<select id="getNotice" resultType="com.korea.gfair.domain.BoardVO">
+	<select id="getNotice" resultType="com.korea.gfair.domain.BoardReplyCountVO">
 		<![CDATA[
-			SELECT /*+INDEX_DESC(tbl_board) */ * 
-			FROM tbl_board 
-			WHERE notice_tf = 'T'
-			AND bname = #{bname}
+			SELECT 
+				/*+INDEX_DESC(tbl_board) */ 
+                b.bno,
+                b.reproot,
+                b.repstep,
+                b.repindent,
+                b.title,
+                b.content,
+                b.memberid,
+                b.insert_ts,
+                b.update_ts,
+                b.readcnt,
+                b.bname,
+                b.fid,
+                b.public_tf,
+                count(r.reno) AS renoCount
+			FROM 
+				tbl_board b
+			LEFT OUTER JOIN
+				tbl_reply r
+			ON
+				b.bno = r.bno 
+			WHERE 
+				notice_tf = 'T'
+			AND 
+				b.bname = #{bname}
+			GROUP BY
+                (b.bno,
+                b.reproot,
+                b.repstep,
+                b.repindent,
+                b.title,
+                b.content,
+                b.memberid,
+                b.insert_ts,
+                b.update_ts,
+                b.readcnt,
+                b.bname,
+                b.fid,
+                b.public_tf)
+            ORDER BY
+            	b.bno desc
 		]]>
 	</select>
 	

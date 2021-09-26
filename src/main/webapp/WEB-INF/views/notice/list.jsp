@@ -334,7 +334,14 @@
                                     
                                     <tr class="notice">
                                         <td>공지</td>
-                                        <td><a href="/notice/get?bno=${notice.bno}&currPage=${pageMaker.cri.currPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${notice.title}</a></td>
+                                        <td>
+                                        	<a href="/notice/get?bno=${notice.bno}&currPage=${pageMaker.cri.currPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">
+                                        		${notice.title}
+                                        		<c:if test="${notice.renoCount > 0}">
+                                                	[${notice.renoCount}]
+                                                </c:if>
+                                        	</a>
+                                        </td>
                                         <td>${notice.memberid}</td>
                                         <td><fmt:formatDate pattern="yyyy/MM/dd" value="${notice.insert_ts}"/></td>
                                         <td>${notice.readcnt}</td>
@@ -357,7 +364,12 @@
                                         	<c:forEach begin="1" end="${board.repindent}">
 						                    	<%= "&nbsp;&nbsp;" %>
 						                    </c:forEach>
-					                    	<a href="/notice/get?bno=${board.bno}&currPage=${pageMaker.cri.currPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${board.title}</a>
+					                    	<a href="/notice/get?bno=${board.bno}&currPage=${pageMaker.cri.currPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">
+					                    		${board.title}
+					                    		<c:if test="${board.renoCount > 0}">
+                                                	[${board.renoCount}]
+                                                </c:if>
+					                    	</a>
                                         </td>
                                         <td>${board.memberid}</td>
                                         <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
