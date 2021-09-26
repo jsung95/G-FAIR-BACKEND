@@ -69,12 +69,12 @@ public class AdminController {
 	
 	//이진성 - 관리자페이지 > 회원관리
 	@GetMapping("memberList")
-	public void memberList(Model model) {
+	public void memberList(@RequestParam(defaultValue = "개인") String membertype, Model model) {
 		
-		List<MemberVO> members = this.service.getMemberList();
+		List<MemberVO> members = this.service.getMemberList(membertype);
 		
 		model.addAttribute("members", members);
-	}
+	}//memberList
 	
 	
 	
@@ -87,7 +87,16 @@ public class AdminController {
 		
 		return "redirect:/admin/memberList";
 		
-	}
+	}//delMember
+	
+	@PostMapping("rollbackMember")
+	public String rollbackMember(@RequestParam("mno") List<Integer> mnoList) {
+		log.info("mno List : {}", mnoList);
+		
+		this.service.rollbackMember(mnoList);
+		
+		return "redirect:/admin/memberList";
+	}//rollbackMember
 	
 	
 	

@@ -50,8 +50,8 @@
 		</selectKey>
 
 		<![CDATA[
-			INSERT INTO tbl_member(mno, memberid, memberpw, membername, memberaddress, phone, email, cbno, fid, membertype)
-			VALUES("ADMIN"."ISEQ$$_103232".nextval, #{memberid}, #{memberpw}, #{membername}, #{memberaddress}, #{phone}, #{email}, #{cbno}, #{fid}, #{membertype})
+			INSERT INTO tbl_member(mno, memberid, memberpw, membername, memberaddress, phone, email, cbno, fid, membertype, dropdate)
+			VALUES("ADMIN"."ISEQ$$_103232".nextval, #{memberid}, #{memberpw}, #{membername}, #{memberaddress}, #{phone}, #{email}, #{cbno}, #{fid}, #{membertype}, null)
 		]]>
 	</insert>
 	
@@ -203,7 +203,8 @@
 	    memberaddress,
 	    phone,
 	    email,
-	    membertype
+	    membertype,
+	    dropdate
     )
 	values(
 		"ADMIN"."ISEQ$$_103239".nextval,
@@ -213,7 +214,8 @@
 		#{memberaddress},
 		#{phone},
 		#{email},
-		'개인')
+		'개인',
+		null)
 	</insert>
    
    <!--==================== 원승대 ====================-->

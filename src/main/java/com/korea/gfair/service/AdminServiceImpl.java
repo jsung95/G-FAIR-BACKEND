@@ -62,13 +62,18 @@ public class AdminServiceImpl implements AdminService {
 	
 	//이진성 - 관리자페이지 > 회원관리
 	@Override
-	public List<MemberVO> getMemberList() {
+	public List<MemberVO> getMemberList(String membertype) {
 		
-		return this.dao.selectMemberList();
+		return this.dao.selectMemberList(membertype);
 	}//getMemberList
 	
 	@Override
 	public void delMember(List<Integer> mnoList) {
 		this.dao.dropMember(mnoList);
-	}
+	}//delMember
+	
+	@Override
+	public void rollbackMember(List<Integer> mnoList) {
+		this.dao.rollbackMember(mnoList);
+	}//rollbackMember
 }//end class

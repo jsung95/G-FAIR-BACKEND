@@ -101,6 +101,8 @@
 			/*+ index_desc(tbl_member) */ *
 		FROM
 			tbl_member
+		WHERE
+			membertype = #{membertype}
 	</select>
 	
 	<update id="dropMember">
@@ -109,6 +111,20 @@
 		SET
 			drop_tf = 'T',
 			dropdate = sysdate
+		WHERE 
+			mno in
+		<foreach item="mnoList" collection="list" open="(" separator="," close=")">
+			#{mnoList}
+		</foreach>
+	
+	</update>
+	
+	<update id="rollbackMember">
+		UPDATE 
+			tbl_member
+		SET
+			drop_tf = 'F',
+			dropdate = null
 		WHERE 
 			mno in
 		<foreach item="mnoList" collection="list" open="(" separator="," close=")">

@@ -130,7 +130,7 @@ public class AdminDAOImpl implements AdminDAO {
 	
 	//이진성 - 관리자페이지 > 회원관리
 	@Override
-	public List<MemberVO> selectMemberList() {
+	public List<MemberVO> selectMemberList(String membertype) {
 		
 		String sqlId = "selectMemberList";
 		String sql = AdminDAOImpl.namespace+"."+sqlId;
@@ -138,11 +138,11 @@ public class AdminDAOImpl implements AdminDAO {
 		SqlSession session = this.sqlSessionFactory.openSession();
 		
 		try(session;) {
-			List<MemberVO> applylist = session.selectList(sql);
+			List<MemberVO> applylist = session.selectList(sql, membertype);
 			
 			return applylist;
-		}
-	}
+		}//try-with-resources
+	}//selectMemberList
 	
 	@Override
 	public void dropMember(List<Integer> mnoList) {
@@ -153,7 +153,20 @@ public class AdminDAOImpl implements AdminDAO {
 		
 		try(session;) {
 			session.update(sql, mnoList);
-		}
-	}
+		}//try-with-resources
+	}//dropMember
+	
+	
+	@Override
+	public void rollbackMember(List<Integer> mnoList) {
+		String sqlId = "rollbackMember";
+		String sql = AdminDAOImpl.namespace+"."+sqlId;
+		
+		SqlSession session = this.sqlSessionFactory.openSession();
+		
+		try(session;) {
+			session.update(sql, mnoList);
+		}//try-with-resources
+	}//rollbackMember
 
 }//end class
