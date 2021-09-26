@@ -64,6 +64,11 @@
             'background-position': 'right center'
         });
         
+        jQuery( '#top_btn' ).click( function() {
+            var htmloffset = jQuery( 'html' ).offset();
+            jQuery( 'html, body' ).animate( { scrollTop : htmloffset.top }, 400 );
+        });
+        
 
     })//end jq
 </script>
@@ -149,7 +154,8 @@
                   <li><a href="https://www.gbsa.or.kr/index.do" title="경기도경제과학진흥원 새창으로 열림" target="_blank"><img src="/resources/img/partner11.png" alt="" /></a></li>
               </ul>
             </div>
-          </div>       
+          </div>
+          <span id="top_btn">top</span>
 		  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

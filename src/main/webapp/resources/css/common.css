@@ -164,7 +164,17 @@ header #nav ul li.menu h3{
 
 /* header 영역 */
 
-
+#top_btn{
+	width:50px;
+	height:52px;
+	text-indent:-9999px;
+	position:fixed;
+	bottom:150px;
+	right:100px;
+	cursor:pointer;
+	background-image: url(/resources/img/top_btn.png);
+	background-repeat: no-repeat;
+}
 
 
 

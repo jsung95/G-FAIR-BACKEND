@@ -272,11 +272,11 @@
 		        <table border=1>
 		            <thead>
 		                <tr>
-		                    <th width=10%>no</th>
+		                    <th width=7%>글번호</th>
 		                    <th width=*>제목</th>
 		                    <th width=10%>작성자</th>
 		                    <th width=10%>등록일</th>
-		                    <th width=10%>조회수</th>
+		                    <th width=7%>조회수</th>
 		                </tr>
 		            </thead>
 		            
@@ -293,7 +293,10 @@
 		                </tbody>
 		            </c:forEach> 
 		        </table>
-				<button id="regBtn" type="button">글쓰기</button>
+		        
+		        <c:if test="${memberid ne ''}">
+					<button id="regBtn" type="button">글쓰기</button>
+		        </c:if>
 		        
 		        <div id="pagination">
 		            <form action="" id="pagenationForm">
