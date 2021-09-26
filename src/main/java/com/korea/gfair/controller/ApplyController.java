@@ -85,10 +85,16 @@ public class ApplyController {
 		List<ApplyVO> applyInfo =this.service.getApplyInfo((MemberVO)session.getAttribute("__LOGIN__"));
 		
 		//신청한 전시회가 새롭게 신청한 전시회와 같은지 확인. 
-		if(applyInfo.get(0).getApplyname().equals(dto.getApplyname())) {
-			attrs.addFlashAttribute("__RESULT__","신청 내역이 이미 존재합니다.");
-			return "redirect:/apply/applystatus";
-		}//if
+		
+		try {
+			if(applyInfo.get(0).getApplyname().equals(dto.getApplyname())) {
+				attrs.addFlashAttribute("__RESULT__","신청 내역이 이미 존재합니다.");
+				return "redirect:/apply/applystatus";
+			}//if
+		}catch(IndexOutOfBoundsException e) {
+			log.debug("처음 전시회 참가 신청");
+		}//try-catch
+		
 		
 		//1. 부스 상태 업데이트하기. 
 		boolean isSelected = this.service.boothIsSelected(dto);
@@ -118,16 +124,19 @@ public class ApplyController {
 		
 		//1. Apply info 가져오기 
 		List<ApplyVO> applyInfo =this.service.getApplyInfo(memberVO);
+		log.debug("========DEBUG=======>applyInfo : {}",applyInfo);
 		
-		//2. Payment info 가져오기 
-		int applyno=applyInfo.get(0).getApplyno();
-		PaymentVO paymentInfo=this.service.getPaymentInfo(applyno);
 		
-		if(applyInfo != null) {
+		if(!applyInfo.isEmpty()) {
+			//2. Payment info 가져오기 
+			log.debug("=========DEBUG POINT 2 ==========");
+			int applyno=applyInfo.get(0).getApplyno();
+			PaymentVO paymentInfo=this.service.getPaymentInfo(applyno);
+			
 			model.addAttribute("__APPLY__",applyInfo);
 			model.addAttribute("__PAYMENT__", paymentInfo);
 		}else{
-			model.addAttribute("__RESULT__", "신청정보가 없습니다.");
+			model.addAttribute("__RESULT_REDIRECT__", "신청정보가 없습니다.");
 		}//if-else
 		
 	}//applyStatus

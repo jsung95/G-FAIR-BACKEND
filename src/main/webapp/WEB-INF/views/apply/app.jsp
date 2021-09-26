@@ -53,6 +53,25 @@
 
     })//end jq
 </script>
+<script>
+    $(function () {
+        console.debug('jq started..');
+
+        $('#agreeBtn').on('click',function () {
+            console.debug('agreeBtn on click event triggered..');
+           
+            if((document.querySelector('#agree').checked) & ("${__LOGIN__.membertype == '기업'}" == 'true' )){
+                let form = $('#appForm');
+                form.submit();
+            }else if(!document.querySelector('#agree').checked){
+                alert('약관에 동의를 해야지만 신청서 작성이 가능합니다. ');
+            }else if("${__LOGIN__.membertype == '개인'}" == 'true'){
+                alert('기업회원만 참가신청을 할 수 있습니다. 관람신청은 관람신청 메뉴를 확인 바랍니다.');
+            }//if-else
+
+    });//on click
+    }); //.jq
+</script>
 <body>
     <div id="wrap">
  	
