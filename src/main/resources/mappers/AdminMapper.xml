@@ -132,4 +132,13 @@
 		</foreach>
 	
 	</update>
+	
+	<update id="changeMemberType">
+		UPDATE
+			tbl_member
+		SET
+			membertype = #{membertype}
+		WHERE
+			mno = #{mno}
+	</update>
 </mapper>

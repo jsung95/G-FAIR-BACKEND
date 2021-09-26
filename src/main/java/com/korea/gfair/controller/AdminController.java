@@ -1,5 +1,6 @@
 package com.korea.gfair.controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,24 +81,40 @@ public class AdminController {
 	
 	
 	@PostMapping("delMember")
-	public String delMember(@RequestParam("mno")List<Integer> mnoList) {
+	public String delMember(@RequestParam("mno")List<Integer> mnoList, String membertype) throws Exception {
 		log.info("mno List : {}", mnoList);
 		
 		this.service.delMember(mnoList);
 		
-		return "redirect:/admin/memberList";
+		log.info("membertype : {}", membertype);
+		membertype = URLEncoder.encode(membertype, "UTF-8"); //UTF-8로 인코딩 해준 후 redirect 해줘야 한글이 ??? 로 안깨짐 
+		
+		return "redirect:/admin/memberList?membertype=" + membertype;
 		
 	}//delMember
 	
 	@PostMapping("rollbackMember")
-	public String rollbackMember(@RequestParam("mno") List<Integer> mnoList) {
+	public String rollbackMember(@RequestParam("mno") List<Integer> mnoList, String membertype) throws Exception {
 		log.info("mno List : {}", mnoList);
 		
 		this.service.rollbackMember(mnoList);
 		
-		return "redirect:/admin/memberList";
+		log.info("membertype : {}", membertype);
+		membertype = URLEncoder.encode(membertype, "UTF-8"); //UTF-8로 인코딩 해준 후 redirect 해줘야 한글이 ??? 로 안깨짐
+		
+		return "redirect:/admin/memberList?membertype=" + membertype;
 	}//rollbackMember
 	
+	@PostMapping("changeMemberType")
+	public String changeMemberType(Integer mno, String membertype) throws Exception {
+		log.info("mno : {} // membertype : {}", mno, membertype);
+		
+		this.service.changeMemberType(mno, membertype);
+		
+		membertype = URLEncoder.encode(membertype, "UTF-8"); //UTF-8로 인코딩 해준 후 redirect 해줘야 한글이 ??? 로 안깨짐		
+		return "redirect:/admin/memberList?membertype=" + membertype;
+
+	}
 	
 	
 }//end class

@@ -17,4 +17,5 @@ public interface AdminDAO {
 	public List<MemberVO> selectMemberList(String membertype);
 	public void dropMember(List<Integer> mnoList);
 	public void rollbackMember(List<Integer> mnoList);
+	public void changeMemberType(Integer mno, String membertype);
 }//end interface

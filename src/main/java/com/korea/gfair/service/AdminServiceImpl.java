@@ -76,4 +76,9 @@ public class AdminServiceImpl implements AdminService {
 	public void rollbackMember(List<Integer> mnoList) {
 		this.dao.rollbackMember(mnoList);
 	}//rollbackMember
+	
+	@Override
+	public void changeMemberType(Integer mno, String membertype) {
+		this.dao.changeMemberType(mno, membertype);
+	}
 }//end class

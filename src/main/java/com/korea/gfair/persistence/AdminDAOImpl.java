@@ -1,6 +1,8 @@
 package com.korea.gfair.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -168,5 +170,21 @@ public class AdminDAOImpl implements AdminDAO {
 			session.update(sql, mnoList);
 		}//try-with-resources
 	}//rollbackMember
+	
+	@Override
+	public void changeMemberType(Integer mno, String membertype) {
+		String sqlId = "changeMemberType";
+		String sql = AdminDAOImpl.namespace+"."+sqlId;
+		
+		SqlSession session = this.sqlSessionFactory.openSession();
+		
+		Map<String, Object> params= new HashMap<>();
+		params.put("mno", mno);
+		params.put("membertype", membertype);
+		
+		try(session;) {
+			session.update(sql, params);
+		}//try-with-resources
+	}//changeMemberType
 
 }//end class

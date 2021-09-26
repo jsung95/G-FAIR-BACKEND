@@ -34,6 +34,33 @@
 			selectForm.submit();
 		});//onChange
 		
+		//회원 등급변경 버튼 처리
+		$('button[name=changeMemberType]').on('click', function(){
+			
+			var result = confirm('정말 변경하시겠습니까?');
+			
+			if(result) {
+				
+				var mno = $('input[name=mno]').val();
+				var boxval = $('select[id=memberTypeBox]').val();
+				
+				var checkboxDelForm = $('#checkboxDelForm');
+				
+                checkboxDelForm.attr('action','/admin/changeMemberType');
+                checkboxDelForm.attr('method','POST');
+                
+                checkboxDelForm.append('<input type="hidden" name="mno" value="'+mno+'" />');
+                checkboxDelForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />');
+                
+                
+                checkboxDelForm.submit();
+                   
+			} else {
+				e.preventDefault();
+			}//if-else
+			
+		});//onClick
+		
 		
 		//회원 탈퇴 
 		$('#memberDelBtn').on('click', function(e){
@@ -44,10 +71,14 @@
 				
 				if(result) {
 					
+					var boxval = $('#selectBox').val();
+					
 					var checkboxDelForm = $('#checkboxDelForm');
 					
                     checkboxDelForm.attr('action','/admin/delMember');
                     checkboxDelForm.attr('method','POST');
+                    
+                    checkboxDelForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />')
                     
                     checkboxDelForm.submit();
 				} else {
@@ -67,11 +98,14 @@
 				var result = confirm('정말 복구하시겠습니까?');
 				
 				if(result) {
+					var boxval = $('#selectBox').val();
 					
 					var checkboxDelForm = $('#checkboxDelForm');
 					
                     checkboxDelForm.attr('action','/admin/rollbackMember');
                     checkboxDelForm.attr('method','POST');
+                    
+                    checkboxDelForm.append('<input type="hidden" name="membertype" value="'+boxval+'" />')
                     
                     checkboxDelForm.submit();
 				} else {
@@ -97,11 +131,14 @@
 			
 		});//onClick
 		
+
 	});//end jq
 </script>
 
 <style>
-
+	.mybtn {
+		cursor: pointer;
+	}
 	.contentIn {
 		min-height: 300px;
 	}
@@ -248,10 +285,19 @@
 	                 				
 	                					
 	                				<tbody>
-	                					<c:forEach items="${members}" var="member">		
+	                					<c:forEach items="${members}" var="member" varStatus="i">
+	                					
 	                					<tr>
-	                						<td><input type="checkbox" name="mno" value="${member.mno}" /></td>
-	                						<td>${member.membertype}</td>
+	                						<td><input type="checkbox" name="mno" id="mno" value="${member.mno}" /></td>
+	                						<td>
+	                							<select id="memberTypeBox">
+	                								<option id="" value="관리자" ${('관리자' eq member.membertype) ? 'selected' : ''}>관리자</option>
+	                								<option value="개인" ${('개인' eq member.membertype) ? 'selected' : ''}>개인</option>
+	                								<option value="기업" ${('기업' eq member.membertype) ? 'selected' : ''}>기업</option>
+	                							</select>
+	                							<button class="mybtn" id="btn_${i.count}" name="changeMemberType" type="submit">변경</button>
+	                						</td>
+	                						
 	                						<td>${member.memberid}</td>
 	                						<td>${member.membername}</td>
 	                						<td>${member.memberaddress}</td>
@@ -272,7 +318,8 @@
                 			
                 			<div id="btnArea">
                 				<button class="btn" id="memberDelBtn" type="button">탈퇴처리</button>
-                				<button class="btn" id="memberRollbackBtn" type="button">복구처리</button>	
+                				<button class="btn" id="memberRollbackBtn" type="button">복구처리</button>
+                					
                 			</div>
                 		
                 		</div>

@@ -16,4 +16,5 @@ public interface AdminService {
 	public List<MemberVO> getMemberList(String membertype);
 	public void delMember(List<Integer> mnoList);
 	public void rollbackMember(List<Integer> mnoList);
+	public void changeMemberType(Integer mno, String membertype);
 }//end interface
