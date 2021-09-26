@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.ApplyDTO;
 import com.korea.gfair.domain.ApplyFileVO;
+import com.korea.gfair.domain.ApplyMemberFileVO;
 import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoothVO;
 import com.korea.gfair.domain.Criteria;
@@ -201,7 +202,7 @@ public class ApplyController {
 		log.debug("companyInfo({}) invoked.",applyno);
 		
 		//해당 기업정보 1개 가져오기
-		ApplyFileVO applyFileVO = this.service.getCompany(applyno);
+		ApplyMemberFileVO applyFileVO = this.service.getCompany(applyno);
 		
 		model.addAttribute("company", applyFileVO);
 		

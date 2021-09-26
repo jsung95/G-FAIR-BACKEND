@@ -92,6 +92,7 @@
             paginationForm.find('input[name=currPage]').val($(this).attr('href'));
             paginationForm.find('input[name=amount]').val('${page.cri.amount}');
             paginationForm.find('input[name=pagesPerPage]').val('${page.cri.pagesPerPage}');
+            paginationForm.find('input[name=bname]').val('${page.cri.bname}');
             paginationForm.submit();
 
         })//onclick
@@ -264,6 +265,7 @@
                             <input type="hidden" name="currPage">
                             <input type="hidden" name="amount">
                             <input type="hidden" name="pagesPerPage">
+                            <input type="hidden" name="bname">
         
                             <ul>
                                 <!-- 무조건 처음페이지로 -->

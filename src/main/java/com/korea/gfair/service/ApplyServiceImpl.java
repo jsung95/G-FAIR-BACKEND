@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.korea.gfair.domain.ApplyDTO;
 import com.korea.gfair.domain.ApplyFileVO;
+import com.korea.gfair.domain.ApplyMemberFileVO;
 import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoothVO;
 import com.korea.gfair.domain.Criteria;
@@ -85,7 +86,7 @@ public class ApplyServiceImpl implements ApplyService {
 	}//getApplyList
 
 	@Override
-	public ApplyFileVO getCompany(Integer applyno) throws Exception {
+	public ApplyMemberFileVO getCompany(Integer applyno) throws Exception {
 		log.debug("getApply({}) invoked.", applyno);
 		
 		return this.dao.applyGet(applyno);

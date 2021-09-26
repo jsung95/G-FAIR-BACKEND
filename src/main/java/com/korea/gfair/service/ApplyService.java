@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.korea.gfair.domain.ApplyDTO;
 import com.korea.gfair.domain.ApplyFileVO;
+import com.korea.gfair.domain.ApplyMemberFileVO;
 import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoothVO;
 import com.korea.gfair.domain.Criteria;
@@ -26,7 +27,7 @@ public interface ApplyService {
 	//참가기업리스트
 	public abstract List<ApplyFileVO> getCompanyList(Criteria cri, String applyname) throws Exception;
 	//참가기업 상세청보
-	public abstract ApplyFileVO getCompany(Integer applyno) throws Exception;
+	public abstract ApplyMemberFileVO getCompany(Integer applyno) throws Exception;
 	//참가기업수(최대6개월까지)
 	public abstract Integer getTotalCount(String applyname) throws Exception;
 }//end interface

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.korea.gfair.domain.ApplyDTO;
 import com.korea.gfair.domain.ApplyFileVO;
+import com.korea.gfair.domain.ApplyMemberFileVO;
 import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoothVO;
 import com.korea.gfair.domain.Criteria;
@@ -170,7 +171,7 @@ public class ApplyDAOImpl implements ApplyDAO {
 	}//ApplyList
 
 	@Override
-	public ApplyFileVO applyGet(Integer applyno) throws Exception {
+	public ApplyMemberFileVO applyGet(Integer applyno) throws Exception {
 		log.debug("applyGet() invoked.");
 		
 		String statement = namespace+".applyGet";
@@ -179,7 +180,7 @@ public class ApplyDAOImpl implements ApplyDAO {
 		
 		try(sqlSession){
 			
-			ApplyFileVO applyVO = sqlSession.selectOne(statement, applyno);
+			ApplyMemberFileVO applyVO = sqlSession.selectOne(statement, applyno);
 		
 			return applyVO;
 		}//try-with-resources
