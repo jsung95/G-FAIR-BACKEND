@@ -18,4 +18,7 @@ public interface ExhibitionDAO {
 	public abstract void delete(List<Integer> exnoList) throws Exception;
 	
 	public abstract Integer totalCount(Criteria cri) throws Exception;
+	
+	//최근6개월 전시목록. visitList는 전체기간. 나중에 합치던지 그대로 두던지
+	public abstract List<ExhibitionVO> searchEx() throws Exception;
 }//end interface
