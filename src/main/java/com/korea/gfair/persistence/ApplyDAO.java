@@ -18,7 +18,7 @@ public interface ApplyDAO {
 	public List<BoothVO> selectBooth () throws Exception;
 	public boolean insert(ApplyDTO dto) throws Exception;
 	public boolean updateBooth(ApplyDTO dto) throws Exception;
-	public List<ApplyVO> selectApplyInfo(MemberDTO dto) throws Exception;
+	public List<ApplyVO> selectApplyInfo(MemberVO dto) throws Exception;
 	public List<ExhibitionVO> selectExhibition() throws Exception;
 	public PaymentVO selectPaymentInfo(Integer applyno) throws Exception; 
 	

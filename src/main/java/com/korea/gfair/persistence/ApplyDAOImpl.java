@@ -101,8 +101,8 @@ public class ApplyDAOImpl implements ApplyDAO {
 	}//selectBooth
 
 	@Override
-	public List<ApplyVO> selectApplyInfo(MemberDTO dto) throws Exception {
-		log.debug("selectApplyInfo({}) invoked.", dto);
+	public List<ApplyVO> selectApplyInfo(MemberVO vo) throws Exception {
+		log.debug("selectApplyInfo({}) invoked.", vo);
 		
 		String sqlId ="selectApplyInfo";
 		String sql = namespace +"." +sqlId;
@@ -110,7 +110,7 @@ public class ApplyDAOImpl implements ApplyDAO {
 		SqlSession session=this.sqlSessionFactory.openSession();
 		
 		try(session;){
-			List<ApplyVO> applyInfo = session.selectList(sql,dto);
+			List<ApplyVO> applyInfo = session.selectList(sql,vo);
 		
 			return applyInfo;
 		}//try-with-resourecs

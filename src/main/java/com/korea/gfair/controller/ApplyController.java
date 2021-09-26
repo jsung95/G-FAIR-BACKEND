@@ -2,7 +2,6 @@ package com.korea.gfair.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoothVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.ExhibitionVO;
-import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.domain.PaymentVO;
@@ -50,14 +48,14 @@ public class ApplyController {
 	}//appui
 	
 	@PostMapping("appform")
-	public void applyFormUi(HttpServletRequest req, Model model) throws Exception {
+	public void applyFormUi(HttpSession session, Model model) throws Exception {
 		log.debug("applyForm() invoked.");
 		
 //		1. session에 올라간 회원 id 를 이용해 CBNO, FID, PHONE, EMAIL, MEMBERID 가져옴
-		HttpSession session = req.getSession();
-		MemberDTO memberDto =(MemberDTO)session.getAttribute("__LOGIN__");
+		
+		MemberVO memberVO =(MemberVO)session.getAttribute("__LOGIN__");
 		//sevice 메소드 호출
-		MemberVO member= this.service.getMemberInfo(memberDto);
+//		MemberVO member= this.service.getMemberInfo(memberDto);
 		
 //	 	2. APPLYNAME 이름으로 EXNAME 가져옴 - select 박스 
 		List<ExhibitionVO> exhibition =this.service.getExhibitionInfo();
@@ -68,23 +66,23 @@ public class ApplyController {
 //		4. model에 올리기. 
 		
 		model.addAttribute("__EXHI__", exhibition);
-		model.addAttribute("__MEMBERINFO__", member);
+		model.addAttribute("__MEMBERINFO__", memberVO);
 		model.addAttribute("__BOOTH__",booths);
 
 	}//applyForm
 	
 	@PostMapping("applyform")
-	public String applyForm(ApplyDTO dto, RedirectAttributes attrs) throws Exception {
+	public String applyForm(ApplyDTO dto, RedirectAttributes attrs, HttpSession session) throws Exception {
 		log.debug("applyForm({}) invoked.", dto);
 		
 		//0. 동일 전시회에 신청 이력이 있는지 검사. 
 		
-		//전시회 신청한 아이디로 MemberDTO객체 생성
-		MemberDTO memberDto = new MemberDTO();
-		memberDto.setMemberid(dto.getMemberid());
+		//전시회 신청한 아이디로 MemberDTO객체 생성  => XXX session login dto 이용
+//		MemberVO memberVO = new MemberDTO();
+//		memberDto.setMemberid(dto.getMemberid());
 		
 		//아이디로 전시회 신청 정보 있는지 확인. 
-		List<ApplyVO> applyInfo =this.service.getApplyInfo(memberDto);
+		List<ApplyVO> applyInfo =this.service.getApplyInfo((MemberVO)session.getAttribute("__LOGIN__"));
 		
 		//신청한 전시회가 새롭게 신청한 전시회와 같은지 확인. 
 		if(applyInfo.get(0).getApplyname().equals(dto.getApplyname())) {
@@ -113,14 +111,13 @@ public class ApplyController {
 	
 	@SuppressWarnings("unused")
 	@GetMapping("applystatus")
-	public void applyStatus(Model model, HttpServletRequest req) throws Exception {
+	public void applyStatus(Model model, HttpSession session) throws Exception {
 		log.debug("applyStatus() invoked.");
 		
-		HttpSession session = req.getSession();
-		MemberDTO memberDto =(MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO memberVO =(MemberVO)session.getAttribute("__LOGIN__");
 		
 		//1. Apply info 가져오기 
-		List<ApplyVO> applyInfo =this.service.getApplyInfo(memberDto);
+		List<ApplyVO> applyInfo =this.service.getApplyInfo(memberVO);
 		
 		//2. Payment info 가져오기 
 		int applyno=applyInfo.get(0).getApplyno();

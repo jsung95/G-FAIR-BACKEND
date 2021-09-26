@@ -18,7 +18,7 @@ public interface ApplyService {
 	public List<BoothVO> getBoothList() throws Exception;
 	public boolean applyExhibition(ApplyDTO dto) throws Exception;
 	public boolean boothIsSelected(ApplyDTO dto) throws Exception;
-	public List<ApplyVO> getApplyInfo(MemberDTO dto) throws Exception;
+	public List<ApplyVO> getApplyInfo(MemberVO dto) throws Exception;
 	public List<ExhibitionVO> getExhibitionInfo() throws Exception;
 	public PaymentVO getPaymentInfo(Integer applyno) throws Exception;
 

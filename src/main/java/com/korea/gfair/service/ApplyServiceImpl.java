@@ -56,10 +56,10 @@ public class ApplyServiceImpl implements ApplyService {
 	}//boothIsSelected
 
 	@Override
-	public List<ApplyVO> getApplyInfo(MemberDTO dto) throws Exception {
-		log.debug("getApplyInfo({}) invoked.", dto);
+	public List<ApplyVO> getApplyInfo(MemberVO vo) throws Exception {
+		log.debug("getApplyInfo({}) invoked.", vo);
 		
-		return this.dao.selectApplyInfo(dto);
+		return this.dao.selectApplyInfo(vo);
 	}//getApplyInfo
 
 	@Override
