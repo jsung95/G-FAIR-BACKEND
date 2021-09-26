@@ -373,7 +373,7 @@
 
             #title_area{
                 border-bottom: 1px solid rgb(201, 201, 201);
-                border-top: 1px solid #6f2b89;
+                border-top: 3px solid #005bbb;
                 height: 40px;
                 line-height: 40px;
                 font-size: 20px;
@@ -414,8 +414,9 @@
             }
 
             #contents{
-                border-top: 1px solid #999;
-                border-bottom: 1px solid #999;
+                min-height: 300px;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
             }
 
             #wrote{
@@ -455,6 +456,10 @@
                 height: 45px;
 
             }
+
+            .space_input{
+                height: 50px;
+            }
         </style>
         
     </head>
@@ -486,6 +491,7 @@
                 <div id="content_img">
                     <img src="/resources/img/${photo.fpath}${photo.frename}" alt="">
                 </div>
+                <div class="space_input"></div>
             </div>
 
 

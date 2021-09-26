@@ -80,7 +80,7 @@
         padding: 30px 0 30px 10px;
     }
 
-    .btn {
+    .btn1 {
         width: 100px;
         height: 40px;
 
@@ -135,6 +135,8 @@
 	$(function () {
 	    console.clear();
 	    console.debug('jq started..!')
+
+        //목록버튼
 	    $("#listBtn").on('click', function () {
 	        console.log('#listBtn button clicked.');
 	
@@ -143,13 +145,28 @@
 	
 	    }); // .onclick
 	    
-	
+        //삭제버튼
+        $('#removeBtn').on('click', function () {
+            console.log('removeBtn Clicked.');
+
+            var result = confirm('정말 삭제하시겠습니까?');
+            if(result){
+                let formObj = $('form');
+                formObj.attr('action', '/photo/remove/?fid='+${file.fid});
+                formObj.attr('method', 'POST');
+    
+                formObj.submit();
+            }//if
+
+        });//onclick()
+
+        //수정버튼
 	    $("#modifyBtn").on('click', function () {
 	        console.log('#modifyBtn button clicked..');
 	
 	        // location.href = "/board/modify?bno=${board.bno}";
 	        location.href = "/photo/modify?fid=${file.fid}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-	    }) // .onclick
+	    }); // .onclick
 	})//end jq
 </script>
 <body>
@@ -200,8 +217,9 @@
                         <!-- 글수정, 답변, 목록 버튼 -->
                         <div id="bottom_space">
                             <div id="btn_area">
-                                <button type="button" class="btn" id="modifyBtn">수정</button>
-                                <button type="button" class="btn" id="listBtn">목록</button>
+                                <button type="button" class="btn1" id="modifyBtn">수정</button>
+                                <button type="button" class="btn1" id="removeBtn">삭제</button>
+                                <button type="button" class="btn1" id="listBtn">목록</button>
                             </div>
                         </div>
                         <!-- <form action="#">

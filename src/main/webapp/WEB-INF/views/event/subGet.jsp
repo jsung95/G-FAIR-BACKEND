@@ -44,6 +44,7 @@
         margin-top: 5px;
         float: right;
     }
+
 </style>
 
 
@@ -154,6 +155,8 @@
                         width="1200" 
                         scrolling="no"></iframe>
                 </div>
+
+
                 <div id="bottom_space">
                     <div id="btn_area">
                         <button type="button" class="btn1" id="modifyBtn">수정</button>

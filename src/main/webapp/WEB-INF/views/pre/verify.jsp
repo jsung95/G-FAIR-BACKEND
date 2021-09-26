@@ -35,17 +35,83 @@
                 border-bottom: solid 1px black;
             }
             
-            h1{
-                font-size: 25px;
-                font-weight: bold;
+            .sub_container{
+                margin-top: 50px;
+                margin-bottom: 50px;
+
+                min-height: 300px;
             }
+
             .show_member_info{
+                margin: 0 auto;
+
+                width: 900px;
+                
+                font-size: 25px;
+
                 border-bottom: solid 1px black;
                 border-top: solid 1px black;
                 border-right: solid 1px black;
                 border-left: solid 1px black;
             }
+
+            .sub_top{
+                display: flex;
+
+                justify-content: center;
+
+                border-top: 3px solid #005bbb;
+                border-bottom: 1px solid #eee;
+            }
+
+            .member_name{
+                margin-bottom: 5px;
+                font-weight: bold;
+                font-size: 40px;
+            }
+
+            .app_statement{
+                display: flex;
+
+                margin-left: 5px;
+
+                height: 53px;
+
+                align-items: flex-end;
+
+                font-weight: bold;
+                font-size: 25px;
+            }
+
+            .btn1 {
+                width: 100px;
+                height: 40px;
+
+                border: 0;
+                
+                text-align: center;
+                background: #005bbb;
+                color: #fff;
+                font-size: 15px;
+                
+                cursor: pointer;
+            }
+
+            #mainBtn{
+                float: right;
+            }
         </style>
+
+        <script>
+            $(function () {
+                console.clear();
+                console.debug('jq started.');
+
+                $('#mainBtn').on('click', function () {
+                    location.href="/index"
+                });
+            })
+        </script>
     </head>
     
     <body>
@@ -59,14 +125,14 @@
                         <ul id="parent">
                             <li><a class="chk" href="/pre/guide">사전관람안내</a></li>
                             <li><a class="chk" href="/pre/register">사전관람신청</a></li>
-                            <li><a class="chk" href="/pre/verify">사전관람신청자 확인</a></li>
+                            <li><a class="chk" href="/pre/verify">사전관람신청확인</a></li>
                         </ul>
         
                     </div>
                     <div id="content">
                         <div class="title">
-                            <div class="map">home > 관람정보 > 사전관람신청자 확인 </div>
-                            <h2 class="subName">사전관람신청자 확인</h2>
+                            <div class="map">home > 관람정보 > 사전관람신청확인 </div>
+                            <h2 class="subName">사전관람신청확인</h2>
                         </div>
                         <div class="contentIn">
                             
@@ -75,7 +141,8 @@
 
                                 <div class="sub_top">
                                     <br>
-                                    <h1>${__LOGIN__.membername}님의 사전관람신청 현황입니다.</h1>
+                                    <span class="member_name">${__LOGIN__.membername}</span>
+                                    <span class="app_statement">님의 사전관람신청 현황입니다.</h1>
                                 </div>
                                 <!-- <tr>
                                     <th><label for="name">신청자명</label></th>
@@ -109,6 +176,10 @@
                                     </table>
                                     <br>
                                 </c:forEach>
+
+                                <div class="btn_area">
+                                    <button id="mainBtn" type="button" class="btn1">Main</button>
+                                </div>
                             </div>
                         
                         </div>

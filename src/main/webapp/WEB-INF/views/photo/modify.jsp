@@ -208,7 +208,7 @@
                             <div class="btn_area">
                                 <button class="btn1" type="submit" id="submitBtn">수정</button>
                                 <button class="btn1" type="button" id="removeBtn">삭제</button>
-                                <button class="btn1" type="button" id="listBtn">목록보기</button>
+                                <button class="btn1" type="button" id="listBtn">목록</button>
                             </div>
                         </form>
                     </div>

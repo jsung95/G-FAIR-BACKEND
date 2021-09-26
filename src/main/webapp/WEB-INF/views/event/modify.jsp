@@ -79,7 +79,11 @@
         line-height: 50px;
         border-bottom: 1px solid rgb(201, 201, 201);
     }
-    
+
+    #listBtn{
+        float: right;
+    }
+
     .buttonstyle {
         right: 0px;
         height: 50px;
@@ -199,9 +203,9 @@
                         </div>
                         
                         <div class="btn_area">
-                            <button type="submit" class="btn1" id="submitBtn">수정하기</button>
+                            <button type="submit" class="btn1" id="submitBtn">수정</button>
                             <button type="button" class="btn1" id="removeBtn">삭제</button>
-                            <button type="button" class="btn1" id="listBtn">목록보기</button>
+                            <button type="button" class="btn1" id="listBtn">목록</button>
                         </div>
                     </form>
                 </div>
