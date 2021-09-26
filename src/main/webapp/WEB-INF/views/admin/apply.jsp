@@ -106,14 +106,9 @@
             <div id="aside">
                 <h2 class="asideMenu">관리페이지</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/admin/memberList">회원관리</a></li>
+                    <li><a class="chk" href="/admin/memberList?membertype=개인">회원관리</a></li>
                     <li><a class="chk" href="/admin/memberBoard">회원글관리</a></li>
                     <li><a class="chk" href="/admin/memberReply">회원댓글관리</a></li>
-
-                    <li><a class="chk" href="/admin/adminInfo">관리자정보관리</a></li>
-                    <li><a class="chk" href="/admin/list">관리자글관리</a></li>
-                    <li><a class="chk" href="/admin/reply">관리자댓글관리</a></li>
-
                     <li><a class="chk" href="/admin/apply">참가기업관리</a></li>
                     <li><a class="chk" href="/exhibition/list">전시일정관리</a></li>
                 </ul>

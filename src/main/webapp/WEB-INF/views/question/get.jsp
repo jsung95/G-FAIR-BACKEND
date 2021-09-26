@@ -139,6 +139,8 @@
     #replylist{
         width: 1100px;
         background-color: #f5f3f3;
+        margin-top: 10px;
+        margin-bottom: 20px;
     }
 
     #replylist tr{
@@ -161,6 +163,11 @@
         font-size: 12px;
         
         line-height: 12px;
+    }
+
+    #replyRegister{
+        border-top: 2px solid #005bbb;
+        width: 1100px;
     }
 </style>
 
@@ -317,8 +324,14 @@
                             </div>
                             <div id="buttons">
                                 <div>
-                                    
-                                    <button type="button" id="modifyBtn">수정</button>
+                                    <c:choose>
+                                        <c:when test="${__LOGIN__.memberid == __LIST__.memberid || __LOGIN__.membertype eq '관리자'}">
+                                            <button type="button" id="modifyBtn">수정</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="hideBtn">&nbsp;</div>
+                                        </c:otherwise>
+                                    </c:choose>
                                     
                                     <c:choose>
                                         <c:when test="${__LOGIN__.memberid == __LIST__.memberid || __LOGIN__.membertype eq '관리자'}">
@@ -344,8 +357,8 @@
                             
                         </form>
                  
-        
                         <c:if test="${__LIST__.public_tf != 'F' && not empty __LOGIN__.memberid}" >
+                            <p>댓글</p>
                             <form action="/question/replyRegister" method="POST" id="replyRegister">
                                 <div id="reply">
                                     <input type="hidden" name="bno" value="${__LIST__.bno}">
