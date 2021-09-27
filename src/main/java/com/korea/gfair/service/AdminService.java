@@ -3,6 +3,8 @@ package com.korea.gfair.service;
 import java.util.List;
 
 import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.domain.BoardReplyCountVO;
+import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.MemberVO;
 
 public interface AdminService {
@@ -18,4 +20,12 @@ public interface AdminService {
 	public void rollbackMember(List<Integer> mnoList);
 	public void changeMemberType(Integer mno, String membertype);
 	public MemberVO showMember(Integer mno);
+	
+	//=========현아===========//
+	//회원글 모두 조회
+	public abstract List<BoardReplyCountVO> getMemberBoardList(Criteria cri) throws Exception;
+	//전체글수
+	public abstract Integer getMemberBoardTotalCount(Criteria cri) throws Exception;
+	//선택삭제
+	public abstract boolean memberBoardRemove(List<Integer> bnoList) throws Exception;
 }//end interface

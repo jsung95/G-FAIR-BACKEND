@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.domain.BoardReplyCountVO;
+import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.MemberVO;
+import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.service.AdminService;
 
 import lombok.NoArgsConstructor;
@@ -123,4 +127,39 @@ public class AdminController {
 		model.addAttribute("list", list);
 	}
 	
+	//=========현아==========//
+	//=========현아==========//
+	//모든 회원이 쓴글 조회
+	@GetMapping("memberBoard")
+	public void memberBoard(@ModelAttribute("cri")Criteria cri, Model model) throws Exception {//게시판명, 제목, 등록일, 체크박스
+		log.debug("memberBoard({}) invoked",cri);
+		
+		
+		List<BoardReplyCountVO> boards = this.service.getMemberBoardList(cri);
+		
+		PageDTO page = new PageDTO(cri, this.service.getMemberBoardTotalCount(cri));
+		
+		
+		model.addAttribute("mbList",boards);
+		model.addAttribute("page",page);
+		
+	}//memberBoard
+	
+	
+	//체크박스 삭제
+	@PostMapping("boardRemove")
+	public String boardRemove(
+						 @ModelAttribute("cri")Criteria cri,
+						 @RequestParam("bno")List<Integer> bnoList,  
+						 RedirectAttributes rttrs) throws Exception {
+		log.debug("remove({},{}) invoked",cri,bnoList);
+		
+		this.service.memberBoardRemove(bnoList);
+		
+		rttrs.addAttribute("currPage", cri.getCurrPage());
+		rttrs.addAttribute("amount", cri.getAmount());
+		rttrs.addAttribute("pagesPerPage", cri.getPagesPerPage());
+		
+		return "redirect:/admin/memberBoard";
+	}//boardRemove
 }//end class

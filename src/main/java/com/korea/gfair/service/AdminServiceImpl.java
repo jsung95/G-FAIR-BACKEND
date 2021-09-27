@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.domain.BoardReplyCountVO;
+import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.MemberVO;
+import com.korea.gfair.mapper.AdminMapper;
 import com.korea.gfair.persistence.AdminDAO;
 
 import lombok.NoArgsConstructor;
@@ -20,6 +23,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	AdminDAO dao;
+	@Autowired private AdminMapper adminMapper;
+	
 	
 	@Override
 	public List<ApplyVO> getApplyInformation() throws Exception {
@@ -87,4 +92,27 @@ public class AdminServiceImpl implements AdminService {
 		
 		return this.dao.selectMember(mno);
 	}
+
+	//=======현아==========
+	//=======현아==========
+	@Override
+	public List<BoardReplyCountVO> getMemberBoardList(Criteria cri) throws Exception {
+		log.debug("getMemberBoardList() invoked.");
+		
+		return this.adminMapper.memberBoardList(cri);
+	}//getMemberBoardList
+
+	@Override
+	public Integer getMemberBoardTotalCount(Criteria cri) throws Exception {
+		log.debug("getMemberBoardTotalCount() invoked.");
+		
+		return this.adminMapper.memberBoardTotalCount(cri);
+	}//getMemberBoardTotalCount
+
+	@Override
+	public boolean memberBoardRemove(List<Integer> bnoList) throws Exception {
+		log.debug("memberBoardRemove() invoked.");
+		
+		return this.adminMapper.memberBoardDelete(bnoList);
+	}//memberBoardRemove
 }//end class
