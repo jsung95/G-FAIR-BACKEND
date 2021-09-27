@@ -19,6 +19,7 @@ import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.domain.PageDTO;
+import com.korea.gfair.domain.ReplyBoardVO;
 import com.korea.gfair.service.AdminService;
 
 import lombok.NoArgsConstructor;
@@ -162,4 +163,38 @@ public class AdminController {
 		
 		return "redirect:/admin/memberBoard";
 	}//boardRemove
+	
+	//모든 회원이 쓴 댓글 조회
+	@GetMapping("memberReply")
+	public void memberReply(@ModelAttribute("cri")Criteria cri, Model model) throws Exception {//게시판명, 제목, 등록일, 체크박스
+		log.debug("memberReply({}) invoked",cri);
+		
+		
+		List<ReplyBoardVO> boards = this.service.getMemberReplyList(cri);
+		
+		PageDTO page = new PageDTO(cri, this.service.getMemberReplyTotalCount(cri));
+		
+		
+		model.addAttribute("mrList",boards);
+		model.addAttribute("page",page);
+		
+	}//memberReply
+	
+	
+	//댓글 체크박스 삭제
+	@PostMapping("boardReplyRemove")
+	public String boardReplyRemove(
+						 @ModelAttribute("cri")Criteria cri,
+						 @RequestParam("reno")List<Integer> renoList,  
+						 RedirectAttributes rttrs) throws Exception {
+		log.debug("boardReplyRemove({},{}) invoked",cri,renoList);
+		
+		this.service.memberReplyRemove(renoList);
+		
+		rttrs.addAttribute("currPage", cri.getCurrPage());
+		rttrs.addAttribute("amount", cri.getAmount());
+		rttrs.addAttribute("pagesPerPage", cri.getPagesPerPage());
+		
+		return "redirect:/admin/memberReply";
+	}//boardReplyRemove
 }//end class

@@ -50,6 +50,12 @@
 <script>
     $(function(){
 
+        $('#listBtn').on('click',function(){
+
+            location.href = "/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=${page.cri.currPage}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}";
+
+        });//listBtn
+
         $('#selectDelBtn').on('click',function(e){//체크박스 눌렀을 때
             e.preventDefault();
 

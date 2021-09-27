@@ -12,7 +12,7 @@
 
     <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
-    <link href="/resources/css/mbBoard.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/css/mrBoard.css" rel="stylesheet" type="text/css" />
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
@@ -49,17 +49,16 @@
 </script>
 <script>
     $(function(){
-
         $('#listBtn').on('click',function(){
 
-            location.href = "/admin/memberBoard?&currPage=${page.cri.currPage}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}";
+            location.href = "/admin/memberReply?&currPage=${page.cri.currPage}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}";
 
         });//listBtn
 
         $('#selectDelBtn').on('click',function(e){//체크박스 눌렀을 때
             e.preventDefault();
 
-            if( $('input[name=bno]:checked').length >0 ){
+            if( $('input[name=reno]:checked').length >0 ){
 
                 var result = confirm("정말 삭제하시겠습니까?");
 
@@ -67,7 +66,7 @@
 
                     var checkboxDelForm = $('#checkboxDelForm');
                     
-                    checkboxDelForm.attr('action','/admin/boardRemove');
+                    checkboxDelForm.attr('action','/admin/boardReplyRemove');
                     checkboxDelForm.attr('method','POST');
                     
                     checkboxDelForm.submit();
@@ -91,7 +90,7 @@
 
             var paginationForm = $('#paginationForm');
 
-            paginationForm.attr('action','/admin/memberBoard');
+            paginationForm.attr('action','/admin/memberReply');
             paginationForm.attr('method','GET');
 
             paginationForm.find('input[name=currPage]').val($(this).attr('href'));
@@ -112,7 +111,7 @@
             console.log('boardVal값:',boardVal);
 
             var selectBoardForm = $('#selectBoardForm');
-            selectBoardForm.attr('action','/admin/memberBoard');
+            selectBoardForm.attr('action','/admin/memberReply');
             selectBoardForm.attr('method','GET');
 
             selectBoardForm.append('<input type="hidden" name="memberid" value="${__LOGIN__.memberid}">');
@@ -128,14 +127,14 @@
 
 
         // 체크박스 전체선택
-        $("input:checkbox[name='bnoAll']").click(function(){
+        $("input:checkbox[name='renoAll']").click(function(){
             if($(this).is(":checked")){
-                $("input:checkbox[name='bno']").each(function() {
+                $("input:checkbox[name='reno']").each(function() {
                     $(this).prop("checked",true);
                 });
                 
             }else{
-                $("input:checkbox[name='bno']").each(function() {
+                $("input:checkbox[name='reno']").each(function() {
                     $(this).prop("checked",false);
                 });
                 
@@ -163,9 +162,10 @@
 
             </div>
             <div id="content">
+                
                 <div class="title">
-                    <div class="map">home > 관리페이지 > 회원글관리</div>
-                    <h2 class="subName">회원글관리</h2>
+                    <div class="map">home > 관리페이지 > 회원댓글관리</div>
+                    <h2 class="subName">회원댓글관리</h2>
                 </div>
 
                 <div class="contentIn">
@@ -174,13 +174,13 @@
                         <thead>
                             <form id="selectBoardForm"></form>
                                 <tr>
-                                    <th><input type="checkbox" name="bnoAll"></th>
+                                    <th><input type="checkbox" name="renoAll"></th>
                                     <th>번호</th>
-                                    <th>제목</th>
-                                    <th>내용</th>
-                                    <th>작성자</th>
+                                    <th>게시글제목</th>
+                                    <th>게시글작성자</th>
+                                    <th>댓글내용</th>
+                                    <th>댓글작성자</th>
                                     <th>등록일</th>
-                                    <th>조회수</th>
                                     <th>
                                         <select id="boardOption" name="bname" class="searchcss">
                                             <option value=>전체게시판</option>
@@ -200,12 +200,13 @@
                         <tbody>
                             <form id="checkboxDelForm">
                                 <c:set var="num" value="${page.totalAmount - ( page.cri.currPage - 1 ) * page.cri.amount}"/>
-                                <c:forEach items="${mbList}" var="board">
+                                <c:forEach items="${mrList}" var="board">
                                     <tr>
-                                        <td><input type="checkbox" name="bno" value="${board.bno}"></td>
+                                        <td><input type="checkbox" name="reno" value="${board.reno}"></td>
+                                        <!-- 번호 -->
                                         <td>${num}</td>
 
-                                        <!-- 게시판명 -->
+                                        <!-- 게시글제목 -->
                                         <td>
                                             <c:choose>
                                                 <c:when test="${board.bname =='공지사항'}">
@@ -217,10 +218,6 @@
                                                             </c:forEach>
                                                             <!-- 제목 -->
                                                             ${board.title}
-                                                            <!-- 댓글수 -->
-                                                            <c:if test="${board.renoCount > 0}">
-                                                                [${board.renoCount}]
-                                                            </c:if>
                                                         </p>
                                                     </a>
                                                 </c:when>
@@ -233,10 +230,7 @@
                                                             </c:forEach>
                                                             <!-- 제목 -->
                                                             ${board.title}
-                                                            <!-- 댓글수 -->
-                                                            <c:if test="${board.renoCount > 0}">
-                                                                [${board.renoCount}]
-                                                            </c:if>
+                                                        
                                                         </p>
                                                     </a>
                                                 </c:when>
@@ -249,10 +243,7 @@
                                                             </c:forEach>
                                                             <!-- 제목 -->
                                                             ${board.title}
-                                                            <!-- 댓글수 -->
-                                                            <c:if test="${board.renoCount > 0}">
-                                                                [${board.renoCount}]
-                                                            </c:if>
+                                                        
                                                         </p>
                                                     </a>
                                                 </c:when>
@@ -265,10 +256,7 @@
                                                             </c:forEach>
                                                             <!-- 제목 -->
                                                             ${board.title}
-                                                            <!-- 댓글수 -->
-                                                            <c:if test="${board.renoCount > 0}">
-                                                                [${board.renoCount}]
-                                                            </c:if>
+                                                        
                                                         </p>
                                                     </a>
                                                 </c:when>
@@ -281,10 +269,7 @@
                                                             </c:forEach>
                                                             <!-- 제목 -->
                                                             ${board.title}
-                                                            <!-- 댓글수 -->
-                                                            <c:if test="${board.renoCount > 0}">
-                                                                [${board.renoCount}]
-                                                            </c:if>
+                                                        
                                                         </p>
                                                     </a>
                                                 </c:when>
@@ -297,21 +282,22 @@
                                                             </c:forEach>
                                                             <!-- 제목 -->
                                                             ${board.title}
-                                                            <c:if test="${board.renoCount > 0}">
-                                                                [${board.renoCount}]
-                                                            </c:if>
                                                         </p>
                                                     </a>
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
-        
+                                        <!-- 게시글작성자 -->
+                                        <td>${board.writer}</td>
+                                        <!-- 댓글내용 -->
                                         <td>
-                                            <p class="ptitle">${board.content}</p>
+                                            <p class="ptitle">${board.recontent}</p>
                                         </td>
+                                        <!-- 댓글작성자 -->
                                         <td>${board.memberid}</td>
-                                        <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
-                                        <td>${board.readcnt}</td>
+                                        <!-- 등록일 -->
+                                        <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.redate}"/></td>
+                                        <!-- 게시판선택 -->
                                         <td>
                                             <c:choose>
                                                 <c:when test="${board.bname eq 'anony'}">고객의소리</c:when>
@@ -334,7 +320,7 @@
                     <p>&nbsp;</p>
         
                     <div id="pagination">
-                        <form action="/admin/memberBoard" id="paginationForm">
+                        <form action="/admin/memberReply" id="paginationForm">
                             <input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
                             <input type="hidden" name="currPage">
                             <input type="hidden" name="amount">
@@ -343,10 +329,10 @@
         
                             <ul>
                                 <!-- 무조건 처음페이지로 -->
-                                <li class="start"><a href="/admin/memberBoard?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">첫페이지</a></li>
+                                <li class="start"><a href="/admin/memberReply?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">첫페이지</a></li>
                                 <!-- 활성화x일때 처음 페이지로 -->
                                 <c:if test="${!page.prev}">
-                                    <li class="prev"><a href="/admin/memberBoard?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">이전</a></li>
+                                    <li class="prev"><a href="/admin/memberReply?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">이전</a></li>
                                 </c:if>
 
                                 <c:if test="${page.prev}">
@@ -355,7 +341,7 @@
                                 <!--  -->
                                 <c:forEach var="pageNum" begin="${page.startPage}" end="${page.endPage}">
                                     <li class="${page.cri.currPage == pageNum ? 'currPage' : ''}">
-                                        <a href="/admin/memberBoard?currPage=${pageNum}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">${pageNum}</a>
+                                        <a href="/admin/memberReply?currPage=${pageNum}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">${pageNum}</a>
                                     </li>
                                 </c:forEach>
                                 <!--  -->
@@ -373,7 +359,7 @@
                     </div>
                     <ul id="searchMenu">
                         <li>
-                            <form action="/admin/memberBoard" method="GET" id="searchMenuForm">
+                            <form action="/admin/memberReply" method="GET" id="searchMenuForm">
                                 <input type="hidden" name="currPage" value="1">
                                 <input type="hidden" name="amount" value="${page.cri.amount}">
                                 <input type="hidden" name="pagesPerPage" value="${page.cri.pagesPerPage}">
@@ -381,10 +367,9 @@
                                 
                                 <select name="type" class="searchcss">
                                     <option>검색조건</option>
-                                    <option value="T" ${("T" eq page.cri.type) ? 'selected' : ''}>제목</option>
-                                    <option value="C" ${("C" eq page.cri.type) ? 'selected' : ''}>내용</option>
-                                    <option value="W" ${("W" eq page.cri.type) ? 'selected' : ''}>작성자</option>
-                                    <option value="TC" ${("TC" eq page.cri.type) ? 'selected' : ''}>제목+내용</option>
+                                    <option value="T" ${("T" eq page.cri.type) ? 'selected' : ''}>원글제목</option>
+                                    <option value="C" ${("C" eq page.cri.type) ? 'selected' : ''}>댓글내용</option>
+                                    <option value="W" ${("W" eq page.cri.type) ? 'selected' : ''}>댓글작성자</option>
                                 </select>
         
                                 <input type="text" class="searchcss" name="keyword" value="${page.cri.keyword}">

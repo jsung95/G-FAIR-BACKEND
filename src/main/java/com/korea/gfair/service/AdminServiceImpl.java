@@ -9,6 +9,7 @@ import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.MemberVO;
+import com.korea.gfair.domain.ReplyBoardVO;
 import com.korea.gfair.mapper.AdminMapper;
 import com.korea.gfair.persistence.AdminDAO;
 
@@ -115,4 +116,25 @@ public class AdminServiceImpl implements AdminService {
 		
 		return this.adminMapper.memberBoardDelete(bnoList);
 	}//memberBoardRemove
+
+	@Override
+	public List<ReplyBoardVO> getMemberReplyList(Criteria cri) throws Exception {
+		log.debug("getMemberReplyList() invoked.");
+		
+		return this.adminMapper.memberReplyList(cri);
+	}//getMemberReplyList
+
+	@Override
+	public Integer getMemberReplyTotalCount(Criteria cri) throws Exception {
+		log.debug("getMemberReplyTotalCount() invoked.");
+		
+		return this.adminMapper.memberReplyTotalCount(cri);
+	}//getMemberReplyTotalCount
+
+	@Override
+	public boolean memberReplyRemove(List<Integer> renoList) throws Exception {
+		log.debug("memberReplyRemove() invoked.");
+		
+		return this.adminMapper.memberReplyDelete(renoList);
+	}//memberReplyRemove
 }//end class

@@ -6,6 +6,7 @@ import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.MemberVO;
+import com.korea.gfair.domain.ReplyBoardVO;
 
 public interface AdminService {
 	public List<ApplyVO> getApplyInformation () throws Exception;
@@ -28,4 +29,10 @@ public interface AdminService {
 	public abstract Integer getMemberBoardTotalCount(Criteria cri) throws Exception;
 	//선택삭제
 	public abstract boolean memberBoardRemove(List<Integer> bnoList) throws Exception;
+	//회원댓글 모두 조회
+	public abstract List<ReplyBoardVO> getMemberReplyList(Criteria cri) throws Exception;
+	//전체댓글수
+	public abstract Integer getMemberReplyTotalCount(Criteria cri) throws Exception;
+	//선택댓글삭제
+	public abstract boolean memberReplyRemove(List<Integer> renoList) throws Exception;
 }//end interface
