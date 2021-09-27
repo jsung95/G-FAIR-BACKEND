@@ -17,187 +17,180 @@
     <script src="/resources/js/fullnav.js"></script>
 
 </head>
+<style>
 
-    <style>
-button {
-    margin: 0;
-}
-button:hover {
-   cursor: pointer;
-}
+	#totalCount{
+		margin: 50px 0 10px 0;
+	}
 
-.wrapper {
-    height: 570px;
-}
-#wrap {
-    margin: 0;
-    width: 100%
-    align-items: center;
-}
+    table{
+        width: 1200px;
+        border-bottom: 1px ridge black;
+        border-collapse: collapse;
+		margin-top: 50px;
+        text-align: center;
+    }
 
-table {
-    width: 100%;
-}
+    th{	
+    	font-size:20px;
+    	height: 50px;
+	    font-size: 20px;
+	    border-top: 3px solid #005bbb;
+        color: #000;
+        background-color: #eee;
+        
+    }
 
-table, th, td {
-    border: 1px solid rgb(201, 201, 201);
-    border-collapse: collapse;
-}
+    td{
+        height: 40px;
+	    font-size: 15px;
+	    text-align: center;
+    }
 
-th {
-    background-color: rgb(245, 245, 245);
-    height: 50px;
-    font-size: 20px;
-    border-top: 3px solid #005bbb;
-}
+    #regBtn{
+		width: 100px;
+		height: 40px;
+		line-hight: 40px;
+		text-align:center;
+		background:#005bbb;
+		color:#fff;
+		font-size:15px;
+		border:0;
+		cursor:pointer;
+		float:right;
+		margin-top:10px;
+		position: relative;
+   		bottom: -513px;
+    }
 
-td {
-    height: 40px;
-    font-size: 15px;
-    text-align: center;
-}
+    tr:hover{
+        background-color: #eee;
+    }
 
-
-tr:hover {
-    background-color: #eee;
-}
-
-a, a:link, a:visited {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
-/* 제목 */
-td:nth-child(2),td:nth-child(3) {
-    text-align: center; 
-    padding-left: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 200px;
-}
-
-/* 작성자 */
-td:nth-child(3) {
-    text-align: center; 
-    padding-left: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100px;
-}
-
-/* no, 조회수 */
-td:nth-child(1),td:nth-child(5) {
-    width: 70px;
-
-}
-/* 등록일 */
-td:nth-child(4) {
-    width: 60px;
-}
-
-}/* paging */
-#pagination {
-    width: 95%;
-    margin: 0 auto;
-    margin-top:5px;
-}
-
-
-#pagination ul {
-     display: flex;
-    justify-content: center;
-    margin-top: -20px;
-    margin-bottom: 55px;
-}
-#pagination li {
-    width: 30px;
-    height: 30px;
-    display: flex;
-
-    border-left: 1px solid #999;
-    border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
-    box-sizing: border-box;
-
-    text-align: center;
-    line-height: 28px;
-    flex-direction: column;
-    margin-top:5px;
-}
-#pagination li:last-child {
-    border-right: 1px solid #999;
-}
-
-/* 하단 버튼 */
-.reg {
-    margin: 0;
-
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-/* 페이징 버튼 */
-.prev, .next, .end {
-    width: 40px !important;
-    color: white;
-    background-color: rgb(235, 238, 232);
-}
-
-/* 현재페이지 버튼 */
-.currPage {
-    height: 29px!important;
-    color: white;
-    background-color: rgb(247, 247, 247);
-    border-bottom: 1px solid #999;
-    box-sizing: border-box;
-}
-/* 버튼CSS */
-.buttonstyle {
-    height: 40px;
-    width: 100px;
-    line-height: 40px;
-    text-align: center;
-    background-color: #005bbb;
-    color: #fff;
-    font-size: 15px;
-    
-}
-
-  form#searchForm {
-    position: relative;
-    bottom: -560px;
-    left: 454px;
-}
-    
-#regBtn{
-     position: relative;
-    bottom: -538px;
-    left: 1100px;
-    height: 40px;
-    width: 100px;
-    line-height: 30px;
-    text-align: center;
-    background-color: #005bbb;
-    color: #fff;
-    font-size: 15px;
+    a, a:link, a:visited{
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
     }
     
-    button.search1 {
-    position: relative;
-    left: 10px;
-    height: 25px;
-    width: 49px;
-    line-height: 20px;
-    text-align: center;
-    background-color: #005bbb;
-    color: #fff;
-    font-size: 14px;
-}
+    td:nth-child(1){
+    	color:#005bbb;
+    }
+    td:nth-child(2) {
+	    text-align: left;
+	    padding-left: 10px;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
+    
+    .insertDate{
+  	 	width:170px;
+    }
+    
+    table ul{
+    	display:flex;
+    	justify-content: center;
+    }
+    
+    .updateDate{
+    	width:170px;
+    }
 
+    #pagination{
+        width: 100%;
+        margin: 0 auto; 
+        position: relative;
+    }
+
+    #pagination .page{
+        display: flex;
+        justify-content: center;
+        margin:50px 0 20px 0;
+        
+    }
+
+    #pagination li{
+        float: left;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        list-style: none;
+        line-height: 30px;
+        font-size:16px;
+        
+        margin-right:10px;
+    }
+    
+    #pagination li a{
+    	display:block;
+    	
+   	}
+
+	.start{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        border:1px solid #eee;
+
+	}
+	
+	.prev{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-30px;
+        border:1px solid #eee;
+	}
+	
+	.next{		
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-60px;
+        border:1px solid #eee;
+	
+	}
+	
+	.end{
+		text-indent:-9999em;
+		background-image: url(/resources/img/btn_pagination.png);
+        background-repeat: no-repeat;
+        background-size: 120px 30px;
+        background-position:-90px;
+        border:1px solid #eee;
+	
+	}
+
+    .start a .prev a, .next a .end a{
+    	display:block;
+        
+    }
+
+    .currPage{
+    	border: 1px solid #000;
+    }
+    .search1{
+    	height:35px;
+    }
+    .search2{
+    	height:30px;
+    }
+        
+    .search3{
+        display: inline-block;
+        background-color: #005bbb;
+        color: #fff;
+        font-size: 15px;
+        width: 100px;
+        height: 40px;
+		border:0;
+        line-height: 40px;
+        text-align: center;
+    }
 </style>
 <script>
     $(function () {
@@ -223,7 +216,7 @@ td:nth-child(4) {
                 paginationForm.find('input[name=amount]').val('${pageMaker.cri.amount}');
                 paginationForm.find('input[name=pagesPerPage]').val('${pageMaker.cri.pagesPerPage}');
       
-                            paginationForm.submit();
+                paginationForm.submit();
             // on  click prev / next 
     	
     		});
@@ -253,11 +246,10 @@ td:nth-child(4) {
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
         });
-        
- 
-
+       
     })//end jq
 </script>
+
 <body>
     <div id="wrap">
  	
@@ -265,107 +257,127 @@ td:nth-child(4) {
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">미디어센터</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/photo/listPerPage">포토갤러리</a></li>
                     <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
-                    <li><a class="chk" href="/question/list">질문게시판</a></li>
-                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
-                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
-                    <li><a class="chk" href="/free/board">자유게시판</a></li>
-                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 보도자료 </div>
+                    <div class="map">home > 미디어센터 > 보도자료 </div>
                     <h2 class="subName">보도자료</h2>
                 </div>
                       <div class="contentIn">
               	<div class="wrapper">
 					<table border =1 >
-		           			 <caption>
-		              			  <ul id="topmenu">
-		                    		<li>
-		                       		 <form id="searchForm" action="/news/listPerPage" method="GET">
-			                            <input type="hidden" name="currPage" value="1">
-			                            <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-			                            <input type="hidden" name="pagesPerPage"  value="${pageMaker.cri.pagesPerPage}">
-		
-		                            <select name="type" id="search1">  <!--eq >> 동등비교 연산자 -->
-		                                <option value="T" ${ ("T" eq pageMaker.cri.type) ? "selected" : ""}>제목</option>
-		                                <option value="C" ${ ("C" eq pageMaker.cri.type) ? "selected" : ""}>내용</option>
-		                                <option value="W" ${ ("W" eq pageMaker.cri.type) ? "selected" : ""}>작성자</option>
-		                            </select>
-			                            <input type="text" name="keyword" class="search2" value="${pageMaker.cri.keyword}">
-			                            <button class="search1">찾기</button>
-		                        	</form>
-		                       		</li>
-		                         </ul>
-		               		 </caption>
+                        <thead>
+                            <tr>
+                                <th width=7%>글번호</th>
+                                <th width=*>제목</th>
+                                <th width=10%>작성자</th>
+                                <th width=10%>등록일</th>
+                                <th width=7%>조회수</th>
+                            </tr>
+                        </thead>
 
+					         <c:set var="number" value="${pageMaker.totalAmount - (pageMaker.cri.currPage - 1) * pageMaker.cri.amount}"/>
+                                <c:forEach items="${list}" var="board" >
+                                        <tr>                
+                                            <td>${number}</td>
+                                            <td><a href ="/news/get?bno=${board.bno}">
+                                            <c:out value="${board.title}"/></a></td>
+                                            <td><c:out value="${board.memberid}"/></td>
+                                            <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
+                                            <td><c:out value="${board.readcnt}"/></td>
+                                        </tr>
+                                <c:set var="number" value="${number-1}"/>
+                                </c:forEach>
 
-						    <thead>
-						        <th>NO</th>
-						        <th>제목</th>
-						        <th>작성자</th>
-						        <th>등록일</th>
-						        <th>조회수</th>
-						    </thead>
-					            <c:set var="number" value="${pageMaker.totalAmount - (pageMaker.cri.currPage - 1) * pageMaker.cri.amount}"/>
-					            <c:forEach items="${list}" var="board" >
-					                <tr>                
-					                    <td>${number}</td>
-					                    <td><a href ="/news/get?bno=${board.bno}">
-					                    <c:out value="${board.title}"/></a></td>
-					                    <td><c:out value="${board.memberid}"/></td>
-					                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
-					                    <td><c:out value="${board.readcnt}"/></td>
-					       			 </tr>
-					          <c:set var="number" value="${number-1}"/>
-					      	  </c:forEach>
-                                <c:if test="${__LOGIN__.memberid != null}">
-                                    <button type="button" id="regBtn"> 등록하기 </button>
-
+                               <c:if test="${__LOGIN__.memberid != null}">
+                                    <button id="regBtn" type="button">글쓰기</button>
                                 </c:if>
 					</table>
 			</div>
 
 <!--페이징 처리 -->
  
-			<div id="wrapper">
-			    <div id="pagination">
-			        <form id="paginationForm">
-			            <input type="hidden" name="currPage"> 
-			            <input type="hidden" name="amount">
-			            <input type="hidden" name="pagePerPage">
-			        
-			            <ul>  
-			                <c:if test="${pageMaker.prev}">                 
-			                    <li class="prev"><a class ="prev" href="${pageMaker.startPage -1 }">Prev</a></li>   <!--왜 클래스 사용했을까? 공통된 특성을 두군데 같이 중복 적용하기 위해서 -->
-			                </c:if>
-			                      <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-			                
-			                    <li class="${pageMaker.cri.currPage == pageNum?'currPage' : ''}">
-			                        <a    
-			                        class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}"
-			                        href="/news/listPerPage?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">
-			                        ${pageNum}
-			                        </a>
-			                    </li>
-			                </c:forEach>
-			
-			                <c:if test="${pageMaker.next}">
-			                    <li class="next"><a class ="next" href="${pageMaker.endPage +1}">next</a></li>
-			         
-			                </c:if>
-			            </ul>
-			        </form>
-			    </div>
-			</div>
-           </div>
-           
+	       <div id="pagination">
+		            <form action="" id="pagenationForm">
+		            
+		                <input type="hidden" name="currPage">
+		                <input type="hidden" name="amount">
+		                <input type="hidden" name="pagesPerPage">
+		                
+		                <ul class="page">
+		                	<c:set var="rep" value="${pageMaker.realEndPage}" />
+		                	<c:set var="curr" value="${pageMaker.cri.currPage}"/>
+		                	<fmt:formatNumber value="${curr}" type="number" var="currNumber" />
+                            <li><a class="start" href="/news/listPerPage">첫페이지</a></li>
+                         <c:choose>
+	                         <c:when test="${curr eq 1}">
+	                            <li><a class="prev" href="/news/listPerPage?currPage=${pageNum}=1&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
+	                         </c:when>
+	                         <c:when test="${curr%10 eq 1}">
+	                         	<li><a class="prev" href="/news/listPerPage?currPage=${pageMaker.startPage-10}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
+	                         </c:when>
+	                         <c:otherwise>
+	                            <li><a class="prev" href="/news/listPerPage?currPage=${pageMaker.startPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
+	                         </c:otherwise>
+                   		 </c:choose>
+		                    	
+		                    <c:forEach
+		                    	 begin="${pageMaker.startPage}"
+		                    	 end="${pageMaker.endPage}" 
+		                    	 var="pageNum" >
+		
+		                         <li class="${pageMaker.cri.currPage == pageNum ? 'currPage':''}">
+			                         <a href="/news/listPerPage?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">
+			                  		 ${pageNum}
+			                  		 </a>
+		                  		 </li>
+		
+		                    </c:forEach>
+		             
+		                    <c:choose>
+		                    	<c:when test="${curr eq rep}">
+		                    		<li><a class="next" href="/news/listPerPage?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
+		                    	</c:when>
+		                    	<c:otherwise>
+                            		<li><a class="next"href="/news/listPerPage?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
+		                    	</c:otherwise>
+		                    </c:choose>
+                            <li><a class="end" href="/news/listPerPage?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">끝페이지</a></li>
+		                </ul>
+		            
+		            </form>
+		
+		        </div>
+		            <table>
+		                <caption>
+		                    <ul>
+		                        <li>
+		                            <form id="searchForm" action="/news/listPerPage" method="GET">
+		                                <input type="hidden" name="currPage" value="1">
+		                                <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		                                <input type="hidden" name="pagesPerPage" value="${pageMaker.cri.pagesPerPage}">
+		
+		                                <select name="type" class="search1">
+		                                    <option value="T" ${ ("T" eq pageMaker.cri.type) ? "selected" : "" }>제목</option>
+		                                    <option value="C" ${ ("C" eq pageMaker.cri.type) ? "selected" : "" }>내용</option>
+		                                    <option value="W" ${ ("W" eq pageMaker.cri.type) ? "selected" : "" }>작성자</option>
+		                                </select>
+		
+		                                <input type="text" name="keyword" class="search2" value="${pageMaker.cri.keyword}">
+		                                <button class="search3">검색</button>
+		                            </form>
+		                        </li>
+		                    </ul>
+		                </caption>
+		                
+		            </table>
+                </div>
             </div>
         </div>
 

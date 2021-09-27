@@ -17,77 +17,145 @@
     <script src="/resources/js/fullnav.js"></script>
 
 </head>
-
 <style>
-#wrap {
-    margin: 0;
-    width: 100%
-    align-items: center;
     
-}
-body,input,textarea,select,button,table{
-	font-family:'noto-sans';
-	font-size:12px; 
-	color:#333;
-	}
-.wraper {
-    width: 1200px;
-    margin-top: 50px;
-    border-top: 2px solid #005bbb;
-}
+    #btn_wrap{
+        width:100%;
+        height:50px;
+    }
+    
+    .btn{
+        width: 100px;
+        height: 40px;
+        line-hight: 40px;
+        text-align:center;
+        background:#005bbb;
+        color:#fff;
+        font-size:15px;
+        border:0;
+        cursor:pointer;
+        margin-top:10px;
+    
+    }
+    
 
-#table {
- 
-    width: 1200px;
-}
+    #modifyBtn{
+        float: left;
+        margin-left:5px;
+    }
+    
+    #removeBtn{
+        float: left;
+        margin-left:5px;
+    }
+    
+    #regBtn{
+        float:left;
+        margin-left:5px;
+    
+    }
+    
+    #listBtn{
+        float: right;
+    }
+    
+    .read_no{
+        margin-top: 50px;
+        border-bottom:3px solid #005bbb;
+        padding-bottom:5px;
+    }
+    
+    #read_Wrap{
+        width:100%;
+    }
+    
+    #title_wrap{
+        width:100%;
+        height:40px;
+        background:#fff;
+    }
+    
+    
+    #title_wrap .title_area{
+        width:85%;
+        float:left;
+        height:40px;
+        line-height:40px;
+        
+        font-size:20px;
+        font-weight:bold;
+    }
+    
+    #title_wrap .writer_area{
+        width:15%;
+        float:right;
+        font-size:20px;
+        height:40px;
+        line-height:40px;
+        text-align:center;
+    }
+    
 
-#first{
-    height:40px;
-    text-align: left;
-    font-size: 20px;
-}
-
-#first :nth-child(2){
-    width: 150px;
-}
-
-#second{
-    height: 40px;
-    background-color: #eee;
-    font-size:15px
-}
-tr#space{
-    height: 10px;
-    border-bottom: 2px solid #eee;
-    border-top: 2px solid #eee;
-}
-
-tr#three td {
-    padding: 30px 0 30px 10px;
-    font-size: 15px;
-    border-top: 1px solid #eee
-
-}
-
-div#btn {
-    border-top: 1px solid #eee;
-    margin-top: 5px;
-    padding-top: 20px;
-}
-
-button {
-    margin: 0;
-}
-
-#modifyBtn , #listBtn {
-    height: 40px;
-    width: 100px;
-    text-align: center;
-    background-color: #005bbb;
-    color: #fff;
-    font-size: 15px;
+    
+    #date_wrap{
+        width:100%;
+        height:40px;
+        background:#eee;
+        
+    }
+    
+    #date_wrap .reg_date{
+        width:85%;
+        float:left;
+        height:40px;
+        line-height:40px;
+        font-size:15px;
+        
+    }
+    
+    #date_wrap .readcnt{
+        width:15%;
+        float:right;
+        font-size:15px;
+        height:40px;
+        line-height:40px;
+        text-align:center;
+        
+    }
+    
+    #content_wrap{
+        min-height:300px;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        padding: 30px 0 30px 10px;
+        font-size:15px;
+        margin:10px 0 20px 0;
+    }
     
 </style>
+
+<script>
+   	  $(function(){
+        console.clear();
+        console.debug("start");
+        
+        $('#listBtn').on('click',function () {
+            console.log("modifyBtn button clicked"); 
+            
+            location.href="/news/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}"
+        });
+        
+        
+        $('#modifyBtn').on('click', function(){
+          console.log("modifyBtn button clicked"); 
+          
+          location.href="/news/modify?bno=${board.bno}"
+          
+         });// .onclick  
+         
+         
+    })//end jq
+</script>
 
 <script>
     $(function(){
@@ -112,19 +180,10 @@ button {
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
         });
-        
-        $('#listBtn').on('click',function () {
-            location.href= location.href="/news/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}"
-        });
-        
-        $('#modifyBtn').on('click', function(){
-          console.log("modifyBtn button clicked"); 
-          
-          location.href="/news/modify?bno=${board.bno}"
-          
-         });// .onclick  
+       
     })//end jq
 </script>
+</head>
 
 <body>
     <div id="wrap">
@@ -133,60 +192,44 @@ button {
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">미디어센터</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/photo/listPerPage">포토갤러리</a></li>
                     <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
-                    <li><a class="chk" href="/question/list">질문게시판</a></li>
-                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
-                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
-                    <li><a class="chk" href="/free/board">자유게시판</a></li>
-                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
                 </ul>
-
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 보도자료 </div>
+                    <div class="map">home > 미디어센터 > 보도자료 </div>
                     <h2 class="subName">보도자료</h2>
                 </div>
+
             <div class="contentIn">
                 	<div class="wraper">
                         <form action="#">
-                            <table id="table">
-                                <tr id="first">
-                                    <td colspan="2">&nbsp${board.title}</td>
-                                    <td>작성자 :
-                                    ${board.memberid}</td>
-                                </tr>
-                                <tr id="second">
-                                    <td colspan="2">&nbsp&nbsp 등록일:
-                                    <fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    수정일 :
-                                    <fmt:formatDate pattern="yyyy/MM/dd" value="${board.update_ts}"/></td>
+                        <div class="read_no">글번호: ${board.bno}</div>
+                            <div id="title_wrap">
+                                <div class="title_area">${board.title}</div>
+                                <div class="writer_area">작성자:${board.memberid}</div>
+                            </div>
 
-                                    <td>조회수 :
-                                    ${board.readcnt}</td>
-                                </tr>
-                                 <tr id="space">
-                                 
-                                 </tr>
-                                
-                                <tr id="three">
-                                     <td colspan="3">${board.content}</td>
-                                </tr>
-                                                     
-                            </table>
+                            <div id="date_wrap">
+                                <div class="reg_date">작성일:<fmt:formatDate pattern="yyyy/MM/dd"  value="${board.insert_ts}"/></div>
+                                <div class="readcnt">조회수:${board.readcnt}</div>
+                                </div>
+                            <div id="content_wrap">${board.content}</div>
+                    
+                            <div id="btn_wrap">
 
-                            <div id="btn">
-                                <button type="button" id="modifyBtn">수정</button> 
-                                <button type="button" id="listBtn">목록</button>
+                             
+                                    <button id="modifyBtn" class="btn" type="button">수정</button>	
+                                	    
+                                <button id="listBtn" class="btn" type="button">목록</button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>
+            </div><!--containerIn-->
         </div>
 
    

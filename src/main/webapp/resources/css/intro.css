@@ -40,7 +40,7 @@
 
 #container #content .contentIn .about_gfair .about_gfair01 .about_gfair01_bg{
 
-    background: url(../publishing/img/kintexbg1.jpg);
+    background: url(/resources/img/kintexbg1.jpg);
     width: 1200px;
     height: 500px;
     background-size: cover;

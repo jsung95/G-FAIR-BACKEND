@@ -15,6 +15,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+    <script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+    
 
 </head>
 
@@ -60,6 +62,8 @@ textarea#content {
     top: 4px;
     font-size: 15px;
     width: -6px;
+    min-height: 300px;
+}
 }
 
 #container #content {
@@ -79,7 +83,12 @@ textarea#content {
     top: 4px;
     position:relative;
 }
-    
+
+button#summitBtn {
+    left: 117px;
+}
+
+
 </style> 
 	
 
@@ -120,23 +129,19 @@ textarea#content {
  	
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-        <div id="container">
+       <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">미디어센터</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/photo/listPerPage">포토갤러리</a></li>
                     <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
-                    <li><a class="chk" href="/question/list">질문게시판</a></li>
-                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
-                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
-                    <li><a class="chk" href="/free/board">자유게시판</a></li>
-                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
+            
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 보도자료 </div>
+                    <div class="map">home > 미디어센터 > 보도자료 </div>
                     <h2 class="subName">보도자료</h2>
                 </div>
                             <div class="contentIn">
@@ -144,13 +149,13 @@ textarea#content {
                         <form action="/news/register" method="POST">
                				 <table>
 		                        <input type="hidden" id="bno" name="bno" value="${board.bno}">
-		                        <input type="hidden" id="reproot" name="reproot"  value="${board.bno}">
-		                     	<input type="hidden" id="memberid" name="memberid" value= "${board.memberid}">
+		                        <input type="hidden" id="reproot" name="reproot"  value="${board.reproot}">
+		                       	<input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
 		         				<input type="hidden" id="bname" name="bname" value="뉴스게시판">
 		                        <input type="hidden" id="fid" name="fid">
-			                    <input type="hidden" id="notice_tf" name="notice_tf" value="T">
-			                	<input type="hidden" id="public_tf" name="public_tf"  value="T">
-								<input type="hidden" id="reply_tf" name="reply_tf"  value="T">
+			                    <input type="hidden" id="notice_tf" name="notice_tf" value="F">
+			                	<input type="hidden" id="public_tf" name="public_tf"  value="F">
+								<input type="hidden" id="reply_tf" name="reply_tf"  value="F">
 								
 								<tr>	
 			                        <td><label for="title">제목</label></td>
@@ -159,7 +164,7 @@ textarea#content {
 		            
 			                    <tr>
 			                        <td><label for="content">내용</label></td> 
-			                   		 <td><textarea name="content" id="content" cols="48" rows="10" placeholder="내용을 입력하세요"></textarea></td>
+			                   		 <td><textarea name="content" id="content" cols="48" rows="10" placeholder="내용을 입력하세요" required></textarea></td>
 			                    </tr>
   
 		                        <tr>

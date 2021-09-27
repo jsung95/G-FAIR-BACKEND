@@ -274,14 +274,13 @@ font-weight: 500;
 }
 
 #innerHead p {
-    margin-top: 30px;
-    line-height: 38px;
-    font-size: 35px;
+	margin-top: 30px;
+    line-height: 44px;
+    font-size: 28px;
     font-weight: 500;
     font-family: 'Noto sans KR';
     color: white;
-    margin-left: 15px;
-
+    margin-left: 28px;
 }
 #innerBody{
     position: relative;
@@ -318,13 +317,13 @@ font-weight: 500;
 } 
 
 #inner2 #innerHead p {
-    margin-top: 7px;
-    line-height: 42px;
-    font-size: 33px;
-    font-weight: 500;
-    font-family: 'Noto sans KR';
-    color: white;
-    margin-left: 22px;
+   margin-top: 7px;
+   line-height: 42px;
+   font-size: 25px;
+   font-weight: 500;
+   font-family: 'Noto sans KR';
+   color: white;
+   margin-left: 40px;
 }
 
 #inner2 #innerBody p:nth-child(2){

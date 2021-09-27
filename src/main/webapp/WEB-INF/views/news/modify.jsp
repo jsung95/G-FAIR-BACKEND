@@ -19,66 +19,98 @@
 </head>
 
 <style>
-	#wrap {
-    margin: 0;
-    width: 100%
-    align-items: center;
+    #write_no{
+        margin:50px 0 10px 0;
+    }
+    #write_title_wrap{
+        width:100%;
+        height:80px;
+        background:#eee;
+        border-top:3px solid #005bbb;
+    }
+    #write_title_wrap .write_title_area{
+        width:100px;
+        padding:10px;
+        margin-top:20px;
+        float:left;
+        line-height:18px;
+        text-align:center;
+        font-size:20px;
+        font-weight:bold;
+    }
     
+    #write_title_wrap .write_title{
+        width:900px;
+        margin-top:15px;
+        padding:10px;
+        float:left;
+        font-size:18px;
+        font-weight:bold;
+    }
+    #write_info{
+        width:100%;
+        height:50px;
+        
+    }
+    
+    #write_info .writer_area{
+        width:85%;
+        float:left;
+        height:50px;
+        line-height:50px;
+        font-size:15px;
+        text-indent:10px;
+    }
+    
+    #write_info .readcnt_area{
+        width:15%;
+        float:right;
+        height:50px;
+        line-height:50px;
+        font-size:15px;
+        text-align:center;
+        
+    }
+    
+    #btn_wrap{
+        width:100%;
+        height:50px;
+    }
+    
+    .btn{
+        width: 100px;
+        height: 40px;
+        line-hight: 40px;
+        text-align:center;
+        background:#005bbb;
+        color:#fff;
+        font-size:15px;
+        border:0;
+        cursor:pointer;
+        margin-top:10px;
+    }
+    
+    
+    #modifyBtn{
+        float: left;
+    }
+    
+    #removeBtn{
+        float: left;
+        margin-left:5px;
+    }
+    
+    #listBtn{
+        float: right;
+    }
+    
+   #editor {
+    min-height: 300px;
+    min-width: 1194px;
 }
-body,input,textarea,select,button,table{
-	font-family:'noto-sans';
-	font-size:12px; 
-	color:#333;
-	}
-.wraper {
-    width: 1200px;
-    margin-top: 50px;
-    border-top: 2px solid #005bbb;
-}
-
-label {
-    width: 54px;
-    display: inline-block;
-    width: 115px;
-    text-align: center;
-    font-size: 20px;
-    height: 30px;
-    height: min-content;
-}
-
-input#title {
-    height: 30px;
-    font-size: 15px;
-    width: 1074px;
-
-    font-weight: 500;
-}
-	
-textarea#content {
-   position: relative;
-    left: -21px;
-    top: 4px;
-    font-size: 15px;
-    width: -6px;
-}
-
-#container #content {
-    width: 1073px;
-    margin: 0 0 10px 20px;
-    float: left;
-}
-#modifyBtn,#listBtn, #removeBtn {
-    height: 40px;
-    width: 100px;
-    line-height: 40px;
-    text-align: center;
-    background-color: #005bbb;
-    color: #fff;
-    font-size: 15px;
-    left: 891px;
-    top: 4px;
-    position:relative;
-}
+    
+    
+    
 </style>
    <script>
         $(function () {
@@ -151,54 +183,48 @@ textarea#content {
  	
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-        <div id="container">
+       <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">미디어센터</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/photo/listPerPage">포토갤러리</a></li>
                     <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
-                    <li><a class="chk" href="/question/list">질문게시판</a></li>
-                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
-                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
-                    <li><a class="chk" href="/free/board">자유게시판</a></li>
-                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
                 </ul>
 
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 보도자료 </div>
+                    <div class="map">home > 미디어센터 > 보도자료 </div>
                     <h2 class="subName">보도자료</h2>
                 </div>
                      <div class="contentIn">
                 	<div class="wraper">
                         <form action="/news/modify" method="POST">
-       						 <table border="1">
-
-					            <input type="hidden" id="notice_tf" name="notice_tf" value="T">
-					            <input type="hidden" id="public_tf" name="public_tf"  value="T">
-					            <input type="hidden" id="reply_tf" name="reply_tf"  value="T">
-					            <input type="hidden" value="<c:out value='${board.memberid}'/>"id = "memberid" name="memberid">
-					            <input type="hidden" value="<c:out value='${board.bno}'/>"id = "bno" name="bno">
-					            <thead>
-                
-				                    <tr>
-				                        <th><label for="title">제목</label></th>
-				                        <td><input type="text" value="<c:out value='${board.title}'/>" id="title" name="title" readonly></td>
-				                    </tr>
-	                
-				                    <tr>
-				                        <th><label for="content">내용</label></th>
-				                        <td><input type="text" value="<c:out value='${board.content}'/>" id="content" name="content" ></>
-				                    </tr>
-                    
-         
-          						 </thead>
-       						 </table>
-        
-						          <button type="submit" id="modifyBtn"> 수정완료</button>
-						          <button type="button" id="removeBtn"> 삭제</button>
-						          <button type="button" id="listBtn"> 목록으로</button>
+                       		 <input type="hidden" name="bno" value="${board.bno}">
+                            <input type="hidden" id="notice_tf" name="notice_tf" value=F">
+                            <input type="hidden" id="public_tf" name="public_tf"  value="F">
+                            <input type="hidden" id="reply_tf" name="reply_tf"  value="F">
+                            <input type="hidden" value="<c:out value='${__LOGIN__.memberid}'/>"id ="memberid" name="memberid">
+                            <input type="hidden" value="<c:out value='${board.bno}'/>"id = "bno" name="bno">
+                          
+                            <div id="write_no">글번호:${board.bno}</div>
+		        		<div id="write_title_wrap">
+			        		<div class="write_title_area">제목</div>
+			        		<div><input type="text" name="title" class="write_title" value="${board.title}"></div>
+		        		</div>
+		        		<div id="write_info">
+							<div class="writer_area">작성자:${board.memberid}</div>
+							<div class="readcnt_area">조회수:${board.readcnt}</div>
+						</div>
+				
+				        <textarea id="editor" name="content">${board.content}</textarea>
+						
+				        
+						<div id="btn_wrap">
+					   		<button id="modifyBtn" class="btn" type="button">수정</button>	
+					        <button id="removeBtn" class="btn" type="button">삭제</button>
+					        <button id="listBtn" class="btn" type="button">목록</button>
+				        </div>
    						</form>
                     </div> 
                 </div>
