@@ -314,7 +314,7 @@
                             <li><a class="start" href="/free/board">첫페이지</a></li>
                          <c:choose>
 	                         <c:when test="${curr eq 1}">
-	                            <li><a class="prev" href="/free/board?currPage=1&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"">이전</a></li>
+	                            <li><a class="prev" href="/free/board?currPage=1&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
 	                         </c:when>
 	                         <c:when test="${curr%10 eq 1}">
 	                         	<li><a class="prev" href="/free/board?currPage=${pageMaker.startPage-10}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a></li>
@@ -339,7 +339,7 @@
 		             
 		                    <c:choose>
 		                    	<c:when test="${curr eq rep}">
-		                    		<li><a class="next" href="/free/board?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}"">다음</a></li>
+		                    		<li><a class="next" href="/free/board?currPage=${pageMaker.realEndPage}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a></li>
 		                    	</c:when>
 		                    	<c:otherwise>
                             		<li><a class="next" href="/free/board?currPage=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a></li>
