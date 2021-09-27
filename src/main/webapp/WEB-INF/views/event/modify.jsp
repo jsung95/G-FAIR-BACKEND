@@ -100,7 +100,6 @@
 
     .custom-file-upload {
         
-        padding: 10px;
         border: 1px solid #005bbb;
         padding: 6px 12px;
         cursor: pointer;

@@ -8,7 +8,7 @@ console.log("Reply Module....")
 
 
 
-//replyService는 JSON타입이다
+//var test = (function(){})
 var replyService = (function(){
 
     // a라는 결과로 어떻게 할지 모르기 때문에, 이 함수를 사용한 쪽에서 활용하는 것으로 목적을 둔다.
@@ -25,18 +25,26 @@ var replyService = (function(){
         $.ajax({
             url: '/reply/new',
             type: 'POST',
-            data: JSON.stringify(reply),      //data는 내가 전달할 데이터이다.
+            data: JSON.stringify(reply),      //json으로 변환
 
             //내가 전달할 데이터의 타입이 무엇인가. 안에 내장된 내용의 타입을 보내는 것
             contentType: "application/json; charset=utf-8",
-            success: function (result, status, xhr) {
-                if(callback){
+            success: function (result, status, xhr) {//백에서 리턴받은 결과값과 상태코드
+                console.log('result:',result);
+                console.log('status:',status);
+                console.log('xhr:',xhr);
+
+                if(callback){//인자로 받은 콜백함수가 있다면
                     callback(result);
 
                 }//if
                 
             },//success
             error: function (xhr,status, er) {
+                console.log('xhr:',xhr);
+                console.log('status:',status);
+                console.log('result:',result);
+
                 if(error){
                     error(er);
                     
@@ -67,7 +75,7 @@ var replyService = (function(){
             function (data) {
                 console.dir("\t+ data" + data);
 
-                if(callback){
+                if(callback){//콜백함수가 있다면
                     // callback(data);       //댓글목록만 가져오는경우
                     callback(data.replyCnt, data.list); //댓글 숫자와 목록을 가져오는 경우
                     

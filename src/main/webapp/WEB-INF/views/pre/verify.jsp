@@ -100,6 +100,13 @@
             #mainBtn{
                 float: right;
             }
+
+            .btn_area{
+                border-top: 1px solid #eee;
+            }
+            .space_input{
+                height: 10px;
+            }
         </style>
 
         <script>
@@ -178,6 +185,7 @@
                                 </c:forEach>
 
                                 <div class="btn_area">
+                                    <div class="space_input"></div>
                                     <button id="mainBtn" type="button" class="btn1">Main</button>
                                 </div>
                             </div>

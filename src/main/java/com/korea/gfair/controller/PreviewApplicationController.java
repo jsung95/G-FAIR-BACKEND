@@ -103,7 +103,7 @@ public class PreviewApplicationController {
 		
 		this.preAppService.register(applications);
 		
-		return "redirect:/index";
+		return "redirect:/pre/verify";
 	}//register()
 	
 	

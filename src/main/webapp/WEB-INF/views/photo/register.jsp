@@ -19,6 +19,13 @@
 </head>
 
 <style>
+
+    #register_area{
+        border-top: 3px solid #005bbb;
+        margin-top: 50px;
+        min-height: 300px;
+    }
+
     .btn {
         width: 100px;
         height: 40px;
@@ -30,7 +37,6 @@
         color: #fff;
         font-size: 15px;
 
-        border-radius: 4px;
 
         cursor: pointer;
     }
@@ -56,28 +62,53 @@
     }
 
     .custom-file-upload {
-        display: inline-block;
-        background-color: #005bbb;
+        border: 1px solid #005bbb;
         padding: 6px 12px;
         cursor: pointer;
 
-        font-size: 20px;
-        color: #fff;
+        font-size: 15px;
+        color: #005bbb;
         font-weight: bold;
-        border-radius: 4px;
+
+        background-color: white;
     }
     
 
     #writer{
+        border-bottom: 1px solid #eee;
+
         line-height: 40px;
         height: 40px;
         margin-top: 10px;
         font-size: 20px;
+
+        margin-bottom: 15px;
+    }
+
+    #writer > h1{
+        width: 20%;
+        float: right;
+        display: inline;
     }
 
     #title_input{
-        line-height: 40px;
-        height: 40px;
+        width: 50%;
+
+        height: 30px;
+        float: left;
+    }
+
+    #listBtn{
+        float: right;
+    }
+
+    #btn_area{
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+
+    .uploadDiv{
+        min-height: 150px;
     }
 </style>
 
@@ -147,12 +178,9 @@
                             </div>
 
                             <div id="writer">
-                                작성자 : ${__LOGIN__.memberid}</h1>
+                                <h1>작성자 : ${__LOGIN__.memberid}</h1>
+                                <input id="title_input" type="text" name="title" placeholder="제목을 입력하세요" required>
                             </div>
-
-                            <div id="title_input">
-                                <input type="text" name="title" placeholder="제목을 입력하세요" required>
-                            </div> 
 
                             <!-- 파일첨부 -->
                             <div class="uploadDiv">
@@ -162,9 +190,10 @@
                             </div>
                             <br>
                                 
-
-                            <button type="submit" class="btn" id="uploadBtn">등록</button>
-                            <button type="button" class="btn" id="listBtn">목록</button>
+                            <div id="btn_area">
+                                <button type="submit" class="btn" id="uploadBtn">등록</button>
+                                <button type="button" class="btn" id="listBtn">목록</button>
+                            </div>
 
                         </form>
                     </div>
