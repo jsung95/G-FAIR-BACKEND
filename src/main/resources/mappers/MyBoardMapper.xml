@@ -36,14 +36,14 @@
         
         <choose>
             <when test="type eq 'T'.toString()">
-                AND title LIKE '%'||#{keyWord}||'%'
+                AND b.title LIKE '%'||#{keyWord}||'%'
             </when>
             <when test="type eq 'C'.toString()">
-                AND content LIKE '%'||#{keyWord}||'%'
+                AND b.content LIKE '%'||#{keyWord}||'%'
             </when>
             <when test="type eq 'TC'.toString()">
-                AND (content LIKE '%'||#{keyWord}||'%'
-                    OR title LIKE '%'||#{keyWord}||'%')
+                AND (b.content LIKE '%'||#{keyWord}||'%'
+                    OR b.title LIKE '%'||#{keyWord}||'%')
             </when>
         </choose>
          

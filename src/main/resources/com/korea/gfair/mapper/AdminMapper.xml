@@ -38,22 +38,22 @@
         
         <choose>
             <when test="type eq 'T'.toString()">
-                AND title LIKE '%'||#{keyword}||'%'
+                AND b.title LIKE '%'||#{keyword}||'%'
             </when>
             <when test="type eq 'C'.toString()">
-                AND content LIKE '%'||#{keyword}||'%'
+                AND b.content LIKE '%'||#{keyword}||'%'
             </when>
             <when test="type eq 'W'.toString()">
-                AND memberid LIKE '%'||#{keyword}||'%'
+                AND b.memberid LIKE '%'||#{keyword}||'%'
             </when>
             <when test="type eq 'TC'.toString()">
-                AND (content LIKE '%'||#{keyword}||'%'
-                    OR title LIKE '%'||#{keyword}||'%')
+                AND (b.content LIKE '%'||#{keyword}||'%'
+                    OR b.title LIKE '%'||#{keyword}||'%')
             </when>
         </choose>
          
         <if test="bname != null and bname != ''">
-            AND bname = #{bname}
+            AND b.bname = #{bname}
         </if>
         
         <![CDATA[ 

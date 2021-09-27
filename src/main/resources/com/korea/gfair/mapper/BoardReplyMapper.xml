@@ -107,17 +107,17 @@
         ]]>
         <choose>
             <when test="cri.type eq 'T'.toString()">
-                AND title LIKE '%'||#{cri.keyword}||'%'
+                AND b.title LIKE '%'||#{cri.keyword}||'%'
             </when>
             <when test="cri.type eq 'C'.toString()">
-                AND content LIKE '%'||#{cri.keyword}||'%'
+                AND b.content LIKE '%'||#{cri.keyword}||'%'
             </when>
             <when test="cri.type eq 'W'.toString()">
-                AND memberid LIKE '%'||#{cri.keyword}||'%'
+                AND b.memberid LIKE '%'||#{cri.keyword}||'%'
             </when>
             <when test="cri.type eq 'TC'.toString()">
-                AND (content LIKE '%'||#{cri.keyword}||'%'
-                     OR title LIKE '%'||#{cri.keyword}||'%')
+                AND (b.content LIKE '%'||#{cri.keyword}||'%'
+                     OR b.title LIKE '%'||#{cri.keyword}||'%')
             </when>
         </choose>
             
