@@ -125,8 +125,8 @@
                 <div class="contentIn">
                     <p id="totalCount">전체 참여기업 수 : ${page.totalAmount}</p>
                     
-                    <div>
-                        전시회별로 참가기업 조회
+                    <div class="selectDiv">
+                        전시회별로 참가기업 조회하기
                         <form id="exValForm">
                             
                             <select name="applyname" id="exOption">
