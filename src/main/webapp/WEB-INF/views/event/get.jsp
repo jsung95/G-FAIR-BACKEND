@@ -267,6 +267,23 @@
                 });//replyPageFooter
 
 
+                let addReplyBtn = $('#addReplyBtn');
+
+                addReplyBtn.click(function (event) {
+                    x = event.pageX;
+                    y = event.pageY;
+                    
+
+                    $('.modal-content').css('margin-top', y-150)
+                });
+                
+                // function showCoords(event) {
+                //     let x = event.clientX;
+                //     let x = event.clientY;
+
+                //     let coords = "X coords: " + x + ", Y coords: " + y
+                // }
+                
                         
             });//jq
 
@@ -382,6 +399,12 @@
             .space_input{
                 height: 50px;
             }
+
+            
+            .modal-content{
+                margin-top: 4700px;
+            }
+            
         </style>
         
     </head>

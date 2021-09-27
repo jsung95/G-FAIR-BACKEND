@@ -113,7 +113,7 @@
         let iframe = document.querySelector("#child-iframe");
 
         iframe.addEventListener('load', function () {
-            iframe.height = iframe.contentWindow.document.body.scrollHeight +390+ 'px'; 
+            iframe.height = iframe.contentWindow.document.body.scrollHeight +440+ 'px'; 
             console.log(iframe.height);
         });
 
