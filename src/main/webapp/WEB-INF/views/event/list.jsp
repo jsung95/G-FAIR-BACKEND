@@ -322,7 +322,18 @@
                         </div>
 
                         <div>
-                            <button class="btn" id="registerBtn" >글쓰기</button>
+                            <c:set var="insert" value="${sessionScope.__LOGIN__}" />
+                            <c:choose>
+                                
+                                <c:when test="${insert.membertype eq '관리자'}">
+                                    <button class="btn" id="registerBtn" >글쓰기</button>
+                                </c:when>
+
+                                <c:otherwise>
+                                    &nbsp;
+                                </c:otherwise>
+
+                            </c:choose>
                         </div>
                         <div class="clear"></div>
 

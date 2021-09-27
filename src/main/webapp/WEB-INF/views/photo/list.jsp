@@ -257,10 +257,10 @@
             'background-position': 'right center'
         });
         
-        $("#registerBtn").on("click", function () {
-        console.debug("regBtn Clicked.");
+        $("#registerBtn").on("click", function (e) {
+            console.debug("regBtn Clicked.");
 
-        location.href="/photo/register";
+            location.href="/photo/register";
         
     }); //onclick #regBtn
     })//end jq
@@ -291,7 +291,19 @@
                     <div id="photo_area">
                         <div class="uploadDiv">
                             <span id="totalCount">전체글 수 : ${pageMaker.totalAmount}</span>
-                            <button class="btn1" id="registerBtn" >글쓰기</button>
+
+                            <c:set var="insert" value="${sessionScope.__LOGIN__}" />
+                            <c:choose>
+                                
+                                <c:when test="${insert.membertype eq '관리자'}">
+                                    <button class="btn1" id="registerBtn" >글쓰기</button>
+                                </c:when>
+
+                                <c:otherwise>
+                                    &nbsp;
+                                </c:otherwise>
+
+                            </c:choose>
                         </div>
                         
                         <div id="photo_zone">
