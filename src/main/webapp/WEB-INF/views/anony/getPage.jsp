@@ -255,6 +255,16 @@
                     }//if
                 })//modalRemoveBtn
 
+                //모달창 위치조정
+                let addReplyBtn = $('#addReplyBtn');
+
+                addReplyBtn.click(function (event) {
+                    x = event.pageX;
+                    y = event.pageY;
+                    
+
+                    $('.modal-content').css('margin-top', y-150)
+                });
             })//.Jq
         </script>
     </head>
