@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>verify.jsp</title>
+        <title>지페어 코리아</title>
 
         <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
         <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
@@ -113,7 +113,27 @@
             $(function () {
                 console.clear();
                 console.debug('jq started.');
-
+	
+                var subName = $('.subName').text();
+                
+                $('.chk').each(function(index,obj){
+                    var t = index;
+                    var o = $(this).text();
+                    console.log(t + ':' + o)
+                    if(o == subName) {
+                    	tmp = t;
+                    }
+                });
+                
+                console.log(tmp)
+                
+                $('#parent').children().eq(tmp).children().css({
+                    'font-size': '18px',
+                    'font-weight':'bold',
+                    'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+                    'background-position': 'right center'
+                });
+                
                 $('#mainBtn').on('click', function () {
                     location.href="/index"
                 });
