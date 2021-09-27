@@ -111,7 +111,9 @@
 			<mapping path="/notice/answer"/>
 			<mapping path="/notice/modify"/>
 			<mapping path="/notice/register"/>
-			
+			<mapping path="/event/register" />
+			<mapping path="/photo/register" />
+
 			<mapping path="/admin/adminPage"/>
 			<mapping path="/admin/memberList"/>
 			<mapping path="/admin/showDetailInfo"/>

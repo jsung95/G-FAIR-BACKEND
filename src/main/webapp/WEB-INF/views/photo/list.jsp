@@ -101,10 +101,13 @@
     }
 
     .uploadDiv{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
         width: 100%;
         height: 50px;
         line-height: 50px;
-        border-bottom: 1px solid rgb(201, 201, 201);
+        border-bottom: 3px solid #005bbb;
     }
     
     .buttonstyle {
@@ -254,7 +257,7 @@
             'background-position': 'right center'
         });
         
-        $("#regBtn").on("click", function () {
+        $("#registerBtn").on("click", function () {
         console.debug("regBtn Clicked.");
 
         location.href="/photo/register";
@@ -287,9 +290,8 @@
                     <!-- 여기에 게시판 넣으면 됩니다. -->
                     <div id="photo_area">
                         <div class="uploadDiv">
-                            <label class="custom-file-upload">
-                                파일업로드<input class="buttonstyle" type="file" name="uploadFile" accept="image/*">
-                            </label>
+                            <span id="totalCount">전체글 수 : ${pageMaker.totalAmount}</span>
+                            <button class="btn1" id="registerBtn" >글쓰기</button>
                         </div>
                         
                         <div id="photo_zone">

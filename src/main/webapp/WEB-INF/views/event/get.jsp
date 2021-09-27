@@ -46,7 +46,7 @@
                     console.debug("showList invoked.")
                     console.log("showList: " + page)
                 
-                    replyService.getList({
+                    replyService.getList({//ajax처리값을 콜백받아서 넣어줌
                         bno:"${board.bno}", page: page || 1}, function (replyCnt, list) {
                             console.log("${board.bno}");
                             console.log("page: " + page);
@@ -100,19 +100,25 @@
                 //NewReply버튼 클릭시 모달창을 띄운다
                 $("#addReplyBtn").on("click", function (e) {
                     console.log("NewReply clicked.");
+                    
+                    if($('input[name=memberid]').val() == '') {
+                        e.preventDefault();
+                        alert('로그인이 필요한 서비스입니다.');
+                    }else{
+                        modal.find("input[name=recontent]").val("");
+                        modalInputReDate.closest("div").hide();
+                        modal.find("button[id != 'modalCloseBtn']").hide();
+                        
+                        modalRegisterBtn.show();
+                        
+                        $(".modal").modal("show")
+                    }//if-else
 
-                    modal.find("input[name=recontent]").val("");
-                    modalInputReDate.closest("div").hide();
-                    modal.find("button[id != 'modalCloseBtn']").hide();
-                    
-                    modalRegisterBtn.show();
-                    
-                    $(".modal").modal("show")
                     
                 });//onclick
 
 
-                
+                //댓글등록 버튼
                 modalRegisterBtn.on("click", function (e) {
 
                     var reply = {
@@ -124,11 +130,11 @@
                     replyService.add(reply, function (result) {
                         alert(result);
 
-                        modal.find("input").val("");
+                        modal.find('input[name=recontent]').val("");
                         modal.modal("hide");
 
                         // showList(1);
-                        showList(-1);
+                        showList(1);
                     }); //add
 
                 });//onclick
@@ -136,6 +142,7 @@
                 //선택자로 ul태그 .chat을 넣었지만 실제이벤트 대상은 li이다
                 //li클릭시 reno값 가져오기(data객체)
                 //댓글 조회 클릭 이벤트 처리
+                //댓글 상세창
                 $(".chat").on("click", "li", function (e) {
                     console.log("list clicked.");
 
@@ -156,6 +163,7 @@
                     console.log(reno);
                 });//click li
 
+                //댓글수정버튼
                 modalModBtn.on("click", function (e) {
                     console.log("ModifyBtn clicked.");
 
@@ -170,6 +178,7 @@
                     });
                 })//modalModBtn.onclick
 
+                //댓글삭제버튼
                 modalRemoveBtn.on("click", function (e) {
                     console.log("removeBtn clicked.");
 
@@ -258,68 +267,6 @@
                 });//replyPageFooter
 
 
-                
-                
-                //========================= add test ==========================//
-                // replyService.add(
-                //     {recontent:"JS Test", memberid:"Blognation", bno:bnoValue},
-                //     function (result) {
-                //         alert("ADDED: " + result);
-                        
-                //     }
-                    
-                //     ); //add
-                    
-                    
-                    
-                //========================= getList test ==========================//
-                // replyService.getList(
-                //     {bno:"${event.bno}", page: 1},
-                //     function (list) {
-                //         for(var i = 0, len = list.length||0; i < len ; i++){
-                //             console.log(list[i]);
-                            
-                //         }//for
-                    
-                //     }
-                    
-                //     );//getList
-                        
-                        
-                        
-                //========================= remove test ==========================//
-                // replyService.remove(39, function (count) {
-                //     console.debug("remove() invoked.");
-                //     console.log(count);
-                    
-                //     if(count == "success"){
-                //         alert("REMOVED");
-                        
-                //     }//if
-                    
-                // },function (err) {
-                //     alert("ERROR...");
-                // }
-                // );//remove
-                        
-                        
-                        
-                //========================= update test ==========================//
-                // replyService.update({
-                //     reno: 23,
-                //     bno: bnoValue,
-                //     recontent: "Modified Reply...."
-                // }, function (result) {
-                //     alert("수정완료!")
-                    
-                // });//update
-                        
-                        
-                // //========================= get test ==========================//
-                // replyService.get(10, function (data) {
-                //     console.log(data);
-                    
-                // });//get
                         
             });//jq
 
@@ -327,32 +274,7 @@
 
         <!-- 기존 javascript -->
         <script>
-            $(function () {
-                console.clear();
-                console.debug('jq started..!');
-                
-                // $("#listBtn").on('click', function () {
-                //     console.log('#listBtn button clicked.');
-                    
-                    
-                //     location.href = "/event/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
-                    
-                // }); // .onclick
-                
-                
-                // $("#modifyBtn").on('click', function () {
-                //     console.log('#modifyBtn button clicked..');
-
-                //             // location.href = "/board/modify?bno=${board.bno}";
-                //             location.href = "/event/modify?bno=${event.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
-                // }) // .onclick
-
-                
-                // iframe 높이 자동조절
-                
-
-            }); //jq
-
+            
         </script>
 
         <style>
@@ -560,27 +482,27 @@
                                 class="close" 
                                 data-dismiss="modal" 
                                 aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">REPLY MODAL</h4>
+                            <h4 class="modal-title" id="myModalLabel">댓글</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>recontent</label>
-                                <input class="form-control" name="recontent" value="NewReply!!!">
+                                <label>내용</label>
+                                <input class="form-control" name="recontent" placeholder="내용을 입력하세요" required>
                             </div>
                             <div class="form-group">
-                                <label>memberid : </label>
-                                <input type="hidden" class="form-control" name="memberid" value="${__LOGIN__.memberid}" readonly>${__LOGIN__.memberid}
+                                <label>작성자</label><br>
+                                <input type="hidden" class="form-control" name="memberid" value="${__LOGIN__.memberid}">${__LOGIN__.memberid}
                             </div>
                             <div class="form-group">
-                                <label>redate</label>
+                                <label>작성일자</label>
                                 <input class="form-control" name="redate" value="">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
-                            <button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
-                            <button id="modalRegisterBtn" type="button" class="btn btn-default">Register</button>
-                            <button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
+                            <button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
+                            <button id="modalRegisterBtn" type="button" class="btn btn-default">등록</button>
+                            <button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">취소</button>
                         </div>
                     </div>
                     <!-- modal-content/ -->
