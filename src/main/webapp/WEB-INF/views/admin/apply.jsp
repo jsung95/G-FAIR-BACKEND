@@ -106,6 +106,7 @@
             <div id="aside">
                 <h2 class="asideMenu">관리페이지</h2>
                 <ul id="parent">
+                    <li><a class="chk" href="/mypage/adminInfo">기본정보변경</a></li>
                     <li><a class="chk" href="/admin/memberList?membertype=개인">회원관리</a></li>
                     <li><a class="chk" href="/admin/memberBoard">회원글관리</a></li>
                     <li><a class="chk" href="/admin/memberReply">회원댓글관리</a></li>
