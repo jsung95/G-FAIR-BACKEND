@@ -77,6 +77,7 @@
             paginationForm.submit();
 
         })//onclick
+
     })//.jq
 </script>
 <body>
@@ -86,10 +87,9 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
@@ -100,16 +100,17 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 고객의소리 </div>
+                    <div class="map">home > 커뮤니티 > 고객의소리 </div>
                     <h2 class="subName">고객의소리</h2>
                 </div>
-                <p>&nbsp;</p>
+
                 <!-- 게시판넣기 -->
                 <div class="contentIn">
+                    <p id="totalCount">전체글 수 : ${page.totalAmount}</p>
                     <table border="1">
                         <thead>
                             <tr>
-                                <th class="noStyle">no</th>
+                                <th class="noStyle">번호</th>
                                 <th>제목</th>
                                 <th class="writerStyle">작성자</th>
                                 <th class="dateStyle">등록일</th>
@@ -123,16 +124,19 @@
                                 <tr>
                                     <td>${number}</td>
                                     <td>
-                                        <c:forEach begin="1" end="${board.repstep}">
-                                            &nbsp;ㄴre:
-                                        </c:forEach> &nbsp;
-        
                                         <a href="/anony/get?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}">
-                                        ${board.title}</a>
-                                        
-                                        <c:if test="${board.renoCount > 0}">
-                                            [${board.renoCount}]
-                                        </c:if>
+                                            <p class="ptitle">
+                                                <!-- 답글 -->
+                                                <c:forEach begin="1" end="${board.repstep}">
+                                                    &nbsp;ㄴre:
+                                                </c:forEach>
+                                                <!-- 제목 -->
+                                                ${board.title}
+                                                <c:if test="${board.renoCount > 0}">
+                                                    [${board.renoCount}]
+                                                </c:if>
+                                            </p>
+                                        </a>
                                     </td>
         
                                     <c:choose>
@@ -144,7 +148,7 @@
                                         </c:otherwise>
                                     </c:choose>
         
-                                    <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.insert_ts}"/></td>
+                                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
                                     <td>${board.readcnt}</td>
                                     <!-- 파일fid여부로 첨부파일 알려주기 -->
                                     <td>
@@ -172,14 +176,14 @@
                             <input type="hidden" name="pagesPerPage">
                             
                             <ul>
-                                <li class="prev"><a href="/anony/list"><<</a></li>
+                                <li class="start"><a href="/anony/list">첫페이지</a></li>
 
                                 <c:if test="${!page.prev}">
-                                    <li class="prev"><a href="/anony/list"><</a></li>
+                                    <li class="prev"><a href="/anony/list">이전</a></li>
                                 </c:if>
 
                                 <c:if test="${page.prev}">
-                                    <li class="prev"><a class="prev" href="${page.startPage-1}"><</a></li>
+                                    <li><a class="prev" href="${page.startPage-1}">이전</a></li>
                                 </c:if>
                                 
                                 <c:forEach var="pageNum" begin="${page.startPage}" end="${page.endPage}">
@@ -189,14 +193,14 @@
                                 </c:forEach>
                                 
                                 <c:if test="${page.next}">
-                                    <li class="next"><a class="next" href="${page.endPage+1}">></a></li>
+                                    <li><a class="next" href="${page.endPage+1}">다음</a></li>
                                 </c:if>
 
                                 <c:if test="${!page.next}">
-                                    <li class="next"><a class="end" href="${page.realEndPage}">></a></li>
+                                    <li><a class="next" href="${page.realEndPage}">다음</a></li>
                                 </c:if>
 
-                                <li class="next"><a class="end" href="${page.realEndPage}">>></a></li>
+                                <li><a class="end" href="${page.realEndPage}">끝페이지</a></li>
                             </ul>
                         </form>
                     </div>

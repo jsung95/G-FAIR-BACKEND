@@ -1,17 +1,15 @@
-*{
-    margin: 0 auto;
-    padding: 0;
-    font-family: "Noto Sans KR Light";
-    
-}
 
-#content{
+
+#wrapper{
     width: 1200px;
     
-    
+    display: flex;
+    justify-content:center;
+
+    font-size: initial;
 }
 
-form{
+#dropForm{
     width: 1100px;
     height: 1000px;
 
@@ -21,7 +19,7 @@ form{
 }
 
 
-input{
+#wrapper input{
     display: inline-block;
     width: 548px;
     height: 30px;
@@ -35,19 +33,31 @@ input{
     align-self: stretch;
 }
 
-button{
+#inner_con h2{
+	font-size : 18px;
+    text-align: center;
+}
+
+.buttons button{
     cursor: pointer;
     border: solid 1px #005bbb;
     background-color: #005bbb;
     color: white;
 
     width: 100px;
-    height: 44px;
+    height: 40px;
     margin-bottom: 1px;
+    margin-left: 5px;
+}
+
+.buttons{
+
+	display: flex;
+    justify-content:center;
 }
 
 div#info_agree{
-    width: 1000px;
+    width: 1100px;
     height: 500px;
 
     background-color: #fbfbfb;
@@ -62,6 +72,9 @@ div.info_user{
     height: 100px;
 
     border: 1px solid #e1e1e1;
+    
+    text-align: center;
+    margin-left: 100px;
 }
 
 div.info_user em{
@@ -69,7 +82,7 @@ div.info_user em{
     color: #005bbb;
 }
 
-h2 strong{
+#inner_con h2 strong{
     color: #005bbb;
 }
 
@@ -88,12 +101,13 @@ div#info_user_check h3{
 }
 
 div#formdata,div#formdata2{
-    width: 700px;
+    width: 100%;
     display: flex;
+    justify-content:center;
 }
 
 div#emailbox{
-    width: 900px;
+    width: 1100px;
     height: 250px;
 
     display: flex;

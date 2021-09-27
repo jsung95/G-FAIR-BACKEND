@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.persistence.AdminDAO;
 
 import lombok.NoArgsConstructor;
@@ -58,4 +59,32 @@ public class AdminServiceImpl implements AdminService {
 		return isPaymentStatus && isPaymentTF;
 	}//modifyPaymentStatusAndApplyPaymentTF
 
+	
+	//이진성 - 관리자페이지 > 회원관리
+	@Override
+	public List<MemberVO> getMemberList(String membertype) {
+		
+		return this.dao.selectMemberList(membertype);
+	}//getMemberList
+	
+	@Override
+	public void delMember(List<Integer> mnoList) {
+		this.dao.dropMember(mnoList);
+	}//delMember
+	
+	@Override
+	public void rollbackMember(List<Integer> mnoList) {
+		this.dao.rollbackMember(mnoList);
+	}//rollbackMember
+	
+	@Override
+	public void changeMemberType(Integer mno, String membertype) {
+		this.dao.changeMemberType(mno, membertype);
+	}
+	
+	@Override
+	public MemberVO showMember(Integer mno) {
+		
+		return this.dao.selectMember(mno);
+	}
 }//end class

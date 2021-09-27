@@ -50,8 +50,8 @@
 		</selectKey>
 
 		<![CDATA[
-			INSERT INTO tbl_member(mno, memberid, memberpw, membername, memberaddress, phone, email, cbno, fid, membertype)
-			VALUES("ADMIN"."ISEQ$$_103232".nextval, #{memberid}, #{memberpw}, #{membername}, #{memberaddress}, #{phone}, #{email}, #{cbno}, #{fid}, #{membertype})
+			INSERT INTO tbl_member(mno, memberid, memberpw, membername, memberaddress, phone, email, cbno, fid, membertype, dropdate)
+			VALUES("ADMIN"."ISEQ$$_103232".nextval, #{memberid}, #{memberpw}, #{membername}, #{memberaddress}, #{phone}, #{email}, #{cbno}, #{fid}, #{membertype}, null)
 		]]>
 	</insert>
 	
@@ -147,20 +147,20 @@
 	<!--==================== 김희용 ====================-->
 	<!--==================== 김희용 ====================-->
 	<select id="selectMemberId" resultType="int">
-		SELECT count(*)
+		SELECT count(memberid)
 		FROM tbl_member
 		WHERE memberid = #{memberid}
 	</select>
 	
 	<select id="selectPhone" resultType="int">
-		SELECT count(*)
+		SELECT count(phone)
 		FROM tbl_member
 		WHERE phone = #{phone}
 	</select>
 	
 	
 	<select id="selectEmail" resultType="int">
-		SELECT count(*)
+		SELECT count(email)
 		FROM tbl_member
 		WHERE email = #{email}
 	</select>
@@ -203,7 +203,8 @@
 	    memberaddress,
 	    phone,
 	    email,
-	    membertype
+	    membertype,
+	    dropdate
     )
 	values(
 		"ADMIN"."ISEQ$$_103239".nextval,
@@ -213,7 +214,8 @@
 		#{memberaddress},
 		#{phone},
 		#{email},
-		'개인')
+		'개인',
+		null)
 	</insert>
    
    <!--==================== 원승대 ====================-->

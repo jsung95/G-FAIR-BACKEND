@@ -20,10 +20,6 @@
 
 </head>
 
-<style>
-
-</style>
-
 <script>
     $(function(){
     	var tmp;
@@ -96,6 +92,7 @@
             paginationForm.find('input[name=currPage]').val($(this).attr('href'));
             paginationForm.find('input[name=amount]').val('${page.cri.amount}');
             paginationForm.find('input[name=pagesPerPage]').val('${page.cri.pagesPerPage}');
+            paginationForm.find('input[name=bname]').val('${page.cri.bname}');
             paginationForm.submit();
 
         })//onclick
@@ -124,6 +121,21 @@
 
         })//boardOption
 
+
+        // 체크박스 전체선택
+        $("input:checkbox[name='bnoAll']").click(function(){
+            if($(this).is(":checked")){
+                $("input:checkbox[name='bno']").each(function() {
+                    $(this).prop("checked",true);
+                });
+                
+            }else{
+                $("input:checkbox[name='bno']").each(function() {
+                    $(this).prop("checked",false);
+                });
+                
+            }
+        });
     })//.jq
 </script>
 <body>
@@ -135,11 +147,11 @@
             <div id="aside">
                 <h2 class="asideMenu">마이페이지</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="#">비밀번호변경</a></li>
+                    <li><a class="chk" href="/mypage/modifypassword">비밀번호변경</a></li>
                     <li><a class="chk" href="/mypage/myInfo">회원정보변경</a></li>
                     <li><a class="chk" href="/myBoard/list?memberid=${__LOGIN__.memberid}">내가쓴글</a></li>
-                    <li><a class="chk" href="#">내가쓴댓글</a></li>
-                    <li><a class="chk" href="#">회원탈퇴</a></li>
+                    <li><a class="chk" href="/mypage/replymanage">내가쓴댓글</a></li>
+                    <li><a class="chk" href="/mypage/dropauth">회원탈퇴</a></li>
                 </ul>
 
             </div>
@@ -150,13 +162,13 @@
                 </div>
 
                 <div class="contentIn">
-                    <p>&nbsp;</p>
+                    <p id="totalCount">전체글 수 : ${page.totalAmount}</p>
                     <table>
                         <thead>
                             <form id="selectBoardForm"></form>
                                 <tr>
-                                    <th>&nbsp;</th>
-                                    <th>no</th>
+                                    <th><input type="checkbox" name="bnoAll"></th>
+                                    <th>번호</th>
                                     <th>제목</th>
                                     <th>내용</th>
                                     <th>등록일</th>
@@ -165,8 +177,8 @@
                                         <select id="boardOption" name="bname" class="searchcss">
                                             <option value=>전체게시판</option>
                                             <option value="anony" ${("anony" eq cri.bname) ? 'selected' : ''}>고객의소리</option>
-                                            <option value="quest" ${("quest" eq cri.bname) ? 'selected' : ''}>질문게시판</option>
-                                            <option value="free" ${("free" eq cri.bname) ? 'selected' : ''}>자유게시판</option>
+                                            <option value="question" ${("question" eq cri.bname) ? 'selected' : ''}>질문게시판</option>
+                                            <option value="자유게시판" ${("자유게시판" eq cri.bname) ? 'selected' : ''}>자유게시판</option>
         
                                         </select>
                                     </th>
@@ -182,25 +194,54 @@
                                     <tr>
                                         <td><input type="checkbox" name="bno" value="${board.bno}"></td>
                                         <td>${num}</td>
+
+                                        <!-- 게시판명 -->
                                         <td>
-                                            <c:forEach begin="1" end="${board.repstep}">
-                                                &nbsp;[re:]
-                                            </c:forEach>
-                                            <a href="/${board.bname}/get?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}">
-                                            ${board.title}</a>
                                             
-                                            <c:if test="${board.renoCount > 0}">
-                                            [${board.renoCount}]
-                                            </c:if>
+                                            <c:choose>
+                                                <c:when test="${board.bname =='자유게시판'}">
+                                                    <a href="/free/read?bno=${board.bno}&bname=free&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}">
+                                                        <p class="ptitle">
+                                                            <!-- 답글 -->
+                                                            <c:forEach begin="1" end="${board.repstep}">
+                                                                &nbsp;ㄴre:
+                                                            </c:forEach>
+                                                            <!-- 제목 -->
+                                                            ${board.title}
+                                                            <!-- 댓글수 -->
+                                                            <c:if test="${board.renoCount > 0}">
+                                                                [${board.renoCount}]
+                                                            </c:if>
+                                                        </p>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="/${board.bname}/get?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}">
+                                                        <p class="ptitle">
+                                                            <!-- 답글 -->
+                                                            <c:forEach begin="1" end="${board.repstep}">
+                                                                &nbsp;ㄴre:
+                                                            </c:forEach>
+                                                            <!-- 제목 -->
+                                                            ${board.title}
+                                                            <c:if test="${board.renoCount > 0}">
+                                                                [${board.renoCount}]
+                                                            </c:if>
+                                                        </p>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </td>
         
-                                        <td>${board.content}</td>
-                                        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.insert_ts}"/></td>
+                                        <td>
+                                            <p class="ptitle">${board.content}</p>
+                                        </td>
+                                        <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
                                         <td>${board.readcnt}</td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${board.bname eq 'anony'}">고객의소리</c:when>
-                                                <c:when test="${board.bname eq 'quest'}">질문게시판</c:when>
+                                                <c:when test="${board.bname eq 'question'}">질문게시판</c:when>
                                                 <c:when test="${board.bname eq 'free'}">자유게시판</c:when>
                                                 <c:otherwise>${board.bname}</c:otherwise>
                                             </c:choose>
@@ -211,7 +252,10 @@
                             </form>
                         </tbody>
                     </table>
-                    <div><button type="button" id="selectDelBtn" class="buttonstyle">선택삭제</button></div>
+                    <div class="getBtn">
+                        <div><button type="button" id="selectDelBtn" class="buttonstyle">선택삭제</button></div>
+                        <div><button type="button" id="listBtn" class="buttonstyle">목록</button></div>
+                    </div>
                 
                     <p>&nbsp;</p>
         
@@ -221,33 +265,35 @@
                             <input type="hidden" name="currPage">
                             <input type="hidden" name="amount">
                             <input type="hidden" name="pagesPerPage">
+                            <input type="hidden" name="bname">
         
                             <ul>
-                                
-                                <li class="prev"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}"><<</a></li>
+                                <!-- 무조건 처음페이지로 -->
+                                <li class="start"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">첫페이지</a></li>
+                                <!-- 활성화x일때 처음 페이지로 -->
                                 <c:if test="${!page.prev}">
-                                    <li class="prev"><a href="/anony/list"><</a></li>
+                                    <li class="prev"><a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=1&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">이전</a></li>
                                 </c:if>
 
                                 <c:if test="${page.prev}">
-                                    <li class="prev"><a class="prev" href="${page.startPage-1}"><</a></li>
+                                    <li><a class="prev" href="${page.startPage-1}"><</a></li>
                                 </c:if>
-
+                                <!--  -->
                                 <c:forEach var="pageNum" begin="${page.startPage}" end="${page.endPage}">
                                     <li class="${page.cri.currPage == pageNum ? 'currPage' : ''}">
                                         <a href="/myBoard/list?memberid=${__LOGIN__.memberid}&currPage=${pageNum}&amount=${page.cri.amount}&pagesPerPage=${page.cri.pagesPerPage}&type=${page.cri.type}&keyword=${page.cri.keyword}&bname=${page.cri.bname}">${pageNum}</a>
                                     </li>
                                 </c:forEach>
-        
+                                <!--  -->
                                 <c:if test="${page.next}">
-                                    <li class="next"><a class="next" href="${page.endPage+1}">></a></li>
+                                    <li><a class="next" href="${page.endPage+1}">다음</a></li>
                                 </c:if>
 
                                 <c:if test="${!page.next}">
-                                    <li class="next"><a class="end" href="${page.realEndPage}">></a></li>
+                                    <li><a class="next" href="${page.realEndPage}">다음</a></li>
                                 </c:if>
 
-                                <li class="next"><a class="end" href="${page.realEndPage}">>></a></li>
+                                <li><a class="end" href="${page.realEndPage}">마지막페이지</a></li>
                             </ul>
                         </form>
                     </div>

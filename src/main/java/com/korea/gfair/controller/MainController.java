@@ -7,10 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.korea.gfair.domain.BoardVO;
+import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.service.NoticeBoardService;
 
@@ -31,7 +29,7 @@ public class MainController {
 	//@RequestMapping(value = "/", method = RequestMethod.GET)
 	@GetMapping({"index","/"})
 	public String index(@ModelAttribute("cri") Criteria cri, Model model) {
-		List<BoardVO> list = this.board_service.getListPerPage(cri, "공지사항");
+		List<BoardReplyCountVO> list = this.board_service.getListPerPage(cri, "공지사항");
 		model.addAttribute("list", list);
 		
 		return "index";

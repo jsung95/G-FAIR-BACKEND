@@ -13,8 +13,7 @@
   <select id="getListWithPaging" resultType="com.korea.gfair.domain.BoardVO">
     SELECT /*+ index_desc(tbl_board) */ *
     FROM tbl_board
-  	where bname = #{bname}
-
+  	WHERE bname = #{bname}
         <choose>
             <when test="cri.type == 'T'.toString()">
                 and title LIKE '%'||#{cri.keyword}||'%'
@@ -29,7 +28,7 @@
             </when>
         </choose>
 
-    
+    ORDER BY bno desc
     OFFSET ( #{cri.currPage} - 1) * #{cri.amount} ROWS
     FETCH NEXT #{cri.amount} ROWS ONLY
 
@@ -44,9 +43,12 @@
   
 
   <update id="readcnt">
-    update tbl_board
-    set readcnt= readcnt+1
-    where bno = #{bno}
+    UPDATE
+    	tbl_board
+    SET 
+    	readcnt= readcnt+1
+    WHERE
+    	bno = #{bno}
   </update>
   
   
@@ -58,25 +60,27 @@
     INSERT INTO tbl_board(
       bno,repRoot,title,content,memberid,bname
     )
-    values(#{bno},#{bno},#{title},#{content},#{memberid},#{bname}
+    VALUES(#{bno},#{bno},#{title},#{content},#{memberid},#{bname}
 
     )
   </insert>
 
   <update id="update">
-    update tbl_board set 
-    title = #{title},
-    content = #{content},
-    
-    memberId = #{memberId},
-    update_ts = sysdate
-    where bno= #{bno}
+    UPDATE 
+    	tbl_board
+    SET 
+	    title = #{title},
+	    content = #{content},
+	    update_ts = sysdate
+	WHERE
+		bno= #{bno}
     
   </update>
 
   <delete id="delete">
-    delete from tbl_board
-    where bno = #{bno}
+    DELETE 
+    FROM tbl_board
+    WHERE bno = #{bno}
 
   </delete>
 

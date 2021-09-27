@@ -51,8 +51,8 @@ public class MyPageDAOImpl
 	}//updatePassword
 
 	@Override
-	public boolean updateDrop(MemberDTO dto) throws Exception {
-		log.debug("updateDrop({}) invoked.", dto);
+	public boolean updateDrop(MemberVO vo) throws Exception {
+		log.debug("updateDrop({}) invoked.", vo);
 		
 		String sqlId ="updateDrop";
 		String sql=MyPageDAOImpl.namespace+"."+sqlId;
@@ -60,7 +60,7 @@ public class MyPageDAOImpl
 		SqlSession session =this.sqlSessionFactory.openSession();
 		
 		try(session;){
-			int affectedLines =session.update(sql,dto);
+			int affectedLines =session.update(sql,vo);
 			
 			return affectedLines>0 ? true : false;
 		}//try-with-resources
@@ -68,8 +68,8 @@ public class MyPageDAOImpl
 	}//updateDrop
 
 	@Override
-	public MemberVO selectEamil(MemberDTO dto) throws Exception {
-		log.debug("updateDrop({}) invoked.", dto);
+	public MemberVO selectEamil(MemberVO memberVO) throws Exception {
+		log.debug("updateDrop({}) invoked.", memberVO);
 		
 		String sqlId ="selectEmail";
 		String sql=MyPageDAOImpl.namespace+"."+sqlId;
@@ -77,7 +77,7 @@ public class MyPageDAOImpl
 		SqlSession session =this.sqlSessionFactory.openSession();
 		
 		try(session;){
-			MemberVO vo=session.selectOne(sql,dto);
+			MemberVO vo=session.selectOne(sql,memberVO);
 			
 			return vo;
 		}//try-with-resources
@@ -85,14 +85,14 @@ public class MyPageDAOImpl
 	}//selectEamil
 
 	@Override
-	public List<BoardReplyJoinVO> selectJoinReply(Criteria cri,MemberDTO dto) throws Exception {
-		log.debug("selectJoinReply({}) invoked.", dto);
+	public List<BoardReplyJoinVO> selectJoinReply(Criteria cri,MemberVO vo) throws Exception {
+		log.debug("selectJoinReply({}) invoked.", vo);
 		
 		String sqlId ="selectJoinReply";
 		String sql=MyPageDAOImpl.namespace+"."+sqlId;
 		
 		Map<String, Object> params= new HashMap<>();
-		params.put("memberid", dto.getMemberid());
+		params.put("memberid", vo.getMemberid());
 		params.put("amount", cri.getAmount());
 		params.put("currPage", cri.getCurrPage());
 		params.put("type", cri.getType());
@@ -110,8 +110,8 @@ public class MyPageDAOImpl
 	}//selectEamil
 
 	@Override
-	public int selectReplyTotalCount(Criteria cri,MemberDTO dto) throws Exception {
-		log.debug("selectReplyTotalCount({}) invoked.", dto);
+	public int selectReplyTotalCount(Criteria cri,MemberVO vo) throws Exception {
+		log.debug("selectReplyTotalCount({}) invoked.", vo);
 		
 		String sqlId= "replyTotalCount";
 		String sql=MyPageDAOImpl.namespace+"."+sqlId;
@@ -119,7 +119,7 @@ public class MyPageDAOImpl
 		SqlSession session =this.sqlSessionFactory.openSession();
 		
 		Map<String, Object> params= new HashMap<>();
-		params.put("memberid", dto.getMemberid());
+		params.put("memberid", vo.getMemberid());
 		params.put("type", cri.getType());
 		params.put("keyWord", cri.getKeyword());
 		params.put("bname", cri.getBname());

@@ -10,10 +10,10 @@ import com.korea.gfair.domain.MemberVO;
 public interface MyPageDAO {
 
 	public boolean updatePassword(MemberDTO dto) throws Exception;
-	public boolean updateDrop(MemberDTO dto) throws Exception;
-	public MemberVO selectEamil(MemberDTO dto) throws Exception;
-	public List<BoardReplyJoinVO> selectJoinReply(Criteria cri,MemberDTO dto) throws Exception;
-	public int selectReplyTotalCount(Criteria cri,MemberDTO dto) throws Exception;
+	public boolean updateDrop(MemberVO vo) throws Exception;
+	public MemberVO selectEamil(MemberVO vo) throws Exception;
+	public List<BoardReplyJoinVO> selectJoinReply(Criteria cri,MemberVO vo) throws Exception;
+	public int selectReplyTotalCount(Criteria cri,MemberVO vo) throws Exception;
 	public boolean deleteReply(List<Integer> renoList) throws Exception;
 
 }//end interface

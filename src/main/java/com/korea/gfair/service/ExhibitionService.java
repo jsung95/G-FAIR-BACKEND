@@ -21,6 +21,7 @@ public interface ExhibitionService{
 	public abstract void remove(List<Integer> exnoList) throws Exception;
 	
 	public abstract Integer getTotalCount(Criteria cri) throws Exception;
+	public abstract List<ExhibitionVO> getEx() throws Exception;
 
 	//--------------------- danny --------------------//
 	public abstract ExhibitionVO get(Integer exno);

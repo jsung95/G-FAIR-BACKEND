@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.korea.gfair.domain.BoardDTO;
+import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
-import com.korea.gfair.domain.ReplyDTO;
-import com.korea.gfair.domain.ReplyVO;
 import com.korea.gfair.mapper.NoticeBoardMapper;
 
 import lombok.NoArgsConstructor;
@@ -50,12 +49,12 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 	}
 
 	@Override
-	public List<BoardVO> readNotice(String bname) {
+	public List<BoardReplyCountVO> readNotice(String bname) {
 		return this.mapper.getNotice(bname);
 	}
 
 	@Override
-	public List<BoardVO> getListPerPage(Criteria cri, String bname) {
+	public List<BoardReplyCountVO> getListPerPage(Criteria cri, String bname) {
 		
 		return this.mapper.list(cri, bname);
 	}

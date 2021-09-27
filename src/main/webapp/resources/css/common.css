@@ -12,7 +12,7 @@ p,li,dd{font-size:1em; line-height:1.5em; text-align:justify; list-style: none;}
 /* a-style */
 a{color:#333;text-decoration:none;}
 a:hover,a:active,a:focus,a:visited{color:#333;text-decoration:none;}
-
+button{border:0; margin:0; padding:0;}
 /*header 영역*/
 #wrap{
     width: 100%;
@@ -60,7 +60,7 @@ header .topMenu li{
 }
 header .topMenu .tm1{
     width: 60px;
-    margin-top: 16px;
+    margin-top: 10px;
     padding:5px;
     text-align: center;
     
@@ -164,7 +164,17 @@ header #nav ul li.menu h3{
 
 /* header 영역 */
 
-
+#top_btn{
+	width:50px;
+	height:52px;
+	text-indent:-9999px;
+	position:fixed;
+	bottom:150px;
+	right:100px;
+	cursor:pointer;
+	background-image: url(/resources/img/top_btn.png);
+	background-repeat: no-repeat;
+}
 
 
 

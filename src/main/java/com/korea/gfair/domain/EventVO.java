@@ -7,16 +7,16 @@ import lombok.Value;
 @Value
 public class EventVO {
 	private Integer bno;
-	private Integer repRoot;
-	private Integer repStep;
-	private Integer repIndent;
+	private Integer reproot;
+	private Integer repstep;
+	private Integer repindent;
 	private String title;
 	private String content;
-	private String memberID;
+	private String memberid;
 	private Date insert_ts;
 	private Date update_ts;
 	private Integer readcnt;
-	private String bName;
+	private String bname;
 	private Integer fid;
 	private String del_tf;
 	private String notice_tf;

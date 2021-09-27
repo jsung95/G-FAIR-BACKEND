@@ -26,6 +26,8 @@
         //     }
         // }
 
+        
+        $('#hide_cp_img').val($('#companyImg').attr('src')); //참여기업 이미지 경로 가져오기
 
 
     	var cp_img = $('#hide_cp_img').val();
@@ -40,7 +42,7 @@
             }
 
             if(cp_img == cp_img_arr[i]) {
-                $('#cp_h_img').attr('src', './ico_h_on.png');
+                $('#cp_h_img').attr('src', '/resources/img/ico_h_on.png');
             }
 
             InputHtml(i);
@@ -166,12 +168,12 @@
         //     setCookie('cp_no', '', 1);
         // }
 
-        if(cp_h_img == "./ico_h_on.png") { //on 일때
-            $('#cp_h_img').attr('src', "./ico_h_off.png"); //off로 바꿈
+        if(cp_h_img == "/resources/img/ico_h_on.png") { //on 일때
+            $('#cp_h_img').attr('src', "/resources/img/ico_h_off.png"); //off로 바꿈
             delCookie('cp_img', cp_img, 1);
             delCookie('cp_no', cp_no, 1);
         } else { //off일때
-            $('#cp_h_img').attr('src', "./ico_h_on.png"); //on으로 바꿈
+            $('#cp_h_img').attr('src', "/resources/img/ico_h_on.png"); //on으로 바꿈
             insCookie('cp_img', cp_img, 1);
             insCookie('cp_no', cp_no, 1);
         }
@@ -206,7 +208,11 @@
         var cp_no_arr = getCookie('cp_no').split(',');
 
         if(seq == 0) {
-            location.href = "http://www.naver.com";
+            location.href = "/apply/companyInfo?applyno=" + cp_no_arr[0];
+        } else if(seq == 1) {
+            location.href = "/apply/companyInfo?applyno=" + cp_no_arr[1];
+        } else if(seq == 2) {
+            location.href = "/apply/companyInfo?applyno=" + cp_no_arr[2];
         }
     }
 </script>
@@ -227,7 +233,6 @@
         height: 100px;
         overflow: hidden;
         text-align: center;
-        _font-size: 100px;
         line-height: 100px;
         overflow: hidden;
         margin-top: 10px;
@@ -241,20 +246,22 @@
 <body>
 
     <a href="#" onclick="h_imgChange()">
-        <img src="./ico_h_off.png" id="cp_h_img" >
-        <input type="hidden" id="hide_cp_img" value="./나노인.jpg">
-        <input type="hidden" id="cp_no" value="999">
+        <img src="/resources/img/ico_h_off.png" id="cp_h_img" >
+        <input type="hidden" id="hide_cp_img" value="">
+        <input type="hidden" id="cp_no" value="${param.applyno}">
     </a>
 
-    <p></p>
+    <p>
+        <img src="/resources/img/mail.png" id="companyImg">
+
+    </p>
 
     <div class="fav_box">
         <p>관심 기업 및 제품"</p>
         <ul id="cp_append">
-            
+            <!-- 여기에 기업 이미지, 정보가 생성됨 -->
         </ul>
     
-        <ul id="pd_append"></ul>
     </div>
 
 </body>

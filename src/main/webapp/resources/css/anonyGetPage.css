@@ -23,9 +23,11 @@ button:hover {
     height: 40px;
     width: 100px;
     
-    /* line-height: 40px; */
+    margin-left: 5px;
     text-align: center;
 
+    border: 0px;
+    
     background-color: #005bbb;
     color: #fff;
     font-size: 15px;
@@ -48,7 +50,7 @@ button:hover {
 .subjectLine {
 
     width: 100%;
-    border-top: 3px solid #6f2b89;
+    border-top: 3px solid #005bbb;
 }
 
 /* 제목,작성자 */

@@ -31,33 +31,33 @@ public class MyPageServiceImpl implements MyPageService {
 	}//modifyPassword
 
 	@Override
-	public String getEmail(MemberDTO dto) throws Exception {
-		log.debug("getEmail({}) invoked.", dto);
-		MemberVO vo = this.dao.selectEamil(dto);
+	public String getEmail(MemberVO memberVO) throws Exception {
+		log.debug("getEmail({}) invoked.", memberVO);
+		MemberVO vo = this.dao.selectEamil(memberVO);
 		
 		return vo.getEmail();
 	}//getEmail
 
 	@Override
-	public boolean fireMember(MemberDTO dto) throws Exception {
-		log.debug("fireMember({}) invoked.", dto);
+	public boolean fireMember(MemberVO vo) throws Exception {
+		log.debug("fireMember({}) invoked.", vo);
 		
-		return this.dao.updateDrop(dto);
+		return this.dao.updateDrop(vo);
 	}//modifyPassword
 
 	@Override
-	public List<BoardReplyJoinVO> getReplyList(Criteria cri,MemberDTO dto) throws Exception {
-		log.debug("getReplyList({}) invoked.", dto);
+	public List<BoardReplyJoinVO> getReplyList(Criteria cri,MemberVO vo) throws Exception {
+		log.debug("getReplyList({}) invoked.", vo);
 		
 		
-		return this.dao.selectJoinReply(cri,dto);
+		return this.dao.selectJoinReply(cri,vo);
 	}//getReplyList
 
 	@Override
-	public int getReplyTotalCount(Criteria cri, MemberDTO dto) throws Exception {
-		log.debug("getReplyTotalCount({}) invoked.", dto);
+	public int getReplyTotalCount(Criteria cri, MemberVO vo) throws Exception {
+		log.debug("getReplyTotalCount({}) invoked.", vo);
 		
-		return this.dao.selectReplyTotalCount(cri,dto);
+		return this.dao.selectReplyTotalCount(cri,vo);
 	}//getReplyList
 
 	@Override

@@ -27,20 +27,18 @@
                 console.log('jq started')
 
                 var comparePass;
-
-                var password = $('#pw');//입력된 패스워드
                 
                 $("#loginBtn").on('click',function(){//로그인 버튼을 눌렀을 때
 
                         
-                    if(comparePass != password.val()){//패스워드가 틀렸을 때
+                    if(comparePass == 'success'){//패스워드가 일치했을 때
+                        
+                        console.log('로그인!!')
+
+                    } else {//패스워드가 일치안했을 때
                         alert("잘못된 접근입니다.");
 
-                        password.focus();
-
                         return false;
-                    } else {//패스워드가 일치했을 때
-                        console.log('로그인!!')
                     }//if-else
 
                 })//loginBtn
@@ -49,13 +47,15 @@
                 //비밀번호 일치여부확인(입력되는대로 인식함)
                 $('#pw').on("propertychange change keyup paste input",function(){
 
-                    var memberid = '${__LOGIN__.memberid}';//아이디값
+                    var formData = $('form').serialize();
+                    console.log("formData",formData);
 
                     $.ajax({
-                        url: '/mypage/getPass?memberid='+memberid,
-                        type: 'GET',
+                        url: '/mypage/getPass',
+                        data: formData,
+                        type: 'POST',
                         success : function(result){
-
+                            console.log("result",result)
                             comparePass = result;
                         }//success
                     })//.ajax

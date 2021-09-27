@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -37,22 +37,23 @@
                 console.debug("jq started.");
                 console.log("================ JS TEST ===============");
                 
-                var bnoValue = '<c:out value = "${event.bno}"/>'
-                var replyUL = $(".chat");
+                var bnoValue = "${board.bno}";
+                var replyUL = $(".chat");//댓글 내용 기입된 ul태그
 
-                showList(1);
+                showList(1);//첫페이지 기본으로 보여줌
 
                 function showList(page) {
                     console.debug("showList invoked.")
                     console.log("showList: " + page)
                 
                     replyService.getList({
-                        bno:"${event.bno}", page: page || 1}, function (replyCnt, list) {
-                            console.log("page: " + page)
+                        bno:"${board.bno}", page: page || 1}, function (replyCnt, list) {
+                            console.log("${board.bno}");
+                            console.log("page: " + page);
                             console.log("replyCnt: " + replyCnt);
                             console.log("list: " + list);
 
-                            if(page == -1){
+                            if(page == -1){//EOF같이 -1로 지정하여 리스트 조회하게 함
                                 currPage = Math.ceil(replyCnt / 10.0);
                                 showList(currPage);
                                 return;
@@ -61,7 +62,7 @@
                             
                             var str="";
 
-                            if(list == null || list.length == 0){
+                            if(list == null || list.length == 0){//리스트값이 없을 때
                                                                 
                                 return;
                                 
@@ -71,7 +72,7 @@
                                 str +="<li class='left clearfix' data-reno='" + list[i].reno + "'>";
                                 str +="<div><div class='header'><strong class='primary-font'>[" + list[i].reno + "] " + list[i].memberid + "</Strong>";
                                 str +="<small class='pull-right text-muted'>" + replyService.displayTime(list[i].redate) + "</small></div>";
-                                str +="<p>" + list[i].recontent + "</p></div></li>";
+                                str +="<p class='replyLine'>" + list[i].recontent + "</p></div></li>";
                             }//for
 
                             replyUL.html(str);
@@ -100,7 +101,7 @@
                 $("#addReplyBtn").on("click", function (e) {
                     console.log("NewReply clicked.");
 
-                    modal.find("input").val("");
+                    modal.find("input[name=recontent]").val("");
                     modalInputReDate.closest("div").hide();
                     modal.find("button[id != 'modalCloseBtn']").hide();
                     
@@ -206,24 +207,24 @@
                     //다음페이지목록 이동가능여부
                     var next = false;
 
-                    if(endPage * amount >= replyCnt){
-                        endPage = Math.ceil(replyCnt * 1.0) / amount;
+                    if(endPage * amount >= replyCnt){//마지막페이지 x 한페이지갯수가 총댓글개수보다 클때
+                        endPage = Math.ceil(replyCnt * 1.0 / amount);
 
                     }//if
 
-                    if(endPage * amount < replyCnt){
+                    if(endPage * amount < replyCnt){//총댓글개수보다 작을때
                         next = true;
 
                     }//if
 
                     var str = "<ul class='pagination pull-right'>";
 
-                        if(prev){
+                        if(prev){//1이 아닐때 li태그 생성
                             str += "<li class='page-item'><a class='page-link' href='" + (startPage -1) + "'>Previous</a></li>";
 
                         }//if
 
-                        for(var i = startPage; i <= endPage; i++){
+                        for(var i = startPage; i <= endPage; i++){//한페이지 첫번호부터 끝번호까지 순회 -> 페이지수 전달
                             var active = currPage == i ? "active" : "";
 
                             str += "<li class='page-item " + active + " '><a class='page-link' href='" + i + "'>" + i + "</a></li>";
@@ -241,7 +242,7 @@
                         
                 }//showReplyPage
 
-                
+                // 페이징버튼처리
                 replyPageFooter.on("click", "li a", function (e) {
                     e.preventDefault();
 
@@ -249,12 +250,12 @@
 
                     var targetPageNum = $(this).attr("href");
 
-                    console.log("targetPageNum: " + targetPageNum);
+                    console.log("targetPageNum: " + targetPageNum);//페이지당 지정된 숫자 얻기
 
                     currPage = targetPageNum;
 
                     showList(currPage);
-                });
+                });//replyPageFooter
 
 
                 
@@ -330,22 +331,24 @@
                 console.clear();
                 console.debug('jq started..!');
                 
-                $("#listBtn").on('click', function () {
-                    console.log('#listBtn button clicked.');
+                // $("#listBtn").on('click', function () {
+                //     console.log('#listBtn button clicked.');
                     
                     
-                    location.href = "/event/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
+                //     location.href = "/event/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
                     
-                }); // .onclick
+                // }); // .onclick
                 
                 
-                $("#modifyBtn").on('click', function () {
-                    console.log('#modifyBtn button clicked..');
+                // $("#modifyBtn").on('click', function () {
+                //     console.log('#modifyBtn button clicked..');
 
-                            // location.href = "/board/modify?bno=${board.bno}";
-                            location.href = "/event/modify?bno=${event.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
-                }) // .onclick
+                //             // location.href = "/board/modify?bno=${board.bno}";
+                //             location.href = "/event/modify?bno=${event.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage${cri.pagesPerPage}";
+                // }) // .onclick
 
+                
+                // iframe 높이 자동조절
                 
 
             }); //jq
@@ -359,48 +362,150 @@
                 list-style: none;
             }
 
+            #container1{
+                width: 1200px;
+                margin-top: 50px;
+                font-weight: bold;
+            }
+            .clear{
+                clear: both;
+            }
+
+            #title_area{
+                border-bottom: 1px solid rgb(201, 201, 201);
+                border-top: 3px solid #005bbb;
+                height: 40px;
+                line-height: 40px;
+                font-size: 20px;
+            }
+
+            #title{
+                margin-left: 10px;
+                float: left;
+                width: 70%;
+            }
             
+            #writer{
+                float: right;
+                width: 20%;
+            }
+            
+            #date_area{
+                background-color: #eee;
+                font-size: 15px;
+                height: 40px;
+                line-height: 40px;
+
+            }
+            
+            #register_date{
+                margin-left: 10px;
+                width: 85%;
+                float: left;
+            }
+
+            #readCnt{
+                width: 11%;
+                float: right;
+            }
+
+            #top_space{
+                margin-top: 10px;
+            }
+
+            #contents{
+                min-height: 300px;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+            }
+
+            #wrote{
+                padding: 30px 0 30px 10px;
+                font-size: 15px;
+                font-weight: bold;
+            }   
+
+            #content_img{
+                margin: 0 auto;
+            }
+            .btn1 {
+                width: 100px;
+                height: 40px;
+
+                border: 0;
+                
+                text-align: center;
+                background: #005bbb;
+                color: #fff;
+                font-size: 15px;
+                
+                cursor: pointer;
+            }
+
+            #bottom_space{
+                line-height: 50px;
+                height: 50px;
+            }
+            #listBtn{
+                margin-top: 5px;
+                float: right;
+            }
+            /* -----------------------댓글 구분선------------------------ */
+            .replyLine{
+                border-bottom: 1px solid rgb(187, 187, 187, 0.3);
+                height: 45px;
+
+            }
+
+            .space_input{
+                height: 50px;
+            }
         </style>
         
     </head>
     <body>
-        <h1>/WEB-INF/views/event/get.jsp</h1>
-        <div id="container">
 
-            <form action="#">
-                <table border="1">
-                    <tr>
-                        <td>글번호 : ${event.bno}</td>
-                    </tr>
-                    <tr>
-                        <td>제목 : ${event.title}</td>
-                    </tr>
-                    <tr>
-                        <td>내용 : ${event.content}</td>
-                    </tr>
-                    <tr>
-                        <td>작성자 : ${event.memberID}</td>
-                    </tr>
-                    <tr>
-                        <td>조회수 : ${event.readcnt}</td>
-                    </tr>
-                    <tr>
-                        <td>파일번호 : ${event.fid}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="/resources/event_img/${photo.fpath}${photo.frename}" alt="">
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                <button type="button" id="modifyBtn">수정</button>
-                <button type="button" id="listBtn">목록보기</button>
 
-            </form>
+        <div id="container1">
 
-            <br>
+            <!-- 제목, 작성자, 등록일, 수정일, 조회수 -->
+            <div id="tables">
+                <div id="title_area">
+                    <div id="title">${board.title}</div>
+                    <div id="writer">작성자 : ${board.memberid}</div>
+                </div>
+                <div class="clear"></div>
+                
+                <div id="date_area">
+                    <div id="register_date">등록일 : <fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${board.insert_ts}" /></div>
+                    <div id="readCnt">조회수 : ${board.readcnt}</div>
+                </div>
+            </div>
+            <div id="top_space"></div>
 
+            <!-- 콘탠츠내용, 이미지 -->
+            <div id="contents">
+                <p id="wrote">
+                    ${board.content} <br>
+                </p>
+                <div id="content_img">
+                    <img src="/resources/img/${photo.fpath}${photo.frename}" alt="">
+                </div>
+                <div class="space_input"></div>
+            </div>
+
+
+            <!-- 글수정, 답변, 목록 버튼 -->
+            <!-- <div id="bottom_space">
+                <div id="btn_area">
+                    <button type="button" class="btn" id="modifyBtn">글 수정</button>
+                    <button type="button" class="btn" id="listBtn">목록</button>
+                </div>
+            </div> -->
+        
+        </div>            
+
+            <!-- 댓글 -->
             <div class="row">
                 <div class="col-lg-12">
                     
@@ -419,10 +524,10 @@
                                 <li class="left clearfix" data-reno="10">
                                     <div>
                                         <div class="header">
-                                            <!-- <strong class="primary-font">Blognation</strong>
-                                            <small class="pull-right next-muted">2021-09-01 10:14</small> -->
+                                            <strong class="primary-font">Blognation</strong>
+                                            <small class="pull-right next-muted">2021-09-01 10:14</small>
                                         </div>
-                                        <!-- <p>Good Job!</p> -->
+                                        <p>등록된 댓글이 없습니다.</p>
                                     </div>
                                 </li>
                                 <!-- end reply -->
@@ -463,8 +568,8 @@
                                 <input class="form-control" name="recontent" value="NewReply!!!">
                             </div>
                             <div class="form-group">
-                                <label>memberid</label>
-                                <input class="form-control" name="memberid" value="memberid!!!">
+                                <label>memberid : </label>
+                                <input type="hidden" class="form-control" name="memberid" value="${__LOGIN__.memberid}" readonly>${__LOGIN__.memberid}
                             </div>
                             <div class="form-group">
                                 <label>redate</label>

@@ -107,8 +107,8 @@
     	//id 중복 검사
         $('#id_input').on("propertychange change keyup paste input", function(){
         
-            var memberId = $('#id_input').val();	//#id_input에 입력되는 값
-            var memberData = {memberId : memberId}		//컨트롤러에 넘길 데이터 이름 : 데이터(#id_input에 입력된 값)
+            var id = $('#id_input').val();			//#id_input에 입력되는 값
+            var memberData = {memberid : id}		//컨트롤러에 넘길 데이터 이름 : 데이터(#id_input에 입력된 값)
       
             
             $.ajax({
@@ -121,12 +121,12 @@
                         $('.possible_id').css("display","inline-block");
                         $('.begin_id').css("display","none");
                         $('.warning').css("display","none");
-                        memberId = true;
+                        id = true;
                     }else{
                         $('.begin_id').css("display","inline-block");
                         $('.possible_id').css("display","none");
                         $('.warning').css("display","none");
-                        memberId = false;
+                        id = false;
                     };//if-else
                 }
             });//ajax
@@ -765,7 +765,7 @@
                 <form action="/member/join_p" method="post">
                     <dl>
                         <dt class="join_title">아이디</dt>
-                        <dd class="join_list"><input type="text" class="user_input" name="memberid" id="id_input" placeholder="아이디를 입력해주세요." required></dd>
+                        <dd class="join_list"><input type="text" class="user_input" name="memberid" id="id_input" placeholder="아이디를 입력해주세요."></dd>
                     </dl>
                     <span class="possible_id">사용 가능한 아이디입니다.</span>
                     <span class="begin_id">이미 존재하는 아이디입니다.</span>

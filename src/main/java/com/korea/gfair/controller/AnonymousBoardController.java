@@ -131,6 +131,7 @@ public class AnonymousBoardController {
 	@PostMapping({"register"})
 	public String register(@ModelAttribute("cri") Criteria cri, 
 							BoardDTO dto, 
+							String editor1,
 							@Nullable AttachFileDTO fileDTO, 
 							RedirectAttributes rttrs) throws Exception {
 		
@@ -138,6 +139,7 @@ public class AnonymousBoardController {
 		
 		Objects.nonNull(service);
 		
+		dto.setContent(editor1);
 		this.service.register(dto,fileDTO);
 
 		rttrs.addAttribute("currPage", cri.getCurrPage());
@@ -151,6 +153,7 @@ public class AnonymousBoardController {
 	@PostMapping("modify")
 	public String modify(@ModelAttribute("cri") Criteria cri, 
 							BoardDTO dto, 
+							String editor1,
 							@Nullable AttachFileDTO fileDTO,
 							RedirectAttributes rttrs) throws Exception {
 		
@@ -158,7 +161,7 @@ public class AnonymousBoardController {
 		
 		Objects.nonNull(service);
 //		Objects.nonNull(this.fileService);
-		
+		dto.setContent(editor1);
 		this.service.modify(dto,fileDTO);
 		
 	
@@ -192,12 +195,14 @@ public class AnonymousBoardController {
 	@PostMapping("retrieve")
 	public String retrieve(@ModelAttribute("cri") Criteria cri, 
 								BoardDTO dto, 
+								String editor1,
 								@Nullable AttachFileDTO fileDTO,
 								RedirectAttributes rttrs) throws Exception {
 		log.debug("retrieve({},{}) invoked",dto,fileDTO);
 		
 		Objects.nonNull(this.service);
-
+		
+		dto.setContent(editor1);
 		this.service.retrieve(dto,fileDTO);
 		
 		

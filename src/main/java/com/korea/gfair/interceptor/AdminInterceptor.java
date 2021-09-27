@@ -17,6 +17,11 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @Component
 public class AdminInterceptor implements HandlerInterceptor {
+	//=========================================================
+	//<!-- = 1. 관리자가 아닌 아이디로 접근 시에 페이지 접근 막기 = -->
+	//<!-- = 2. 관리자가 아닌 아이디로 접근 시에 로그인 창으로 이동 = -->
+	//<!-- = 3. 로그인이 안되어 있다면 로그인 창으로 이동 = -->
+	//=========================================================	
 	
 	public static final String requestURIKey = "__REQUEST_URI__";
 	public static final String queryStringKey = "__QUERYSTRING__";
@@ -36,8 +41,8 @@ public class AdminInterceptor implements HandlerInterceptor {
 				return true;
 			} else {
 				log.info("admin계정이 아닙니다");
-				response.sendRedirect("/notice/list");
-				log.info("Redirected to /notice/list");
+				response.sendRedirect("/");
+				log.info("Redirected !!");
 				return false;
 			}
 		} else {

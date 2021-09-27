@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.mapper.FreeBoardMapper;
@@ -23,14 +25,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	@Setter(onMethod_= @Autowired)
 	private FreeBoardMapper mapper;
 	
-	@Override
-	public List<BoardVO> list() {
-		log.debug("getList() invoked.");
-		
-		List<BoardVO> list = mapper.selectList();
-		
-		return list;
-	}//getList
+
 	
 	@Override
 	public List<BoardVO> getListPerPage(Criteria cri,String bname) {
@@ -70,7 +65,6 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		
 		boolean write = mapper.insert(vo);
 		
-		log.info("write=@@@"+write);
 		if(write) {
 			return true;
 		}else {
@@ -80,11 +74,11 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}//write
 
 	@Override
-	public boolean modify(BoardVO vo) {
+	public boolean modify(BoardDTO dto) {
 		
 		log.debug("modify() invoked.");
 		
-		boolean modify = mapper.update(vo);
+		boolean modify = mapper.update(dto);
 		
 		return modify;
 		

@@ -1,12 +1,10 @@
-*{
-    margin: 0 auto;
-    padding: 0;
-    font-family: "Noto Sans KR Light";
-    
-}
 
-#content{
+#wrapper{
     width: 1200px;
+    display: flex;
+    justify-content: center;
+    
+    font-size: initial;
 }
 
 #inner_con{
@@ -16,9 +14,15 @@
     flex-direction: column;
 
     
+    
 }
 
-input{
+#buttons{
+	display: flex;
+    justify-content: center;
+}
+
+input#memberpw{
     display: block;
     width: 498px;
     height: 30px;
@@ -33,23 +37,30 @@ input{
 
 }
 
-button{
+#passBtn{
     cursor: pointer;
     border: solid 1px #005bbb;
     background-color: #005bbb;
     color: white;
 
     width: 100px;
-    height: 44px;
+    height: 40px;
     margin-bottom: 1px;
 }
 
-h4{
+#inner_con h4{
     color: #005bbb;
     margin: 0;
 }
 
-form{
+#inner_con h2{
+    text-align: center;
+
+    font-size: large;
+
+}
+
+#passAuth{
     height: 400px;
     display: flex;
     flex-direction: column;

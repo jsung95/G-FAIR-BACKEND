@@ -88,9 +88,7 @@
 <style>
 
 #title_top {
-    font-size: 30px;
-   	font-weight: bold;
-    padding: 0 0 20px 10px;
+    padding: 0 0 10px 10px;
 }
 
 .contentIn form {
@@ -108,6 +106,10 @@ th {
 
 .table_padding {
     padding: 20px;
+}
+
+thead {
+	border-top: 3px solid #005bbb;
 }
 
 thead tr{ /* 제목 Input */
@@ -202,10 +204,9 @@ tfoot tr td {
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
@@ -216,7 +217,7 @@ tfoot tr td {
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 공지사항 </div>
+                    <div class="map">home > 커뮤니티 > 공지사항 </div>
                     <h2 class="subName">공지사항</h2>
                 </div>
                 <div class="contentIn">
@@ -235,7 +236,7 @@ tfoot tr td {
 				       	<input type="hidden" name="reply_tf" value="T">
 				       	<input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
 
-                        <div id="title_top">답글 등록</div>
+                        <div id="title_top">원글번호 : ${board.bno}</div>
                         <table>
                             <thead>
                                 <tr>
@@ -265,9 +266,8 @@ tfoot tr td {
                             
                             <tfoot>
 	                            <tr>
-	                            	<th></th>
+	                            	<th><input type="submit" id="submit" class="btn" value="등록"></th>
 	                                <td>
-	                                	<input type="submit" id="submit" class="btn" value="답글등록">
 	                                	<button class="btn" type="button" id="backBtn">취소</button>
 	                               	</td>
 	                            </tr>

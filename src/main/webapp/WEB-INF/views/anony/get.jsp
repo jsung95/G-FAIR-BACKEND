@@ -44,36 +44,10 @@
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
         });
-        
-
     })//end jq
 </script>
 <script>
     $(function(){
-
-        $('#regBtn').on('click',function(){
-            
-            location.href = "/anony/register?bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        });//regBtn
-        
-        $('#reregBtn').on('click',function(){
-            
-            location.href = "/anony/retrieve?title=${board.title}&reproot=${board.reproot}&repstep=${board.repstep}&repindent=${board.repindent}&bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        });//reregBtn
-        
-        $('#modifyBtn').on('click',function() {
-            
-            location.href = "/anony/modify?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        })//modifyBtn
-        
-        $('#listBtn').on('click',function(){
-            
-            location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
-            
-        });//listBtn
 
         //iframe 높이 자동조절
         let iframe = document.getElementById("child-iframe"); 
@@ -93,10 +67,9 @@
 
         <div id="container">
             <div id="aside">
-                <h2 class="asideMenu">고객센터</h2>
+                <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
@@ -107,29 +80,16 @@
             </div>
             <div id="content">
                 <div class="title">
-                    <div class="map">home > 고객센터 > 고객의소리 </div>
+                    <div class="map">home > 커뮤니티 > 고객의소리 </div>
                     <h2 class="subName">고객의소리</h2>
                 </div>
                 <p>&nbsp;</p>
+                
                 <!-- 상세페이지 -->
                 <div class="contentIn">
-                    <iframe id="child-iframe" src="/anony/getPage?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" frameborder="0" width="1200" scrolling='no'></iframe>
+                    <iframe id="child-iframe" target="_parent" src="/anony/getPage?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" frameborder="0" width="1200" scrolling='no'></iframe>
                 </div>
-                <!-- 버튼 -->
-                <div class=getBtn>
-                    <div>
-                        <c:if test="${__LOGIN__.memberid != null}">
-                            <button type="button" class="buttonstyle" id="regBtn">글쓰기</button>&nbsp;&nbsp;
-                            <button type="button" class="buttonstyle" id="reregBtn">답글</button>
-                        </c:if>
-                        <c:if test="${__LOGIN__.memberid eq board.memberid}">
-                            <button type="button" class="buttonstyle" id="modifyBtn">수정</button>
-                        </c:if>
-                    </div>
-                    <div>
-                        <button type="button" class="buttonstyle" id="listBtn">목록</button>
-                    </div>
-                </div>
+
                 <p>&nbsp;</p>
             </div>
         </div>

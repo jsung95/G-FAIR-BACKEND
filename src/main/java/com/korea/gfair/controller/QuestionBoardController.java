@@ -62,7 +62,9 @@ public class QuestionBoardController {
 			BoardDTO dto, Model model) throws Exception {
 		log.debug("modifyUi() invoked.");
 		
+		BoardVO board=this.service.getOneList(dto);
 		
+		model.addAttribute("__LIST__", board);
 	}//modifyUi
 	
 	@GetMapping({"get"})
@@ -147,9 +149,10 @@ public class QuestionBoardController {
 	}//register
 	
 	@PostMapping("retrieve")
-	public String retrieve(@ModelAttribute("cri") Criteria cri,BoardDTO dto, RedirectAttributes rttrs) throws Exception {
+	public String retrieve(@ModelAttribute("cri") Criteria cri,BoardDTO dto, RedirectAttributes rttrs,String editordata) throws Exception {
 		log.debug("retrieve({}, {}) invoked.", dto, rttrs);
 		
+		dto.setContent(editordata);
 		boolean result=this.service.retrieve(dto);
 		
 		if(result) {
@@ -164,9 +167,10 @@ public class QuestionBoardController {
 	}//retrieve
 	
 	@PostMapping("modify")
-	public String modify(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs) throws Exception{
+	public String modify(@ModelAttribute("cri") Criteria cri, BoardDTO dto, RedirectAttributes rttrs,String editordata) throws Exception{
 		log.debug("modify({},{}) invoked.", dto, rttrs);
 		
+		dto.setContent(editordata);
 		boolean result=this.service.modify(dto);
 		
 		if(result) {

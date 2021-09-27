@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.EventDTO;
 import com.korea.gfair.domain.EventVO;
@@ -20,6 +21,7 @@ import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.domain.PhotoVO;
 import com.korea.gfair.service.EventBoardService;
 import com.korea.gfair.service.PhotoBoardService;
+import com.korea.gfair.service.ReplyService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,6 +42,8 @@ public class EventBoardController {
 	@Setter(onMethod_= {@Autowired})
 	private PhotoBoardService photoService;
 	
+	@Setter(onMethod_= {@Autowired})
+	private ReplyService replyService;
 	
 	@GetMapping("listPerPage")
 	public String listPerPage(@ModelAttribute("cri")Criteria cri, Model model) {
@@ -65,7 +69,7 @@ public class EventBoardController {
 	
 	@GetMapping("register")
 	public void registerui(@ModelAttribute("cri")Criteria cri) {
-		log.debug("register() invoked.");
+		log.debug("registerui() invoked.");
 		log.info("\t+ cri: " + cri);
 		
 	}//registerui()
@@ -117,7 +121,7 @@ public class EventBoardController {
 		
 	}//test
 	
-	@GetMapping({"get", "modify"})
+	@GetMapping("get")
 	public void get(
 			@ModelAttribute("cri") Criteria cri,
 			@RequestParam("bno") Integer bno,
@@ -138,17 +142,43 @@ public class EventBoardController {
 		
 		model.addAttribute("photo", photoVO);
 		
-		model.addAttribute("event", eventVO);
+		model.addAttribute("board", eventVO);
 		
 		this.service.readcnt(bno);
 		
 	}//get()
 	
+	@GetMapping({"subGet", "modify"})
+	public void get1(
+			@ModelAttribute("cri") Criteria cri,
+			@RequestParam("bno") Integer bno,
+			Model model
+			) {
+		log.debug("get(cri, bno, model) invoked.");
+		log.info(
+				"\t+ cri: {}, bno: {}, model: {}",
+				cri, bno, model);
+		
+		
+		EventVO eventVO = this.service.get(bno);
+		log.info("\t+ eventVO: " + eventVO.getFid());
+		
+		PhotoVO photoVO = this.photoService.read(eventVO.getFid());
+		log.info("\t+ photoVO: " + photoVO);
+		
+		
+		model.addAttribute("photo", photoVO);
+		
+		model.addAttribute("board", eventVO);
+		
+		
+	}//get()
 	
 	@PostMapping("modify")
 	public String modify(
 			@ModelAttribute("cri") Criteria cri,
-			EventDTO eventDTO, 
+			EventDTO eventDTO,
+			MultipartFile uploadFile, 
 			RedirectAttributes rttrs
 			) {
 		log.debug("modify(cri, eventDTO, rttrs) invoked.");
@@ -156,8 +186,9 @@ public class EventBoardController {
 				"\t+ cri: {}, eventDTO: {}, rttrs: {}"
 				,cri, eventDTO, rttrs);
 		
-		this.service.modify(eventDTO);
-		
+		this.service.modify(eventDTO, uploadFile);
+		this.photoService.modify(eventDTO.getFid(), uploadFile);
+
 		rttrs.addFlashAttribute(
 				"result",
 				"success"
@@ -186,6 +217,7 @@ public class EventBoardController {
 	public String remove(
 			@ModelAttribute("cri") Criteria cri,
 			@RequestParam("bno") Integer bno,
+//			@RequestParam("reno") Integer reno,
 			RedirectAttributes rttrs
 			) {
 		
@@ -193,6 +225,17 @@ public class EventBoardController {
 		log.info(
 				"\t+ cri: {}, bno: {}, rttrs: {}",
 				cri, bno, rttrs);
+		
+//		int childRemoved = this.replyService.remove(reno);
+//		
+//		if(childRemoved == 1) {
+//			log.info("자식레코드가 삭제되었습니다.");
+//			
+//		}else {
+//			log.info("자식레코드 삭제실패.");
+//			
+//		}
+		
 		
 		boolean isRemoved = this.service.remove(bno);
 		

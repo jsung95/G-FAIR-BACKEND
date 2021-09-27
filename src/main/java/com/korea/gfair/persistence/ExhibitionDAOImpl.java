@@ -141,7 +141,24 @@ public class ExhibitionDAOImpl implements ExhibitionDAO {
 			
 			return result;
 		}//try-with-resources
-	}//
+	}//totalCount
+
+
+	@Override
+	public List<ExhibitionVO> searchEx() throws Exception {
+		log.debug("searchEx() invoked");
+		
+		SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		
+		try(sqlSession){
+			
+			String Statement = "exhibitionMapper.searchEx";
+			
+			List<ExhibitionVO> result = sqlSession.selectList(Statement);
+			
+			return result;
+		}//try-with-resources
+	}//searchEx
 
 
 

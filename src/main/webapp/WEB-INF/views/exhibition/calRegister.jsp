@@ -19,7 +19,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
 			
-        <link rel="stylesheet" href="../resources/css/boardBasic.css">
+        <link href="/resources/css/calendar.css" rel="stylesheet" type="text/css" />
 
         <script>
             $(function(){
@@ -78,12 +78,14 @@
                         </tr>
                         <tr>
                             <th>전시내용</th>
-                            <td><textarea name="excontent"cols="30" rows="10" placeholder="전시일정 내용을 입력해주세요" required></textarea></td>
+                            <td><textarea name="excontent" rows="10" placeholder="전시일정 내용을 입력해주세요" required></textarea></td>
                         </tr>
                     </tbody>
                 </table>
-                <button type="submit" class="listBtnstyle" id="exRegBtn">등록</button>
-                <button type="button" class="listBtnstyle" id="exCancleBtn">취소</button>
+                <div>
+                    <button type="submit" class="exBtnStyle" id="exRegBtn">등록</button>
+                    <button type="button" class="exBtnStyle" id="exCancleBtn">취소</button>
+                </div>
             </form>
         </div>
     </body>

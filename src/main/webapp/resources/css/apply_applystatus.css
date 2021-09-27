@@ -1,111 +1,123 @@
 
-            *{
-                margin: 0 auto;
-                padding: 0;
-                font-family: "Noto Sans KR Light";
-                
-            }
+          
 
-            #content{
-                width: 1200px;
-            }
+#wrapper{
+    width: 1200px;
 
-            #inner_con{
-                width: 1100px;
-                height: 700px;
+    font-size: initial;
+    
+}
 
-                display: flex;
-                flex-direction: column;
-                justify-content: space-evenly;
-            }
+#inner_con{
+    width: 1200px;
+    height: 700px;
 
-            #inner_con h3{
-                color: #005bbb;
-            }
-            #apply_status{
-                width: 1100px;
-                height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
 
-                background-color: #fbfbfb;
+#inner_con h3{
+    color: #005bbb;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+#apply_status{
+    width: 1200px;
+    height: 150px;
 
-            }
+    background-color: #fbfbfb;
 
-            #status{
-                width: 1100px;
-                height: 100px;
+}
 
-                display: flex;
-                justify-content: space-around;
+#status{
+    width: 1200px;
+    height: 100px;
 
-                text-align: center;
-            }
-            #status2{
-                width: 1100px;
-                height: 50px;
+    display: flex;
+    justify-content: space-around;
 
-                display: flex;
-                justify-content: space-around;
+    text-align: center;
+}
+#status2{
+    width: 1200px;
+    height: 50px;
 
-                text-align: center;
-            }
+    display: flex;
+    justify-content: space-around;
 
-            #status span{
-                width: 100px;
-                height: 100px;
+    text-align: center;
+}
 
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
+#status span{
+    width: 100px;
+    height: 100px;
 
-            #status2 span{
-                width: 100px;
-                height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+#status2 span{
+    width: 100px;
+    height: 50px;
 
-                font-size: 10%;
-            }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-            .st{
-                background-color:#244870d9;
-                color: white;
+    font-size: 10%;
+}
 
-                border-radius: 50%;
-            }
+.st{
+    background-color:#244870d9;
+    color: white;
 
-            #now_status{
-                background-color:#005bbb;
-                /* border: 1px solid #005bbb; */
-            }
+    border-radius: 50%;
+}
 
-            #info{
-                width: 1100px;
-                height: 450px;
+#now_status{
+    background-color:#005bbb;
+    /* border: 1px solid #005bbb; */
+}
 
-                background-color: #fbfbfb;
+#wrapper #info{
+    width: 1200px;
+    height: 450px;
 
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-            }
+    background-color: #fbfbfb;
 
-            #information{
-                width: 800px;
-                height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                
-            }
+#wrapper #info> h4:nth-child(1){
+    text-align: center;
+}
 
-            #information h4,h5{
-                margin: 0;
-            }
+#wrapper #information{
+    width: 800px;
+    height: 330px;
 
-            #information h4{
-                color: #005bbb;
-            }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+#information h4,h5{
+    margin: 0;
+    padding-left: 10px;
+}
+
+#information h4{
+    color: #005bbb;
+}
+
+#app_not{
+    color: red;
+    font-style: italic;
+    font-size: 12px;
+}

@@ -18,13 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.AttachFileVO;
 import com.korea.gfair.domain.BoardDTO;
+import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
-import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.domain.PageDTO;
 import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.domain.ReplyVO;
-import com.korea.gfair.interceptor.LoginInterceptor;
 import com.korea.gfair.service.NoticeBoardReplyService;
 import com.korea.gfair.service.NoticeBoardService;
 import com.korea.gfair.service.UploadFileService;
@@ -53,8 +52,8 @@ public class NoticeBoardController {
 	
 	@GetMapping("list")
 	public void getList(@ModelAttribute("cri") Criteria cri, Model model) {
-		List<BoardVO> list_notice = this.board_service.readNotice("공지사항");
-		List<BoardVO> list = this.board_service.getListPerPage(cri, "공지사항");
+		List<BoardReplyCountVO> list_notice = this.board_service.readNotice("공지사항");
+		List<BoardReplyCountVO> list = this.board_service.getListPerPage(cri, "공지사항");
 		
 		PageDTO pageDTO = new PageDTO(cri, this.board_service.getTotal(cri, "공지사항"));
 		model.addAttribute("pageMaker", pageDTO);

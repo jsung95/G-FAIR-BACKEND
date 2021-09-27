@@ -36,7 +36,6 @@ import com.korea.gfair.domain.LoginDTO;
 import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.domain.PageDTO;
-import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.service.MemberService;
 import com.korea.gfair.service.MyPageService;
 import com.korea.gfair.util.ApiCaptchaImage;
@@ -64,25 +63,8 @@ public class MyPageController {
 	private JavaMailSender mailSender;
 	
 	@Autowired private MemberService memberService;
-//	---------------------------------------------------------------
-	@GetMapping("sample")
-	public String sample(RedirectAttributes attrs,HttpServletRequest req) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		log.debug("sample() invoked.");
-		
-		MemberDTO dto = new MemberDTO();
-		dto.setMemberid("dani125");
-		
-		String pw  =UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest("12345");
-		
-		dto.setMemberpw(pw);
-		
-		HttpSession session =req.getSession();
-		session.setAttribute("__LOGIN__", dto);
-		
-		return "redirect:/question/list";
-	}//sample
+
 	
-//	----------------------------------------------------------------
 	
 	@PostMapping("captchaAuth")
 	public ResponseEntity<String> captchaAuth(
@@ -149,23 +131,23 @@ public class MyPageController {
 		dto.setMemberpw(currentPassword);
 		
 		HttpSession session =req.getSession();
-		MemberDTO sessionDto =(MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO sessionVO =(MemberVO)session.getAttribute("__LOGIN__");
 		
 		log.info("parameter dto password : {}",dto.getMemberpw());
-		log.info("session dto password : {}", sessionDto.getMemberpw());
+		log.info("session dto password : {}", sessionVO.getMemberpw());
 		
 		
 		//입력한 기존비밀번호와 세션영역에 올라온 비밀번호가 일치했을때 
-		if(sessionDto.getMemberpw().equals(dto.getMemberpw())) {
+		if(sessionVO.getMemberpw().equals(dto.getMemberpw())) {
 			
 			
 			//1. 새 비밀번호 암호화 
 			String encodedNewPassword =
 			UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(newMemberpw);
-			//2. 새 비밀번호로 sessiondto에 set
-			sessionDto.setMemberpw(encodedNewPassword);
+			//2. 새 비밀번호로 dto set
+			dto.setMemberpw(encodedNewPassword);  // 
 			//3. 서비스 메소드 호출 
-			boolean result=this.service.modifyPassword(sessionDto);
+			boolean result=this.service.modifyPassword(dto);
 			
 				if(result) {	//업데이트 성공시 
 					attrs.addFlashAttribute("__RESULT__", "비밀번호 변경 성공");
@@ -201,9 +183,9 @@ public class MyPageController {
 		dto.setMemberpw(currentPassword);
 		
 		HttpSession session =req.getSession();
-		MemberDTO sessionDto =(MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO sessionVO =(MemberVO)session.getAttribute("__LOGIN__");
 		
-		if(!sessionDto.getMemberpw().equals(dto.getMemberpw())) {	//만약 기존 비밀번호 틀릴경우
+		if(!sessionVO.getMemberpw().equals(dto.getMemberpw())) {	//만약 기존 비밀번호 틀릴경우
 			model.addAttribute("__RESULT__","false");
 		}//if
 		
@@ -216,11 +198,11 @@ public class MyPageController {
 		log.debug("emailCode(req) invoked.");
 		HttpSession session =req.getSession();
 		
-		MemberDTO dto = (MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO vo = (MemberVO)session.getAttribute("__LOGIN__");
 		//------------------------------------------------------------------		
 		//1. session에 올라간 dto이용해 email 가져오기 
 		//------------------------------------------------------------------		
-		String toEmail =this.service.getEmail(dto);
+		String toEmail =this.service.getEmail(vo);
 		//------------------------------------------------------------------		
 		//2. email 발송
 		//------------------------------------------------------------------
@@ -272,9 +254,9 @@ public class MyPageController {
 		
 		HttpSession session =req.getSession();
 		
-		MemberDTO dto = (MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO vo = (MemberVO)session.getAttribute("__LOGIN__");
 		
-		boolean result = this.service.fireMember(dto);
+		boolean result = this.service.fireMember(vo);
 		
 		if(result) {
 			session.invalidate();
@@ -292,11 +274,11 @@ public class MyPageController {
 		
 		HttpSession session =req.getSession();
 		
-		MemberDTO dto = (MemberDTO)session.getAttribute("__LOGIN__");
+		MemberVO vo = (MemberVO)session.getAttribute("__LOGIN__");
 		
-		PageDTO pageDTO = new PageDTO(cri,this.service.getReplyTotalCount(cri,dto));
+		PageDTO pageDTO = new PageDTO(cri,this.service.getReplyTotalCount(cri,vo));
 		
-		List<BoardReplyJoinVO> replyList =this.service.getReplyList(cri,dto);
+		List<BoardReplyJoinVO> replyList =this.service.getReplyList(cri,vo);
 		
 		model.addAttribute("__REPLY__", replyList);
 		model.addAttribute("__PAGE__",pageDTO);
@@ -333,22 +315,35 @@ public class MyPageController {
 	
 	
 	//VIEW만 호출용
-	@GetMapping({"checkPass","jusoPopup","myInfo"})
+	@GetMapping({"checkPass","jusoPopup","myInfo","adminInfo"})
 	public void VIEW() throws Exception{
-		log.debug("VIEW : checkPass,jusoPopup() invoked");
+		log.debug("VIEW : checkPass,jusoPopup,myInfo,adminInfo() invoked");
 		
 	}//VIEW
 	
 	//패스워드 확인용
-	@GetMapping({"getPass"})
+	@PostMapping({"getPass"})
 	@ResponseBody
-	public String getPass(String memberid) throws Exception{//전송받은 아이디값으로 패스워드를 알려줌
-		log.debug("getPass() invoked",memberid);
+	public String getPass(LoginDTO dto) throws Exception{//전송받은 아이디값으로 패스워드를 알려줌
+		log.debug("getPass() invoked",dto);
 		
-		MemberVO memberVO = this.memberService.searchMember(memberid);
-		log.info("memberVO : ",memberVO);
+		MemberVO memberVO = this.memberService.searchMember(dto.getMemberid());
+		String digest = UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(dto.getMemberpw());
 		
-		return memberVO.getMemberpw();
+		log.info("pw : "+memberVO.getMemberpw().toString());
+		log.info("digest:"+digest.toString());
+		
+		
+		if(memberVO.getMemberpw().equals(digest)) {
+			log.info("성공>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			
+			return "success";
+			
+		}else {
+			log.info("실패>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			
+			return "fail";
+		}//if-else
 	}//checkPass
 	
 	
@@ -359,6 +354,9 @@ public class MyPageController {
 		
 		Objects.nonNull(this.memberService);
 		log.info("\t+ memberService: "+this.memberService);
+		
+		String digest = UUIDGenerator.generateUniqueKeysWithUUIDAndMessageDigest(dto.getMemberpw());
+		dto.setMemberpw(digest);
 		
 		MemberVO user = this.memberService.login(dto);
 		

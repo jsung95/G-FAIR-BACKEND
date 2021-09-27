@@ -1,10 +1,13 @@
 package com.korea.gfair.service;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.korea.gfair.domain.PreApplicationDTO;
+import com.korea.gfair.domain.PreApplicationVO2;
 import com.korea.gfair.mapper.PreApplicationMapper;
 
 import lombok.NoArgsConstructor;
@@ -31,6 +34,13 @@ public class PreApplicationServiceImpl implements PreApplicationService {
 		
 		return (affectedLines == 1) ? true : false;
 		
+	}
+
+	@Override
+	public List<PreApplicationVO2> getList(String memberid) {
+		log.debug("get(memberid) invoked.");
+		
+		return this.mapper.getList(memberid);
 	}//register()
 	
 }//end class

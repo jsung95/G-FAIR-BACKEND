@@ -1,22 +1,206 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
-
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>list.jsp</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js" referrerpolicy="no-referrer"></script>
-    <script>
-        $(function () {
+    <title>지페어 코리아</title>
+
+    <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    <script src="/resources/js/fullnav.js"></script>
+
+</head>
+
+    <style>
+button {
+    margin: 0;
+}
+button:hover {
+   cursor: pointer;
+}
+
+.wrapper {
+    height: 570px;
+}
+#wrap {
+    margin: 0;
+    width: 100%
+    align-items: center;
+}
+
+table {
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid rgb(201, 201, 201);
+    border-collapse: collapse;
+}
+
+th {
+    background-color: rgb(245, 245, 245);
+    height: 50px;
+    font-size: 20px;
+    border-top: 3px solid #005bbb;
+}
+
+td {
+    height: 40px;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+tr:hover {
+    background-color: #eee;
+}
+
+a, a:link, a:visited {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+/* 제목 */
+td:nth-child(2),td:nth-child(3) {
+    text-align: center; 
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 200px;
+}
+
+/* 작성자 */
+td:nth-child(3) {
+    text-align: center; 
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100px;
+}
+
+/* no, 조회수 */
+td:nth-child(1),td:nth-child(5) {
+    width: 70px;
+
+}
+/* 등록일 */
+td:nth-child(4) {
+    width: 60px;
+}
+
+}/* paging */
+#pagination {
+    width: 95%;
+    margin: 0 auto;
+    margin-top:5px;
+}
+
+
+#pagination ul {
+     display: flex;
+    justify-content: center;
+    margin-top: -20px;
+    margin-bottom: 55px;
+}
+#pagination li {
+    width: 30px;
+    height: 30px;
+    display: flex;
+
+    border-left: 1px solid #999;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    box-sizing: border-box;
+
+    text-align: center;
+    line-height: 28px;
+    flex-direction: column;
+    margin-top:5px;
+}
+#pagination li:last-child {
+    border-right: 1px solid #999;
+}
+
+/* 하단 버튼 */
+.reg {
+    margin: 0;
+
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* 페이징 버튼 */
+.prev, .next, .end {
+    width: 40px !important;
+    color: white;
+    background-color: rgb(235, 238, 232);
+}
+
+/* 현재페이지 버튼 */
+.currPage {
+    height: 29px!important;
+    color: white;
+    background-color: rgb(247, 247, 247);
+    border-bottom: 1px solid #999;
+    box-sizing: border-box;
+}
+/* 버튼CSS */
+.buttonstyle {
+    height: 40px;
+    width: 100px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #005bbb;
+    color: #fff;
+    font-size: 15px;
+    
+}
+
+  form#searchForm {
+    position: relative;
+    bottom: -560px;
+    left: 454px;
+}
+    
+#regBtn{
+     position: relative;
+    bottom: -538px;
+    left: 1100px;
+    height: 40px;
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #005bbb;
+    color: #fff;
+    font-size: 15px;
+    }
+    
+    button.search1 {
+    position: relative;
+    left: 10px;
+    height: 25px;
+    width: 49px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #005bbb;
+    color: #fff;
+    font-size: 14px;
+}
+
+</style>
+<script>
+    $(function () {
             
             console.clear();
             console.debug("start ");
@@ -41,237 +225,152 @@
       
                             paginationForm.submit();
             // on  click prev / next 
-    		
-    		
-    	});
+    	
+    		});
         
         });
     </script>
-  <style>
-    *{
-        margin: 0 auto;
-        padding: 0;
-
-     }
-
-    #wrapper{
-        width: 1024;
-
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-size: 14px;
-    }
-
-    table{
-        width: 95%;
-
-        border: 1px ridge green;
-        border-collapse: collapse;
-    }
-
-    th{
-        padding: 10px;
-
-        color: white;
-        background-color: orange;
-
-        font-size: 16px;
-    }
-
-    td{
-        padding: 3px;
-    }
-    
-    caption{
-        font-size: 16px;
-        font-weight: bold;
-
-        padding: 0;
-    }
-    #topmenu > li {
-        float: left;
-
-        text-align: center;
-        line-height: 50px;
-        list-style: none;
-
-        width: 33%;
-        height: 50px;
-    }
-
-    #regBtn{
-        width: 150px;
-        height: 40px;
-
-        border: 0;
-
-        font-size: 15px;
-        font-weight: bold;
-
-        color: white;
-        background-color: blue;
-
-        cursor: pointer;
-    }
-
-    tr:hover{
-        background-color:yellowgreen;
-
-    }
-
-    a, a:link, a:visited{
-        text-decoration: none;
-
-        color: black;
-
-        cursor:pointer;
-    }
-
-    th:nth-child(){
-        text-align: left;
-
-        width: 40%;
-        padding-left: 10px;
-    }
-
-    /* -------------------------페이지 스타일 추가 -------------------- */
-
-    #pagenation{
-        width: 95%;  /*전체 컨텐츠 영역은 wrapper로 되어있는데 이를 기준으로 95%의 괄호를 차지해라 */
-        margin: 0 auto;
+<script>
+    $(function(){
+    	var tmp;
+    	
+        var subName = $('.subName').text();
         
-    }
+        $('.chk').each(function(index,obj){
+            var t = index;
+            var o = $(this).text();
+            console.log(t + ':' + o)
+            if(o == subName) {
+            	tmp = t;
+            }
+        });
 
-    #pagination li{
-        float: left;
-
-        width: 30px;
-        height: 30px;
-        border: 1px gray dotted;
-
-        text-align: center;
-        list-style: none;
-        line-height: 30px;  /*세로 정렬 */
-    }
-
-    #pagination ul{
-        float: right;
-    }
-
-        /*class 속성이 prev와 next인 곳에 적용해라 */
-    .prev, .next{
-        width: 70px !important;
+        console.log(tmp)
         
-        background-color: lightslategrey;
-        color: white !important;
-    }
+        $('#parent').children().eq(tmp).children().css({
+            'font-size': '18px',
+            'font-weight':'bold',
+            'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+            'background-position': 'right center'
+        });
+        
+ 
 
-    .currPage{ /*부여된 속성값에 해당하는 것만 스타일이 적용된다.  >> 3항 연산자 */
-        background-color: orange;
-        color: honeydew;
-    }
-
-
-</style>
-
-</head>
+    })//end jq
+</script>
 <body>
-    <h1>newslist.jsp</h1>
-</body>
+    <div id="wrap">
+ 	
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<div class="wrapper">
-<table border =1 >
-            <caption>tbl
-                <ul id="topmenu">
-                    <li>
-                        <form id="searchForm" action="/news/listPerPage"method="GET">
-                            <input type="hidden" name="currPage"  value="1">
-                            <input type="hidden" name="amount"  value="${pageMaker.cri.amount}">
-                            <input type="hidden" name="pagesPerPage"  value="${pageMaker.cri.pagesPerPage}">
+        <div id="container">
+            <div id="aside">
+                <h2 class="asideMenu">고객센터</h2>
+                <ul id="parent">
+                    <li><a class="chk" href="/notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
+                    <li><a class="chk" href="/question/list">질문게시판</a></li>
+                    <li><a class="chk" href="/often/question">자주묻는질문</a></li>
+                    <li><a class="chk" href="/anony/list">고객의소리</a></li>
+                    <li><a class="chk" href="/free/board">자유게시판</a></li>
+                    <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
+                </ul>
 
-                            <select name="type" id="search1">  <!--eq >> 동등비교 연산자 -->
-                                <option value="T" ${ ("T" eq pageMaker.cri.type) ? "selected" : ""}>제목</option>
-                                <option value="C" ${ ("C" eq pageMaker.cri.type) ? "selected" : ""}>내용</option>
-                                <option value="W" ${ ("W" eq pageMaker.cri.type) ? "selected" : ""}>작성자</option>
-                            </select>
+            </div>
+            <div id="content">
+                <div class="title">
+                    <div class="map">home > 고객센터 > 보도자료 </div>
+                    <h2 class="subName">보도자료</h2>
+                </div>
+                      <div class="contentIn">
+              	<div class="wrapper">
+					<table border =1 >
+		           			 <caption>
+		              			  <ul id="topmenu">
+		                    		<li>
+		                       		 <form id="searchForm" action="/news/listPerPage" method="GET">
+			                            <input type="hidden" name="currPage" value="1">
+			                            <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+			                            <input type="hidden" name="pagesPerPage"  value="${pageMaker.cri.pagesPerPage}">
+		
+		                            <select name="type" id="search1">  <!--eq >> 동등비교 연산자 -->
+		                                <option value="T" ${ ("T" eq pageMaker.cri.type) ? "selected" : ""}>제목</option>
+		                                <option value="C" ${ ("C" eq pageMaker.cri.type) ? "selected" : ""}>내용</option>
+		                                <option value="W" ${ ("W" eq pageMaker.cri.type) ? "selected" : ""}>작성자</option>
+		                            </select>
+			                            <input type="text" name="keyword" class="search2" value="${pageMaker.cri.keyword}">
+			                            <button class="search1">찾기</button>
+		                        	</form>
+		                       		</li>
+		                         </ul>
+		               		 </caption>
 
-                            <input type="text" name="keyword" class="search2" value="${pageMaker.cri.keyword}">
-                        
-                            <button class="search1">Search</button>
-                        </form>
-                        </li>
-                        
-                        <li>tbl_board(${pageMaker.totalAmount}</li>
-                        
-                    </ul>
-                </caption>
 
+						    <thead>
+						        <th>NO</th>
+						        <th>제목</th>
+						        <th>작성자</th>
+						        <th>등록일</th>
+						        <th>조회수</th>
+						    </thead>
+					            <c:set var="number" value="${pageMaker.totalAmount - (pageMaker.cri.currPage - 1) * pageMaker.cri.amount}"/>
+					            <c:forEach items="${list}" var="board" >
+					                <tr>                
+					                    <td>${number}</td>
+					                    <td><a href ="/news/get?bno=${board.bno}">
+					                    <c:out value="${board.title}"/></a></td>
+					                    <td><c:out value="${board.memberid}"/></td>
+					                    <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insert_ts}"/></td>
+					                    <td><c:out value="${board.readcnt}"/></td>
+					       			 </tr>
+					          <c:set var="number" value="${number-1}"/>
+					      	  </c:forEach>
+                                <c:if test="${__LOGIN__.memberid != null}">
+                                    <button type="button" id="regBtn"> 등록하기 </button>
 
-    <thead>
-        <th>글번호</th>
-        <th>기사제목</th>
-        <th>작성자</th>
-        <th>조회수</th>
-        <th>등록일</th>
-        <th>수정일</th>
-    </thead>
-
-    <c:forEach items="${list}" var="board">
-        <tr>
-         
-        
-        
-            <td><c:out value="${board.bno}"/></td>
-            <td><a href ="/news/get?bno=${board.bno}">
-            <c:out value="${board.title}"/></a></td>
-            <td><c:out value="${board.memberid}"/></td>
-            <td><c:out value="${board.readcnt}"/></td>
-            <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.insetts}"/></td>
-             <td><fmt:formatDate pattern="yyyy/MM/dd" value="${board.updatets}"/></td>
-
-        </tr>
-    </c:forEach>
-	
-	<button type="button" id="regBtn"> 등록하기 </button></li>
-</table>
-</div>
+                                </c:if>
+					</table>
+			</div>
 
 <!--페이징 처리 -->
  
-<div id="wrapper">
-    <div id="pagination">
-        <div id="paginationForm">
-            <input type="hidden" name="currPage">
-            <input type="hidden" name="amount">
-            <input type="hidden" name="pagePerPage">
-        
-
-            <ul>  
-                <c:if test="${pageMaker.prev}">                 
-                    <li class="prev"><a class ="prev" href="${pageMaker.startPage -1 }">Prev</a></li>   <!--왜 클래스 사용했을까? 공통된 특성을 두군데 같이 중복 적용하기 위해서 -->
-                </c:if>
-
-                      <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                
-                    <li class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}">
-                        <a    
-                        class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}"
-                        href="/news/listPerPage?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">
-                        ${pageNum}
-                        </a>
-                    </li>
-        
-
-                </c:forEach>
-
-                <c:if test="${pageMaker.next}">
-                    <li class="next"><a class ="next" href="${pageMaker.endPage +1 }">next</a></li>
-                </c:if>
-        
-            </ul>
+			<div id="wrapper">
+			    <div id="pagination">
+			        <form id="paginationForm">
+			            <input type="hidden" name="currPage"> 
+			            <input type="hidden" name="amount">
+			            <input type="hidden" name="pagePerPage">
+			        
+			            <ul>  
+			                <c:if test="${pageMaker.prev}">                 
+			                    <li class="prev"><a class ="prev" href="${pageMaker.startPage -1 }">Prev</a></li>   <!--왜 클래스 사용했을까? 공통된 특성을 두군데 같이 중복 적용하기 위해서 -->
+			                </c:if>
+			                      <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+			                
+			                    <li class="${pageMaker.cri.currPage == pageNum?'currPage' : ''}">
+			                        <a    
+			                        class="${pageMaker.cri.currPage == pageNum? 'currPage' : ''}"
+			                        href="/news/listPerPage?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">
+			                        ${pageNum}
+			                        </a>
+			                    </li>
+			                </c:forEach>
+			
+			                <c:if test="${pageMaker.next}">
+			                    <li class="next"><a class ="next" href="${pageMaker.endPage +1}">next</a></li>
+			         
+			                </c:if>
+			            </ul>
+			        </form>
+			    </div>
+			</div>
+           </div>
+           
+            </div>
         </div>
-    </div>
-</div>
 
-</body> 
-
+   
+	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+    </div> <!--wrap-->
+</body>
 </html>

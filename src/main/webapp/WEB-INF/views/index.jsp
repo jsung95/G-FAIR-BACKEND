@@ -64,6 +64,11 @@
             'background-position': 'right center'
         });
         
+        jQuery( '#top_btn' ).click( function() {
+            var htmloffset = jQuery( 'html' ).offset();
+            jQuery( 'html, body' ).animate( { scrollTop : htmloffset.top }, 400 );
+        });
+        
 
     })//end jq
 </script>
@@ -94,11 +99,11 @@
         <div id="quick_Menu_Wrap">
             <div id="quick_Menu">
                 <ul>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_1.png" alt="">전시회 일정</a></li>
+                    <li class="quick"><a href="/exhibition/calendar"><img src="/resources/img/quick_1.png" alt="">전시회 일정</a></li>
                     <li class="quick"><a href="#"><img src="/resources/img/quick_2.png" alt="">참가 신청</a></li>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_3.png" alt="">사전관람 신청</a></li>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_4.png" alt="">이벤트</a></li>
-                    <li class="quick"><a href="#"><img src="/resources/img/quick_5.png" alt="">찾아오시는길</a></li>
+                    <li class="quick"><a href="/pre/agreement"><img src="/resources/img/quick_3.png" alt="">사전관람 신청</a></li>
+                    <li class="quick"><a href="event/listPerPage"><img src="/resources/img/quick_4.png" alt="">이벤트</a></li>
+                    <li class="quick"><a href="traffic/main"><img src="/resources/img/quick_5.png" alt="">찾아오시는길</a></li>
                 </ul>
             </div>
         </div>
@@ -115,11 +120,20 @@
         </div>
 
         <div id="member_Join_Wrap">
-            <div id="member_Join">
-                <h3>지페어 코리아에 더 많은 정보를 얻고 싶으신가요?</h3>
-                <div><a href="member/agreement" class="member_Join_btn">회원가입</a></div>
-            </div>
-
+            <c:choose>
+            	<c:when test="${__LOGIN__.memberid == null}">
+            		<div id="member_Join">
+				        <h3>지페어 코리아에 더 많은 정보를 얻고 싶으신가요?</h3>
+				        <div><a href="member/agreement" class="member_Join_btn">회원가입</a></div>
+				    </div>
+                </c:when>
+                <c:otherwise>
+                	<div id="member_Join">
+		                <h3>지페어 코리아의 일정이 궁금하다면?</h3>
+				        <div><a href="exhibition/calendar" class="member_Join_btn">일정조회</a></div>
+				    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
 
 
@@ -140,7 +154,8 @@
                   <li><a href="https://www.gbsa.or.kr/index.do" title="경기도경제과학진흥원 새창으로 열림" target="_blank"><img src="/resources/img/partner11.png" alt="" /></a></li>
               </ul>
             </div>
-          </div>       
+          </div>
+          <span id="top_btn">top</span>
 		  <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

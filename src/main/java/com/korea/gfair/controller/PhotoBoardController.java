@@ -34,7 +34,7 @@ import lombok.extern.log4j.Log4j2;
 public class PhotoBoardController {
 	
 	@Autowired
-	private PhotoBoardService service;
+	private PhotoBoardService photoService;
 	
 	@Autowired
 	private EventBoardService eventService;
@@ -44,7 +44,7 @@ public class PhotoBoardController {
 		log.debug("list() invoked.");
 		log.info("\t+ model: " + model);
 		
-		List<PhotoVO2> photos = this.service.getList();
+		List<PhotoVO2> photos = this.photoService.getList();
 		
 		Objects.requireNonNull(photos);
 		
@@ -58,13 +58,13 @@ public class PhotoBoardController {
 		log.debug("listPerPage(cri, model) invoked.");
 		log.info("\t+ cri: {}, model: {}", cri, model);
 		
-		cri.setAmount(12);
-		List<PhotoVO2> photos = this.service.getListPerPage(cri);
+		cri.setAmount(16);
+		List<PhotoVO2> photos = this.photoService.getListPerPage(cri);
 		
 		Objects.requireNonNull(photos);
 		
 		photos.forEach(log::info);
-		PageDTO pageDTO = new PageDTO(cri, this.service.getTotal(cri));
+		PageDTO pageDTO = new PageDTO(cri, this.photoService.getTotal(cri));
 		
 		model.addAttribute("list", photos);
 		model.addAttribute("pageMaker", pageDTO);
@@ -95,9 +95,9 @@ public class PhotoBoardController {
 				cri, uploadFile, rttrs);
 		
 		this.eventService.register("img", eventDTO, uploadFile);
-		
 		log.info("uploadFileName: " + uploadFile.getOriginalFilename());
 		log.info("uploadFile: " + uploadFile);
+		
 		
 		rttrs.addFlashAttribute(
 				"result", uploadFile);
@@ -130,12 +130,14 @@ public class PhotoBoardController {
 		log.debug("get() invoked.");
 		log.info("fileNo: {}, model: {}", fid, model);
 		
-		PhotoVO photo = this.service.read(fid);
-		
-		assert photo != null;
-		
+		PhotoVO photo = this.photoService.read(fid);
 		log.info("\t+ photo: " + photo);
 		
+		EventVO board = this.eventService.getWithFid(fid);
+		log.info("\t+ board: " + board);
+		
+		this.eventService.readcntWithFid(fid);
+		model.addAttribute("board", board);
 		model.addAttribute("file", photo);
 	}//get()
 	
@@ -144,15 +146,21 @@ public class PhotoBoardController {
 	@PostMapping("modify")
 	public String modify(
 			@ModelAttribute("cri") Criteria cri,
-			PhotoDTO PhotoDTO, 
+			EventDTO eventDTO,
+			Integer fid,
+			MultipartFile uploadFile, 
 			RedirectAttributes rttrs
 			) {
 		log.debug("modify(cri, eventDTO, rttrs) invoked.");
 		log.info(
 				"\t+ cri: {}, eventDTO: {}, rttrs: {}"
-				,cri, PhotoDTO, rttrs);
+				,cri, uploadFile, rttrs);
 		
-		this.service.modify(PhotoDTO);
+		log.info("\t+ ===============eventDTO: " + eventDTO);
+		
+		
+		this.eventService.modify(eventDTO, uploadFile);
+		this.photoService.modify(fid, uploadFile);
 		
 		rttrs.addFlashAttribute(
 				"result",
@@ -181,11 +189,21 @@ public class PhotoBoardController {
 	@PostMapping("remove")
 	public String remove(
 			@ModelAttribute("cri") Criteria cri,
-			@RequestParam("fid") Integer fid, 
+			@RequestParam(value="fid", required=false) Integer fid, 
 			RedirectAttributes rttrs) {
 		log.debug("remove({}, {}) invoked,", fid, rttrs);
 		
-		boolean isRemoved = this.service.remove(fid);
+		boolean childRemoved = this.eventService.removeWithFid(fid);
+		
+		if(childRemoved) {
+			log.info("자식레코드가 삭제되었습니다.");
+			
+		}else {
+			log.info("자식레코드 삭제실패.");
+			
+		}
+		
+		boolean isRemoved = this.photoService.remove(fid);
 		
 		if(isRemoved) {//삭제 성공일때
 			rttrs.addFlashAttribute("result", "success");

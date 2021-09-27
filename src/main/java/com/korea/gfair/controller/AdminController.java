@@ -1,5 +1,6 @@
 package com.korea.gfair.controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.korea.gfair.domain.ApplyVO;
+import com.korea.gfair.domain.MemberVO;
 import com.korea.gfair.service.AdminService;
 
 import lombok.NoArgsConstructor;
@@ -26,6 +29,12 @@ public class AdminController {
 
 	@Autowired
 	AdminService service;
+	
+//	뷰 역할만 하는 Mapping
+	@GetMapping({"adminPage"})
+	public void view() {
+		
+	}//view
 	
 	@GetMapping("apply")
 	public void apply(Model model) throws Exception {
@@ -58,5 +67,60 @@ public class AdminController {
 		
 		return "redirect:/admin/apply";
 	}//applyUpdatePayment
+	
+	//이진성 - 관리자페이지 > 회원관리
+	@GetMapping("memberList")
+	public void memberList(@RequestParam(defaultValue = "개인") String membertype, Model model) {
+		
+		List<MemberVO> members = this.service.getMemberList(membertype);
+		
+		model.addAttribute("members", members);
+	}//memberList
+	
+	
+	
+	
+	@PostMapping("delMember")
+	public String delMember(@RequestParam("mno")List<Integer> mnoList, String membertype) throws Exception {
+		log.info("mno List : {}", mnoList);
+		
+		this.service.delMember(mnoList);
+		
+		log.info("membertype : {}", membertype);
+		membertype = URLEncoder.encode(membertype, "UTF-8"); //UTF-8로 인코딩 해준 후 redirect 해줘야 한글이 ??? 로 안깨짐 
+		
+		return "redirect:/admin/memberList?membertype=" + membertype;
+		
+	}//delMember
+	
+	@PostMapping("rollbackMember")
+	public String rollbackMember(@RequestParam("mno") List<Integer> mnoList, String membertype) throws Exception {
+		log.info("mno List : {}", mnoList);
+		
+		this.service.rollbackMember(mnoList);
+		
+		log.info("membertype : {}", membertype);
+		membertype = URLEncoder.encode(membertype, "UTF-8"); //UTF-8로 인코딩 해준 후 redirect 해줘야 한글이 ??? 로 안깨짐
+		
+		return "redirect:/admin/memberList?membertype=" + membertype;
+	}//rollbackMember
+	
+	@ResponseBody
+	@PostMapping("changeMemberType")
+	public void changeMemberType(Integer mno, String membertype) throws Exception {
+		log.info("mno : {} // membertype : {}", mno, membertype);
+		
+		this.service.changeMemberType(mno, membertype);
+		
+		membertype = URLEncoder.encode(membertype, "UTF-8"); //UTF-8로 인코딩 해준 후 redirect 해줘야 한글이 ??? 로 안깨짐		
+		/* return "redirect:/admin/memberList?membertype=" + membertype; */
+	}
+	
+	@GetMapping("showDetailInfo")
+	public void showDetailInfo(@RequestParam("mno") Integer mno, Model model) {
+		MemberVO list = this.service.showMember(mno);
+		
+		model.addAttribute("list", list);
+	}
 	
 }//end class

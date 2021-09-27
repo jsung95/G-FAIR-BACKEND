@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.korea.gfair.domain.ApplyDTO;
+import com.korea.gfair.domain.ApplyFileVO;
+import com.korea.gfair.domain.ApplyMemberFileVO;
 import com.korea.gfair.domain.ApplyVO;
 import com.korea.gfair.domain.BoothVO;
+import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.ExhibitionVO;
 import com.korea.gfair.domain.MemberDTO;
 import com.korea.gfair.domain.MemberVO;
@@ -54,10 +57,10 @@ public class ApplyServiceImpl implements ApplyService {
 	}//boothIsSelected
 
 	@Override
-	public List<ApplyVO> getApplyInfo(MemberDTO dto) throws Exception {
-		log.debug("getApplyInfo({}) invoked.", dto);
+	public List<ApplyVO> getApplyInfo(MemberVO vo) throws Exception {
+		log.debug("getApplyInfo({}) invoked.", vo);
 		
-		return this.dao.selectApplyInfo(dto);
+		return this.dao.selectApplyInfo(vo);
 	}//getApplyInfo
 
 	@Override
@@ -73,5 +76,27 @@ public class ApplyServiceImpl implements ApplyService {
 		
 		return this.dao.selectPaymentInfo(applyno);
 	}//getExhibitionInfo
+
+	
+	@Override
+	public List<ApplyFileVO> getCompanyList(Criteria cri, String applyname) throws Exception {
+		log.debug("getApplyList({}) invoked.", applyname);
+		
+		return this.dao.applyList(cri, applyname);
+	}//getApplyList
+
+	@Override
+	public ApplyMemberFileVO getCompany(Integer applyno) throws Exception {
+		log.debug("getApply({}) invoked.", applyno);
+		
+		return this.dao.applyGet(applyno);
+	}//getApply
+
+	@Override
+	public Integer getTotalCount(String applyname) throws Exception {
+		log.debug("getTotalCount({}) invoked.", applyname);
+		
+		return this.dao.totalCount(applyname);
+	}//getTotalCount
 
 }//end class

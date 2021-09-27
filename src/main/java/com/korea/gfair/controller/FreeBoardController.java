@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.PageDTO;
@@ -62,9 +64,9 @@ public class FreeBoardController {
 	
 	
 	@PostMapping("modify")
-	public String modify(BoardVO vo) {
+	public String modify(BoardDTO dto) {
 		
-		service.modify(vo);
+		service.modify(dto);
 		
 		return "redirect:/free/board";
 	}//modify
@@ -87,8 +89,8 @@ public class FreeBoardController {
 	}//write
 	
 	@PostMapping("remove")
-	public String remove(@RequestParam("bno")Integer bno) {
-		
+	public String remove(@RequestParam("bno") Integer bno) {
+		log.info("integer bno : " + bno);
 		service.remove(bno);
 		
 		return "redirect:/free/board";
