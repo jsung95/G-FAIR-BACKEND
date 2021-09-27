@@ -66,7 +66,7 @@ public class NewsBoardServiceImpl implements NewsBoardService{
 		
 		Objects.requireNonNull(this.mapper);
 		
-		return mapper.list(cri, "뉴스게시판");
+		return mapper.list(cri, "보도자료");
 	}
 	
 	@Override
@@ -74,7 +74,7 @@ public class NewsBoardServiceImpl implements NewsBoardService{
 	
 		Objects.requireNonNull(this.mapper);
 //		Criteria cri = new Criteria();
-		return mapper.totalCount(cri, "뉴스게시판");
+		return mapper.totalCount(cri, "보도자료");
 	}
 
 	@Override

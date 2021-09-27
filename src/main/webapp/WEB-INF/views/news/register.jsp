@@ -151,7 +151,7 @@ button#summitBtn {
 		                        <input type="hidden" id="bno" name="bno" value="${board.bno}">
 		                        <input type="hidden" id="reproot" name="reproot"  value="${board.reproot}">
 		                       	<input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
-		         				<input type="hidden" id="bname" name="bname" value="뉴스게시판">
+		         				<input type="hidden" id="bname" name="bname" value="보도자료">
 		                        <input type="hidden" id="fid" name="fid">
 			                    <input type="hidden" id="notice_tf" name="notice_tf" value="F">
 			                	<input type="hidden" id="public_tf" name="public_tf"  value="F">
