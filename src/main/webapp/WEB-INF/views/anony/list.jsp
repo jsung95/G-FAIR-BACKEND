@@ -164,7 +164,9 @@
                     <p>&nbsp;</p>
         
                     <div class="reg">
-                        <button type="button" class="buttonstyle" id="regBtn">글쓰기</button>&nbsp;&nbsp;
+                        <c:if test="${__LOGIN__.memberid != null and __LOGIN__.memberid != ''}">
+                            <button type="button" class="buttonstyle" id="regBtn">글쓰기</button>&nbsp;&nbsp;
+                        </c:if>
                         <button type="button" class="buttonstyle" id="listBtn">목록</button>
                     </div>
         

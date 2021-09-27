@@ -163,13 +163,21 @@
                 //댓글창버튼
                 $("#addReplyBtn").on('click',function(e){
 
-                    modal.find('input[name=recontent]').val('');
-                    modalInputReplyDate.closest("div").hide();
-                    modal.find('button[id != "modalCloseBtn"]').hide();
+                    let loginId = '${__LOGIN__.memberid}';
+                    if(loginId == null || loginId == ''){//회원정보가 없을 때
+                        alert("로그인 정보가 없습니다.");
 
-                    modalRegisterBtn.show();
-
-                    $('.modal').modal('show');
+                        return false;
+                    }else{//로그인했을 때
+                        
+                        modal.find('input[name=recontent]').val('');
+                        modalInputReplyDate.closest("div").hide();
+                        modal.find('button[id != "modalCloseBtn"]').hide();
+                        
+                        modalRegisterBtn.show();
+                        
+                        $('.modal').modal('show');
+                    }
 
                 })//addReplyBtn
 

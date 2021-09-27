@@ -114,17 +114,41 @@
 			<mapping path="/event/register" />
 			<mapping path="/photo/register" />
 
+			<!-- ==관리페이지=메뉴순서대로== -->
 			<mapping path="/admin/adminPage"/>
+			<mapping path="/mypage/adminInfo" />
 			<mapping path="/admin/memberList"/>
 			<mapping path="/admin/showDetailInfo"/>
-			
+			<mapping path="/admin/memberBoard" />
+			<mapping path="/admin/memberReply" />
+			<mapping path="/exhibition/list" />
+
+			<!-- ==전시일정관리== -->
+			<mapping path="/exhibition/register" />
+			<mapping path="/exhibition/modify" />
+			<mapping path="/exhibition/calRegister" />
 			<beans:ref bean="adminInterceptor"/>
 		</interceptor>
 		<!-- ========================================= -->
 		
-		
+		<!-- ========================================= -->
+		<!-- 회원전용 인터셉터 -->
+		<interceptor>
+			<!-- 고객의소리 -->
+			<mapping path="/anony/register" />
+			<mapping path="/anony/modify" />
+			<mapping path="/anony/remove" />
+			<mapping path="/anony/retrieve" />
 
-		
+			<!-- 마이페이지 -->
+			<mapping path="/mypage/checkPass" />
+			<mapping path="/mypage/myInfo" />
+			<mapping path="/mypage/mypageInfo" />
+			<mapping path="/myBoard/list" />
+
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+		<!-- ========================================= -->
 	</interceptors>
 	
 	

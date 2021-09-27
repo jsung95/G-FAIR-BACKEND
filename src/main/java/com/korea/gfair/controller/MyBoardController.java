@@ -33,7 +33,7 @@ public class MyBoardController {
 	
 	
 	//내가 쓴글만 조회
-	@GetMapping({"list","test"})
+	@GetMapping({"list"})
 	public void list(@ModelAttribute("cri")Criteria cri, String memberid, Model model) throws Exception {//게시판명, 제목, 등록일, 체크박스
 		log.debug("list({},{}) invoked",cri,memberid);
 		
