@@ -294,7 +294,7 @@
 		            </c:forEach> 
 		        </table>
 		        
-		        <c:if test="${memberid ne ''}">
+		        <c:if test="${not empty __LOGIN__.memberid}">
 					<button id="regBtn" type="button">글쓰기</button>
 		        </c:if>
 		        

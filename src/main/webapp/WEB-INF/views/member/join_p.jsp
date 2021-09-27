@@ -26,9 +26,7 @@
     </script>
 
 	<script>
-		
-
-		
+	
         var auth = 'fail';
 	    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	    function sample4_execDaumPostcode() {
@@ -169,12 +167,8 @@
         });
         
         //메일 중복 가입 체크 후 발송
-
-        
-
         var checkBox = $("#email_authKey");  //인증번호 입력 값
         var emailMsg = $(".email_chk");
-
         
         $("#mail_button,#reMail_button").click(function(){
            	var email = $("#email_input").val(); //입력한 이메일 값	
@@ -183,53 +177,49 @@
         	console.log(email);
         	console.log(checkBox);
         	console.log(emailMsg);
+        	
         	if($('#email_input').val() == "" && $('#email_input').val().length == 0 ){
-        		
-	     		alert('이메일을 입력해주세요');
-            }else{
-		        
-                
-                if(mailFormCheck(email)){
-             	   emailMsg.html("입력하신 이메일로 인증번호가 발송되었습니다.");
-             	   emailMsg.css('display','block'); 
-             	   
-             		$.ajax({
-                        url:"/member/emailChk",
-                        type: 'post',
-                        data: { "email" : $('#email_input').val() },
-                        
-                        success:function(result){
-                            
-                            if(result == "success"){
-                	            $('#mail_certified').show();
-                	            $('#btnBox_certified').show();
-                	            $('#btnBox_mail').hide();
+				emailMsg.html("이메일을 입력 해주세요.");
+				emailMsg.css('display','block'); 
 
-                                $.ajax({
-                                    url:"/member/send",
-                                    type: 'POST',
-                                    data: { "email" : $('#email_input').val() },
-                                    success:function(data){
-                                        
-                                        alert('입력하신 이메일로 인증번호가 발송되었습니다.');
-                                    code = email;
-
-                                    timer();
-                                    }
-                                })
-                            }//if-else
-                            
-                        }//fuction
-    	            });//ajax
+            }else if(mailFormCheck(email)==true){
+				$.ajax({
+					url:"/member/emailChk",
+					type: 'post',
+					data: { "email" : email},
+					success:function(result){
+						if(result == "success"){
+							$('#mail_certified').show();
+							$('#btnBox_certified').show();
+							$('#btnBox_mail').hide();
+							
+							$.ajax({
+								url:"/member/send",
+								type: 'POST',
+								data: { "email" : email },
+								success:function(){
+									alert('입력하신 이메일로 인증번호가 발송되었습니다.');
+									code = email;
+									
+									timer();
+								}//success
+							})//ajax
+						}else {
+							alert("이미 가입 된 이메일입니다.");
+						}//if-else
+						
+					}//success
+				})//ajax
+            }else if(mailFormCheck(email)==false){
+                emailMsg.html("이메일 형식이 올바르지 않습니다. 예)xxx@xxx.xxx");
+                emailMsg.css('display','block');
+            }//if-else
+           	   
             	
-                }else{
 
-             	   emailMsg.html("이메일 형식이 올바르지 않습니다. 예)xxx@xxx.xxx");
-             	   emailMsg.css('display','block');
-             	   
-                }
-            }
-        });//click
+	});//function
+            	
+
 
         
         $('#before_button').on('click',function(){

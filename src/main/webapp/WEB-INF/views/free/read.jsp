@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
@@ -41,11 +42,18 @@
             
             $('#removeBtn').on('click', function(){
                 console.log('removeBtn button clicked...');
-				var obj = $('#form');
-		/*		obj.attr('action','/free/remove?bno='+${__READ__.bno});*/
-				obj.attr('action','/free/remove');
-				obj.attr('method','POST');
-				obj.submit();
+                var result = confirm('삭제 하시겠습니까?');
+                
+                if(result) {
+    				var obj = $('#form');
+    				obj.attr('action','/free/remove');
+    				obj.attr('method','POST');
+    				obj.submit();
+                }else{
+                	
+                }
+                
+
             });//onclick
             
 
@@ -225,27 +233,38 @@
                 <h2 class="subName">자유게시판</h2>
             </div>
             <div class="contentIn">
-           		<div class="read_no">글번호: ${__READ__.bno}</div>
-            	<div id="read_Wrap">
-            		<div id="title_wrap">
-					    <div class="title_area">${__READ__.title}</div>
-					    <div class="writer_area">작성자:${__READ__.memberid}</div>
-				    </div>
-				    
-				    <div id="date_wrap">
-				    <div class="reg_date">작성일:<fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${__READ__.insert_ts}"/></div>
-				    <div class="readcnt">조회수:${__READ__.readcnt}</div>
-				    </div>
-				    
-				    
-				    <div id="content_wrap">${__READ__.content}</div>
-				    
-				    <div id="btn_wrap">
-					    <button id="modifyBtn" class="btn" type="button">수정</button>	
-				        <button id="removeBtn" class="btn" type="button">삭제</button>
-					    <button id="regBtn" class="btn" type="button">글쓰기</button>				    
-					    <button id="listBtn" class="btn" type="button">목록</button>
+            	<form id="form">
+            		<input type="hidden" name="bno" value="${__READ__.bno}" />
+	           		<div class="read_no">글번호: ${__READ__.bno}</div>
+	           		
+	            	<div id="read_Wrap">
+	            		<div id="title_wrap">
+						    <div class="title_area">${__READ__.title}</div>
+						    <div class="writer_area">작성자:${__READ__.memberid}</div>
+					    </div>
+					    
+					    <div id="date_wrap">
+					    <div class="reg_date">작성일:<fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${__READ__.insert_ts}"/></div>
+					    <div class="readcnt">조회수:${__READ__.readcnt}</div>
+					    </div>
+					    
+					    <div id="content_wrap">${__READ__.content}</div>
+					    
+					    <div id="btn_wrap">
+					    	<c:set var="login" value="${sessionScope.__LOGIN__}" />
+					    	<c:choose>
+					    		<c:when test="${__READ__.memberid eq login.memberid}">				    		
+							    	<button id="modifyBtn" class="btn" type="button">수정</button>	
+						       		<button id="removeBtn" class="btn" type="button">삭제</button>
+					    		</c:when>
+					    		<c:otherwise>&nbsp;</c:otherwise>
+					    	</c:choose>
+					        
+						    <button id="regBtn" class="btn" type="button">글쓰기</button>				    
+						    <button id="listBtn" class="btn" type="button">목록</button>
+						 </div>
 	    			</div>
+	    			</form>
                 </div>
              </div>
          </div>

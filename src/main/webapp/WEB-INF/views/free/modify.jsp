@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <!DOCTYPE html>
 
@@ -60,10 +62,13 @@
 					obj.submit();
 	            });//onclick
 	            
-	            $('#modifyBtn').on('click', function(){
+	           $('#modifyBtn').on('click', function(){
 	                console.log('listBtn button clicked...');
 	            
-	            	location.href="modify?bno=${__READ__.bno}";
+	            	var form = $('#form');
+	            	form.attr('action','/free/modify');
+	            	form.attr('method','post');
+	            	form.submit();
 	            });//onclick
 
 	        }); //jq
@@ -186,7 +191,7 @@
                     <h2 class="subName">자유게시판</h2>
                 </div>
                 <div class="contentIn">
-			        <form id="form" action="/free/modify" method="post">
+			        <form id="form">
 			        	<input type="hidden" name="bno" value="${__READ__.bno}">
 			        	
 		        		<div id="write_no">글번호:${__READ__.bno}</div>
@@ -203,8 +208,14 @@
 						
 				        
 						<div id="btn_wrap">
-					   		<button id="modifyBtn" class="btn" type="button">수정</button>	
-					        <button id="removeBtn" class="btn" type="button">삭제</button>
+				    		<c:set var="login" value="${sessionScope.__LOGIN__}" />
+				    			<c:choose>
+					    			<c:when test="${__READ__.memberid eq login.memberid}">		
+								   		<button id="modifyBtn" class="btn" type="button">수정</button>
+								        <button id="removeBtn" class="btn" type="button">삭제</button>
+							        </c:when>
+						        </c:choose>
+						        <otherwise></otherwise>
 					        <button id="listBtn" class="btn" type="button">목록</button>
 				        </div>
 			        </form>
