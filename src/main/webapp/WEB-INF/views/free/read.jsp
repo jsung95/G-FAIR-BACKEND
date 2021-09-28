@@ -42,7 +42,7 @@
             
             $('#removeBtn').on('click', function(){
                 console.log('removeBtn button clicked...');
-                var result = confirm('삭제 하시겠습니까?');
+                var result = confirm('게시글을 삭제 하시겠습니까?');
                 
                 if(result) {
     				var obj = $('#form');
