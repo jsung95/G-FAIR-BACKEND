@@ -153,12 +153,13 @@
             <div id="aside">
                 <h2 class="asideMenu">참가안내</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="#">참가신청안내</a></li>
-                    <li><a class="chk" href="#">참가신청</a></li>
-                    <li><a class="chk" href="#">참가규정</a></li>
-                    <li><a class="chk" href="#">부스안내</a></li>
+                    <li><a class="chk" href="/apply/info">참가신청안내</a></li>
+                    <li><a class="chk" href="/apply/app">참가신청</a></li>
+                    <li><a class="chk" href="/apply/applystatus">참가신청확인</a></li>
+                    <li><a class="chk" href="/apply/rule">참가규정</a></li>
+                    <li><a class="chk" href="/apply/booth">부스안내</a></li>
                     <li><a class="chk" href="/apply/map">전시장배치도</a></li>
-                    <li><a class="chk" href="#">참가기업목록</a></li>
+                    <li><a class="chk" href="/apply/companyList">참가기업목록</a></li>
                 </ul>
 
             </div>

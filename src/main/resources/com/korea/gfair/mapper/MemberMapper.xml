@@ -146,25 +146,29 @@
 	<!--==================== 김희용 ====================-->
 	<!--==================== 김희용 ====================-->
 	<!--==================== 김희용 ====================-->
+	
+	<!-- 아이디 중복 검사 -->
 	<select id="selectMemberId" resultType="int">
 		SELECT count(memberid)
 		FROM tbl_member
 		WHERE memberid = #{memberid}
 	</select>
 	
+	<!-- 연락처 중복 검사 -->
 	<select id="selectPhone" resultType="int">
 		SELECT count(phone)
 		FROM tbl_member
 		WHERE phone = #{phone}
 	</select>
 	
-	
+	<!-- 이메일 중복 검사 -->
 	<select id="selectEmail" resultType="int">
 		SELECT count(email)
 		FROM tbl_member
 		WHERE email = #{email}
 	</select>
 	
+	<!-- 개인회원 아이디찾기 -->
 	<select id="selectFindId" resultType="String">
 		SELECT memberid
 		FROM tbl_member
@@ -173,6 +177,7 @@
 		
 	</select>
 	
+	<!-- 개인회원 비밀번호찾기 -->
 	<select id="selectFindPw" resultType="int">
 		SELECT count(*) 
 		FROM tbl_member
@@ -181,6 +186,7 @@
 		AND membertype = '개인'
 	</select>
 	
+	<!-- 임시 비밀번호 발급 -->
 	<update id="updatePw">
         UPDATE tbl_member 
         SET memberpw = #{pw}
@@ -189,6 +195,7 @@
 		AND membertype = '개인'
 	</update>
 	
+	<!-- 개인회원가입 -->
 	<insert id="insertMember">
 	
 <!-- 	<selectKey keyProperty="mno" order="BEFORE" resultType="int">
