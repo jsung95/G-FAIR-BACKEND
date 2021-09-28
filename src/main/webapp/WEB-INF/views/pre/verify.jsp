@@ -84,8 +84,8 @@
             }
 
             .btn1 {
-                width: 100px;
-                height: 40px;
+                width: 120px;
+                height: 50px;
 
                 border: 0;
                 
@@ -97,16 +97,18 @@
                 cursor: pointer;
             }
 
-            #mainBtn{
-                float: right;
-            }
 
             .btn_area{
+                display: flex;
+                justify-content: center;
                 border-top: 1px solid #eee;
+                padding-top: 10px;
             }
             .space_input{
                 height: 10px;
             }
+
+
         </style>
 
         <script>
@@ -179,7 +181,8 @@
                                     <th><label for="phone">연락처</label></th>
                                     <td>${__LOGIN__.phone}</td>
                                 </tr> -->
-                                <c:forEach items="${__APP__}" var="app">
+                                <div class="contents">
+                                    <c:forEach items="${__APP__}" var="app">
                                     <br>
                                     <table class="show_member_info">
                                         <tbody>
@@ -203,10 +206,11 @@
                                     </table>
                                     <br>
                                 </c:forEach>
+                                </div>
 
                                 <div class="btn_area">
                                     <div class="space_input"></div>
-                                    <button id="mainBtn" type="button" class="btn1">Main</button>
+                                    <button id="mainBtn" type="button" class="btn1">홈으로</button>
                                 </div>
                             </div>
                         
