@@ -192,7 +192,7 @@
                 </ul>
 
             </div>
-            <div id="content">
+               <div id="content">
                 <div class="title">
                     <div class="map">home > 미디어센터 > 보도자료 </div>
                     <h2 class="subName">보도자료</h2>
@@ -200,12 +200,15 @@
                      <div class="contentIn">
                 	<div class="wraper">
                         <form action="/news/modify" method="POST">
-                       		 <input type="hidden" name="bno" value="${board.bno}">
-                            <input type="hidden" id="notice_tf" name="notice_tf" value=F">
-                            <input type="hidden" id="public_tf" name="public_tf"  value="F">
-                            <input type="hidden" id="reply_tf" name="reply_tf"  value="F">
-                            <input type="hidden" value="<c:out value='${__LOGIN__.memberid}'/>"id ="memberid" name="memberid">
-                            <input type="hidden" value="<c:out value='${board.bno}'/>"id = "bno" name="bno">
+                       	 
+				       		<input type="hidden" id="bno" name="bno" value="${board.bno}">
+	                        <input type="hidden" id="reproot" name="reproot"  value="${board.reproot}">
+	                       	<input type="hidden" name="memberid" value="${__LOGIN__.memberid}">
+	         				<input type="hidden" id="bname" name="bname" value="보도자료">
+	                        <input type="hidden" id="fid" name="fid">
+		                    <input type="hidden" id="notice_tf" name="notice_tf" value="F">
+		                	<input type="hidden" id="public_tf" name="public_tf"  value="F">
+							<input type="hidden" id="reply_tf" name="reply_tf"  value="F">
                           
                             <div id="write_no">글번호:${board.bno}</div>
 		        		<div id="write_title_wrap">
@@ -221,7 +224,7 @@
 						
 				        
 						<div id="btn_wrap">
-					   		<button id="modifyBtn" class="btn" type="button">수정</button>	
+					   		<button id="modifyBtn" class="btn" type="submit">수정</button>	
 					        <button id="removeBtn" class="btn" type="button">삭제</button>
 					        <button id="listBtn" class="btn" type="button">목록</button>
 				        </div>
@@ -230,6 +233,7 @@
                 </div>
             </div>
         </div>
+
 
    
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
