@@ -128,6 +128,34 @@
                 font-size: 16px;
             }
         </style>
+
+        <script>
+            $(function () {
+                console.clear();
+                console.debug('jq started.');
+
+                var subName = $('.subName').text();
+                
+                $('.chk').each(function(index,obj){
+                    var t = index;
+                    var o = $(this).text();
+                    console.log(t + ':' + o)
+                    if(o == subName) {
+                        tmp = t;
+                    }
+                });
+                
+                console.log(tmp)
+                
+                $('#parent').children().eq(tmp).children().css({
+                    'font-size': '18px',
+                    'font-weight':'bold',
+                    'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
+                    'background-position': 'right center'
+                });
+                
+            });
+        </script>
     </head>
 
     <body>
@@ -139,13 +167,14 @@
                     <div id="aside">
                         <h2 class="asideMenu">참가안내</h2>
                         <ul id="parent">
-                            <li><a class="chk" href="#">참가안내</a></li>
-                            <li><a class="chk" href="#">참가신청안내</a></li>
-                            <li><a class="chk" href="#">참가신청</a></li>
-                            <li><a class="chk" href="#">참가규정</a></li>
+                            
+                            <li><a class="chk" href="/apply/info">참가신청안내</a></li>
+                            <li><a class="chk" href="/apply/app">참가신청</a></li>
+                            <li><a class="chk" href="/apply/applystatus">참가신청확인</a></li>
+                            <li><a class="chk" href="/apply/rule">참가규정</a></li>
                             <li><a class="chk" href="/apply/booth">부스안내</a></li>
                             <li><a class="chk" href="/apply/map">전시장배치도</a></li>
-                            <li><a class="chk" href="#">참가기업목록</a></li>
+                            <li><a class="chk" href="/apply/companyList">참가기업목록</a></li>
                         </ul>
         
                     </div>
