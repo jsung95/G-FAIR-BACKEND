@@ -181,8 +181,8 @@
                                     ※ 본인은 위 각 정보의 수집/조회/활용에 관한 자세한 설명을 듣고, 본 동의서 내용을 충분히 이해하고 동의하였습니다.<br>
                     
                                     본인은 위 목적으로 동의서에 적시된 정보 및 기관에 한해 본인의 기업정보를 수집․조회 및 활용하는 것에 동의합니다. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" name="agreement" value="T" checked>예
-                                    <input type="radio" name="agreement" value="F">아니오
+                                    <input type="radio" name="agreement" value="T" >예
+                                    <input type="radio" name="agreement" value="F" checked>아니오
                                 </p>
                             </div>
                             <div id="agreementBtn_area">
