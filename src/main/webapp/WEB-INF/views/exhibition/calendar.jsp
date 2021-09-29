@@ -148,7 +148,7 @@
                 </div>
                 <div class="contentIn">
                     <c:choose>
-                        <c:when test="${__LOGIN__.memberid == 'admin'}">
+                        <c:when test="${__LOGIN__.membertype == '관리자'}">
                             <div class="btn">
                                 <button type="button" id="exRegBtn">일정등록</button>
                                 <button type="button" id="exListBtn">일정관리</button>

@@ -53,15 +53,24 @@ td:nth-child(1) {
     width: 30px;
 }
 
-/* 제목,내용 */
-td:nth-child(3),td:nth-child(4) {
+/* 제목 */
+td:nth-child(3) {
     text-align: left; 
     padding-left: 10px;
     width: 350px;
 }
+/* 내용 */
+td:nth-child(4) {
+    text-align: left; 
+    padding-left: 10px;
+    
+    width: 392px;
+    overflow: hidden;
+    display: table-caption;
+}
 .ptitle {
     width: 340px;
-    
+    line-height: 40px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
