@@ -145,7 +145,11 @@
 			<mapping path="/mypage/myInfo" />
 			<mapping path="/mypage/mypageInfo" />
 			<mapping path="/myBoard/list" />
-
+			
+			<!-- 기업참가신청확인 -->
+			<mapping path="/apply/applystatus" />
+			<!-- 사전참가신청확인 -->
+			<mapping path="/pre/verify" />
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 		<!-- ========================================= -->
