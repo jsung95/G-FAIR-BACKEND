@@ -16,6 +16,8 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    <script src="/resources/js/top.js"></script>
+    
     <script>           	    
         /* 입력 이메일 형식 유효성 검사 */
         function mailFormCheck(email){
@@ -827,6 +829,7 @@
 
             </section>
         </div>
+        <span id="top_btn">top</span>
     </div>
     
 </body>

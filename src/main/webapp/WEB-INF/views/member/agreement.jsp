@@ -15,7 +15,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-
+    <script src="/resources/js/top.js"></script>
+    
     <script>
 
         $(function() {
@@ -640,9 +641,10 @@
                 <p class="btn_area" id="btn_area">
                     <span><input type="button" value="다음" class="btn btn_l btn_blue" id="btnNxt"/></span>
                 </p>
-
+				
             </section>
         </div>
+        <span id="top_btn">top</span>
     </div>
     
 </body>

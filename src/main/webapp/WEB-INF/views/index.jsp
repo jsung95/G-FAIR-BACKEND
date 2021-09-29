@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+    <script src="/resources/js/top.js"></script>
     
     <script src="/resources/js/movebanner.js" type="text/javascript"></script>
 
@@ -62,11 +63,6 @@
             'font-weight':'bold',
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
-        });
-        
-        jQuery( '#top_btn' ).click( function() {
-            var htmloffset = jQuery( 'html' ).offset();
-            jQuery( 'html, body' ).animate( { scrollTop : htmloffset.top }, 400 );
         });
         
 

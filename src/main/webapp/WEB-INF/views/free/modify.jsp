@@ -17,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
    	<script src="//cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+   	<script src="/resources/js/top.js"></script>
    	
 	<script>
 	    $(function(){
@@ -231,7 +232,7 @@
             </div>
         </div>
 
-   
+    <span id="top_btn">top</span>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>
