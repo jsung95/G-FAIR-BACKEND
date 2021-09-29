@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+    <script src="/resources/js/top.js"></script>
 
 </head>
 
@@ -195,7 +196,7 @@
             </div>
         </div>
 
-   
+    <span id="top_btn">top</span>  
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>
