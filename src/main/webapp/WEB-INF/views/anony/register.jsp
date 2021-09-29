@@ -22,6 +22,7 @@
     <script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
     
     <script type="text/javascript" src="/resources/js/uploadFile.js"></script>
+    <script src="/resources/js/top.js" type="text/javascript"></script>
 
 </head>
 <script>
@@ -165,6 +166,8 @@
                 height: 500
             });
         </script>
+
+        <span id="top_btn">top</span>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>
