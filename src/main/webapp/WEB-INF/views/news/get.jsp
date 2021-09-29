@@ -221,9 +221,9 @@
                     
                             <div id="btn_wrap">
 
-                             
-                                    <button id="modifyBtn" class="btn" type="button">수정</button>	
-                                	    
+                                 <c:if test="${__LOGIN__.memberid != null and __LOGIN__.memberid != ''}">
+                                   <button id="modifyBtn" class="btn" type="button">수정</button>
+                                </c:if>	    
                                 <button id="listBtn" class="btn" type="button">목록</button>
                             </div>
                         </form>

@@ -141,7 +141,7 @@
                 alert("정말 삭제하시겠습니까?")
               });
              $('#removeBtn').on('click',function(){
-                let formObj = $('form');
+                let formObj = $('#form');
                  formObj.attr('action',"/news/remove");
                  formObj.attr('method',"post");
                  formObj.submit();
@@ -177,7 +177,6 @@
     })//end jq
 </script>
 
- 
 <body>
     <div id="wrap">
  	
@@ -199,7 +198,7 @@
                 </div>
                      <div class="contentIn">
                 	<div class="wraper">
-                        <form action="/news/modify" method="POST">
+                        <form action="/news/modify" method="POST" id="form">
                        	 
 				       		<input type="hidden" id="bno" name="bno" value="${board.bno}">
 	                        <input type="hidden" id="reproot" name="reproot"  value="${board.reproot}">
@@ -224,8 +223,10 @@
 						
 				        
 						<div id="btn_wrap">
-					   		<button id="modifyBtn" class="btn" type="submit">수정</button>	
-					        <button id="removeBtn" class="btn" type="button">삭제</button>
+							  <c:if test="${__LOGIN__.memberid != null and __LOGIN__.memberid != ''}">
+                                    <button id="modifyBtn" class="btn" type="submit">수정</button>
+                                    <button id="removeBtn" class="btn" type="button">삭제</button>
+                                </c:if>
 					        <button id="listBtn" class="btn" type="button">목록</button>
 				        </div>
    						</form>

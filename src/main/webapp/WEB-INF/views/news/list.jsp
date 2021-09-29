@@ -295,7 +295,7 @@
                                 <c:set var="number" value="${number-1}"/>
                                 </c:forEach>
 
-                               <c:if test="${__LOGIN__.memberid != null}">
+                               <c:if test="${__LOGIN__.memberid != null and __LOGIN__.memberid != '' }">
                                     <button id="regBtn" type="button">글쓰기</button>
                                 </c:if>
 					</table>
