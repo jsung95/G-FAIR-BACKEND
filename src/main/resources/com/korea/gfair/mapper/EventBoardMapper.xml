@@ -71,7 +71,8 @@
             UPDATE 
                 tbl_board
             SET 
-                readcnt = readcnt + 1 WHERE bno=#{bno}
+                readcnt = readcnt + 1 
+            WHERE bno=#{bno}
         ]]>
     </update>
 

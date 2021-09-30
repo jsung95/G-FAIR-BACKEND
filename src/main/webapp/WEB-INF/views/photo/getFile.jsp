@@ -204,7 +204,7 @@
                             
                             <div id="date_area">
                                 <div id="register_date">등록일 : <fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${board.insert_ts}" /></div>
-                                <div id="readCnt">조회수 : ${board.readcnt}</div>
+                                <div id="readCnt">조회수 : ${board.readcnt+1}</div>
                             </div>
                         </div>
                         <div id="top_space"></div>

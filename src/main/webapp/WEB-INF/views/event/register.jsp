@@ -147,6 +147,18 @@
 	        location.href = "/event/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
 	
 	    }); // .onclick
+
+        $('#registerBtn').on('click', function (e) {
+            console.debug('registerBtn clicked.');
+            var value = $('input[name="uploadFile"]').val();
+
+            if(value == ''){
+                e.preventDefault();
+                alert('이미지를 첨부하여주세요.')
+            }else{
+                $('#registerBtn').unbind();
+            }
+        });
     })//end jq
 </script>
 <body>
@@ -212,7 +224,7 @@
                             <!-- 파일첨부 -->
                             <div class="uploadDiv">
                                 <label class="custom-file-upload">파일업로드
-                                    <input class="buttonstyle" type="file" name="uploadFile" accept="image/*">
+                                    <input class="buttonstyle" type="file" name="uploadFile" accept="image/*" required>
                                 </label>
                             </div>
                             <div class="btn_area">

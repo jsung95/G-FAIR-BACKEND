@@ -159,8 +159,17 @@
 
                 <div id="bottom_space">
                     <div id="btn_area">
-                        <button type="button" class="btn1" id="modifyBtn">수정</button>
-                        <button type="button" class="btn1" id="removeBtn">삭제</button>
+                        <c:set var="insert" value="${sessionScope.__LOGIN__}" />
+                        <c:choose>
+                            <c:when test="${insert.membertype eq '관리자'}">
+                                <button type="button" class="btn1" id="modifyBtn">수정</button>
+                                <button type="button" class="btn1" id="removeBtn">삭제</button>
+                            </c:when>
+                            
+                            <c:otherwise>
+                                &nbsp;
+                            </c:otherwise>
+                        </c:choose>
                         <button type="button" class="btn1" id="listBtn">목록</button>
                     </div>
                 </div>

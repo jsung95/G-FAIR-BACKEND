@@ -100,11 +100,14 @@
                 //NewReply버튼 클릭시 모달창을 띄운다
                 $("#addReplyBtn").on("click", function (e) {
                     console.log("NewReply clicked.");
-                    
-                    if($('input[name=memberid]').val() == '') {
+
+                    let loginId = $('input[name=memberid]').val();
+
+                    if(loginId == '' || loginId == null) { //로그인 안됐을 때
                         e.preventDefault();
                         alert('로그인이 필요한 서비스입니다.');
-                    }else{
+                        
+                    }else{ //로그인 됐을 때
                         modal.find("input[name=recontent]").val("");
                         modalInputReDate.closest("div").hide();
                         modal.find("button[id != 'modalCloseBtn']").hide();
@@ -128,7 +131,7 @@
                     };
                 
                     replyService.add(reply, function (result) {
-                        alert(result);
+                        alert('댓글이 등록되었습니다.');
 
                         modal.find('input[name=recontent]').val("");
                         modal.modal("hide");
@@ -143,22 +146,36 @@
                 //li클릭시 reno값 가져오기(data객체)
                 //댓글 조회 클릭 이벤트 처리
                 //댓글 상세창
+                let listClick = $('.chat');
+
+                listClick.click(function (event) {
+                    x = event.pageX;
+                    y = event.pageY;
+                    
+
+                    $('.modal-content').css('margin-top', y-200)
+                });
                 $(".chat").on("click", "li", function (e) {
                     console.log("list clicked.");
 
+                    var memberid = "${__LOGIN__.memberid}";
+                    
                     var reno = $(this).data("reno");
 
-                    replyService.get(reno, function (reply) {
-                        modalInputRecontent.val(reply.recontent);
-                        modalInputMemberID.val(reply.memberid);
-                        modalInputReDate.val(replyService.displayTime(reply.redate)).attr("readonly", "readonly");
-                        modal.data("reno", reply.reno);
+                    replyService.get(reno, function (replyVO) {
+                        if(replyVO.memberid == memberid){//로그인아이디와 댓글작성자가 같을때
+                            modalInputRecontent.val(replyVO.recontent);
+                            modalInputMemberID.val(replyVO.memberid);
+                            // modalInputReDate.val(replyService.displayTime(reply.redate)).attr("readonly", "readonly");
+                            modal.data("reno", replyVO.reno);
+    
+                            modal.find('button[id=modalRegisterBtn').hide();
+                            modalModBtn.show();
+                            modalRemoveBtn.show();
+    
+                            $(".modal").modal("show");
 
-                        modal.find("button[id !='modalCloseBtn']").hide();
-                        modalModBtn.show();
-                        modalRemoveBtn.show();
-
-                        $(".modal").modal("show");
+                        }
                     })
                     console.log(reno);
                 });//click li
@@ -170,7 +187,7 @@
                     var recontent = {reno:modal.data("reno"), recontent:modalInputRecontent.val()};
 
                     replyService.update(recontent, function (result) {
-                        alert(result);
+                        alert('댓글 수정완료');
 
                         modal.modal("hide");
 
@@ -185,7 +202,7 @@
                     var reno = modal.data("reno");
 
                     replyService.remove(reno, function (result) {
-                        alert(result);
+                        alert('댓글 삭제완료');
 
                         modal.modal("hide");
 
@@ -401,9 +418,9 @@
             }
 
             
-            .modal-content{
+            /* .modal-content{
                 margin-top: 4700px;
-            }
+            } */
             
         </style>
         
@@ -423,7 +440,7 @@
                 
                 <div id="date_area">
                     <div id="register_date">등록일 : <fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${board.insert_ts}" /></div>
-                    <div id="readCnt">조회수 : ${board.readcnt}</div>
+                    <div id="readCnt">조회수 : ${board.readcnt+1}</div>
                 </div>
             </div>
             <div id="top_space"></div>
@@ -469,8 +486,8 @@
                                 <li class="left clearfix" data-reno="10">
                                     <div>
                                         <div class="header">
-                                            <strong class="primary-font">Blognation</strong>
-                                            <small class="pull-right next-muted">2021-09-01 10:14</small>
+                                            <strong class="primary-font"></strong>
+                                            <small class="pull-right next-muted"></small>
                                         </div>
                                         <p>등록된 댓글이 없습니다.</p>
                                     </div>
@@ -517,8 +534,8 @@
                                 <input type="hidden" class="form-control" name="memberid" value="${__LOGIN__.memberid}">${__LOGIN__.memberid}
                             </div>
                             <div class="form-group">
-                                <label>작성일자</label>
-                                <input class="form-control" name="redate" value="">
+                                <!-- <label>작성일자</label> -->
+                                <input type="hidden" class="form-control" name="redate" value="">
                             </div>
                         </div>
                         <div class="modal-footer">

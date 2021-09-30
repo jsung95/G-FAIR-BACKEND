@@ -55,6 +55,7 @@
         font-size: 15px;
         text-align: center;
     }
+    
 
     td:first-child {
         color: #005bbb;
@@ -233,6 +234,10 @@
     	display:block;
         
     }
+
+    #including_img{
+        width: 80px;
+    }
 </style>
 
 <script>
@@ -297,11 +302,12 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th scope="col">번호</th>
-                                        <th scope="col">제목</th>
-                                        <th scope="col">작성자</th>
-                                        <th scope="col">등록일</th>
-                                        <th scope="col">조회수</th>
+                                        <th width="7%" scope="col">번호</th>
+                                        <th width="*" scope="col">제목</th>
+                                        <th width="10%" scope="col">작성자</th>
+                                        <th width="10%" scope="col">등록일</th>
+                                        <th width="10%" scope="col">조회수</th>
+                                        <th>첨부파일</th>
                                     </tr>
                                 </thead>
 
@@ -315,6 +321,12 @@
                                             <td>${event.memberid}</td>
                                             <td><fmt:formatDate pattern="yyyy/MM/dd" value="${event.insert_ts}" /></td>
                                             <td>${event.readcnt}</td>
+                                            <td id="including_img">
+                                            	<c:if test="${event.fid != null}">
+                                            		<img src="/resources/file.png">
+                                            	</c:if>                                            
+                                            </td>
+                                            
                                         </tr>
                                     </tbody>
                                 </c:forEach>

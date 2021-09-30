@@ -137,7 +137,18 @@
             'background-position': 'right center'
         });
         
-
+        $('#modifyBtn').on('click', function (e) {
+            console.debug('modifyBtn clicked.');
+            var value = $('input[name="uploadFile"]').val();
+            if(value == ''){
+                e.preventDefault();
+                alert('이미지를 첨부하여주세요.')
+            }else{
+                $('#modifyBtn').unbind();
+            }
+            
+        });
+        
     })//end jq
 </script>
 <body>
@@ -203,9 +214,17 @@
                         </div>
                         
                         <div class="btn_area">
-                            <button type="submit" class="btn1" id="submitBtn">수정</button>
-                            <button type="button" class="btn1" id="removeBtn">삭제</button>
-                            <button type="button" class="btn1" id="listBtn">목록</button>
+                            <c:set var="insert" value="${sessionScope.__LOGIN__}" />
+                            <c:choose>
+                                <c:when test="${insert.membertype eq '관리자'}">
+                                    <button type="submit" class="btn1" id="modifyBtn">수정</button>
+                                    <button type="button" class="btn1" id="removeBtn">삭제</button>
+                                    <button type="button" class="btn1" id="listBtn">목록</button>
+                                </c:when>
+                                <c:otherwise>
+                                    &nbsp;
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </form>
                 </div>
