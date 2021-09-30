@@ -68,7 +68,7 @@ public class EventBoardServiceImpl
 		
 		
 		String uploadFolder =
-				"D:/opt/eclipse/workspace/JEE/aphotogallery2/src/main/webapp/resources/img/";
+				"D:/opt/eclipse/workspace/JEE/G-FAIR-BACKEND/src/main/webapp/resources/img/";
 		//오늘날짜를 문자열로 반환하는 getFolder()메소드를 호출하고 반환된 문자열"yyyy/MM/dd/"을 detailFolderPath에 저장
 		String detailFolderPath = getFolder();
 		log.info("\t+ detailFolderPath: " + detailFolderPath);

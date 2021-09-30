@@ -45,7 +45,7 @@ public class PhotoBoardServiceImpl
 	private EventBoardService eventService;
 	
 	String uploadFolder = 
-			"D:/opt/eclipse/workspace/JEE/aphotogallery2/src/main/webapp/resources/img/";
+			"D:/opt/eclipse/workspace/JEE/G-FAIR-BACKEND/src/main/webapp/resources/img/";
 	//=========================== 1. getList ==========================//
 	@Override
 	public List<PhotoVO2> getList() {
