@@ -17,6 +17,7 @@
      <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+    <script src="/resources/js/top.js"></script>
 
 </head>
 
@@ -630,7 +631,7 @@
             </div>
         </div>
 
-   
+  	 <span id="top_btn">top</span>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

@@ -15,6 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+    <script src="/resources/js/top.js"></script>
 
 </head>
 <style>
@@ -221,7 +222,7 @@
                     
                             <div id="btn_wrap">
 
-                                 <c:if test="${__LOGIN__.memberid != null and __LOGIN__.memberid != ''}">
+                                   <c:if test="${__LOGIN__.membertype == '관리자'}">
                                    <button id="modifyBtn" class="btn" type="button">수정</button>
                                 </c:if>	    
                                 <button id="listBtn" class="btn" type="button">목록</button>
@@ -232,7 +233,7 @@
             </div><!--containerIn-->
         </div>
 
-   
+   	<span id="top_btn">top</span>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

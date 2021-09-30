@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
-
+	<script src="/resources/js/top.js"></script>
 </head>
 
 
@@ -283,7 +283,7 @@
                     
                                     </div>
                                         <div class="panel-body">
-                                            <p>A. G-FAIR KOREA 2019 전시장은 지하철3호선 대화역 1번출구 킨텍스 제1전시장 1~3홀입니다.</p>
+                                            <p>A. G-FAIR KOREA 2021 전시장은 지하철3호선 대화역 1번출구 킨텍스 제1전시장 1~3홀입니다.</p>
                                         </div>
                                 </div>   
                     
@@ -308,7 +308,7 @@
             </div>
         </div>
 
-   
+   	<span id="top_btn">top</span>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>
