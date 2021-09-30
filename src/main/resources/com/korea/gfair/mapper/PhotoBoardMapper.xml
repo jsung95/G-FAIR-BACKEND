@@ -62,6 +62,9 @@
                 A.fid = B.fid
             WHERE
                 B.bname = '포토게시판'
+            ORDER BY
+            	bno desc  
+              
         ]]>
             
             <choose>

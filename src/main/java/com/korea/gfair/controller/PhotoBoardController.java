@@ -160,7 +160,7 @@ public class PhotoBoardController {
 		
 		
 		this.eventService.modify(eventDTO, uploadFile);
-		this.photoService.modify(fid, uploadFile);
+//		this.photoService.modify(fid, uploadFile);
 		
 		rttrs.addFlashAttribute(
 				"result",

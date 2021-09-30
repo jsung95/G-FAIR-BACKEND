@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -178,16 +179,16 @@ public class EventBoardController {
 	public String modify(
 			@ModelAttribute("cri") Criteria cri,
 			EventDTO eventDTO,
-			MultipartFile uploadFile, 
+			@Nullable MultipartFile uploadFile, 
 			RedirectAttributes rttrs
 			) {
-		log.debug("modify(cri, eventDTO, rttrs) invoked.");
+		log.debug("modifyController(cri, eventDTO, rttrs) invoked.");
 		log.info(
 				"\t+ cri: {}, eventDTO: {}, rttrs: {}"
 				,cri, eventDTO, rttrs);
 		
 		this.service.modify(eventDTO, uploadFile);
-		this.photoService.modify(eventDTO.getFid(), uploadFile);
+//		this.photoService.modify(eventDTO.getFid(), uploadFile);
 
 		rttrs.addFlashAttribute(
 				"result",

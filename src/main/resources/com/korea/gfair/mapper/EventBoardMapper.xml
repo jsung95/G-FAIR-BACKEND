@@ -95,6 +95,8 @@
                 tbl_board
             WHERE
                 bname = '이벤트게시판'
+            ORDER BY
+            	bno desc
         ]]>
             <choose>
                 <when test="type == 'T'.toString()">

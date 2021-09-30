@@ -137,17 +137,31 @@
             'background-position': 'right center'
         });
         
-        $('#modifyBtn').on('click', function (e) {
-            console.debug('modifyBtn clicked.');
-            var value = $('input[name="uploadFile"]').val();
-            if(value == ''){
-                e.preventDefault();
-                alert('이미지를 첨부하여주세요.')
-            }else{
-                $('#modifyBtn').unbind();
-            }
+        // $('#modifyBtn').on('click', function (e) {
+        //     console.debug('modifyBtn clicked.');
+
+        //     var value = $('input[name="uploadFile"]').val();
             
-        });
+        //     // var modifyForm = $('#modifyForm');
+            
+        //     if(value == '' || value == null){
+        //         modifyForm.attr('method', 'POST');
+        //         var newInput = document.createElement('input');
+
+        //         modifyForm.find
+        //     }else{
+        //         $('#modifyBtn').unbind();
+        //     }
+            
+        // });
+
+        $("#listBtn").on('click', function () {
+	        console.log('#listBtn button clicked.');
+	
+	        
+	        location.href = "/event/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+	
+	    }); // .onclick
         
     })//end jq
 </script>
@@ -177,7 +191,7 @@
                 <div class="contentIn">
                 	
                     <!-- 여기에 게시판 넣으면 됩니다. -->
-                    <form action="/event/modify" method="POST" enctype="multipart/form-data">
+                    <form action="/event/modify" method="POST" enctype="multipart/form-data" id="modifyForm">
                         <!-- <input type="hidden" name="bno" value="${board.bno}"> -->
                         <input type="hidden" name="currPage" value="${cri.currPage}">
                         <input type="hidden" name="amount" value="${cri.amount}">
