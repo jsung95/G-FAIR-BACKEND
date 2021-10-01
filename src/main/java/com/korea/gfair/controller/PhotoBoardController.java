@@ -58,7 +58,7 @@ public class PhotoBoardController {
 		log.debug("listPerPage(cri, model) invoked.");
 		log.info("\t+ cri: {}, model: {}", cri, model);
 		
-		cri.setAmount(16);
+		cri.setAmount(12);
 		List<PhotoVO2> photos = this.photoService.getListPerPage(cri);
 		
 		Objects.requireNonNull(photos);

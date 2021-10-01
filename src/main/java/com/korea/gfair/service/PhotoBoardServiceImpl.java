@@ -28,6 +28,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
 
 
 @Log4j2
@@ -222,7 +223,7 @@ public class PhotoBoardServiceImpl
 				
 				Thumbnailator.createThumbnail(
 						uploadFile.getInputStream(),
-						thumbnail, 100, 100
+						thumbnail, 300, 300
 					);
 				
 				thumbnail.close();

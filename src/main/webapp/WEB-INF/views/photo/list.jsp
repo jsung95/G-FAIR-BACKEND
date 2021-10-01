@@ -43,38 +43,69 @@
             sans-serif;
     }
 
+
+
+    #photo_zone{
+        margin-top: 10px;
+        margin-bottom: 50px;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        width: 100%;
+    }
+
+
+    .ex_img{
+        padding: 20px 25px 3px 25px;
+    }
+
     .thumbnail{
-        width: 165px;
-        height: 165px;
+        width: 250px;
+        height: 230px;
     }
     
     #thumb_title{
-        margin-top: 5px;
-        font-size: 15px;
-        text-align: center;
+        width: 99%;
 
+        margin-top: 5px;
+        
+        font-size: 20px;
+        font-weight: bold;
+        
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+        text-align: center;
     }
     
     #photo_zone > ul{
         display: flex;
         flex-wrap: wrap;
         
-        list-style: none;
         
-        justify-content: center;
+        list-style: none;
+
+
+        /* justify-content: center; */
+        /* justify-content: space-between; */
     }
     
     #photo_zone > ul > li{
+        margin-bottom: 30px;
+    }
+    /* #photo_zone > ul > li{
         display: flex;
         width: 250px;
         height: 230px;
-        
-        margin-bottom: 30px;
+        margin-top: 50px;
+        margin-bottom: 50px;
 
         justify-content: center;
         align-items: center;
         
-    }
+    } */
 
 
     #topmenu{
@@ -103,11 +134,15 @@
 
     .uploadDiv{
         display: flex;
+
         justify-content: space-between;
+
         margin-top: 30px;
+
         width: 100%;
         height: 50px;
         line-height: 50px;
+
         border-bottom: 3px solid #005bbb;
     }
     
@@ -312,7 +347,10 @@
                                 <c:forEach items="${list}" var="photo">
                                     <li>
                                         <a href="/photo/getFile?fid=${photo.fid}">
-                                            <img src="/resources/img/${photo.fpath}s_${photo.frename}" class="thumbnail" alt="">
+                                            <div class="ex_img">
+                                                <img src="/resources/img/${photo.fpath}${photo.frename}" class="thumbnail" alt="">
+                                            </div>
+                                            <!-- 제목 -->
                                             <p id="thumb_title">${photo.title}</p>
                                         </a>
                                     </li>
