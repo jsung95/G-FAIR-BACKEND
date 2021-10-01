@@ -48,11 +48,11 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}//getTotal
 	
 	@Override
-	public BoardVO read(Integer bno) {
+	public BoardVO read(BoardDTO dto) {
 		log.debug("read() invoked.");
 		
-		readcnt(bno);
-		BoardVO read = mapper.select(bno);
+		readcnt(dto);
+		BoardVO read = mapper.select(dto);
 		
 		return read;
 
@@ -100,14 +100,17 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}//remove
 
 	@Override
-	public void readcnt(Integer bno) {
+	public void readcnt(BoardDTO dto) {
 		
 		log.debug("readcnt() invoked.");
 		
-		mapper.readcnt(bno);
+		mapper.readcnt(dto);
 		
 		
-	}//readcnt
+	}
+
+
+
 
 
 	

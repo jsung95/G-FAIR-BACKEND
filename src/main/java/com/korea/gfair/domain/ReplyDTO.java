@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 public class ReplyDTO {
 	
-	private Integer reno;
-	private Integer bno;
-	private String recontent;
-	private String memberid;
-	private Date redate;
+	private Integer reno;		//댓글번호
+	private Integer bno;		//글번호
+	private String recontent;	//댓글내용
+	private String memberid;	//작성자
+	private Date redate;		//작성시간
 
 	
 }//end class

@@ -57,6 +57,21 @@
 
             });//onclick
             
+/*             $('#replyWriteBtn').on('click', function(){
+            	
+            	var result = confirm('댓글을 등록 하시겠습니까?');
+            	
+                if(result) {
+    				var obj = $('#replyForm');
+    				obj.attr('action','/free/replyWrite');
+    				obj.attr('method','POST');
+    				obj.submit();
+                }else{
+                	
+                }
+            	
+            });//onclick */
+            
 
 
         }); //jq
@@ -72,7 +87,7 @@
     	.btn{
     		width: 100px;
 			height: 40px;
-			line-hight: 40px;
+			line-height: 40px;
 			text-align:center;
 			background:#005bbb;
 			color:#fff;
@@ -177,6 +192,38 @@
 		    margin:10px 0 20px 0;
 		}
 		
+		#reply_wrap{
+			width:1200px;
+			height:150px;
+			background:#eee;
+		}
+		
+		#text_wrap{
+			width:1200px;
+			padding:20px;
+		}
+		
+		#recontent_text{    
+			width: 1040px;
+		    height: 90px;
+		    float: left;
+		    padding:10px;
+		}
+		
+		#replyWriteBtn{
+		    width: 100px;
+		    height: 113px;
+		    float: left;
+		    border: 0;
+		    text-align: center;
+		    background: #005bbb;
+		    color: #fff;
+		    font-size: 15px;
+		    margin-left: 10px;
+		    cursor: pointer;
+		}
+		
+		
     </style>
 </head>
 <body>
@@ -212,7 +259,7 @@
 
 <div id="wrap">
 
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 
     <div id="container">
         <div id="aside">
@@ -227,53 +274,81 @@
                 <li><a class="chk" href="/event/listPerPage">이벤트</a></li>
             </ul>
 
-        </div>
+        </div> <!-- aside -->
         <div id="content">
             <div class="title">
                 <div class="map">home > 커뮤니티 > 자유게시판 </div>
                 <h2 class="subName">자유게시판</h2>
-            </div>
+            </div> <!-- title -->
             <div class="contentIn">
             	<form id="form">
             		<input type="hidden" name="bno" value="${__READ__.bno}" />
-	           		<div class="read_no">글번호: ${__READ__.bno}</div>
+	           		<div class="read_no">
+						   글번호: ${__READ__.bno}
+					</div><!-- read_no -->
 	           		
 	            	<div id="read_Wrap">
 	            		<div id="title_wrap">
-						    <div class="title_area">${__READ__.title}</div>
-						    <div class="writer_area">작성자:${__READ__.memberid}</div>
-					    </div>
+						    <div class="title_area">
+								${__READ__.title}
+							</div><!--title_area-->
+
+						    <div class="writer_area">
+								작성자:${__READ__.memberid}
+							</div><!--writer_area-->
+					    </div><!-- title_wrap -->
 					    
 					    <div id="date_wrap">
-					    <div class="reg_date">작성일:<fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${__READ__.insert_ts}"/></div>
-					    <div class="readcnt">조회수:${__READ__.readcnt}</div>
-					    </div>
+							<div class="reg_date">
+								작성일:<fmt:formatDate pattern="yyyy.MM.dd HH:mm:ss" value="${__READ__.insert_ts}"/>
+							</div><!-- reg_date -->
+
+							<div class="readcnt">
+								조회수:${__READ__.readcnt}
+							</div><!-- readcnt -->
+					    </div><!-- date_wrap -->
 					    
 					    <div id="content_wrap">${__READ__.content}</div>
+					</div> <!-- read_Wrap -->
+				</form><!-- form -->
+
+				<div id="reply_wrap">
+					<c:set var="reply_login" value="${sessionScope.__LOGIN__}" />
+					<form id="replyForm" action="/free/replyWrite" method="post">
+
+						<div id="text_wrap">
+							<c:set var="reply_login" value="${reply_login.memberid}" ></c:set>
+							<input type="hidden" value="${__READ__.bno}" name="bno" />
+							<input type="hidden" value="${reply_login.memberid}" name="memberid" />
+							<textarea id="recontent_text" name="recontent"></textarea>
+							<button id="replyWriteBtn" type="submit">댓글작성</button>
+						</div><!-- text_wrap  -->
+						
+					</form><!--replyForm-->
+				</div><!--reply_wrap-->
 					    
-					    <div id="btn_wrap">
-					    	<c:set var="login" value="${sessionScope.__LOGIN__}" />
-					    	<c:choose>
-					    		<c:when test="${__READ__.memberid eq login.memberid}">				    		
-							    	<button id="modifyBtn" class="btn" type="button">수정</button>	
-						       		<button id="removeBtn" class="btn" type="button">삭제</button>
-					    		</c:when>
-					    		<c:otherwise>&nbsp;</c:otherwise>
-					    	</c:choose>
-					        
-						    <button id="regBtn" class="btn" type="button">글쓰기</button>				    
-						    <button id="listBtn" class="btn" type="button">목록</button>
-						 </div>
-	    			</div>
-	    			</form>
-                </div>
-             </div>
-         </div>
-	</div>
+			    <div id="btn_wrap">
+			    	<c:set var="login" value="${sessionScope.__LOGIN__}" />
+			    	<c:choose>
+			    		<c:when test="${__READ__.memberid eq login.memberid}">				    		
+					    	<button id="modifyBtn" class="btn" type="button">수정</button>	
+				       		<button id="removeBtn" class="btn" type="button">삭제</button>
+			    		</c:when>
+			    		<c:otherwise>&nbsp;</c:otherwise>
+			    	</c:choose>
+
+			        <c:if test="${not empty __LOGIN__.memberid}">
+				    <button id="regBtn" class="btn" type="button">글쓰기</button>
+				    </c:if>		    
+				    <button id="listBtn" class="btn" type="button">목록</button>
+				</div><!-- btn_wrap-->
+
+            </div> <!-- contentIn  -->
+        </div><!-- content  -->
+	</div><!-- container -->
     <span id="top_btn">top</span>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </div> <!--wrap-->
-</body>
-</html>
+
 </body>
 </html>

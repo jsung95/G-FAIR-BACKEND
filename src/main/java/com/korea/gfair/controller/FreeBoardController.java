@@ -16,6 +16,9 @@ import com.korea.gfair.domain.BoardDTO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.PageDTO;
+import com.korea.gfair.domain.ReplyDTO;
+import com.korea.gfair.domain.ReplyVO;
+import com.korea.gfair.service.FreeBoardReplyService;
 import com.korea.gfair.service.FreeBoardService;
 
 import lombok.NoArgsConstructor;
@@ -32,6 +35,10 @@ public class FreeBoardController {
 	@Setter(onMethod_=@Autowired)
 	public FreeBoardService service;
 	
+	@Autowired
+	public FreeBoardReplyService replyService;
+
+	
 	
 	@GetMapping("board")
 	public String listPerPage(@ModelAttribute("cri") Criteria cri, Model model) {
@@ -41,6 +48,7 @@ public class FreeBoardController {
 		Objects.requireNonNull(boards);
 		
 		boards.forEach(log::info);
+		
 		
 		PageDTO pageDTO= new PageDTO(cri,service.getTotal(cri,"자유게시판"));
 		
@@ -53,13 +61,20 @@ public class FreeBoardController {
 	}//listPerPage
 	
 	@GetMapping({"read","modify"})
-	public void read(@RequestParam("bno") Integer bno, Model model) {
+	public void read(BoardDTO dto,ReplyDTO rdto, Model model) {
+
+		BoardVO read = service.read(dto);
 		
-		BoardVO read = service.read(bno);
+		log.info(">>>>>>>>>>>>>>>>>" + rdto);
 		
 		Objects.requireNonNull(read);
-		
 		model.addAttribute("__READ__",read);
+
+		List<ReplyVO> replyList = replyService.readReply(rdto);
+
+		model.addAttribute("__replyList__",replyList);
+		
+		
 	}//read
 	
 	
@@ -96,5 +111,11 @@ public class FreeBoardController {
 		return "redirect:/free/board";
 	}//remove
 	
+	@PostMapping("replyWrite")
+	public String replyWrite(ReplyDTO rdto) {
+		replyService.writeReply(rdto);
+		
+		return "redirect:/free/read?bno="+ rdto.getBno();
+	}//replyWrite
 
 }//end class

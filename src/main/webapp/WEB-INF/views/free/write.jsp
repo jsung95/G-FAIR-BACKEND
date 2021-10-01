@@ -101,7 +101,7 @@
 		.btn{
 			width: 100px;
 			height: 40px;
-			line-hight: 40px;
+			line-height: 40px;
 			text-align:center;
 			background:#005bbb;
 			color:#fff;

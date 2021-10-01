@@ -5,7 +5,6 @@ import java.util.Date;
 import lombok.Value;
 
 @Value
-
 public class ReplyVO {
 
 	private Integer reno;
