@@ -1007,7 +1007,7 @@
 
                     <dl>
                         <dt class="join_title">연락처</dt>
-                        <dd class="join_list"><input type="tel" class="user_input" name="phone" id="phone" placeholder="- 를 제외한 휴대폰 번호를 입력해주세요."></dd>
+                        <dd class="join_list"><input type="tel" class="user_input" name="phone" id="phone" placeholder="- 를 포함한 휴대폰 번호를 입력해주세요."></dd>
                         <span class="phone_error">핸드폰번호를 입력해주세요.</span>
                     </dl>
 

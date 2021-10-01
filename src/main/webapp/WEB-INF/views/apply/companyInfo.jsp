@@ -66,48 +66,47 @@
 
     $(function(){
 
-
-        // if(getCookie('cp_img') != "") {
-        //     var cp_img_arr = getCookie('cp_img').split(',');
-
-        //     for(var i = 0; i < cp_img_arr.length; i++) {
-        //         InputHtml(i);
-        //         $('#cookie_img' + i + "").attr('src', cp_img_arr[i]);
-        //     }
-        // }
-
-        
         $('#hide_cp_img').val($('#companyImg').attr('src')); //참여기업 이미지 경로 가져오기
 
 
-    	var cp_img = $('#hide_cp_img').val();
-        var cp_img_arr = getCookie('cp_img').split(',');
+    	var cp_img = $('#hide_cp_img').val(); //기업 이미지 경로
+        var cp_img_arr = getCookie('cp_img').split(','); //쿠키에 등록된 이미지 경로
+        
+        var applyno = ${param.applyno}; //요청파라미터(쿼리스트링)로 받은 신청 전시회 번호 
+        var applynoarr = getCookie('cp_no').split(','); //쿠키에 등록된 신청 전시회 번호
 
-        $('#cp_append').html("");
+        $('#cp_append').html(""); //좋아요 목록에 담긴 리스트 초기화
 
-        for(var i = 0; i < cp_img_arr.length; i++) {
+        //쿠키에 담긴 좋아요 리스트를 순회
+        for(var i = 0; i < applynoarr.length; i++) {
 
-            if(cp_img_arr[0].trim() == "") {
+        	//만약 담긴게 없다면 아무동작도 하지않음
+            if(applynoarr[0].trim() == "") {
                 break;
             }
 
-            if(cp_img == cp_img_arr[i]) {
+        	//만약 현재페이지의 신청 전시회 번호랑, 쿠키에 등록된 전시회 번호가 같다면
+        	//좋아요버튼(하트) 변경
+            if(applyno == applynoarr[i]) {
                 $('#cp_h_img').attr('src', '/resources/img/ico_h_on.png');
-            }
+            }//if
 
+        	//우측 좋아요 목록에 추가
             InputHtml(i);
             $('#cookie_img' + i).attr('src', cp_img_arr[i]);
 
-        }
+        }//for
         
     })//end jq
 
+    //쿠키 등록
     function setCookie(name, value, exp) {
         var date = new Date();
         date.setTime(date.getTime() + exp*24*60*60*1000);
         document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
     }
 
+    //쿠키 얻어오기
 	function getCookie(key) {
 
         var cookie = document.cookie;
@@ -122,20 +121,17 @@
                 var _value = arr[1].trim();
                 cookie_json[_key] = _value;
 
-            }
-        }
+            }//for
+        }//if
 
         if (cookie_json[key]) {
-
             return cookie_json[key];
-
-        }
-
+        }//if
+        
         return "";
+    }//getCookie
 
-    }
-
-       // 쿠키 입력
+    // 쿠키 입력
     function insCookie(key, value, days) {
 
         var cookie_value = getCookie(key);
@@ -144,7 +140,7 @@
 
         if (!cookie_value || !cookie_arr.length) {
             cookie_arr = [];
-        }
+        }//if
 
         // 3개 이상일때
         if (cookie_arr.length >= 3) {
@@ -152,7 +148,7 @@
             cookie_arr.splice(0, 1);
         } else {
             cookie_arr.push(value);
-        }
+        }//if-else
 
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + days);
@@ -162,10 +158,10 @@
         document.cookie = key + '=' + cookie;
         //alert(document.cookie);
 
-    }
+    }//insCookie
 
 
-       // 쿠키 삭제
+    // 쿠키 삭제
     function delCookie(key, value, days) {
 
         var cookie_value = getCookie(key);
@@ -173,15 +169,15 @@
 
         if (!cookie_arr.length) {
             cookie_arr = [];
-        }
+        }//if
 
         for (var i = 0, j = cookie_arr.length; i < j; i++) {
 
             if (cookie_arr[i] == value) {
                 cookie_arr.splice(i, 1);
-            }
+            }//if
 
-        }
+        }//for
 
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + days);
@@ -190,9 +186,9 @@
         var cookie = cookie_arr.join(",") + ((days == null) ? '' : ';    expires=' + exdate.toUTCString() + '; path=' + path);
         document.cookie = key + '=' + cookie;
 
-    }
+    }//delCookie
 
-
+	//좋아요(하트)버튼 클릭 시에 이미지 변경
     function h_imgChange() {
         var cp_img = $('#hide_cp_img').val();
         var cp_h_img = $('#cp_h_img').attr('src');
@@ -206,34 +202,44 @@
             $('#cp_h_img').attr('src', "/resources/img/ico_h_on.png"); //on으로 바꿈
             insCookie('cp_img', cp_img, 1);
             insCookie('cp_no', cp_no, 1);
-        }
+        }//if-else
 
+        //쿠키에 올라가있는 신청기업 이미지 경로들을 변수에 담음
         var cp_img_arr = getCookie('cp_img').split(',');
+        //태그 초기화
         $('#cp_append').html("");
 
+        //쿠키에 올라가있는 신청기업 이미지 경로들의 배열을 순회
         for(var i =0; i < cp_img_arr.length; i++) {
-
+			//쿠키의 첫번째 이미지 경로가 비어있다면, 즉 좋아요 누른게 없다면 break
             if(cp_img_arr[0].trim() == "") {
                 break;
-            }
+            }//if
+			
+			//즉 좋아요(하트) 버튼 클릭 시에
+			//우측 좋아요 목록에 추가
             InputHtml(i);
             $('#cookie_img' + i + "").attr('src', cp_img_arr[i]);
 
-        }
+        }//for
 
-    }
+    }//h_imgChange
 
+    //좋아요(하트) 버튼을 클릭했을 때, 
+    //우측 좋아요 목록 메뉴에 html 태그 생성 함수
     function InputHtml(seq) {
         var html = "<li id='list_" + seq + "'>" +
             "<a href='javascript: showCpImg("+ seq +");' id='cp_no" + seq + "'>" +
-            "<img src='../images/sub/bg_n.png' width='100px' height='100px' id='cookie_img" + seq + "'/> " +
+            "<img src='' width='100px' height='100px' id='cookie_img" + seq + "'/> " +
             "</a>" +
             "<em class='ico_c1'>기업</em>" +
             "</li>";
 
         $('#cp_append').append(html);
-    }
+    }//InputHtml
 
+    //쿠키에 올라가있는 신청번호를 통해
+    //우측 좋아요 목록에 담긴 이미치에 링크를 걸어주는 함수
     function showCpImg(seq) {
         var cp_no_arr = getCookie('cp_no').split(',');
 
@@ -243,8 +249,22 @@
             location.href = "/apply/companyInfo?applyno=" + cp_no_arr[1];
         } else if(seq == 2) {
             location.href = "/apply/companyInfo?applyno=" + cp_no_arr[2];
-        }
-    }
+        }//if-else
+    }//showCpImg
+
+</script>
+
+<script>
+	//우측 좋아요로 담은 메뉴바 애니메이션 이벤트
+	$(function(){
+		
+		var currentPosition = parseInt($(".fav_box").css("top")); 
+		$(window).scroll(function() { 
+			var position = $(window).scrollTop(); 
+			$(".fav_box").stop().animate({"top":position+currentPosition+"px"},700); 
+		});//scroll
+		
+	});//endjq
 
 </script>
 
@@ -256,26 +276,49 @@
     }
 
     .fav_box {
-        position: fixed;
-        top: 443px;
+        position: absolute;
+        top: 300px;
         right: 20px;
         height: 200px;
     }
+    
+    .fav_box ul {
+    	width: 200px;
+    	background: #eee;
+    	border-radius: 0 0 10px 10px;
+    	min-height: 150px;
+    }
+    
+    .fav_box ul li:first-child {
+    	padding-top: 25px;
+    }
+    
+    .fav_box ul li:last-child {
+    	padding-bottom: 25px;
+    }
 
     .fav_box ul li {
-        width: 100%;
-        position: relative;
-        border: 1px solid #ddd;
+    	margin: 0 auto;
+        width: 150px;
         height: 100px;
-        overflow: hidden;
+        position: relative;
         text-align: center;
         line-height: 100px;
         overflow: hidden;
-        margin-top: 10px;
 
-        border-bottom: 1px solid #ddd !important;
-        margin-top: -1px !important;
     }
+    
+    #cp_title {
+   	    text-align: center;
+	    background: #005bbb;
+	    color: #fff;
+	    font-size: 20px;
+	    height: 50px;
+	    line-height: 50px;
+	    border-radius: 20px 20px 0 0;
+    }
+    /* ==== 진성 좋아요 기능 ==== */
+    
 </style>
 
 <body>
@@ -327,7 +370,7 @@
                                             <td>
                                                 <p>
                                                     ${company.applycompany}
-                                                    <a href="#" onclick="h_imgChange()">
+                                                    <a href="#" onclick="h_imgChange(); return false;">
                                                         <img src="/resources/img/ico_h_off.png" id="cp_h_img" >
                                                         <input type="hidden" id="hide_cp_img" value="">
                                                         <input type="hidden" id="cp_no" value="${param.applyno}">
@@ -367,7 +410,7 @@
 
                     <!-- ==== 진성 좋아요 기능 ==== -->
                     <div class="fav_box">
-                        <p>관심 기업 및 제품"</p>
+                        <div id="cp_title">관심 기업</div>
                         <ul id="cp_append">
                             <!-- 여기에 기업 이미지, 정보가 생성됨 -->
                         </ul>

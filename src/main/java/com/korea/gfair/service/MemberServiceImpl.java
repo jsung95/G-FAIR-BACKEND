@@ -127,17 +127,11 @@ public class MemberServiceImpl implements MemberService {
 			
 			String auth_key = getKey(false, 6);
 			
-			
-			helper.setFrom("테스트메일<25800s10@gmail.com>");
+			helper.setFrom("지페어코리아<gfairkor@gmail.com>");
 			helper.setTo(dto.getEmail());
-			helper.setSubject("테스트 제목asd");
-			helper.setText("인증키 : " + auth_key);
-			
-//			msg.addRecipient(RecipientType.TO, new InternetAddress("jsung9912@gmail.com"));
-//			
-//			msg.setFrom(new InternetAddress("25800s10@gmail.com"));
-//			msg.setSubject("테스트 제목asd", "utf-8");
-//			msg.setText("본문입니다. asd", "utf-8");
+			helper.setSubject("Gfair 회원가입 진행을 위해 요청하신 인증번호를 알려드립니다.");
+			String text = "<h1>지페어코리아 가입 하기위해 요청하신 인증번호를 알려드립니다.<br> " + auth_key + " 입니다.</h1>";
+			helper.setText(text, true);
 			
 			mailSender.send(msg);
 			
@@ -147,8 +141,8 @@ public class MemberServiceImpl implements MemberService {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-	}
+		}//try-catch
+	}//sendMail
 	
 	
 	
@@ -297,10 +291,12 @@ public class MemberServiceImpl implements MemberService {
 			MimeMessage msg = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(msg, "utf-8");
 			
-			helper.setFrom("다은메리호<25800s10@gmail.com>");
+			
+			helper.setFrom("지페어코리아<gfairkor@gmail.com>");
 			helper.setTo(dto.getEmail());
-			helper.setSubject("다은메리호 임시비밀번호 입니다.");
-			helper.setText(dto.getMemberid() + "님의 임시비밀번호 : " + memberpw);
+			helper.setSubject("Gfair 임시비밀번호 입니다.");
+			String text = "<h1>" + dto.getMemberid() + "님의 임시비밀번호는 " + memberpw + " 입니다.</h1>";
+			helper.setText(text, true);
 			mailSender.send(msg);
 			
 			this.mapper.updatePW(dto); //비번변경
