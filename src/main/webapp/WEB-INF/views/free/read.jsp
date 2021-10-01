@@ -313,13 +313,18 @@
 				</form><!-- form -->
 
 				<div id="reply_wrap">
-					<c:set var="reply_login" value="${sessionScope.__LOGIN__}" />
+					<c:forEach items="${__replyList__}" var="replyList">
+					<div>작성자:${replyList.memberid}</div>
+					<div>작성일:<fmt:formatDate value="${replyList.redate}" pattern="yyyy-MM-dd" /></div>
+					<div>작성자:${replyList.recontent}</div>
+					</c:forEach>
+					
+					<c:set var="reply_login" value="${__LOGIN__.memberid}" />
 					<form id="replyForm" action="/free/replyWrite" method="post">
 
 						<div id="text_wrap">
-							<c:set var="reply_login" value="${reply_login.memberid}" ></c:set>
 							<input type="hidden" value="${__READ__.bno}" name="bno" />
-							<input type="hidden" value="${reply_login.memberid}" name="memberid" />
+							<input type="hidden" value="${reply_login}" name="memberid" />
 							<textarea id="recontent_text" name="recontent"></textarea>
 							<button id="replyWriteBtn" type="submit">댓글작성</button>
 						</div><!-- text_wrap  -->
