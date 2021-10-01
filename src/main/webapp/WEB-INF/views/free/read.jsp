@@ -194,24 +194,22 @@
 		
 		#reply_wrap{
 			width:1200px;
-			height:150px;
-			background:#eee;
+			min-height:150px;
 		}
 		
 		#text_wrap{
 			width:1200px;
-			padding:20px;
 		}
 		
-		#recontent_text{    
-			width: 1040px;
+		#text_wrap #recontent_text{    
+			width: 1060px;
 		    height: 90px;
 		    float: left;
 		    padding:10px;
 		}
 		
 		#replyWriteBtn{
-		    width: 100px;
+		    width: 108px;
 		    height: 113px;
 		    float: left;
 		    border: 0;
@@ -221,6 +219,38 @@
 		    font-size: 15px;
 		    margin-left: 10px;
 		    cursor: pointer;
+		}
+		
+		#reply_box{
+			width:100%;
+			margin-top:10px;
+		}
+		
+		#reply_box #reply_info{
+			height:50px;
+			line-height:50px;
+			background:#eee;
+		}
+		
+		#reply_box #reply_info #re_memberid{
+			width:80%;
+			float:left;
+			font-weight:bold;
+			text-indent:10px;
+		}
+		
+		#reply_box #reply_info #re_date{
+			width:20%;
+			float:left;
+			font-weight:bold;
+			text-align:center;
+		}
+		
+		#re_content{
+			width:90%;
+			background:#fff;
+			padding:10px;
+		    white-space: pre;
 		}
 		
 		
@@ -314,9 +344,13 @@
 
 				<div id="reply_wrap">
 					<c:forEach items="${__replyList__}" var="replyList">
-					<div>작성자:${replyList.memberid}</div>
-					<div>작성일:<fmt:formatDate value="${replyList.redate}" pattern="yyyy-MM-dd" /></div>
-					<div>작성자:${replyList.recontent}</div>
+					<div id="reply_box">
+						<div id="reply_info">
+							<div id="re_memberid">작성자:${replyList.memberid}</div>
+							<div id="re_date">작성일:<fmt:formatDate value="${replyList.redate}" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+						</div>
+						<div id="re_content">${replyList.recontent}</div>
+					</div>
 					</c:forEach>
 					
 					<c:set var="reply_login" value="${__LOGIN__.memberid}" />
