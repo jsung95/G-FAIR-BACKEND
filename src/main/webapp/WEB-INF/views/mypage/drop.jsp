@@ -20,7 +20,7 @@
     <script src="/resources/js/fullnav.js"></script>
 
     <script src="/resources/js/mypage_drop.js"></script>
-
+	<script src="/resources/js/top.js"></script>
 </head>
 
 <script>
@@ -136,7 +136,7 @@
             </div>
         </div>
 
-   
+   	<span id="top_btn">top</span>   
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

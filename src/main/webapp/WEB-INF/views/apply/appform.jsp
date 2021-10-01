@@ -20,7 +20,7 @@
     <script src="/resources/js/fullnav.js"></script>
 
     <script src="/resources/js/apply_appform.js"></script>
-
+	<script src="/resources/js/top.js"></script>
 </head>
 
 <style>
@@ -80,7 +80,7 @@
                     <li><a class="chk" href="/apply/rule">참가규정</a></li>
                     <li><a class="chk" href="/apply/booth">부스안내</a></li>
                     <li><a class="chk" href="/apply/map">전시장배치도</a></li>
-                    <li><a class="chk" href="#">참가기업목록</a></li>
+                    <li><a class="chk" href="/apply/companyList">참가기업목록</a></li>
                 </ul>
 
             </div>
@@ -172,7 +172,7 @@
             </div>
         </div>
 
-   
+   	<span id="top_btn">top</span>   
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

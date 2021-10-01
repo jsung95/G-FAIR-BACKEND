@@ -18,7 +18,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
         <script src="/resources/js/fullnav.js"></script>
         <script src="/resources/js/mypage_replymanage.js"></script>
-        
+        <script src="/resources/js/top.js"></script>
 </head>
 
 <script>
@@ -149,16 +149,13 @@
                                     <thead>
                                         <tr>
                                             <th>선택</th>
-                                            
+                                           
                                             <th>
                                                 <select name="bname" id="bname">
                                                     <option value="null">전체보기</option>
                                                     <option value="question"    ${ ("question"  eq __PAGE__.cri.bname) ? "selected" : ""}>질문게시판</option>
                                                     <option value="anony"       ${ ("anony"     eq __PAGE__.cri.bname) ? "selected" : ""}>고객의소리</option>
-                                                    <option value="free"        ${ ("free"      eq __PAGE__.cri.bname) ? "selected" : ""}>자유게시판</option>
-                                                    <option value="notice"      ${ ("notice"    eq __PAGE__.cri.bname) ? "selected" : ""}>공지사항</option>
-                                                    <option value="news"        ${ ("news"      eq __PAGE__.cri.bname) ? "selected" : ""}>보도자료</option>
-                                                    <option value="event"       ${ ("notice"    eq __PAGE__.cri.bname) ? "selected" : ""}>이벤트게시판</option>
+                                                    <option value="자유게시판"        ${ ("free"      eq __PAGE__.cri.bname) ? "selected" : ""}>자유게시판</option>
                                                 </select>
                                             </th>
                                             
@@ -170,8 +167,23 @@
                                         <c:forEach items="${__REPLY__}" var="reply">
                                             <tr>
                                                 <td><input type="checkbox" name="reno" value="${reply.reno}"></td>
-                                                <td>${reply.bname}</td>
-                                                <td><a href="/${reply.bname}/get?bno=${reply.bno}">${reply.recontent}</a></td>
+                                                <!-- 게시판 이름  -->
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${reply.bname eq 'anony'}">고객의소리</c:when>
+                                                        <c:when test="${reply.bname eq 'question'}">질문게시판</c:when>
+                                                        <c:when test="${reply.bname eq '자유게시판'}">자유게시판</c:when>
+                                                        <c:otherwise>${reply.bname}</c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${reply.bname eq '자유게시판'}"><a href="/free/read?bno=${reply.bno}">${reply.recontent}</a></c:when>
+                                                        <c:otherwise><a href="/${reply.bname}/get?bno=${reply.bno}">${reply.recontent}</a></c:otherwise>
+                                                    </c:choose>
+                                                </td>
+
                                                 <td><fmt:formatDate value="${reply.redate}" pattern="yyyy/MM/dd"/></td>
                                                 
                                             </tr>
@@ -244,7 +256,7 @@
             </div>
         </div>
         
-        
+        <span id="top_btn">top</span>  
         <%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

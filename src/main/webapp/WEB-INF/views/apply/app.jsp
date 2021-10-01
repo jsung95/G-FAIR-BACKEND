@@ -13,10 +13,11 @@
     <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/resources/css/sub.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="/resources/css/apply_app.css">
-
+	
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
+    <script src="/resources/js/top.js"></script>
 
     <script src="/resources/js/apply_app.js"></script>
 
@@ -87,7 +88,7 @@
                     <li><a class="chk" href="/apply/rule">참가규정</a></li>
                     <li><a class="chk" href="/apply/booth">부스안내</a></li>
                     <li><a class="chk" href="/apply/map">전시장배치도</a></li>
-                    <li><a class="chk" href="#">참가기업목록</a></li>
+                    <li><a class="chk" href="/apply/companyList">참가기업목록</a></li>
                 </ul>
 
             </div>
@@ -177,7 +178,7 @@
             </div><!--content-->
         </div>
 
-   
+   	<span id="top_btn">top</span> 
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>

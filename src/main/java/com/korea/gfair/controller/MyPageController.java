@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -192,7 +193,7 @@ public class MyPageController {
 		
 	}//passAuth
 	
-	
+	@Async
 	@GetMapping("sendemail")
 	public ResponseEntity<String> emailCode(HttpServletRequest req) throws Exception {
 		log.debug("emailCode(req) invoked.");
@@ -211,7 +212,7 @@ public class MyPageController {
 		Random random = new Random();
         int code = random.nextInt(888888) + 111111;
 		
-		String subject 	="Mail send test";
+		String subject 	="G-FAIR KOREA 인증번호 입니다.";
 		String content 	="G-FAIR 인증 메일<br> <strong>인증 코드: </strong>"+code;
 		 
 		String from   	="gfairkor@gmail.com";

@@ -15,7 +15,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="/resources/js/fullnav.js"></script>
-
+	<script src="/resources/js/top.js"></script>
     <!-- Summer note -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
@@ -237,7 +237,6 @@
                 <h2 class="asideMenu">고객센터</h2>
                 <ul id="parent">
                     <li><a class="chk" href="/notice/list">공지사항</a></li>
-                    <li><a class="chk" href="/news/listPerPage">보도자료</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
@@ -264,11 +263,11 @@
                             <div id="board">
         
                                 <c:choose>
-                                    <c:when test="${__LIST__.public_tf == 'T'}">
+                                    <c:when test="${__LIST__.public_tf == 'T' || (__LIST__.memberid == __LOGIN__.memberid || __LOGIN__.membertype eq '관리자')}">
                                         
                                         <div id="title">
                                             <span>
-                                                ${__LIST__.title}
+                                                <c:if test="${__LIST__.public_tf == 'F'}">[비공개]</c:if> ${__LIST__.title} 
                                             </span>
                                             
                                             <span>
@@ -277,8 +276,8 @@
                                         </div>
                                         <div id="content_info">
                                             <span>
-                                                등록일 : ${__LIST__.insert_ts} 
-                                                수정일 : ${__LIST__.update_ts}
+                                                등록일 : <fmt:formatDate value="${__LIST__.insert_ts}" pattern="yyyy/MM/dd"/>
+                                                수정일 : <fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
                                             </span>
                                             <span>
                                                 조회수 : ${__LIST__.readcnt}
@@ -296,10 +295,10 @@
         
                                     </c:when>
                                    
-                                    <c:otherwise>
+                                    <c:when test="${__LIST__.public_tf == 'F' && (__LIST__.memberid != __LOGIN__.memberid )}">
                                         <div id="title">
                                             <span>
-                                                ${__LIST__.title}
+                                                <c:if test="${__LIST__.public_tf == 'F'}">[비공개]</c:if> ${__LIST__.title}
                                             </span>
                                             
                                             <span>
@@ -309,7 +308,7 @@
                                         <div id="content_info">
                                             <span>
                                                 등록일 : <fmt:formatDate value="${__LIST__.insert_ts}" pattern="yyyy/MM/dd"/>
-                                                수정일 : <fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
+                                                <c:if test="${not empty __LIST__.update_ts}">수정일 : </c:if><fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
                                             </span>
                                             <span>
                                                 조회수 : ${__LIST__.readcnt}
@@ -318,7 +317,7 @@
                                         <div id="board_content">
                                             비공개 글 입니다. 
                                         </div>
-                                    </c:otherwise>
+                                    </c:when>
                                 </c:choose>
                            
                             </div>
@@ -404,7 +403,7 @@
             </div>
         </div>
 
-   
+   	<span id="top_btn">top</span>  
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
     </div> <!--wrap-->
 </body>
