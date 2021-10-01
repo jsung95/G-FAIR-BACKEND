@@ -280,7 +280,7 @@
                                                 수정일 : <fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
                                             </span>
                                             <span>
-                                                조회수 : ${__LIST__.readcnt}
+                                                조회수 : ${__LIST__.readcnt+1}
                                             </span>
                                         </div>
                                         <div id="board_content">
@@ -311,7 +311,7 @@
                                                 <c:if test="${not empty __LIST__.update_ts}">수정일 : </c:if><fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
                                             </span>
                                             <span>
-                                                조회수 : ${__LIST__.readcnt}
+                                                조회수 : ${__LIST__.readcnt+1}
                                             </span>
                                         </div>
                                         <div id="board_content">

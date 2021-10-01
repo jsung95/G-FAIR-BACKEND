@@ -261,7 +261,9 @@
     }
 
 
-
+    #lockImg{
+        padding: 5px 0 0;
+    }
 
    
 
@@ -391,7 +393,7 @@
                                         
                                         
                                         <td>
-                                          <c:if test="${list.public_tf == 'F'}">[비공개]</c:if> 
+                                          
                                           <c:if test="${list.repindent>0}" >
                                             <c:forEach begin ="1" end="${list.repindent}">
                                                 <%= "&nbsp;&nbsp;" %>
@@ -399,6 +401,7 @@
                                             RE:
                                           </c:if>  
                                             <a href="/question/get?bno=${list.bno}&currPage=${__PAGE__.cri.currPage}&amount=${__PAGE__.cri.amount}&pagesPerPage=${__PAGE__.cri.pagesPerPage}">${list.title}</a>
+                                            <c:if test="${list.public_tf == 'F'}"><img src="/resources/img/question_lock_icon.png" width="15" height="15" id="lockImg"></c:if> 
                                         </td>
 
                                         <td>${list.memberid}</td>

@@ -196,7 +196,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><textarea id="summernote" name="editordata" value="${__LIST__.content}" ></textarea></td>
+                                        <td><textarea id="summernote" name="editordata" >${__LIST__.content}</textarea></td>
                                     </tr>
                                     <tr>
                                         <td> 

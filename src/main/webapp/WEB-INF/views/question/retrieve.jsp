@@ -31,14 +31,22 @@
 
     #retrieve{
         width: 900px;
+        border-top: 5px solid #005bbb;
+        margin-top: 50px;
     }
 
-    #title{
+    #retrieveForm{
+        margin-top: 50px;
+    }
+
+    input#title{
+    	
         display: inline-block;
         width: 900px;
         height: 30px;
 
         border: none;
+        
         border-bottom: 1px solid grey;
         
     }
@@ -83,9 +91,7 @@
         border: 1px solid #005bbb;
     }
 
-    td{
-        padding: 5px;
-    }
+  
 </style>
 
 <script>
@@ -160,7 +166,7 @@
                 	
                     <div id="wrapper">
 
-            <form action="/question/retrieve" method="POST">
+            <form action="/question/retrieve" method="POST" id="retrieveForm">
                 <input type="hidden" name="currPage" value="${cri.currPage}">
                 <input type="hidden" name="amount" value="${cri.amount}">
                 <input type="hidden" name="pagesPerPage" value="${cri.pagesPerPage}">
