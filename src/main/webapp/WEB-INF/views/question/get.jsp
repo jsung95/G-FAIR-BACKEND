@@ -277,7 +277,7 @@
                                         <div id="content_info">
                                             <span>
                                                 등록일 : <fmt:formatDate value="${__LIST__.insert_ts}" pattern="yyyy/MM/dd"/>
-                                                수정일 : <fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
+                                                <c:if test="${not empty __LIST__.update_ts}">수정일 : </c:if><fmt:formatDate value="${__LIST__.update_ts}" pattern="yyyy/MM/dd"/>
                                             </span>
                                             <span>
                                                 조회수 : ${__LIST__.readcnt+1}
