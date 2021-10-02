@@ -54,8 +54,8 @@ public class UploadFileServiceImpl implements UploadFileService {
 	
 	@Autowired private UploadFileMapper fileMapper;
 	
-	private String imgFileName = "C:/opt/eclipse/eclipse-workspace/JEE/G-FAIR-BACKEND/src/main/webapp/resources/img";
-	
+	//private String imgFileName = "C:/opt/eclipse/eclipse-workspace/JEE/G-FAIR-BACKEND/src/main/webapp/resources/img";
+	private String imgFileName = "C:/opt/eclipse/workspace/JEE/G-FAIR-BACKEND/src/main/webapp/resources/img";
 //	DTO받아서 파일insert
 	@Override
 	public Integer fileInsert(AttachFileDTO dto) throws Exception {

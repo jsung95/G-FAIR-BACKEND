@@ -383,14 +383,17 @@
 									            	<input type="hidden" name="reno" value="${reply.reno}">
 									            	
 												    <c:set var="insert" value="${sessionScope.__LOGIN__}" />
-												    <c:choose>
+												    <%-- <c:choose>
 												        <c:when test="${insert.memberid eq reply.memberid}">
 												        	<button class="reply_delete_btn" type="submit">삭제</button>
 												        </c:when>
 												        <c:otherwise>
 												            &nbsp;
 												        </c:otherwise>
-												    </c:choose>
+												    </c:choose> --%>
+												    <c:if test="${insert.memberid eq reply.memberid || insert.membertype == '관리자'}">
+												    	<button class="reply_delete_btn" type="submit">삭제</button>
+												    </c:if>
 									            	
 								            	</form>
 							            	</div>

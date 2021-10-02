@@ -97,7 +97,8 @@ public class ApiCaptchaImage {
         LocalDate todaysDate = LocalDate.now(); // 현재 날짜 얻기. 
         
         String filePath = todaysDate+"/";   //날짜별로 저장할 폴더 경로
-        String fullPath="C:/OPT/eclipse/workspace/JEE/gfair2/src/main/webapp/resources/captcha/"+filePath; 
+        //String fullPath="C:/OPT/eclipse/workspace/JEE/gfair2/src/main/webapp/resources/captcha/"+filePath; 
+        String fullPath = "C:/opt/eclipse/workspace/JEE/G-FAIR-BACKEND/src/main/webapp/resources/captcha/" + filePath;
         
         File f = new File(fullPath);
         
