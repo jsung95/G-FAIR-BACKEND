@@ -154,6 +154,20 @@
           
          });// .onclick  
          
+        $('#removeBtn').on('click',function(){
+       		var result = confirm('게시글을 삭제 하시겠습니까?');
+       		
+       		if(result){
+   			 	var formObj = $('#form');
+                formObj.attr('action',"/news/remove");
+                formObj.attr('method',"post");
+                formObj.submit();
+       		}else{
+
+       		}
+       		
+            });
+         
          
     })//end jq
 </script>
@@ -207,7 +221,8 @@
 
             <div class="contentIn">
                 	<div class="wraper">
-                        <form action="#">
+                        <form id="form">
+                        <input type="hidden" id="bno" name="bno" value="${board.bno}">
                         <div class="read_no">글번호: ${board.bno}</div>
                             <div id="title_wrap">
                                 <div class="title_area">${board.title}</div>
@@ -224,6 +239,7 @@
 
                                    <c:if test="${__LOGIN__.membertype == '관리자'}">
                                    <button id="modifyBtn" class="btn" type="button">수정</button>
+                                   <button id="removeBtn" class="btn" type="button">삭제</button>
                                 </c:if>	    
                                 <button id="listBtn" class="btn" type="button">목록</button>
                             </div>

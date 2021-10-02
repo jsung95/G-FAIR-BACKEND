@@ -113,43 +113,7 @@
     
     
 </style>
-   <script>
-        $(function () {
-            console.clear();
-            console.debug("jq start")
-   
-   
-            $(document).ready(function() {
-    	  $('ul.dropdownmenu li ul').hide();
 
-    	  $('ul.dropdownmenu').hover(
-    	  function() { 
-    	      $('ul.dropdownmenu li.menu ul').fadeIn('slow',function(){$(this).stop();});
-    	      $('.header_wapper').animate({height:200},'fast').clearQueue();
-    	      },
-    	      function() {
-    	      $('ul.dropdownmenu li.menu ul').fadeOut('fast');
-    	      $('.header_wapper').animate({height:200},'fast').clearQueue();
-    	      });
-	  
-    	});
-
-            $('#listBtn').on('click',function(){
-                location.href= location.href="/news/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}"
-             });
-
-             $('#removeBtn').on('click',function(){
-                alert("정말 삭제하시겠습니까?")
-              });
-             $('#removeBtn').on('click',function(){
-                let formObj = $('#form');
-                 formObj.attr('action',"/news/remove");
-                 formObj.attr('method',"post");
-                 formObj.submit();
-             });
-        }); 
-   
-       </script>
 <script>
     $(function(){
     	var tmp;
@@ -173,10 +137,36 @@
             'background':'url(/resources/img/side_li_bg.jpg) no-repeat',
             'background-position': 'right center'
         });
-        
-
-    })//end jq
+ 
+    });//end jq
 </script>
+
+   <script>
+        $(function (){
+            console.clear();
+            console.debug("jq start")
+  
+
+            $('#listBtn').on('click',function(){
+                location.href= location.href="/news/listPerPage?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}"
+             });
+            
+    
+            $('#removeBtn').on('click',function(){
+       		var result = confirm('게시글을 삭제 하시겠습니까?');
+       		
+       		if(result){
+   			 	var formObj = $('#form');
+                formObj.attr('action',"/news/remove");
+                formObj.attr('method',"post");
+                formObj.submit();
+       		}else{
+
+       		}
+            });
+     
+            });//onclick
+       </script>
 
 <body>
     <div id="wrap">
