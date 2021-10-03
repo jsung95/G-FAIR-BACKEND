@@ -101,7 +101,7 @@
 
         //삭제버튼 이벤트
         $('#removeBtn').on('click', function () {
-            var result = confirm('정말 삭제하실?');
+            var result = confirm('정말 삭제하시겠습니까?');
 
             if(result) {
                 let formObj = $('form');
@@ -131,7 +131,7 @@
             <div id="aside">
                 <h2 class="asideMenu">커뮤니티</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="notice/list">공지사항</a></li>
+                    <li><a class="chk" href="/notice/list">공지사항</a></li>
                     <li><a class="chk" href="/question/list">질문게시판</a></li>
                     <li><a class="chk" href="/often/question">자주묻는질문</a></li>
                     <li><a class="chk" href="/anony/list">고객의소리</a></li>
