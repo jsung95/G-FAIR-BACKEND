@@ -164,7 +164,7 @@
             $('#codeCheck').attr('disabled', false);
             $('#checkBtn').attr('disabled', false);
 
-            count = 70;
+            count = 600;
             mytimer = setInterval(function() {
                 timer();
             }, 1000);

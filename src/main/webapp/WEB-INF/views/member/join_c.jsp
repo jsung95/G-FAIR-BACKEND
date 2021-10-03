@@ -22,11 +22,13 @@
         var emailCheck = 'fail';
         var idCheck = 'fail';
         var phoneCheck = 'fail';
-        var captchaCheck = 'fail';
+        //@@@@
+        var captchaCheck = 'ok';
 
         $(function() {
-            
-            captchaImg();
+            //@@@@
+            //captchaImg();
+            $('#captcha_img').attr('src', '/resources/captcha/2021-10-03/1633256179871.jpg');
 
             var idRule = /^[a-z]+[a-z0-9]{5,11}$/;
             $('#memberid').on("propertychange change keyup paste input", function(){
@@ -196,12 +198,15 @@
 
 
             $('#captchaRefresh').on('click',function(){
-        	    captchaImg();
+        	    //@@@@
+            	//captchaImg();
             });
 
             
             $('#checkCaptcha').on('click', function(){
-                captcha();
+                //@@@@
+            	//captcha();
+            	alert('인증 성공');
             });
 
             $('#before_button').on('click', function(){
@@ -233,8 +238,8 @@
                 success: function(result) {
                     console.log(result);
                     if(result == 'ok') {
-                        captchaCheck = result;
-                        alert('성공');
+                    	captchaCheck = result;
+                        alert('인증 성공');
                     } else {
                         alert('fail');
                         captchaImg();
@@ -257,7 +262,7 @@
             $('#codeCheck').attr('disabled', false);
             $('#checkBtn').attr('disabled', false);
 
-            count = 70;
+            count = 600;
             mytimer = setInterval(function() {
                 timer();
             }, 1000);
