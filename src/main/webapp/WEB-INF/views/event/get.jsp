@@ -63,9 +63,9 @@
                             var str="";
 
                             if(list == null || list.length == 0){//리스트값이 없을 때
-                                                                
+                                replyUL.html("<p>등록된 댓글이 없습니다.</p>")
+
                                 return;
-                                
                             }//if
 
                             for(var i = 0, len = list.length || 0; i < len; i++){
@@ -77,7 +77,7 @@
 
                             replyUL.html(str);
 
-                            showReplyPage(replyCnt);
+                            showReplyPage(replyCnt); //페이징
                         });//end function
                 }//showList()
 
@@ -202,7 +202,7 @@
                     var reno = modal.data("reno");
 
                     replyService.remove(reno, function (result) {
-                        alert('댓글 삭제완료');
+                        alert('정말 삭제하시겠습니까?');
 
                         modal.modal("hide");
 
