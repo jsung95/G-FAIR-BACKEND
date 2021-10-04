@@ -512,7 +512,7 @@ public class UploadFileServiceImpl implements UploadFileService {
         Date date = new Date();
         String todaysDate =sdf.format(date);
         String filePath = todaysDate+"/";   //날짜별로 저장할 폴더 경로
-        String fullPath="C:/OPT/eclipse/workspace/JEE/gfair2/src/main/webapp/resources/img/"+filePath; 
+        String fullPath=imgFileName+filePath; 
        
         File dir = new File(fullPath); //fullPath로 파일 객체 생성
 

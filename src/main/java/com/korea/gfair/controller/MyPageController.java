@@ -193,7 +193,7 @@ public class MyPageController {
 		
 	}//passAuth
 	
-	@Async
+//	@Async
 	@GetMapping("sendemail")
 	public ResponseEntity<String> emailCode(HttpServletRequest req) throws Exception {
 		log.debug("emailCode(req) invoked.");
