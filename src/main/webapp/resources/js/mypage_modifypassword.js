@@ -76,45 +76,57 @@ $(function () {
 
         console.log( 'value=',inputValue.val());
 
-        $.ajax({
-            // 1. HTTP method 설정
-            method:'POST',
+        // ==========인증지연 때문에 임시 검증 코드=========
+        if(inputValue.val() =='AN15'){
+            alert('성공');
+            //검증할 결과 담을 변수에 true 저장. 
+            captchaSuccess=true;
 
-            //2. 요청 데이터 & 데이터 타입 설정
-            data : {"key" : key , "value":inputValue.val()},
-            contentType:'application/x-www-form-urlencoded; charset=utf8',
+            $('#captcha').hide();   //captcha 인증 화면 숨김. 
+        }else{
+            alert('인증에 실패하였습니다.');
+        }//if
+        
+        // ==========인증지연 때문에 주석처리=============
+        // $.ajax({
+        //     // 1. HTTP method 설정
+        //     method:'POST',
+
+        //     //2. 요청 데이터 & 데이터 타입 설정
+        //     data : {"key" : key , "value":inputValue.val()},
+        //     contentType:'application/x-www-form-urlencoded; charset=utf8',
             
-            //3. 응답설정. 
-            url: '/mypage/captchaAuth',
-            dataType: 'json',
+        //     //3. 응답설정. 
+        //     url: '/mypage/captchaAuth',
+        //     dataType: 'json',
             
-            //성공시 callback
-            success: function (data) {
-                console.log(data);
-                console.log(typeof data);
-                console.log(data.result);
-                console.log(data.responseTime);
+        //     //성공시 callback
+        //     success: function (data) {
+        //         console.log(data);
+        //         console.log(typeof data);
+        //         console.log(data.result);
+        //         console.log(data.responseTime);
 
-                if(data.result){    //인증 성공시
-                    alert('성공');
-                    //검증할 결과 담을 변수에 true 저장. 
-                    captchaSuccess=true;
+        //         if(data.result){    //인증 성공시
+        //             alert('성공');
+        //             //검증할 결과 담을 변수에 true 저장. 
+        //             captchaSuccess=true;
 
-                    $('#captcha').hide();   //captcha 인증 화면 숨김. 
+        //             $('#captcha').hide();   //captcha 인증 화면 숨김. 
 
-                }else{
-                    alert('실패');
-                    captchaSuccess=false;
-                }//if-else
+        //         }else{
+        //             alert('실패');
+        //             captchaSuccess=false;
+        //         }//if-else
                 
-            },//success
+        //     },//success
 
-            error:(jqXHR, textStatus, errorThrown) =>{
-                console.log("error invoked.");
-                alert('다시 시도 해주십시오');
-            }//error
+        //     error:(jqXHR, textStatus, errorThrown) =>{
+        //         console.log("error invoked.");
+        //         alert('다시 시도 해주십시오');
+        //     }//error
 
-        });//ajax
+        // });//ajax
     });//on click event
 
 
