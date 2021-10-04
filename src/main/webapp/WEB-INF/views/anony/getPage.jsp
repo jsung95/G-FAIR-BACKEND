@@ -31,24 +31,24 @@
         <script>
             $(function(){
 
-                // 버튼클릭관련
-                $('#reregBtn').on('click',function(){
+                // // 버튼클릭관련
+                // $('#reregBtn').on('click',function(){
                     
-                    window.parent.location.href = "/anony/retrieve?title=${board.title}&reproot=${board.reproot}&repstep=${board.repstep}&repindent=${board.repindent}&bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                //     window.parent.location.href = "/anony/retrieve?title=${board.title}&reproot=${board.reproot}&repstep=${board.repstep}&repindent=${board.repindent}&bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
                     
-                });//reregBtn
+                // });//reregBtn
                 
-                $('#modifyBtn').on('click',function() {
+                // $('#modifyBtn').on('click',function() {
                     
-                    window.parent.location.href = "/anony/modify?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                //     window.parent.location.href = "/anony/modify?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
                     
-                })//modifyBtn
+                // })//modifyBtn
 
-                $('#listBtn').on('click',function(){
+                // $('#listBtn').on('click',function(){
                     
-                    window.parent.location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+                //     window.parent.location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
                     
-                });//listBtn
+                // });//listBtn
 
            
 
@@ -131,8 +131,8 @@
 
 
                         let str = "";
-                        if(list == null|| list.length ==0){//리스트값이 없을 때
-                            // replyUL.html("");
+                        if(list == null|| list.length == 0){//리스트값이 없을 때
+                            replyUL.html("<p>등록된 댓글이 없습니다.</p>");
 
                             return;
                         }//if
@@ -390,7 +390,7 @@
         <!-- modal -->
     <!-- -------------------------------------------------------------------------------------------------- -->
         
-        <div class=getBtn>
+        <!-- <div class=getBtn>
             <div>
                 <c:if test="${__LOGIN__.memberid eq board.memberid}">
                         <button type="button" class="buttonstyle" id="modifyBtn">수정</button>
@@ -402,6 +402,6 @@
             <div>
                 <button type="button" class="buttonstyle" id="listBtn">목록</button>
             </div>
-        </div>
+        </div> -->
     </body>
 </html>

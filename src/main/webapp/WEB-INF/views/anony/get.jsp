@@ -11,10 +11,9 @@
     <title>지페어 코리아</title>
 
     <link href="/resources/css/anonyGetPage.css" rel="stylesheet" type="text/css"/>
-
+    
     <link href="/resources/css/common.css" rel="stylesheet" type="text/css" />
     <link href="/resources/css/sub.css" rel="stylesheet" type="text/css"/>
-
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
@@ -51,6 +50,26 @@
 <script>
     $(function(){
 
+        // 버튼클릭관련
+        $('#reregBtn').on('click',function(){
+                    
+            location.href = "/anony/retrieve?title=${board.title}&reproot=${board.reproot}&repstep=${board.repstep}&repindent=${board.repindent}&bname=${board.bname}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+            
+        });//reregBtn
+        
+        $('#modifyBtn').on('click',function() {
+            
+            location.href = "/anony/modify?bno=${board.bno}&bname=${board.bname}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+            
+        })//modifyBtn
+
+        $('#listBtn').on('click',function(){
+            
+            location.href = "/anony/list?currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
+            
+        });//listBtn
+
+    
         //iframe 높이 자동조절
         let iframe = document.getElementById("child-iframe"); 
 
@@ -85,14 +104,31 @@
                     <div class="map">home > 커뮤니티 > 고객의소리 </div>
                     <h2 class="subName">고객의소리</h2>
                 </div>
-                <p>&nbsp;</p>
                 
                 <!-- 상세페이지 -->
                 <div class="contentIn">
                     <iframe id="child-iframe" target="_parent" src="/anony/getPage?bno=${board.bno}&readcnt=${board.readcnt}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}" frameborder="0" width="1200" scrolling='no'></iframe>
                 </div>
 
-                <p>&nbsp;</p>
+                <!-- 버튼 -->
+                <form action="/anony/remove" method="POST">
+                    <input type="hidden" name="bno" value="${board.bno}">
+                
+                    <div class=getBtn>
+                        <div>
+                            <c:if test="${__LOGIN__.memberid eq board.memberid}">
+                                <button type="button" class="buttonstyle" id="modifyBtn">수정</button>
+                                <button type="submit" class="buttonstyle" id="removeBtn">삭제</button>
+                            </c:if>
+                            <c:if test="${__LOGIN__.memberid != null}">
+                                <button type="button" class="buttonstyle" id="reregBtn">답글</button>
+                            </c:if>
+                        </div>
+                        <div>
+                            <button type="button" class="buttonstyle" id="listBtn">목록</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 

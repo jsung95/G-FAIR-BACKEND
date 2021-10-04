@@ -98,6 +98,7 @@ button:hover {
 .replyLine {
     border-bottom: 1px solid rgb(187, 187, 187, 0.3);
     height: 45px;
+    margin-bottom: 10px;
 }
 
 /* 버튼위치 */
@@ -107,6 +108,7 @@ button:hover {
     justify-content: space-between;
 
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 .row {
     margin-top: 20px;

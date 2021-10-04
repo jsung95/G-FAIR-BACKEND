@@ -181,9 +181,7 @@ public class AnonymousBoardController {
 		Objects.nonNull(service);
 		
 		this.service.remove(dto);
-		
-		rttrs.addAttribute("result", "등록완료!");
-		
+	
 		rttrs.addAttribute("currPage", cri.getCurrPage());
 		rttrs.addAttribute("amount", cri.getAmount());
 		rttrs.addAttribute("pagesPerPage", cri.getPagesPerPage());
