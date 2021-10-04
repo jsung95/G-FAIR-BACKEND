@@ -49,6 +49,10 @@ public class NoticeBoardReplyServiceImpl implements NoticeBoardReplyService {
 		
 		return isSuccess;
 	}
-	
+
+	@Override
+	public void modifyReply(ReplyDTO dto) {
+		this.mapper.updateReply(dto);
+	}
 	
 }

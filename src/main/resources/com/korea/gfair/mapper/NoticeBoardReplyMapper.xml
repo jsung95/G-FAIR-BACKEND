@@ -41,6 +41,17 @@
     </delete>
     
     
+    <update id="updateReply">
+    	<![CDATA[
+    		UPDATE 
+    			tbl_reply 
+    		SET
+    			recontent = #{recontent},
+    			redate = sysdate
+    		WHERE
+    			reno = #{reno}
+    	]]>
+    </update>
     
     
 </mapper>

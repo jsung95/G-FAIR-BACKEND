@@ -95,6 +95,20 @@
 
        })//boardOption
     })//.jq
+    
+    //쿠키에 올라가있는 신청번호를 통해
+    //우측 좋아요 목록에 담긴 이미치에 링크를 걸어주는 함수
+    function showCpImg(seq) {
+        var cp_no_arr = getCookie('cp_no').split(',');
+
+        if(seq == 0) {
+            location.href = "/apply/companyInfo?applyno=" + cp_no_arr[0];
+        } else if(seq == 1) {
+            location.href = "/apply/companyInfo?applyno=" + cp_no_arr[1];
+        } else if(seq == 2) {
+            location.href = "/apply/companyInfo?applyno=" + cp_no_arr[2];
+        }//if-else
+    }//showCpImg
 </script>
 
 

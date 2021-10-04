@@ -13,5 +13,6 @@ public interface NoticeBoardReplyMapper {
 	public abstract boolean replyInsert(ReplyDTO dto);
 	public abstract boolean replyDelete(ReplyDTO dto);
 	
+	public abstract void updateReply(ReplyDTO dto);
 	
 }//end interface

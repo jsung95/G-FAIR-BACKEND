@@ -47,7 +47,7 @@
  		
  		$('#answerBtn').on('click', function(){
  			location.href="/notice/answer?bno=${board.bno}&currPage=${cri.currPage}&amount=${cri.amount}&pagesPerPage=${cri.pagesPerPage}";
- 		});
+ 		});//onclick
  		
 		if($('#memberid').val() == '') {
 			$('#recontent').attr('placeholder', '로그인 후 이용해주세요.');
@@ -56,9 +56,9 @@
 			$('#recontent, #reply_submitBtn').on('click', function(e){	
 				alert('로그인이 필요합니다.');
 				e.preventDefault();
-			});
+			});//onclick
 			
-		};
+		};//if
 		
 		
         $('.reply_delete_btn').on('click', function(e) {
@@ -77,13 +77,62 @@
                 reply_delete.submit(); */
             } else {
             	e.preventDefault();
-            }
+            }//if-else
             
 
 
-        });
-		
-    });
+        });//onClick
+        
+        
+    });//end jq
+    
+    
+    function modify_btn(re_no, re_content, bno) {
+    	
+    	var html = '';
+    	
+    	html += '<div id="reply_box">';
+    	html += '<textarea id="recontent" name="recontent" style="resize: none;">';
+    	html += re_content;
+    	html += '</textarea>';
+    	html += '<input type="button" id="reply_submitBtn" onclick="update_reply('+re_no+', '+bno+')" value="댓글수정">';
+    	html += '<div class="clear"></div>';
+    	html += '</div>';
+    	
+    	$('#reply_content'+re_no).html(html);
+    	
+    	
+    	$('#reply_modify_btn'+re_no).text('취소');
+    	$('#reply_modify_btn'+re_no).removeAttr('onclick');
+    	$('#reply_modify_btn'+re_no).attr('onclick', 'rollback('+re_no+', \''+re_content+'\', '+bno+');');
+    	
+    }//modify_btn
+    
+    function update_reply(re_no, bno) {
+		$.ajax({
+			url: '/notice/modifyReply',
+			type: 'post',
+			data: {'reno':re_no, 'recontent':$('#recontent').val(), 'bno':bno},
+			success: function() {
+				location.reload();
+			}//success
+		})//ajax
+    }//update_reply
+    
+    function rollback(re_no, re_content, bno) {
+    	var html = '';
+    	
+    	html += '<div style="white-space:pre;">';
+    	html += re_content;
+    	html += '</div>';
+    	
+    	$('#reply_content'+re_no).html(html);
+    	
+    	$('#reply_modify_btn'+re_no).text('수정');
+    	$('#reply_modify_btn'+re_no).removeAttr('onclick');
+    	$('#reply_modify_btn'+re_no).attr('onclick', 'modify_btn('+re_no+', \''+re_content+'\', '+bno+');');
+    }//rollback
+
 </script>
 
 <style>
@@ -235,7 +284,7 @@
     	width: 20%;
     }
 
-    #reply_content {
+    .reply_content {
     	margin-top: 10px;
         background: #eee;
         padding: 10px;
@@ -273,6 +322,14 @@
 		background-color: transparent;
 		border: 0;
 		cursor: pointer;
+	}
+	
+	.reply_modify_btn {
+		color: red;
+		background-color: transparent;
+		border: 0;
+		cursor: pointer;
+		margin-right: 5px;
 	}
 
 </style>
@@ -370,6 +427,7 @@
                             
                             <div id="reply_area">
 	                       	    <c:forEach items="${reply}" var="reply">
+	                       	    	<input type="hidden" id="reno" value="${reply.reno}" />
 	                       	    
 							        <div id="reply_list_area">
 							        
@@ -392,6 +450,7 @@
 												        </c:otherwise>
 												    </c:choose> --%>
 												    <c:if test="${insert.memberid eq reply.memberid || insert.membertype == '관리자'}">
+												    	<button class="reply_modify_btn" id="reply_modify_btn${reply.reno}" type="button" onclick="modify_btn(${reply.reno}, '${reply.recontent}', ${reply.bno});">수정</button>
 												    	<button class="reply_delete_btn" type="submit">삭제</button>
 												    </c:if>
 									            	
@@ -401,7 +460,7 @@
 							        	</div>
 							        	
 							        	
-							        	<div id="reply_content">
+							        	<div class="reply_content" id="reply_content${reply.reno}">
 							        		<div style="white-space:pre;">${reply.recontent}</div>
 							        	</div>
 							            

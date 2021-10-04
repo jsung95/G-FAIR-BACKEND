@@ -13,5 +13,6 @@ public interface NoticeBoardReplyService {
 	public abstract List<ReplyVO> getReply(ReplyDTO dto);
 	//DEL REPLY
 	public abstract boolean removeReply(ReplyDTO dto);
-
+	//MODIFY REPLY
+	public abstract void modifyReply(ReplyDTO dto);
 }//end interface
