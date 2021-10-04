@@ -9,6 +9,7 @@
                         <ul class="topMenu">
                             <!-- 로그인 정보 있을 때 -->
                             <c:if test="${__LOGIN__.memberid != null}">
+                            	<li class="tm1"><strong>${__LOGIN__.membername}</strong>님</li>
                                 <li class="tm1"><a href="/login/logout">로그아웃</a></li>
                                 <!-- 관리자가 로그인 했을 때 -->
                                 <c:if test="${__LOGIN__.membertype == '관리자'}">
