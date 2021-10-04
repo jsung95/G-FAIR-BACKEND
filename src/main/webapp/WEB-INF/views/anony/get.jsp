@@ -118,6 +118,8 @@
                         <div>
                             <c:if test="${__LOGIN__.memberid eq board.memberid}">
                                 <button type="button" class="buttonstyle" id="modifyBtn">수정</button>
+                            </c:if>
+                            <c:if test="${__LOGIN__.memberid eq board.memberid or __LOGIN__.membertype eq '관리자'}">
                                 <button type="submit" class="buttonstyle" id="removeBtn">삭제</button>
                             </c:if>
                             <c:if test="${__LOGIN__.memberid != null}">
