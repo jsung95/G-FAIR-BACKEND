@@ -20,7 +20,8 @@
 	
 	<update id="updateDrop">
 		UPDATE tbl_member
-		SET drop_tf = 'T'
+		SET drop_tf = 'T',
+			dropdate = sysdate
 		WHERE memberid=#{memberid}
 	</update>
 	
