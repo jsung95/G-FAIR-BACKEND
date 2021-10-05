@@ -71,8 +71,8 @@
             <div id="aside">
                 <h2 class="asideMenu">마이페이지</h2>
                 <ul id="parent">
-                    <li><a class="chk" href="/mypage/modifypassword">비밀번호변경</a></li>
                     <li><a class="chk" href="/mypage/myInfo">회원정보변경</a></li>
+                    <li><a class="chk" href="/mypage/modifypassword">비밀번호변경</a></li>
                     <li><a class="chk" href="/myBoard/list?memberid=${__LOGIN__.memberid}">내가쓴글</a></li>
                     <li><a class="chk" href="/mypage/replymanage">내가쓴댓글</a></li>
                     <li><a class="chk" href="/mypage/dropauth">회원탈퇴</a></li>
