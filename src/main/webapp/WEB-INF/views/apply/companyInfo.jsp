@@ -299,6 +299,7 @@
 
     .fav_box ul li {
     	margin: 0 auto;
+    	padding: 10px;
         width: 150px;
         height: 100px;
         position: relative;
