@@ -413,7 +413,7 @@
 							        	<div style="white-space: pre;">${board.content}</div>
 							        </c:when>
 							        <c:otherwise>
-							            <img src="/notice/load_img?fid=${board.fid}" width="500px" height="auto" alt="게시글 이미지" id="board_img">
+							            <img src="/notice/load_img?fid=${board.fid}" width="auto" height="auto" alt="게시글 이미지" id="board_img">
 							            <br><br>
 							            <div style="white-space: pre;">${board.content}</div>
 							        </c:otherwise>
