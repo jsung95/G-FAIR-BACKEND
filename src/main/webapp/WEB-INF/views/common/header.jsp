@@ -13,7 +13,7 @@
                                 <li class="tm1"><a href="/login/logout">로그아웃</a></li>
                                 <!-- 관리자가 로그인 했을 때 -->
                                 <c:if test="${__LOGIN__.membertype == '관리자'}">
-                                    <li class="tm1"><a href="/mypage/myInfo">관리페이지</a></li>
+                                    <li class="tm1"><a href="/mypage/adminInfo">관리페이지</a></li>
                                 </c:if>
                                 <!-- 회원이 로그인 했을 때 -->
                                 <c:if test="${__LOGIN__.membertype != '관리자'}">
