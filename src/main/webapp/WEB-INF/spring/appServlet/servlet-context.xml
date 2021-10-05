@@ -121,6 +121,7 @@
 			<mapping path="/admin/showDetailInfo"/>
 			<mapping path="/admin/memberBoard" />
 			<mapping path="/admin/memberReply" />
+			<mapping path="/admin/apply" />
 			<mapping path="/exhibition/list" />
 
 			<!-- ==전시일정관리== -->
