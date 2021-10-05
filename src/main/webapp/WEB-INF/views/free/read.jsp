@@ -51,13 +51,24 @@
     				obj.attr('method','POST');
     				obj.submit();
                 }else{
-                	
+                	return false;
                 }
                 
 
             });//onclick
             
-/*             $('#replyWriteBtn').on('click', function(){
+    		if($('#member_id').val() == '') {
+    			$('#recontent_text').attr('placeholder', '로그인 후 이용해주세요.');
+    			$('#recontent_text').attr('readonly', true);
+    			
+    			$('#recontent_text').on('click', function(e){
+    				alert('로그인이 필요합니다.');
+    				location.href = "/login/login";
+    			});//onclick
+    			
+    		};//if
+            
+            $('#replyWriteBtn').on('click', function(){
             	
             	var result = confirm('댓글을 등록 하시겠습니까?');
             	
@@ -67,14 +78,84 @@
     				obj.attr('method','POST');
     				obj.submit();
                 }else{
-                	
+                	return false;
                 }
             	
-            });//onclick */
+            });//onclick
+            
+            $('.re_modifyBtn').on("click",function(){
+				var obj = $('.re_modifyBtn');
+				obj.attr('action','/free/replyModify');
+				obj.attr('method','POST');
+				obj.submit();
+            	
+            	
+            });
+            
+            $('.re_removeBtn').on("click",function(){
+            	var result = confirm('댓글을 삭제 하시겠습니까?');
+            	
+                if(result) {
+    				var obj = $('.re_removeBtn');
+    				obj.attr('action','/free/replyRemove');
+    				obj.attr('method','POST');
+    				obj.submit();
+                }else{
+                	alert('삭제가 취소 되었습니다.');
+                	return false;
+                }
+            	
+            });
             
 
 
         }); //jq
+        
+        function modify_btn(re_no, re_content, bno) {
+        	
+        	var html = '';
+        	
+        	html += '<div id="reply_box">';
+        	html += '<textarea id="recontent" name="recontent" style="resize: none;">';
+        	html += re_content;
+        	html += '</textarea>';
+        	html += '<input type="button" id="reply_submitBtn" onclick="update_reply('+re_no+', '+bno+')" value="댓글수정">';
+        	html += '<div class="clear"></div>';
+        	html += '</div>';
+        	
+        	$('#reply_content'+re_no).html(html);
+        	
+        	
+        	$('#reply_modify_btn'+re_no).text('취소');
+        	$('#reply_modify_btn'+re_no).removeAttr('onclick');
+        	$('#reply_modify_btn'+re_no).attr('onclick', 'rollback('+re_no+', \''+re_content+'\', '+bno+');');
+        	
+        }//modify_btn
+        
+        function update_reply(re_no, bno) {
+    		$.ajax({
+    			url: '/notice/modifyReply',
+    			type: 'post',
+    			data: {'reno':re_no, 'recontent':$('#recontent').val(), 'bno':bno},
+    			success: function() {
+    				location.reload();
+    			}//success
+    		})//ajax
+        }//update_reply
+        
+        function rollback(re_no, re_content, bno) {
+        	var html = '';
+        	
+        	html += '<div style="white-space:pre;">';
+        	html += re_content;
+        	html += '</div>';
+        	
+        	$('#reply_content'+re_no).html(html);
+        	
+        	$('#reply_modify_btn'+re_no).text('수정');
+        	$('#reply_modify_btn'+re_no).removeAttr('onclick');
+        	$('#reply_modify_btn'+re_no).attr('onclick', 'modify_btn('+re_no+', \''+re_content+'\', '+bno+');');
+        }//rollback
     </script>
 
     <style>
@@ -233,10 +314,31 @@
 		}
 		
 		#reply_box #reply_info #re_memberid{
-			width:80%;
+			width:20%;
 			float:left;
+			color:#005bbb;
 			font-weight:bold;
 			text-indent:10px;
+
+		}
+		
+		#reply_box #reply_info #re_btn_wrap{
+			width:60%;
+			height:50px;
+			float:left;
+			
+		}
+		
+		.re_modifyBtn{
+			width:30px;
+			height:30px;
+			color:red;
+		}
+		
+		.re_removeBtn{
+			width:30px;
+			height:30px;
+			color:red;
 		}
 		
 		#reply_box #reply_info #re_date{
@@ -251,6 +353,7 @@
 			background:#fff;
 			padding:10px;
 		    white-space: pre;
+		    font-size:16px;
 		}
 		
 		
@@ -347,9 +450,23 @@
 					<div id="reply_box">
 						<div id="reply_info">
 							<div id="re_memberid">작성자:${replyList.memberid}</div>
+							
+							<div id="re_btn_wrap">
+								<form id="re_button_form"action="/free/replyRemove" method="post">
+									<input type="hidden" name="reno" value="${replyList.reno}" />
+									<input type="hidden" name="bno" value="${replyList.bno}" />
+									
+									<c:if test="${replyList.memberid eq __LOGIN__.memberid}">
+									<button class="re_modifyBtn" type="button">수정</button>
+									
+									<button class="re_removeBtn" type="submit">삭제</button>
+									</c:if>
+								</form>
+							</div>					
 							<div id="re_date">작성일:<fmt:formatDate value="${replyList.redate}" pattern="yyyy-MM-dd HH:mm:ss" /></div>
 						</div>
 						<div id="re_content">${replyList.recontent}</div>
+						
 					</div>
 					</c:forEach>
 					
@@ -358,7 +475,7 @@
 
 						<div id="text_wrap">
 							<input type="hidden" value="${__READ__.bno}" name="bno" />
-							<input type="hidden" value="${reply_login}" name="memberid" />
+							<input id="member_id"type="hidden" value="${reply_login}" name="memberid" />
 							<textarea id="recontent_text" name="recontent"></textarea>
 							<button id="replyWriteBtn" type="submit">댓글작성</button>
 						</div><!-- text_wrap  -->

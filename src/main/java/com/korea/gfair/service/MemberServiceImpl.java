@@ -325,7 +325,7 @@ public class MemberServiceImpl implements MemberService {
 			
 			String text = "<h1>지페어코리아 가입 하기위해 요청하신 인증번호를 알려드립니다.<br> " + checkNum + " 입니다.</h1>";
 			
-			helper.setFrom("gmldyd0762@gmail.com");
+			helper.setFrom("지페어코리아<gfairkor@gmail.com>");
 			helper.setTo(dto.getEmail());
 			helper.setSubject("Gfair 회원가입 진행을 위해 요청하신 인증번호를 알려드립니다.");
 			helper.setText(text,true);

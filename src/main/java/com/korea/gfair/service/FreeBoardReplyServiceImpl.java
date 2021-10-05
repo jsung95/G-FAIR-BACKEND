@@ -29,5 +29,23 @@ public class FreeBoardReplyServiceImpl implements FreeBoardReplyService {
 		remapper.insertReply(rdto);
 		
 	}//writeReply
+
+	@Override
+	public void modifyReply(ReplyDTO dto) {
+		remapper.updateReply(dto);
+	}//modifyReply
+
+	@Override
+	public void deleteReply(ReplyDTO dto) {
+		remapper.deleteReply(dto);
+	}//deleteReply
+
+	@Override
+	public void countReply(ReplyDTO dto) {
+		remapper.countReply(dto);
+		
+	}//countReply
+	
+	
 	
 }//end class

@@ -31,7 +31,24 @@
 		)
 	</insert>
 	<!-- 댓글 수정 -->
-	
+	<update id="updateReply">
+		UPDATE tbl_reply
+		SET recontent = #{recontent}
+		WHERE reno = #{reno}
+		)
+	</update>
 	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE
+		FROM tbl_reply
+		WHERE reno = #{reno}
+	</delete>
 	
+	<!-- 댓글 갯수 -->
+	<select id="countReply">
+		SELECT count(r.reno)
+		FROM tbl_member m , tbl_reply r
+		WHERE m.memberid = r.memberid
+		AND bno = #{bno};
+	</select>
 </mapper>

@@ -74,7 +74,6 @@ public class FreeBoardController {
 
 		model.addAttribute("__replyList__",replyList);
 		
-		
 	}//read
 	
 	
@@ -117,5 +116,29 @@ public class FreeBoardController {
 		
 		return "redirect:/free/read?bno="+ rdto.getBno();
 	}//replyWrite
+	
+	@PostMapping("replyModify")
+	public void replyModify(ReplyDTO dto,Model model) {
+		
+		replyService.modifyReply(dto);
+		
+	}//replyModify
+	
+	@PostMapping("replyRemove")
+	public String replyRemove(ReplyDTO dto) {
+
+		log.info(">>>>>>>>"+dto.getBno());
+		replyService.deleteReply(dto);
+		
+		
+		return "redirect:/free/read?bno="+dto.getBno();
+		
+	}//replyModify
+	
+	@PostMapping("countReply")
+	public void countReply(ReplyDTO dto,Model model) {
+		replyService.countReply(dto);
+		
+	}//countReply
 
 }//end class
