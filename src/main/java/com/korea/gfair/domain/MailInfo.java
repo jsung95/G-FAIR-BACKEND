@@ -14,10 +14,10 @@ public class MailInfo {
 			
 	
 	public MailInfo(int number,String toMail) {
-		this.setFrom = "지페어<love8038@naver.com>";
+		this.setFrom = "지페어코리아<gfairkor@gmail.com>";
 		this.toMail = toMail;
-		this.title = "이메일주소 변경 인증 이메일 입니다.";
-		this.content = "<br><br>인증 번호는 "+number+"입니다. "
+		this.title = "Gfair 회원가입 진행을 위해 요청하신 인증번호를 알려드립니다.";
+		this.content = "<h1>지페어코리아 가입 하기위해 요청하신 인증번호를 알려드립니다.<br>"+number+" 입니다.</h1>"
 						+ "<br> 해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
 	}//constructor
 }//end class

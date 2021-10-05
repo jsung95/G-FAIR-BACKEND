@@ -115,7 +115,6 @@
 			<mapping path="/photo/register" />
 
 			<!-- ==관리페이지=메뉴순서대로== -->
-			<mapping path="/admin/adminPage"/>
 			<mapping path="/mypage/adminInfo" />
 			<mapping path="/admin/memberList"/>
 			<mapping path="/admin/showDetailInfo"/>
@@ -144,7 +143,6 @@
 			<!-- 마이페이지 -->
 			<mapping path="/mypage/checkPass" />
 			<mapping path="/mypage/myInfo" />
-			<mapping path="/mypage/mypageInfo" />
 			<mapping path="/myBoard/list" />
 			
 			<!-- 기업참가신청확인 -->
