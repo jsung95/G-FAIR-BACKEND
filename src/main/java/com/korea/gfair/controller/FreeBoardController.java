@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.korea.gfair.domain.BoardDTO;
+import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.BoardVO;
 import com.korea.gfair.domain.Criteria;
 import com.korea.gfair.domain.PageDTO;
@@ -43,6 +45,8 @@ public class FreeBoardController {
 	@GetMapping("board")
 	public String listPerPage(@ModelAttribute("cri") Criteria cri, Model model) {
 		
+		List<BoardReplyCountVO> replyCnt = replyService.countReply("자유게시판");
+		
 		List<BoardVO> boards = service.getListPerPage(cri,"자유게시판");
 		
 		Objects.requireNonNull(boards);
@@ -52,6 +56,7 @@ public class FreeBoardController {
 		
 		PageDTO pageDTO= new PageDTO(cri,service.getTotal(cri,"자유게시판"));
 		
+		model.addAttribute("__REPLY__",replyCnt);
 		model.addAttribute("__LIST__",boards);
 		model.addAttribute("pageMaker",pageDTO);
 		
@@ -117,8 +122,9 @@ public class FreeBoardController {
 		return "redirect:/free/read?bno="+ rdto.getBno();
 	}//replyWrite
 	
+	@ResponseBody
 	@PostMapping("replyModify")
-	public void replyModify(ReplyDTO dto,Model model) {
+	public void replyModify(ReplyDTO dto) {
 		
 		replyService.modifyReply(dto);
 		
@@ -135,10 +141,6 @@ public class FreeBoardController {
 		
 	}//replyModify
 	
-	@PostMapping("countReply")
-	public void countReply(ReplyDTO dto,Model model) {
-		replyService.countReply(dto);
-		
-	}//countReply
+
 
 }//end class

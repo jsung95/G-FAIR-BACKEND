@@ -2,7 +2,7 @@ package com.korea.gfair.service;
 
 import java.util.List;
 
-import com.korea.gfair.domain.BoardDTO;
+import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.domain.ReplyVO;
 
@@ -12,7 +12,7 @@ public interface FreeBoardReplyService {
 	public abstract void writeReply(ReplyDTO rdto);			//댓글 작성
 	public abstract void modifyReply(ReplyDTO dto);			//댓글 수정
 	public abstract void deleteReply(ReplyDTO dto);			//댓글 삭제
-	public abstract void countReply(ReplyDTO dto);			//댓글 갯수
+	public abstract List<BoardReplyCountVO> countReply(String bname);			//댓글 갯수
 	
 
 }//end interface

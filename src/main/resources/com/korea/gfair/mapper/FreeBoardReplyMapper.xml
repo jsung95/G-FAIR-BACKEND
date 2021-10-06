@@ -33,9 +33,11 @@
 	<!-- 댓글 수정 -->
 	<update id="updateReply">
 		UPDATE tbl_reply
-		SET recontent = #{recontent}
+		SET 
+			recontent = #{recontent},
+			redate = sysdate
 		WHERE reno = #{reno}
-		)
+		
 	</update>
 	<!-- 댓글 삭제 -->
 	<delete id="deleteReply">
@@ -45,10 +47,50 @@
 	</delete>
 	
 	<!-- 댓글 갯수 -->
-	<select id="countReply">
-		SELECT count(r.reno)
-		FROM tbl_member m , tbl_reply r
-		WHERE m.memberid = r.memberid
-		AND bno = #{bno};
+	<select id="countReply" resultType="com.korea.gfair.domain.BoardReplyCountVO">
+		<![CDATA[
+			SELECT 
+				/*+INDEX_DESC(tbl_board) */ 
+                b.bno,
+                b.reproot,
+                b.repstep,
+                b.repindent,
+                b.title,
+                b.content,
+                b.memberid,
+                b.insert_ts,
+                b.update_ts,
+                b.readcnt,
+                b.bname,
+                b.fid,
+                b.public_tf,
+                count(r.reno) AS renoCount
+			FROM 
+				tbl_board b
+			LEFT OUTER JOIN
+				tbl_reply r
+			ON
+				b.bno = r.bno 
+			WHERE 
+				notice_tf = 'T'
+			AND 
+				b.bname = #{bname}
+			GROUP BY
+                (b.bno,
+                b.reproot,
+                b.repstep,
+                b.repindent,
+                b.title,
+                b.content,
+                b.memberid,
+                b.insert_ts,
+                b.update_ts,
+                b.readcnt,
+                b.bname,
+                b.fid,
+                b.public_tf)
+            ORDER BY
+            	b.bno desc
+		]]>
 	</select>
 </mapper>

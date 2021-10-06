@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.korea.gfair.domain.BoardReplyCountVO;
 import com.korea.gfair.domain.ReplyDTO;
 import com.korea.gfair.domain.ReplyVO;
 import com.korea.gfair.mapper.FreeBoardReplyMapper;
@@ -41,10 +42,12 @@ public class FreeBoardReplyServiceImpl implements FreeBoardReplyService {
 	}//deleteReply
 
 	@Override
-	public void countReply(ReplyDTO dto) {
-		remapper.countReply(dto);
+	public List<BoardReplyCountVO> countReply(String bname) {
 		
-	}//countReply
+		return remapper.countReply(bname);
+	}
+
+
 	
 	
 	
